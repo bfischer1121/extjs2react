@@ -1,4 +1,4 @@
-import fs from 'fs'
+import fs from 'fs-extra'
 import path from 'path'
 
 export const asyncForEach = async (array, callback) => {
@@ -17,10 +17,10 @@ export const asyncMap = async (array, callback) => {
   return results
 }
 
-export const getConfig = async () => {
-  let config = JSON.parse(await readFile(path.join(__dirname, '..', 'config.json')))
+export const getConfig = () => {
+  let config = fs.readJsonSync(getAbsolutePath(__dirname, '..', 'config.json'))
 
-  config.sourceDir = path.resolve(path.join(__dirname, '..', config.sourceDir || 'nonexistant'))
+  config.sourceDir = getAbsolutePath(__dirname, '..', config.sourceDir || 'nonexistant')
 
   if(!isDirectory(config.sourceDir)){
     throw `Source directory not found (${config.sourceDir}). Please adjust sourceDir in /config.json to point to your ExtJS project`
@@ -38,17 +38,11 @@ export const isDirectory = path => {
   }
 }
 
-export const readFile = path => (
-  new Promise((resolve, reject) => {
-    fs.readFile(path, 'utf8', (error, data) => error ? reject(error) : resolve(data))
-  })
-)
+export const getAbsolutePath = (...paths) => path.resolve(path.join(...paths))
 
-export const writeFile = (path, data) => (
-  new Promise((resolve, reject) => {
-    fs.writeFile(path, data, 'utf8', (error, data) => error ? reject(error) : resolve())
-  })
-)
+export const readFile = path => fs.readFile(path, 'utf8')
+
+export const writeFile = (path, data) => fs.outputFile(path, data, 'utf8')
 
 export const getFilesRecursively = dir => (
   fs.readdirSync(dir).reduce((filePaths, fileName) => {

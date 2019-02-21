@@ -1,46 +1,37 @@
 import _ from 'lodash'
-import { readFile, writeFile, getRelativePath, asyncForEach } from './Util'
+import recast from 'recast'
+import { getConfig, readFile, writeFile, getAbsolutePath, getRelativePath, asyncForEach } from './Util'
 
 export default class Source{
-  static async fromFile(file){
-    let source = new Source(file, await readFile(file))
-    return source._isExtJS() ? source : null
+  constructor(filePath, source){
+    this.filePath = filePath
+    this.source   = source
+    this.valid    = this._isExtJS()
+
+    if(this.valid){
+      this.ast   = recast.parse(source)
+      this.valid = (this.toCode() === source)
+    }
   }
 
-  static async addImports(sources){
-    let classFiles   = {},
-        classRe      = [],
-        missingFiles = []
-
-    sources.forEach(source => {
-      source.getClassNames().forEach(className => {
-        classFiles[className] = source.filePath
-        classRe.push(Source.getClassRe(className))
-      })
-    })
-
-    await asyncForEach(sources, async source => {
-      let classes    = source.getClassesUsed(classRe).filter(cls => !cls.startsWith('Ext.')),
-          oldImports = source.getImportedFiles(),
-          newImports = _.uniq(classes.filter(cls => classFiles[cls]).map(cls => getRelativePath(source.filePath, classFiles[cls])).map(i => i.replace(/\.js$/, '')))
-
-      missingFiles.push(...classes.filter(cls => !classFiles[cls]))
-
-      let uniqOld = _.difference(oldImports, newImports)
-
-      await source.addImports(newImports)
-    })
-
-    missingFiles.forEach(className => console.error(`[Error] Unknown file for class: ${className}`))
+  static async fromFile(file){
+    let source = new Source(file, await readFile(file))
+    return source.valid ? source : null
   }
 
   static getClassRe(className){
     return new RegExp(`(${className})\\W+?`, 'g')
   }
 
-  constructor(filePath, source){
-    this.filePath = filePath
-    this.source   = source
+  toCode(){
+    return recast.print(this.ast).code
+  }
+
+  saveOutput(){
+    let { sourceDir, targetDir } = getConfig(),
+        path = getAbsolutePath(targetDir, this.filePath.replace(new RegExp('^' + sourceDir), ''))
+
+    writeFile(path, this.source)
   }
 
   getClassNames(){
@@ -75,7 +66,8 @@ export default class Source{
         importCode = newImports.map(file => `import '${file}'\n`).join('')
 
     if(newImports.length){
-      writeFile(this.filePath, importCode + (oldImports.length ? '' : '\n') + this.source)
+      this.source = importCode + (oldImports.length ? '' : '\n') + this.source
+      this.saveOutput()
     }
   }
 

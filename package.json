@@ -27,7 +27,8 @@
   "homepage": "https://github.com/bfischer1121/extjs2react#readme",
   "dependencies": {
     "@babel/polyfill": "^7.2.5",
-    "minimist": "^1.2.0"
+    "fs-extra": "^7.0.1",
+    "recast": "^0.17.3"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
