@@ -1,4 +1,4 @@
 {
-  "sourceDir": "../RELATIVE/PATH/TO/YOUR/EXTJS/PROJECT",
-  "targetDir": "../RELATIVE/PATH/TO/REACT/OUTPUT"
+  "sourceDir": "../medlium-client/src",
+  "targetDir": "../medlium-client/output"
 }
