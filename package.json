@@ -1,0 +1,39 @@
+{
+  "name": "extjs2react",
+  "version": "1.0.0",
+  "description": "Helps convert ExtJS apps to React (Unofficial -- Not associated with Sencha)",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./start.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bfischer1121/extjs2react.git"
+  },
+  "keywords": [
+    "extjs",
+    "react",
+    "sencha",
+    "transpile",
+    "rewrite",
+    "convert"
+  ],
+  "author": "Blake Fischer",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bfischer1121/extjs2react/issues"
+  },
+  "homepage": "https://github.com/bfischer1121/extjs2react#readme",
+  "dependencies": {
+    "@babel/polyfill": "^7.2.5",
+    "minimist": "^1.2.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.3.3",
+    "@babel/preset-env": "^7.3.1",
+    "babel-preset-env": "^1.7.0",
+    "babel-register": "^6.26.0"
+  }
+}
