@@ -16,7 +16,7 @@ For speed of development and depth of implementation, it is currently assumed th
 * Run `npm start`
 * Say a little prayer
 
-## Progress (...in transpilations that generally will not break your code)
+## Progress - architectural transpilations that will generally not break your code
 - [x] `import` statements for fully-qualified class dependencies
 - [ ] `import` statements for xtypes
 - [ ] ExtJS classes → ES6 classes
@@ -25,7 +25,7 @@ For speed of development and depth of implementation, it is currently assumed th
 - [ ] ViewController → Component methods, `props`, render
 - [ ] Utility methods → ES6, Underscore
 
-## Progress (...in *optional* migrations that will certainly break some code)
+## Progress - optional migrations that will break some associated code
 - [ ] Small subset of Components → Bootstrap and others (w/ documented api loss)
   - [ ] Layouts (flexbox-compatible)
   - [ ] Panel, Container, Component
