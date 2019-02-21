@@ -1,7 +1,7 @@
 # (ExtJS | Sencha Touch) → React
 
 ## Summary
-The goal of this project is to migrate ExtJS (and Sencha Touch) applications over to React. It does this by rewriting existing ExtJS code into React code. The goal is not perfection, but to eliminate the vast majority of the work while leaving an ever-shrinking set of cases for human intervention. This is an unofficial library in no way associated with Sencha. Use at your own risk.
+The goal of this project is to migrate ExtJS (and Sencha Touch) applications over to React. It does this by rewriting existing ExtJS code into React code (for everything outside of the component library and, likely, data package). The goal is not perfection, but to eliminate the bulk of the work while leaving an ever-shrinking set of cases for human intervention. This is an unofficial library in no way associated with Sencha. Use at your own risk.
 
 ## Preparing Your ExtJS Project
 For speed of development and depth of implementation, it is currently assumed that the source project is ExtJS 6.x with MVVM architecture. If your project isn't there but you want to use this tool, migrate to the common starting point and then run this tool to cross the bridge to React-land:
@@ -16,7 +16,8 @@ For speed of development and depth of implementation, it is currently assumed th
 * Run `npm start`
 * Say a little prayer
 
-## Progress - architectural transpilations that will generally not break your code
+## Progress
+##### Architectural - generally non-breaking:
 - [x] `import` statements for fully-qualified class dependencies
 - [ ] `import` statements for xtypes
 - [ ] ExtJS classes → ES6 classes
@@ -24,8 +25,7 @@ For speed of development and depth of implementation, it is currently assumed th
 - [ ] ViewModel → `state`, render
 - [ ] ViewController → Component methods, `props`, render
 - [ ] Utility methods → ES6, Underscore
-
-## Progress - optional migrations that will break some associated code
+##### Component (Optional) - generally break associated code, requiring manual fixing
 - [ ] Small subset of Components → Bootstrap and others (w/ documented api loss)
   - [ ] Layouts (flexbox-compatible)
   - [ ] Panel, Container, Component
@@ -38,4 +38,4 @@ For speed of development and depth of implementation, it is currently assumed th
   - [ ] Proxies
 
 ## Need Help?
-If your company migrating an ExtJS app to React (or other framework) and you could use some help, feel free to email me at my github username (looks like bfis----1121) at gmail.com
+If your company is migrating an ExtJS app to React (or other framework) and would like some help, feel free to email me at my github username (looks like bfis----1121) at gmail.com
