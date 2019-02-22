@@ -1,4 +1,4 @@
 {
-  "sourceDir": "../medlium-client/src",
-  "targetDir": "../medlium-client/output"
+  "sourceDir": "../medlium-client/app",
+  "targetDir": "../medlium-client/src"
 }

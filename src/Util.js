@@ -29,6 +29,13 @@ export const getConfig = () => {
   return config
 }
 
+export const getPathInTargetDirForSource = sourcePath => {
+  let { sourceDir, targetDir } = getConfig()
+  return getAbsolutePath(targetDir, sourcePath.replace(new RegExp('^' + sourceDir), ''))
+}
+
+export const copySourceFileToTargetDir = path => fs.copySync(path, getPathInTargetDirForSource(path))
+
 export const isDirectory = path => {
   try{
     return fs.statSync(path).isDirectory()

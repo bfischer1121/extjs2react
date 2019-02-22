@@ -1,22 +1,26 @@
 import _ from 'lodash'
 import recast from 'recast'
-import { getConfig, readFile, writeFile, getAbsolutePath, getRelativePath, asyncForEach } from './Util'
+
+import {
+  getConfig,
+  readFile,
+  writeFile,
+  getAbsolutePath,
+  getPathInTargetDirForSource,
+  getRelativePath,
+  asyncForEach
+} from './Util'
 
 export default class Source{
   constructor(filePath, source){
-    this.filePath = filePath
-    this.source   = source
-    this.valid    = this._isExtJS()
+    this.filePath  = filePath
+    this.source    = source
+    this.parseable = this._isExtJS()
 
-    if(this.valid){
-      this.ast   = recast.parse(source)
-      this.valid = (this.toCode() === source)
+    if(this.parseable){
+      this.ast       = recast.parse(source)
+      this.parseable = (this.toCode() === source)
     }
-  }
-
-  static async fromFile(file){
-    let source = new Source(file, await readFile(file))
-    return source.valid ? source : null
   }
 
   static getClassRe(className){
@@ -24,14 +28,11 @@ export default class Source{
   }
 
   toCode(){
-    return recast.print(this.ast).code
+    return this.parseable ? recast.print(this.ast).code : this.source
   }
 
-  saveOutput(){
-    let { sourceDir, targetDir } = getConfig(),
-        path = getAbsolutePath(targetDir, this.filePath.replace(new RegExp('^' + sourceDir), ''))
-
-    writeFile(path, this.source)
+  save(){
+    writeFile(getPathInTargetDirForSource(this.filePath), this.source)
   }
 
   getClassNames(){
@@ -67,7 +68,6 @@ export default class Source{
 
     if(newImports.length){
       this.source = importCode + (oldImports.length ? '' : '\n') + this.source
-      this.saveOutput()
     }
   }
 
