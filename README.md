@@ -19,7 +19,7 @@ For speed of development and depth of implementation, it is currently assumed th
 ## Progress
 ##### Architectural - generally non-breaking:
 - [x] `import` statements for fully-qualified class dependencies
-- [ ] `import` statements for xtypes
+- [x] `import` statements for aliases
 - [ ] ExtJS classes → ES6 classes
 - [ ] `items` → JSX within render
 - [ ] ViewModel → `state`, render
