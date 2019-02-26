@@ -1,4 +1,4 @@
-# (ExtJS | Sencha Touch) → React
+# ExtJS → React
 
 ## Summary
 The goal of this project is to migrate ExtJS (and Sencha Touch) applications over to React. It does this by rewriting existing ExtJS code into React code (for everything outside of the component library and, likely, data package). The goal is not perfection, but to eliminate the bulk of the work while leaving an ever-shrinking set of cases for human intervention. This is an unofficial library in no way associated with Sencha. Use at your own risk.
