@@ -4,7 +4,7 @@
   "description": "Helps convert ExtJS apps to React (Unofficial -- Not associated with Sencha)",
   "main": "index.js",
   "scripts": {
-    "start": "node ./start.js",
+    "start": "nodemon --exec babel-node ./src/index.js --watch src --watch ../medlium-client/app",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -27,14 +27,16 @@
   "homepage": "https://github.com/bfischer1121/extjs2react#readme",
   "dependencies": {
     "@babel/polyfill": "^7.2.5",
+    "ast-types": "^0.12.2",
     "fs-extra": "^7.0.1",
+    "nodemon": "^1.18.10",
     "recast": "^0.17.3"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
     "@babel/core": "^7.3.3",
-    "@babel/preset-env": "^7.3.1",
-    "babel-preset-env": "^1.7.0",
-    "babel-register": "^6.26.0"
+    "@babel/node": "^7.2.2",
+    "@babel/plugin-proposal-class-properties": "^7.3.4",
+    "@babel/preset-env": "^7.3.1"
   }
 }

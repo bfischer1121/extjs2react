@@ -1,5 +1,4 @@
 import '@babel/polyfill'
-import { getConfig } from './Util'
-import Transpiler from './Transpiler'
+import SourceFile from './SourceFile'
 
-new Transpiler(getConfig().sourceDir).run()
+SourceFile.transpile()
