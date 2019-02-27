@@ -33,7 +33,7 @@ export default class SourceFile{
   constructor(filePath, source){
     this.filePath  = filePath
     this.source    = source
-    this.parseable = this._isExtJS()
+    this.parseable = this._getMatches(/Ext\.define\(\s*['|"][^'|"]+['|"]/g).length > 0
 
     if(this.parseable){
       try{
@@ -51,7 +51,7 @@ export default class SourceFile{
   static async transpile(){
     let files       = getFilesRecursively(getConfig().sourceDir),
         unparseable = files.filter(file => !file.endsWith('.js')),
-        js          = files.filter(file => file.endsWith('.js')), //.filter(file => file.endsWith('NonClinical.js')),
+        js          = files.filter(file => file.endsWith('.js')).filter(file => file.endsWith('NonClinical.js')),
         sources     = []
 
     await asyncForEach(js, async file => {
@@ -66,6 +66,7 @@ export default class SourceFile{
 
     await asyncForEach(sources, async source => {
       source.addImports()
+      source.classes.forEach(cls => cls.process('items'))
       source.save()
       //source.missingFiles.forEach(className => logError(`Unknown file for class: ${className}`))
     })
@@ -164,29 +165,10 @@ export default class SourceFile{
   }
 
   getClassNamesUsed(){
-    let internalCls = this._getClassNames(),
+    let internalCls = this.classes.map(cls => cls.className),
         externalCls = SourceFile.classRe.reduce((classes, re) => [...classes, ...(this._getMatches(re).map(match => match[1]))], [])
 
     return _.uniq(externalCls.filter(cls => !internalCls.includes(cls)))
-  }
-
-  _getClassNames(){
-    return this.classes.map(cls => cls.className)
-  }
-
-  getExtendedClasses(){
-    return this._getMatches(/extend\s*:\s*['|"]([^'|"]+)['|"]/g).map(match => match[1])
-  }
-
-  _isExtJS(){
-    return this._getMatches(/Ext\.define\(\s*['|"]([^'|"]+)['|"]/g).map(match => match[1]).length > 0
-  }
-
-  getImportedFiles(){
-    return [
-      ...(this._getMatches(/import\s+['|"]([^'|"]+)['|"]/g).map(match => match[1])),
-      ...(this._getMatches(/import.+from\s+['|"]([^'|"]+)['|"]/g).map(match => match[1]))
-    ]
   }
 
   _getMatches(regExp){

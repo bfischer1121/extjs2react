@@ -1,4 +1,4 @@
 import '@babel/polyfill'
-import SourceFile from './SourceFile'
+import SourceFile from './src/SourceFile'
 
 SourceFile.transpile()

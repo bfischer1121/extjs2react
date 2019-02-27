@@ -4,7 +4,7 @@
   "description": "Helps convert ExtJS apps to React (Unofficial -- Not associated with Sencha)",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --exec babel-node ./src/index.js --watch src --watch ../medlium-client/app",
+    "start": "nodemon --exec babel-node ./index.js --watch src --watch ../medlium-client/app",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
