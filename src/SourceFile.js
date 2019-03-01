@@ -1,7 +1,7 @@
 import _ from 'lodash'
 import recast from 'recast'
 import { builders as b, visit } from 'ast-types'
-import { Ast, getRelativePath, logError } from './Util'
+import { Ast, code, getRelativePath, logError } from './Util'
 import ExtJSClass from './ExtJSClass'
 
 export default class SourceFile{
@@ -64,8 +64,16 @@ export default class SourceFile{
     })
   }
 
+  transpile(){
+    return [
+      Ast.toString(this.ast),
+      this.getImports(),
+      ...(this.classes.map(cls => cls.transpile()))
+    ].join('\n\n')
+  }
+
   toCode(){
-    return this.parseable ? recast.print(this.ast).code : this.originalSource
+    return this.parseable ? Ast.toString(this.ast) : this.originalSource
   }
 
   getImportNameForAlias(alias){
@@ -122,17 +130,17 @@ export default class SourceFile{
   getImports(){
     let classes   = Object.keys(this.importNames).map(className => this.codebase.getClassForClassName(className)),
         files     = _.groupBy(classes, cls => cls.sourceFile.filePath),
-        filePaths = Object.keys(files).reverse(),
-        extraLine = (this.imports.length === 0)
+        filePaths = Object.keys(files).reverse()
 
-    return filePaths.map((filePath, i) => {
-      let importNames = files[filePath].map(cls => this.importNames[cls.className]),
+    let imports = filePaths.map(filePath => {
+      let importNames = files[filePath].map(cls => this.getImportNameForClassName(cls.className)),
           specifiers  = importNames.length > 1 ? '{ ' + importNames.join(', ') + ' }' : importNames[0],
-          source      = getRelativePath(this.filePath, filePath).replace(/\.js$/, ''),
-          suffix      = (extraLine && i + 1 === filePaths.length) ? '\n\n' : '\n'
+          source      = getRelativePath(this.filePath, filePath).replace(/\.js$/, '')
 
-      return recast.parse(`import ${specifiers} from '${source}'${suffix}`).program.body[0]
+      return `import ${specifiers} from '${source}'`
     })
+
+    return code(...imports)
   }
 
   getExportName(cls){
@@ -144,11 +152,19 @@ export default class SourceFile{
       return cls.getUnqualifiedClassName()
     }
 
-    let parts     = cls.classAliases[0].split('.'),
-        namespace = parts.slice(0, parts.length - 1).join('.'),
-        alias     = _.capitalize(parts[parts.length - 1].replace(/.*-/, ''))
+    let parts      = cls.classAliases[0].split('.'),
+        namespace  = parts.slice(0, parts.length - 1).join('.'),
+        alias      = _.capitalize(parts[parts.length - 1].replace(/.*-/, '')),
+        exportName = this.codebase.words.reduce((alias, [word, wordRe]) => alias.replace(wordRe, word), alias)
 
-    return this.codebase.words.reduce((alias, [word, wordRe]) => alias.replace(wordRe, word), alias)
+    let suffix = {
+      'controller' : 'Controller',
+      'viewmodel'  : 'Model',
+      'proxy'      : 'Proxy',
+      'store'      : 'Store'
+    }[namespace] || ''
+
+    return exportName + suffix
   }
 
   getAliasesUsed(){

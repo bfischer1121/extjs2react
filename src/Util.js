@@ -1,6 +1,7 @@
 import fs from 'fs-extra'
 import path from 'path'
 import _ from 'lodash'
+import recast from 'recast'
 import { namedTypes as t } from 'ast-types'
 
 export const asyncForEach = async (array, callback) => {
@@ -82,7 +83,21 @@ export const logError = message => {
   //console.error(message)
 }
 
+export const code = (...lines) => {
+  return lines.map(line => (
+    _.isArray(line) ? code(...line).replace(/^/gm, '  ') : line
+  )).join('\n')
+}
+
 class AST{
+  from(source){
+    return recast.parse(source).program.body[0]
+  }
+
+  toString(ast){
+    return recast.print(ast).code
+  }
+
   getMethodCall(node){
     let { object, property } = node.callee
     return (this.isIdentifier(object) && this.isIdentifier(property)) ? `${object.name}.${property.name}` : null

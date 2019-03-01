@@ -64,12 +64,7 @@ export default class Codebase{
     unparseable.forEach(file => copySourceFileToTargetDir(file))
 
     await asyncForEach(sourceFiles, async sourceFile => {
-      let imports = sourceFile.getImports(),
-          classes = sourceFile.classes.map(cls => cls.getES6Class())
-
-      sourceFile.ast.program.body.push(...[...imports, ...classes])
-
-      this.saveSourceFile(sourceFile)
+      this.saveSourceFile(sourceFile, sourceFile.transpile())
       //sourceFile.missingFiles.forEach(className => logError(`Unknown file for class: ${className}`))
     })
   }
@@ -139,8 +134,8 @@ export default class Codebase{
     await fs.writeFile(infoPath, JSON.stringify({ generator: 'extjs2react' }, null, 2))
   }
 
-  saveSourceFile(sourceFile){
-    writeFile(getPathInTargetDirForSource(sourceFile.filePath), sourceFile.toCode())
+  saveSourceFile(sourceFile, code){
+    writeFile(getPathInTargetDirForSource(sourceFile.filePath), code)
   }
 
   _addWordsFromClassNames(classNames){

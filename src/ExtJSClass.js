@@ -1,7 +1,7 @@
 import _ from 'lodash'
 import recast from 'recast'
 import { namedTypes as t, builders as b, visit } from 'ast-types'
-import { Ast, logError, getConfig } from './Util'
+import { Ast, code, logError, getConfig } from './Util'
 import SourceFile from './SourceFile'
 
 export default class ExtJSClass{
@@ -28,13 +28,9 @@ export default class ExtJSClass{
     this.classAliases    = _.uniq([...xtypes, ...aliases])
   }
 
-  static getUnqualifiedClassName(className){
-    let parts = className.split('.')
-    return parts[parts.length - 1]
-  }
-
   getUnqualifiedClassName(){
-    return ExtJSClass.getUnqualifiedClassName(this.className)
+    let parts = this.className.split('.')
+    return parts[parts.length - 1]
   }
 
   getFileSearchRegExp(){
@@ -87,17 +83,23 @@ export default class ExtJSClass{
     return this.sourceFile.getExportName(this)
   }
 
+  transpile(){
+    return this.getES6Class()
+  }
+
   getES6Class(){
+    let exportCode = this.sourceFile.classes.length === 1 ? 'export default' : 'export',
+        className   = this.getExportName(),
+        parentName  = this.parentClass ? this.sourceFile.getImportNameForClassName(this.parentClass.className) : null,
+        extendsCode = parentName ? ` extends ${parentName}` : '',
+        methods     = [this.getRenderFn()]
+
     // controller, viewModel, cls, items, listeners, bind
-    return b.classDeclaration(
-      b.identifier(this.getExportName()),
-      b.classBody([this.getRenderFn()]),
-      this.parentClass ? b.identifier(this.parentClass.getUnqualifiedClassName()) : null
-    )
+    return code(`${exportCode} class ${className}${extendsCode}{`, methods, '}')
   }
 
   getRenderFn(){
-    let identifier = b.jsxIdentifier(this.getUnqualifiedClassName()),
+    let identifier = b.jsxIdentifier(this.getExportName()),
         props      = [],
         items      = _.compact((Ast.getConfig(this.ast, 'items') || []).map(item => this.getJSXFromConfig(item)))
 
@@ -108,14 +110,7 @@ export default class ExtJSClass{
       items.length === 0
     )
 
-    return b.classMethod(
-      'method',
-      b.identifier('render'),
-      [b.identifier('props')],
-      b.blockStatement([
-        b.returnStatement(jsx)
-      ])
-    )
+    return code('render(props){', [`return ${Ast.toString(jsx)}`], '}')
   }
 
   getJSXFromConfig(config){
