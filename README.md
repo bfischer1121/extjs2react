@@ -34,7 +34,7 @@ e.g., `FaceidSetup` → add `FaceID` to config → `FaceIDSetup` (if no effect, 
 - [ ] `items` → JSX within render
 - [ ] ViewModel → `state`, render
 - [ ] ViewController → Component methods, `props`, render
-- [ ] Utility methods → ES6, Underscore
+- [ ] Utility methods → ES6, lodash
 ##### Component (Optional) - generally break associated code, requiring manual fixing
 - [ ] Small subset of Components → open source libraries (w/ documented api loss)
   - [ ] Layouts (flexbox-compatible)
