@@ -1,7 +1,7 @@
 # ExtJS → React [Native]
 
 ## Summary
-The goal of this project is to migrate ExtJS applications to React [Native]. It does this by rewriting entire ExtJS codebases into React codebases. The goal is to automate most of the work while leaving an ever-shrinking set of cases for manual intervention. This is an unofficial library in no way associated with Sencha. Use at your own risk.
+The goal of ExtJS2React (e2r) is migrate ExtJS applications to React [Native] by rewriting their entire codebase. Much of the work will be automated while an ever-shrinking set of cases will be left for manual intervention. This is an unofficial library in no way associated with Sencha. Use at your own risk.
 
 ## Preparing Your ExtJS Project
 For speed of development and depth of implementation, it is currently assumed that the source project is ExtJS 6.x with MVVM architecture. If your project isn't there but you want to use this tool, migrate to the common starting point and then run this tool to cross the bridge to React-land:
@@ -19,7 +19,7 @@ For speed of development and depth of implementation, it is currently assumed th
 ## ES6 Class Names
 ExtJS classes are namespaced while, with modules, ES6 class names are generally not. To make the transition, e2r uses the xtype or alias of your ExtJS class as the ES6 class name. To convert lowercase xtypes to properly-cased class names, we need to distinguish words. To this end, e2r builds a word list from the class names and namespaces used within your codebase and the ExtJS framework. While this works fairly well, it requires some manual tuning:
 
-* Run `npm run classnames` in the estjs2react directory
+* Run `npm run classnames` in the extjs2react directory
 * Go through this list of all of your classes and add mis-capitalized words to the `words` array in `/config.json`
 * Rinse and repeat until the class names look good
 * Note: if a word has no effect, use a larger portion of the class name (longer words take precedence and yours may have been overriden)
@@ -36,7 +36,7 @@ e.g., `FaceidSetup` → add `FaceID` to config → `FaceIDSetup` (if no effect, 
 - [ ] ViewController → Component methods, `props`, render
 - [ ] Utility methods → ES6, Underscore
 ##### Component (Optional) - generally break associated code, requiring manual fixing
-- [ ] Small subset of Components → Bootstrap and others (w/ documented api loss)
+- [ ] Small subset of Components → open source libraries (w/ documented api loss)
   - [ ] Layouts (flexbox-compatible)
   - [ ] Panel, Container, Component
   - [ ] Button
