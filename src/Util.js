@@ -1,5 +1,7 @@
 import fs from 'fs-extra'
 import path from 'path'
+import _ from 'lodash'
+import { namedTypes as t } from 'ast-types'
 
 export const asyncForEach = async (array, callback) => {
   for(let i = 0; i < array.length; i++){
@@ -79,3 +81,53 @@ export const getRelativePath = (fromFile, toFile) => {
 export const logError = message => {
   //console.error(message)
 }
+
+class AST{
+  getMethodCall(node){
+    let { object, property } = node.callee
+    return (this.isIdentifier(object) && this.isIdentifier(property)) ? `${object.name}.${property.name}` : null
+  }
+
+  isIdentifier(node){
+    return t.Identifier.check(node)
+  }
+
+  isString(node){
+    return t.Literal.check(node) && _.isString(node.value)
+  }
+
+  isObject(node){
+    return t.ObjectExpression.check(node)
+  }
+
+  getConfig(config, name){
+    let property = this.getProperty(config, name)
+
+    if(!property){
+      return undefined
+    }
+
+    if(property.type === 'ArrayExpression'){
+      return property.elements
+    }
+
+    return property.value
+  }
+
+  getProperty(object, name){
+    return (this.getProperties(object, [name])[0] || {}).value
+  }
+
+  getPropertiesExcept(object, ...exclude){
+    return this.getProperties(object, null, exclude)
+  }
+
+  getProperties(object, include, exclude){
+    return object.properties.filter(({ key, value }) => {
+      let name = key.name || key.value
+      return (include ? include.includes(name) : true) && (exclude ? !exclude.includes(name) : true)
+    })
+  }
+}
+
+export const Ast = new AST()

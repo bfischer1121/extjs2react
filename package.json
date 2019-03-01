@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon --exec babel-node ./index.js --watch src --watch ../medlium-client/app",
+    "classnames": "ACTION=classnames babel-node ./index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
