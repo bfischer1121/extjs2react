@@ -4,9 +4,14 @@ process.on('unhandledRejection', (reason, p) => {
 
 import '@babel/polyfill'
 import Codebase from './src/Codebase'
+import Framework from './src/Framework'
+import { getConfig, getAbsolutePath } from './src/Util'
 
 (async () => {
-  let codebase = await Codebase.factory()
+  let { sourceDir, targetDir, sdkFilePath, frameworkDirName, words } = getConfig()
+
+  let framework = await Framework.factory(sdkFilePath, getAbsolutePath(targetDir, frameworkDirName)),
+      codebase  = await Codebase.factory({ sourceDir, targetDir, words, parentCodebase: framework })
 
   if(process.env.ACTION === 'classnames'){
     (await codebase.getAllClassNames()).forEach(className => {

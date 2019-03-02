@@ -1,5 +1,5 @@
 {
-  "sdkFilePath": "../medlium-client/ext/build/ext-modern-all.js",
+  "sdkFilePath": "../medlium-client/ext/build/ext-modern-all-debug.js",
   "sourceDir": "../medlium-client/app",
   "targetDir": "../medlium-client/src",
   "frameworkDirName": "framework",

@@ -5,7 +5,6 @@ import { Ast, code, getRelativePath, logError } from './Util'
 import ExtJSClass from './ExtJSClass'
 
 export default class SourceFile{
-  imports = []
   classes = []
 
   importNames = {}
@@ -13,33 +12,44 @@ export default class SourceFile{
   unknownAliases    = []
   unknownClassNames = []
 
-  constructor(codebase, filePath, source){
-    this.codebase       = codebase
-    this.filePath       = filePath
-    this.originalSource = source
-    this.parseable      = this._getMatches(/Ext\.define\(\s*['|"][^'|"]+['|"]/g).length > 0
+  static async factory(config){
+    let sourceFile = new this(config)
+
+    if(sourceFile.parseable){
+      await sourceFile.processAST()
+    }
+
+    return sourceFile
+  }
+
+  constructor({ codebase, codeFilePath, importFilePath, source, ast, forceParse }){
+    this._codebase       = codebase
+    this._originalSource = source
+
+    this.codeFilePath   = codeFilePath
+    this.importFilePath = importFilePath
+    this.ast            = ast
+
+    this.parseable = this._getMatches(/Ext\.define\(\s*['|"][^'|"]+['|"]/g).length > 0
 
     if(this.parseable){
       try{
-        this.ast = recast.parse(source)
+        this.ast = this.ast || recast.parse(source)
       }
       catch(e){
         throw `Error parsing source file (${filePath}): ${e}`
       }
 
-      this.parseable = (this.toCode() === source)
-      this.process()
+      this.parseable = forceParse || (Ast.toString(this.ast) === source)
     }
   }
 
-  async process(){
-    let processImport = node => this.imports.push(node)
-
+  async processAST(){
     let processClassDefinition = node => {
       let [className, data, createdFn] = node.arguments
 
       if(!Ast.isString(className) || !Ast.isObject(data)){
-        logError(`Error parsing Ext.define call (${this.filePath}): Expected first and second arguments to be a string and object, respectively`)
+        logError(`Error parsing Ext.define call (${this.codeFilePath}): Expected first and second arguments to be a string and object, respectively`)
         return
       }
 
@@ -47,11 +57,6 @@ export default class SourceFile{
     }
 
     visit(this.ast, {
-      visitImportDeclaration: function(path){
-        processImport(path.node)
-        this.traverse(path)
-      },
-
       visitCallExpression: function(path){
         let { node } = path
 
@@ -67,36 +72,38 @@ export default class SourceFile{
   transpile(){
     return [
       Ast.toString(this.ast),
-      this.getImports(),
-      ...(this.classes.map(cls => cls.transpile()))
+      this.getImportsCode(),
+      this.getExportsCode()
     ].join('\n\n')
   }
 
-  toCode(){
-    return this.parseable ? Ast.toString(this.ast) : this.originalSource
+  getImportsCode(){
+    let classes   = Object.keys(this.importNames).map(className => this._codebase.getClassForClassName(className)),
+        files     = _.groupBy(classes, cls => cls.sourceFile.importFilePath),
+        filePaths = Object.keys(files).reverse()
+
+    let imports = filePaths.map(filePath => {
+      let importNames = files[filePath].map(cls => this.getImportNameForClassName(cls.className)),
+          specifiers  = importNames.length > 1 ? '{ ' + importNames.join(', ') + ' }' : importNames[0],
+          source      = getRelativePath(this.codeFilePath, filePath).replace(/\.js$/, '')
+
+      return `import ${specifiers} from '${source}'`
+    })
+
+    return code(...imports)
+  }
+
+  getExportsCode(){
+    return this.classes.map(cls => cls.transpile()).join('\n\n')
   }
 
   getImportNameForAlias(alias){
-    let className = this.codebase.getClassNameForAlias(alias)
+    let className = this._codebase.getClassNameForAlias(alias)
     return className ? this.getImportNameForClassName(className) : null
   }
 
   getImportNameForClassName(className){
     return this.importNames[className]
-  }
-
-  // [{ className: 'Grid', xtype: 'grid' }]
-  async getFrameworkImports(imports){
-    let reactor = b.importDeclaration([b.importSpecifier(b.identifier('reactify'))], '@extjs/reactor')
-
-    let classes = b.variableDeclaration('const', imports.map(({ className, xtype }) => (
-      b.variableDeclarator(
-        b.identifier(className),
-        b.callExpression(b.identifier('reactify'), [xtype])
-      )
-    )))
-
-    return [reactor, ...classes]
   }
 
   async initImports(){
@@ -105,12 +112,12 @@ export default class SourceFile{
         classes    = []
 
     aliases.forEach(alias => {
-      let className = this.codebase.getClassNameForAlias(alias)
+      let className = this._codebase.getClassNameForAlias(alias)
       className ? classNames.push(className) : this.unknownAliases.push(alias)
     })
 
     classNames.forEach(className => {
-      let cls = this.codebase.getClassForClassName(className)
+      let cls = this._codebase.getClassForClassName(className)
       cls ? classes.push(cls) : this.unknownClassNames.push(className)
     })
 
@@ -119,28 +126,13 @@ export default class SourceFile{
     let importNames = _.groupBy(classes, cls => cls.getExportName())
 
     Object.keys(importNames).forEach(importName => {
-      let classes = importNames[importName]
+      let classes = importNames[importName],
+          exports = this.classes.map(cls => cls.getExportName())
 
       classes.forEach((cls, i) => {
-        this.importNames[cls.className] = importName + (classes.length === 1 ? '' : (i + 1))
+        this.importNames[cls.className] = importName + ((classes.length > 1 || exports.includes(cls.getExportName())) ? (i + 1) : '')
       })
     })
-  }
-
-  getImports(){
-    let classes   = Object.keys(this.importNames).map(className => this.codebase.getClassForClassName(className)),
-        files     = _.groupBy(classes, cls => cls.sourceFile.filePath),
-        filePaths = Object.keys(files).reverse()
-
-    let imports = filePaths.map(filePath => {
-      let importNames = files[filePath].map(cls => this.getImportNameForClassName(cls.className)),
-          specifiers  = importNames.length > 1 ? '{ ' + importNames.join(', ') + ' }' : importNames[0],
-          source      = getRelativePath(this.filePath, filePath).replace(/\.js$/, '')
-
-      return `import ${specifiers} from '${source}'`
-    })
-
-    return code(...imports)
   }
 
   getExportName(cls){
@@ -155,7 +147,7 @@ export default class SourceFile{
     let parts      = cls.classAliases[0].split('.'),
         namespace  = parts.slice(0, parts.length - 1).join('.'),
         alias      = _.capitalize(parts[parts.length - 1].replace(/.*-/, '')),
-        exportName = this.codebase.words.reduce((alias, [word, wordRe]) => alias.replace(wordRe, word), alias)
+        exportName = this._codebase.words.reduce((alias, [word, wordRe]) => alias.replace(wordRe, word), alias)
 
     let suffix = {
       'controller' : 'Controller',
@@ -173,7 +165,7 @@ export default class SourceFile{
 
   getClassNamesUsed(){
     let internalCls = this.classes.map(cls => cls.className),
-        externalCls = this.codebase.classRe.reduce((classes, re) => [...classes, ...(this._getMatches(re).map(match => match[1]))], [])
+        externalCls = this._codebase.classRe.reduce((classes, re) => [...classes, ...(this._getMatches(re).map(match => match[1]))], [])
 
     return _.uniq(_.difference(externalCls, internalCls))
   }
@@ -182,7 +174,7 @@ export default class SourceFile{
     let matches = [],
         match
 
-    while(match = regExp.exec(this.originalSource)){
+    while(match = regExp.exec(this._originalSource)){
       matches.push(match)
     }
 

@@ -1,17 +1,36 @@
 import _ from 'lodash'
 import recast from 'recast'
 import fs from 'fs-extra'
-import { Ast, getAbsolutePath, readFile } from './Util'
+import Codebase from './Codebase'
+import SourceFile from './SourceFile'
 
-export default class Framework{
-  aliases = {}
-  classes = {}
+import {
+  Ast,
+  getAbsolutePath,
+  readFile,
+  asyncForEach
+} from './Util'
 
-  static async factory(targetDir, sdkFilePath){
-    return new Framework(targetDir, await Framework.getInfo(sdkFilePath))
+export default class Framework extends Codebase{
+  static factory(sdkFilePath, targetDir){
+    return Codebase.factory.bind(this)({ sourceDir: sdkFilePath, targetDir })
   }
 
-  static async getInfo(sdkFilePath){
+  async doLoadSourceFiles(){
+    let sdkFilePath = this.sourceDir
+
+    let sdkFile = await SourceFile.factory({
+      codebase       : this,
+      codeFilePath   : sdkFilePath,
+      importFilePath : sdkFilePath,
+      source         : await readFile(sdkFilePath),
+      forceParse     : true
+    })
+
+    return [sdkFile]
+  }
+
+  async getInfo(sdkFilePath){
     let filePath = getAbsolutePath(__dirname, '..', 'framework.json'),
         getInfo  = () => fs.readJsonSync(filePath)
 
@@ -50,12 +69,53 @@ export default class Framework{
     }
   }
 
-  constructor(targetDir, { aliases }){
-    this.targetDir = targetDir
-    this.aliases   = aliases
+  async initSodurceFiles(){
+    let components = [
+      {
+        className : 'Button',
+        xtype     : 'button',
+        props     : [{ name: 'cls', usage: 42 }],
+        usage     : 42,
+        filePath  : `./components/${className}`
+      }
+    ]
   }
 
-  getClassForClassName(className){
-    return this.classes[className] || null
+  getIndexFileCode(classes){
+    let longestClassName = Math.max(0, ...classes.map(cls => cls.className.length)),
+        getComment       = cls => _.repeat(' ', (longestClassName - cls.className.length) * 2) + `// used ${cls.usage} times`
+
+    classes = classes.sort((c1, c2) => c1.usage - c2.usage)
+
+    return code(
+      ...classes.map(cls => `export { default as ${cls.className} } from '${cls.sourceFile.codeFilePath}' ${getComment(cls)}`)
+    )
+  }
+
+  getComponentFileCode({ className, xtype, props }){
+    let longestProp = Math.max(0, ...props.map(prop => prop.name.length)),
+        getComment  = prop => _.repeat(' ', longestProp - prop.name.length) + `// used ${prop.usage} times`,
+        comma       = (array, i, space = true) => i < (array.length - 1) ? ',' : (space ? ' ' : '')
+
+    props = props.sort((p1, p2) => p1.usage - p2.usage)
+
+    return code(
+      `import { reactify } from '@extjs/reactor'`,
+      `const ExtJS${className} = reactify('${xtype}')`,
+      '',
+      `export default class ${className} extends Component{`,
+      [
+        'render(){',
+        [
+          'const {',
+            props.map((prop, i) => `${prop.name}${comma(props, i)} ${getComment(prop)}`),
+          '} = this.props',
+          '',
+          `return <ExtJS${className} {...(this.props)} />`
+        ],
+        '}'
+      ],
+      '}'
+    )
   }
 }

@@ -20,12 +20,8 @@ export default class ExtJSClass{
     this.ast        = ast
     this.createdFn  = createdFn
 
-    let normalize = config => _.compact(_.isArray(config) ? config : [config]),
-        xtypes    = normalize(Ast.getConfig(this.ast, 'xtype')).map(xtype => `widget.${xtype}`),
-        aliases   = normalize(Ast.getConfig(this.ast, 'alias'))
-
     this.parentClassName = Ast.getConfig(this.ast, 'extend')
-    this.classAliases    = _.uniq([...xtypes, ...aliases])
+    this.classAliases    = _.uniq(this.getAliasesFromNodes(Ast.getProperties(this.ast, ['xtype', 'alias'])))
   }
 
   getUnqualifiedClassName(){
@@ -48,6 +44,10 @@ export default class ExtJSClass{
       }
     })
 
+    return _.uniq(_.difference(this.getAliasesFromNodes(nodes), this.classAliases))
+  }
+
+  getAliasesFromNodes(nodes){
     let handleNode = (aliases, node, configName) => {
       let prefix = {
         xtype      : 'widget.',
@@ -55,28 +55,38 @@ export default class ExtJSClass{
         controller : 'controller.'
       }[configName] || ''
 
-      let { value } = node
+      // xtype      : String
+      // alias      : String / String[]
+      // controller : String / Object / Ext.app.ViewController
+      // viewModel  : String / Object / Ext.app.ViewModel
 
-      if(t.Literal.check(value)){
-        return [...aliases, prefix + value.value]
+      if(t.Literal.check(node) && _.isString(node.value)){
+        return [...aliases, prefix + node.value]
       }
 
-      if(configName === 'viewModel' && t.ObjectExpression.check(value)){
-        let vmType = value.properties.find(p => p.key.name === 'type')
-        return vmType ? [...aliases, prefix + vmType.value.value] : aliases
+      if(t.Literal.check(node) && _.isNull(node.value)){
+        return aliases
       }
 
-      if(t.ConditionalExpression.check(value)){
-        return handleNode(handleNode(aliases, value.consequent, configName), value.alternate, configName)
+      if(t.ArrayExpression.check(node) && ['xtype', 'alias'].includes(configName)){
+        return node.elements.reduce((aliases, node) => handleNode(aliases, node, configName), aliases)
       }
 
-      logError(`Error parsing ${configName} (${this.sourceFile.filePath})`)
+      if(t.ObjectExpression.check(node) && ['controller', 'viewModel'].includes(configName)){
+        let typeNode = Ast.getProperty(node, 'type')
+        return typeNode ? handleNode(aliases, typeNode, configName) : aliases
+      }
+
+      if(t.ConditionalExpression.check(node)){
+        return [node.consequent, node.alternate].reduce((aliases, node) => handleNode(aliases, node, configName), aliases)
+      }
+
+      console.log(`Error parsing ${configName} (${this.className}): ${Ast.toString(node)}`) // logError
+
       return aliases
     }
 
-    let aliases = nodes.reduce((aliases, node) => handleNode(aliases, node, node.key.name), [])
-
-    return _.uniq(_.difference(aliases, this.classAliases))
+    return nodes.reduce((aliases, node) => handleNode(aliases, node.value, node.key.name), [])
   }
 
   getExportName(){
