@@ -14,10 +14,12 @@ import { getConfig, getAbsolutePath } from './src/Util'
       codebase  = await Codebase.factory({ sourceDir, targetDir, words, parentCodebase: framework })
 
   if(process.env.ACTION === 'classnames'){
-    (await codebase.getAllClassNames()).forEach(className => {
-      console.log(className)
-    })
+    (await codebase.getAllClassNames()).forEach(className => console.log(className))
+    return
+  }
 
+  if(process.env.ACTION === 'methodcalls'){
+    (await codebase.getAllMethodCalls()).forEach(methodCall => console.log(`${methodCall.count} => ${methodCall.method}`))
     return
   }
 

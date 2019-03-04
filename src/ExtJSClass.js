@@ -33,6 +33,19 @@ export default class ExtJSClass{
     return new RegExp(`(${this.className})\\W+?`, 'g')
   }
 
+  getMethodCalls(){
+    let calls = []
+
+    visit(this.ast, {
+      visitCallExpression: function(path){
+        calls.push(Ast.getMethodCall(path.node))
+        this.traverse(path)
+      }
+    })
+
+    return calls
+  }
+
   getAliasesUsed(){
     let nodes       = [],
         configNames = ['xtype', 'alias', 'controller', 'viewModel']

@@ -81,6 +81,10 @@ export default class Framework extends Codebase{
     ]
   }
 
+  transpile(){
+    
+  }
+
   getIndexFileCode(classes){
     let longestClassName = Math.max(0, ...classes.map(cls => cls.className.length)),
         getComment       = cls => _.repeat(' ', (longestClassName - cls.className.length) * 2) + `// used ${cls.usage} times`

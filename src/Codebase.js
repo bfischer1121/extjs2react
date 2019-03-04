@@ -66,6 +66,31 @@ export default class Codebase{
       this.saveSourceFile(sourceFile, sourceFile.transpile())
       //sourceFile.missingFiles.forEach(className => logError(`Unknown file for class: ${className}`))
     })
+
+    if(this.parentCodebase){
+      await this.parentCodebase.transpile()
+    }
+  }
+
+  async getAllMethodCalls(){
+    let fnCalls = _.flattenDeep(this.sourceFiles.map(sourceFile => sourceFile.classes.map(cls => cls.getMethodCalls()))),
+        objects = ['Ext', 'Math'],
+        counts  = {}
+
+    fnCalls.forEach(fnCall => {
+      let [object, method] = fnCall.split('.')
+
+      if(object === 'me'){
+        object = 'this'
+      }
+
+      fnCall = (objects.includes(object) ? object : '') + '.' + method
+
+      counts[fnCall] = counts[fnCall] || 0
+      counts[fnCall]++
+    })
+
+    return Object.keys(counts).map(c => ({ method: c, count: counts[c] })).sort((c1, c2) => c2.count - c1.count)
   }
 
   async addSourceFiles(){

@@ -100,7 +100,11 @@ class AST{
 
   getMethodCall(node){
     let { object, property } = node.callee
-    return (this.isIdentifier(object) && this.isIdentifier(property)) ? `${object.name}.${property.name}` : null
+
+    return [
+      (t.ThisExpression.check(object) ? 'this' : (object || {}).name) || '',
+      (property || {}).name || ''
+    ].join('.')
   }
 
   isIdentifier(node){
