@@ -1,5 +1,6 @@
 import _ from 'lodash'
 import recast from 'recast'
+import prettier from 'prettier'
 import { namedTypes as t, builders as b, visit } from 'ast-types'
 import { Ast, code, logError, getConfig } from './Util'
 import SourceFile from './SourceFile'
@@ -106,12 +107,62 @@ export default class ExtJSClass{
     return this.sourceFile.getExportName(this)
   }
 
-  transpile(){
-    return this.getES6Class()
+  transpile(type = 'ES6'){
+    return type === 'reactified'
+      ? this.getReactifiedClass()
+      : this.getES6Class()
+  }
+
+  getReactifiedClass(){
+    return code(
+      `import { reactify } from '@extjs/reactor'`,
+      `const ExtJS${className} = reactify('${xtype}')`,
+      '',
+      `export default class ${className} extends Component{`,
+      [
+        'render(){',
+        [
+          'const {',
+            props.map((prop, i) => `${prop.name}${comma(props, i)} ${getComment(prop)}`),
+          '} = this.props',
+          '',
+          `return <ExtJS${className} {...(this.props)} />`
+        ],
+        '}'
+      ],
+      '}'
+    )
+  }
+
+  getComponentFileCode({ className, xtype, props }){
+    let longestProp = Math.max(0, ...props.map(prop => prop.name.length)),
+        getComment  = prop => _.repeat(' ', longestProp - prop.name.length) + `// used ${prop.usage} times`,
+        comma       = (array, i, space = true) => i < (array.length - 1) ? ',' : (space ? ' ' : '')
+
+    props = props.sort((p1, p2) => p1.usage - p2.usage)
+
+    return code(
+      `import { reactify } from '@extjs/reactor'`,
+      `const ExtJS${className} = reactify('${xtype}')`,
+      '',
+      `export default class ${className} extends Component{`,
+      [
+        'render(){',
+        [
+          'const {',
+            props.map((prop, i) => `${prop.name}${comma(props, i)} ${getComment(prop)}`),
+          '} = this.props',
+          '',
+          `return <ExtJS${className} {...(this.props)} />`
+        ],
+        '}'
+      ],
+      '}'
+    )
   }
 
   getES6Class(){
-    let exportCode = this.sourceFile.classes.length === 1 ? 'export default' : 'export',
+    let exportCode  = this.sourceFile.classes.length === 1 ? 'export default' : 'export',
         className   = this.getExportName(),
         parentName  = this.parentClass ? this.sourceFile.getImportNameForClassName(this.parentClass.className) : null,
         extendsCode = parentName ? ` extends ${parentName}` : '',
@@ -137,11 +188,22 @@ export default class ExtJSClass{
       'render(props){',
       [
         'return (',
-        [Ast.toString(jsx)],
+        [this.getCodeFromJSX(jsx)],
         ')',
       ],
       '}'
     )
+  }
+
+  getCodeFromJSX(jsx){
+    jsx = Ast.toString(jsx)
+
+    try{
+      return prettier.format(jsx, { parser: 'babel', printWidth: 200 }).replace(/;\s*$/, '')
+    }
+    catch(e){
+      return jsx
+    }
   }
 
   getJSXFromConfig(config){
