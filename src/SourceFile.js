@@ -79,14 +79,13 @@ export default class SourceFile{
   }
 
   getImportsCode(){
-    let classes   = Object.keys(this.importNames).map(className => this._codebase.getClassForClassName(className)),
-        files     = _.groupBy(classes, cls => cls.sourceFile.importFilePath),
-        filePaths = Object.keys(files).reverse()
+    let classes     = Object.keys(this.importNames).map(className => this._codebase.getClassForClassName(className)),
+        sourceFiles = _.uniq(classes.map(c => c.sourceFile))
 
-    let imports = filePaths.map(filePath => {
-      let importNames = files[filePath].map(cls => this.getImportNameForClassName(cls.className)),
-          specifiers  = importNames.length > 1 ? '{ ' + importNames.join(', ') + ' }' : importNames[0],
-          source      = getRelativePath(this.codeFilePath, filePath).replace(/\.js$/, '')
+    let imports = sourceFiles.map(sourceFile => {
+      let importNames = _.intersection(sourceFile.classes, classes).map(cls => this.getImportNameForClassName(cls.className)),
+          specifiers  = sourceFile.classes.length > 1 ? '{ ' + importNames.join(', ') + ' }' : importNames[0],
+          source      = getRelativePath(this.codeFilePath, sourceFile.importFilePath).replace(/\.js$/, '')
 
       return `import ${specifiers} from '${source}'`
     })
