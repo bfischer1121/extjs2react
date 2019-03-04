@@ -40,7 +40,8 @@ export default class SourceFile{
         throw `Error parsing source file (${filePath}): ${e}`
       }
 
-      this.parseable = forceParse || (Ast.toString(this.ast) === source)
+      this.parseable  = forceParse || true
+      this.perfectAst = (Ast.toString(this.ast) === source)
     }
   }
 

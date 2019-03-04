@@ -120,7 +120,15 @@ export default class ExtJSClass{
       items.length === 0
     )
 
-    return code('render(props){', [`return ${Ast.toString(jsx)}`], '}')
+    return code(
+      'render(props){',
+      [
+        'return (',
+        [Ast.toString(jsx)],
+        ')',
+      ],
+      '}'
+    )
   }
 
   getJSXFromConfig(config){
