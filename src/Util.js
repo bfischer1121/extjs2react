@@ -99,7 +99,7 @@ export const logError = message => {
 export const code = (...lines) => {
   return lines.map(line => (
     _.isArray(line) ? code(...line).replace(/^/gm, '  ') : line
-  )).join('\n')
+  )).join('\n').replace(/^\s+$/gm, '')
 }
 
 class AST{
@@ -148,6 +148,10 @@ class AST{
     return t.ConditionalExpression.check(node)
   }
 
+  isFunction(node){
+    return t.FunctionExpression.check(node)
+  }
+
   getConfig(config, name){
     let property = this.getProperty(config, name)
 
@@ -171,10 +175,14 @@ class AST{
   }
 
   getProperties(object, include, exclude){
-    return object.properties.filter(({ key, value }) => {
-      let name = key.name || key.value
+    return object.properties.filter(node => {
+      let name = this.getPropertyName(node)
       return (include ? include.includes(name) : true) && (exclude ? !exclude.includes(name) : true)
     })
+  }
+
+  getPropertyName(node){
+    return node.key.name || node.key.value
   }
 }
 

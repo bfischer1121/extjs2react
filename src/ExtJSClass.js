@@ -85,11 +85,6 @@ export default class ExtJSClass{
     this._classAliases = aliases
   }
 
-  get unqualifiedClassName(){
-    let parts = this.className.split('.')
-    return parts[parts.length - 1]
-  }
-
   get fileSearchRegExp(){
     return new RegExp(`(${this.className})\\W+?`, 'g')
   }
@@ -122,7 +117,7 @@ export default class ExtJSClass{
 
       visit(this._ast, {
         visitObjectExpression: function(path){
-          nodes.push(...path.node.properties.filter(p => configNames.includes(p.key.name)))
+          nodes.push(...path.node.properties.filter(p => configNames.includes(Ast.getPropertyName(p))))
           this.traverse(path)
         }
       })
@@ -188,7 +183,7 @@ export default class ExtJSClass{
       return aliases
     }
 
-    return nodes.reduce((aliases, node) => handleNode(aliases, node.value, node.key.name), [])
+    return nodes.reduce((aliases, node) => handleNode(aliases, node.value, Ast.getPropertyName(node)), [])
   }
 
   transpile(type = 'ES6'){
@@ -249,11 +244,29 @@ export default class ExtJSClass{
     let exportCode  = this.sourceFile.classes.length === 1 ? 'export default' : 'export',
         className   = this.exportName,
         parentName  = this.parentClass ? this.sourceFile.getImportNameForClassName(this.parentClass.className) : null,
-        extendsCode = parentName ? ` extends ${parentName}` : '',
-        methods     = [this.getRenderFn()]
+        extendsCode = parentName ? ` extends ${parentName}` : ''
 
     // controller, viewModel, cls, items, listeners, bind
-    return code(`${exportCode} class ${className}${extendsCode}{`, methods, '}')
+    return code(
+      `${exportCode} class ${className}${extendsCode}{`,
+        [this.getMethods()],
+      '}'
+    )
+  }
+
+  getMethods(){
+    let fns = Ast.getProperties(this._ast).filter(({ value }) => Ast.isFunction(value))
+
+    let methods = fns.map(({ key, value }) => {
+      let method = b.classMethod('method', key, value.params, value.body)
+      return (value.async ? 'async ' : '') + Ast.toString(method).replace(/\) \{/, '){')
+    })
+
+    if(true){
+      methods.unshift(this.getRenderFn())
+    }
+
+    return methods.join('\n\n')
   }
 
   getRenderFn(){
@@ -326,9 +339,10 @@ export default class ExtJSClass{
   getPropsFromConfig(config){
     let getPropName = configName => ({ 'cls': 'className' }[configName] || configName)
 
-    return Ast.getPropertiesExcept(config, 'extend', 'xtype', 'items').map(({ key, value }) => {
-      let name = getPropName(key.name || key.value),
-          prop = value => b.jsxAttribute(b.jsxIdentifier(name), value)
+    return Ast.getPropertiesExcept(config, 'extend', 'xtype', 'items').map(node => {
+      let name  = Ast.getPropertyName(node),
+          value = node.value,
+          prop  = value => b.jsxAttribute(b.jsxIdentifier(name), value)
 
       if(this._shouldExtractJSXValue(value)){
         value = b.identifier(this._extractProp(name, value))
