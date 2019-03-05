@@ -34,8 +34,8 @@ export default class ExtJSClass{
     return {
       className       : this.className,
       exportName      : this.exportName,
-      parentClassName : this.parentClassName,
-      override        : this.override,
+      parentClassName : this.parentClassName || undefined,
+      override        : this.override        || undefined,
       classAliases    : this.classAliases,
       aliasesUsed     : this.aliasesUsed,
       methodCalls     : this.methodCalls
@@ -51,7 +51,7 @@ export default class ExtJSClass{
 
   get parentClassName(){
     if(_.isUndefined(this._parentClassName)){
-      this._parentClassName = Ast.getConfig(this._ast, 'extend')
+      this._parentClassName = this._getClassReferenceConfig('extend')
     }
 
     return this._parentClassName
@@ -63,7 +63,7 @@ export default class ExtJSClass{
 
   get override(){
     if(_.isUndefined(this._override)){
-      this._override = Ast.getConfig(this._ast, 'override')
+      this._override = this._getClassReferenceConfig('override')
     }
 
     return this._override
@@ -142,6 +142,22 @@ export default class ExtJSClass{
 
   set exportName(name){
     this._exportName = name
+  }
+
+  _getClassReferenceConfig(name){
+    let property = Ast.getProperty(this._ast, name)
+
+    if(!property){
+      return null
+    }
+
+    if(Ast.isString(property)){
+      return property.value
+    }
+
+    property = Ast.toString(property)
+
+    return this.sourceFile.codebase.getClassForClassName(property) ? property : null
   }
 
   _getAliasesFromNodes(nodes){

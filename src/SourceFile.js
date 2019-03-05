@@ -43,15 +43,15 @@ export default class SourceFile{
   }
 
   constructor({ codebase, codeFilePath, source, ast }){
-    this._codebase = codebase
-    this._source   = source
-    this._ast      = ast
-
+    this.codebase     = codebase
     this.codeFilePath = codeFilePath
+
+    this._source  = source
+    this._ast     = ast
   }
 
   get importFilePath(){
-    return this._codebase.manifestFilePath || this.codeFilePath
+    return this.codebase.manifestFilePath || this.codeFilePath
   }
 
   get _ast(){
@@ -92,7 +92,7 @@ export default class SourceFile{
   }
 
   get _importsCode(){
-    let classes     = Object.keys(this._importNames).map(className => this._codebase.getClassForClassName(className)),
+    let classes     = Object.keys(this._importNames).map(className => this.codebase.getClassForClassName(className)),
         sourceFiles = _.uniq(classes.map(c => c.sourceFile))
 
     let imports = sourceFiles.map(sourceFile => {
@@ -116,7 +116,7 @@ export default class SourceFile{
 
   get _classNamesUsed(){
     let internalCls = this.classes.map(cls => cls.className),
-        externalCls = this._codebase.classRe.reduce((classes, re) => [...classes, ...(this._getMatches(re).map(match => match[1]))], [])
+        externalCls = this.codebase.classRe.reduce((classes, re) => [...classes, ...(this._getMatches(re).map(match => match[1]))], [])
 
     return _.uniq(_.difference(externalCls, internalCls))
   }
@@ -159,7 +159,7 @@ export default class SourceFile{
   }
 
   getImportNameForAlias(alias){
-    let className = this._codebase.getClassNameForAlias(alias)
+    let className = this.codebase.getClassNameForAlias(alias)
     return className ? this.getImportNameForClassName(className) : null
   }
 
@@ -182,12 +182,12 @@ export default class SourceFile{
         classes    = []
 
     aliases.forEach(alias => {
-      let className = this._codebase.getClassNameForAlias(alias)
+      let className = this.codebase.getClassNameForAlias(alias)
       className ? classNames.push(className) : this.unknownAliases.push(alias)
     })
 
     classNames.forEach(className => {
-      let cls = this._codebase.getClassForClassName(className)
+      let cls = this.codebase.getClassForClassName(className)
       cls ? classes.push(cls) : this.unknownClassNames.push(className)
     })
 
@@ -213,7 +213,7 @@ export default class SourceFile{
     let parts      = cls.classAliases[0].split('.'),
         namespace  = parts.slice(0, parts.length - 1).map(p => _.capitalize(p)).join(''),
         alias      = _.capitalize(parts[parts.length - 1].replace(/.*-/, '')),
-        exportName = this._codebase.words.reduce((alias, [word, wordRe]) => alias.replace(wordRe, word), alias),
+        exportName = this.codebase.words.reduce((alias, [word, wordRe]) => alias.replace(wordRe, word), alias),
         suffix     = { 'viewmodel': 'Model' }[namespace] || namespace
 
     return exportName + (suffix === 'Widget' ? '' : suffix)
