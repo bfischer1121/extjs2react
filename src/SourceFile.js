@@ -125,8 +125,25 @@ export default class SourceFile{
     let processClassDefinition = node => {
       let [className, data, createdFn] = node.arguments
 
-      if(!Ast.isString(className) || !Ast.isObject(data)){
-        logError(`Error parsing Ext.define call (${this.codeFilePath}): Expected first and second arguments to be a string and object, respectively`)
+      if(Ast.isNull(className)){
+        return
+      }
+
+      if(!Ast.isString(className)){
+        console.log(`Error parsing Ext.define call (${this.codeFilePath}): Expected first argument to be a string`)
+        return
+      }
+
+      if(Ast.isFunction(data)){
+        let returnStatements = data.body.body.filter(node => node.type === 'ReturnStatement')
+
+        if(returnStatements.length === 1){
+          data = returnStatements[0].argument
+        }
+      }
+
+      if(!Ast.isObject(data)){
+        console.log(`Error parsing Ext.define call (${className.value}): Expected second argument to be a function or object`)
         return
       }
 
