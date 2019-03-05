@@ -24,7 +24,7 @@ export default class Codebase{
   unparseable = []
   aliases     = {}
   classes     = {}
-  classRe     = []
+  _classRe    = []
   words       = []
 
   static async factory(config){
@@ -97,6 +97,10 @@ export default class Codebase{
     return _.uniq(classNames).sort((n1, n2) => n1.localeCompare(n2))
   }
 
+  get classRe(){
+    return this.parentCodebase ? [...(this._classRe), ...(this.parentCodebase.classRe)] : this._classRe
+  }
+
   get methodCalls(){
     let fnCalls = _.flattenDeep(this.sourceFiles.map(sourceFile => sourceFile.classes.map(cls => cls.methodCalls))),
         objects = ['Ext', 'Math'],
@@ -149,7 +153,7 @@ export default class Codebase{
       }
 
       this.classes[cls.className] = cls
-      this.classRe.push(cls.fileSearchRegExp)
+      this._classRe.push(cls.fileSearchRegExp)
     })
 
     classes.forEach(cls => {
