@@ -152,12 +152,6 @@ export default class Codebase{
       this._classRe.push(cls.fileSearchRegExp)
     })
 
-    classes.forEach(cls => {
-      if(cls.parentClassName){
-        cls.parentClass = this.getClassForClassName(cls.parentClassName)
-      }
-    })
-
     this._addWordsFromClassNames(classes.map(cls => cls.className))
     this.sourceFiles.forEach(sourceFile => sourceFile.init())
   }

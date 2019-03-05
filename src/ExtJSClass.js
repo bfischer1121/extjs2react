@@ -6,26 +6,23 @@ import { Ast, code, logError, getConfig } from './Util'
 import SourceFile from './SourceFile'
 
 export default class ExtJSClass{
-  parentClass = null
-
-  className = null
-
   props = {}
   state = {}
 
   extractedProps = {}
 
-  static fromSnapshot(sourceFile, { className, exportName, parentClassName, override, classAliases, aliasesUsed, methodCalls }){
-    let cls = new this(sourceFile, className)
+  static fromSnapshot(sourceFile, snapshot){
+    let cls = new this(sourceFile, snapshot.className)
 
     cls.fromSnapshot = true
 
-    cls.exportName      = exportName
-    cls.parentClassName = parentClassName
-    cls.override        = override
-    cls.classAliases    = classAliases
-    cls.aliasesUsed     = aliasesUsed
-    cls.methodCalls     = methodCalls
+    cls.exportName      = snapshot.exportName
+    cls.parentClassName = snapshot.parentClassName
+    cls.override        = snapshot.override
+    cls.classAliases    = snapshot.classAliases
+    cls.classConfigs    = snapshot.classConfigs
+    cls.aliasesUsed     = snapshot.aliasesUsed
+    cls.methodCalls     = snapshot.methodCalls
 
     return cls
   }
@@ -37,6 +34,7 @@ export default class ExtJSClass{
       parentClassName : this.parentClassName || undefined,
       override        : this.override        || undefined,
       classAliases    : this.classAliases,
+      classConfigs    : this.classConfigs,
       aliasesUsed     : this.aliasesUsed,
       methodCalls     : this.methodCalls
     }
@@ -61,6 +59,26 @@ export default class ExtJSClass{
     this._parentClassName = name || null
   }
 
+  get parentClass(){
+    if(_.isUndefined(this._parentClass)){
+      this._parentClass = this.parentClassName
+        ? this.sourceFile.codebase.getClassForClassName(this.parentClassName)
+        : null
+    }
+
+    return this._parentClass
+  }
+
+  get ancestors(){
+    let ancestors = []
+
+    for(let parentClass = this.parentClass; parentClass; parentClass = parentClass.parentClass){
+      ancestors.push(parentClass)
+    }
+
+    return ancestors
+  }
+
   get override(){
     if(_.isUndefined(this._override)){
       this._override = this._getClassReferenceConfig('override')
@@ -83,6 +101,22 @@ export default class ExtJSClass{
 
   set classAliases(aliases){
     this._classAliases = aliases
+  }
+
+  get classConfigs(){
+    if(_.isUndefined(this._classConfigs)){
+      let config          = Ast.getProperty(this._ast, 'config'),
+          configs         = Ast.isObject(config) ? config.properties.map(node => Ast.getPropertyName(node)) : [],
+          ancestorConfigs = this.ancestors.reduce((configs, cls) => [...configs, ...cls.classConfigs], [])
+
+      this._classConfigs = _.difference(configs, ancestorConfigs)
+    }
+
+    return this._classConfigs
+  }
+
+  set classConfigs(configs){
+    this._classConfigs = configs
   }
 
   get fileSearchRegExp(){
@@ -257,20 +291,14 @@ export default class ExtJSClass{
   }
 
   isComponent(){
-    for(let parentClass = this; parentClass; parentClass = parentClass.parentClass){
-      if(parentClass.className === 'Ext.Widget'){
-        return true
-      }
-    }
-
-    return false
+    return !![this, ...(this.ancestors)].find(cls => cls.className === 'Ext.Widget')
   }
 
   getES6Class(){
     let exportCode  = this.sourceFile.classes.length === 1 ? 'export default' : 'export',
         className   = this.exportName,
         parentName  = this.parentClass ? this.sourceFile.getImportNameForClassName(this.parentClass.className) : null,
-        extendsCode = (parentName && this.isComponent()) ? ` extends ${parentName}` : ''
+        extendsCode = this.isComponent() ? ' extends Component' : (parentName ? ` extends ${parentName}` : '')
 
     // controller, viewModel, cls, items, listeners, bind
     return code(
