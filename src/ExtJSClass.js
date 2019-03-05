@@ -256,6 +256,17 @@ export default class ExtJSClass{
     )
   }
 
+  isComponent(){
+    for(let parentClass = this; parentClass; parentClass = parentClass.parentClass){
+      console.log({ parentClass: parentClass.className })
+      if(parentClass.className === 'Ext.Widget'){
+        return true
+      }
+    }
+
+    return false
+  }
+
   getES6Class(){
     let exportCode  = this.sourceFile.classes.length === 1 ? 'export default' : 'export',
         className   = this.exportName,
@@ -278,7 +289,7 @@ export default class ExtJSClass{
       return (value.async ? 'async ' : '') + Ast.toString(method).replace(/\) \{/, '){')
     })
 
-    if(true){
+    if(this.isComponent()){
       methods.unshift(this.getRenderFn())
     }
 
