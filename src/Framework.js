@@ -12,19 +12,14 @@ import {
 } from './Util'
 
 export default class Framework extends Codebase{
-  static factory(sdkFilePath, targetDir){
-    return Codebase.factory.bind(this)({ sourceDir: sdkFilePath, targetDir })
-  }
-
-  async doLoadSourceFiles(){
+  async _doLoadSourceFiles(){
     let sdkFilePath = this.sourceDir
 
     let sdkFile = await SourceFile.factory({
       codebase       : this,
       codeFilePath   : sdkFilePath,
       importFilePath : sdkFilePath,
-      source         : await readFile(sdkFilePath),
-      forceParse     : true
+      source         : await readFile(sdkFilePath)
     })
 
     return [sdkFile]
@@ -93,33 +88,6 @@ export default class Framework extends Codebase{
 
     return code(
       ...classes.map(cls => `export { default as ${cls.className} } from '${cls.sourceFile.codeFilePath}' ${getComment(cls)}`)
-    )
-  }
-
-  getComponentFileCode({ className, xtype, props }){
-    let longestProp = Math.max(0, ...props.map(prop => prop.name.length)),
-        getComment  = prop => _.repeat(' ', longestProp - prop.name.length) + `// used ${prop.usage} times`,
-        comma       = (array, i, space = true) => i < (array.length - 1) ? ',' : (space ? ' ' : '')
-
-    props = props.sort((p1, p2) => p1.usage - p2.usage)
-
-    return code(
-      `import { reactify } from '@extjs/reactor'`,
-      `const ExtJS${className} = reactify('${xtype}')`,
-      '',
-      `export default class ${className} extends Component{`,
-      [
-        'render(){',
-        [
-          'const {',
-            props.map((prop, i) => `${prop.name}${comma(props, i)} ${getComment(prop)}`),
-          '} = this.props',
-          '',
-          `return <ExtJS${className} {...(this.props)} />`
-        ],
-        '}'
-      ],
-      '}'
     )
   }
 }

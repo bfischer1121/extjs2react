@@ -9,6 +9,8 @@ import {
   getConfig,
   readFile,
   writeFile,
+  readSnapshot,
+  saveSnapshot,
   isDirectory,
   getFilesRecursively,
   getAbsolutePath,
@@ -19,7 +21,6 @@ import {
 } from './Util'
 
 export default class Codebase{
-  sourceFiles = []
   unparseable = []
   aliases     = {}
   classes     = {}
@@ -28,17 +29,55 @@ export default class Codebase{
 
   static async factory(config){
     let codebase = new this(config)
-    await codebase.addSourceFiles()
+    await codebase._loadSourceFiles()
+    codebase._addSourceFiles()
     return codebase
+  }
+
+  static async loadSnapshot(id, config){
+    let snapshot = await readSnapshot(id)
+
+    if(!snapshot){
+      let codebase = await this.factory(config)
+      await codebase.saveSnapshot(id)
+      snapshot = await readSnapshot(id)
+    }
+
+    return this.fromSnapshot(config.parentCodebase, snapshot)
+  }
+
+  static fromSnapshot(parentCodebase, { sourceFiles, unparseable, words }){
+    let codebase = new this({ parentCodebase, words })
+
+    codebase.fromSnapshot = true
+
+    codebase.sourceFiles = sourceFiles.map(snapshot => SourceFile.fromSnapshot(codebase, snapshot))
+    codebase.unparseable = unparseable
+
+    codebase._addSourceFiles()
+
+    return codebase
+  }
+
+  toSnapshot(){
+    return {
+      sourceFiles : this.sourceFiles.map(sourceFile => sourceFile.toSnapshot()),
+      unparseable : this.unparseable,
+      words       : this._customWords
+    }
+  }
+
+  async saveSnapshot(id){
+    await saveSnapshot(id, this.toSnapshot())
   }
 
   constructor({ sourceDir, targetDir, parentCodebase, words = [] }){
     this.sourceDir      = sourceDir
     this.targetDir      = targetDir
     this.parentCodebase = parentCodebase
-    this.customWords    = words
+    this._customWords   = words
 
-    this.addWords(words)
+    this._addWords(this._customWords)
 
     if(this.parentCodebase){
       this._addWordsFromClassNames(Object.values(this.parentCodebase.aliases))
@@ -53,27 +92,13 @@ export default class Codebase{
     return this.classes[className] || (this.parentCodebase ? this.parentCodebase.getClassForClassName(className) : null) || null
   }
 
-  async getAllClassNames(){
-    let classNames = Object.keys(this.classes).map(className => this.classes[className].getExportName())
+  get classNames(){
+    let classNames = Object.keys(this.classes).map(className => this.classes[className].exportName)
     return _.uniq(classNames).sort((n1, n2) => n1.localeCompare(n2))
   }
 
-  async transpile(){
-    await this.prepareTargetDirectory()
-    this.unparseable.forEach(file => copySourceFileToTargetDir(file))
-
-    await asyncForEach(this.sourceFiles, async sourceFile => {
-      this.saveSourceFile(sourceFile, sourceFile.transpile())
-      //sourceFile.missingFiles.forEach(className => logError(`Unknown file for class: ${className}`))
-    })
-
-    if(this.parentCodebase){
-      await this.parentCodebase.transpile()
-    }
-  }
-
-  async getAllMethodCalls(){
-    let fnCalls = _.flattenDeep(this.sourceFiles.map(sourceFile => sourceFile.classes.map(cls => cls.getMethodCalls()))),
+  get methodCalls(){
+    let fnCalls = _.flattenDeep(this.sourceFiles.map(sourceFile => sourceFile.classes.map(cls => cls.methodCalls))),
         objects = ['Ext', 'Math'],
         counts  = {}
 
@@ -93,9 +118,21 @@ export default class Codebase{
     return Object.keys(counts).map(c => ({ method: c, count: counts[c] })).sort((c1, c2) => c2.count - c1.count)
   }
 
-  async addSourceFiles(){
-    this.sourceFiles = await this.loadSourceFiles()
+  async transpile(){
+    await this._prepareTargetDirectory()
+    this.unparseable.forEach(file => copySourceFileToTargetDir(file))
 
+    await asyncForEach(this.sourceFiles, async sourceFile => {
+      this._saveSourceFile(sourceFile, sourceFile.transpile())
+      //sourceFile.missingFiles.forEach(className => logError(`Unknown file for class: ${className}`))
+    })
+
+    if(this.parentCodebase){
+      await this.parentCodebase.transpile()
+    }
+  }
+
+  _addSourceFiles(){
     let classes = this.sourceFiles.reduce((classes, sourceFile) => ([...classes, ...sourceFile.classes]), [])
 
     classes.forEach(cls => {
@@ -112,7 +149,7 @@ export default class Codebase{
       }
 
       this.classes[cls.className] = cls
-      this.classRe.push(cls.getFileSearchRegExp())
+      this.classRe.push(cls.fileSearchRegExp)
     })
 
     classes.forEach(cls => {
@@ -122,15 +159,14 @@ export default class Codebase{
     })
 
     this._addWordsFromClassNames(classes.map(cls => cls.className))
-    await asyncForEach(this.sourceFiles, async sourceFile => await sourceFile.initImports())
+    this.sourceFiles.forEach(sourceFile => sourceFile.initImports())
   }
 
-  loadSourceFiles(){
-    this._loadSourceFiles = this._loadSourceFiles || this.doLoadSourceFiles()
-    return this._loadSourceFiles
+  async _loadSourceFiles(){
+    this.sourceFiles = this.sourceFiles || await this._doLoadSourceFiles()
   }
 
-  async doLoadSourceFiles(){
+  async _doLoadSourceFiles(){
     let files       = getFilesRecursively(this.sourceDir),
         unparseable = files.filter(file => !file.endsWith('.js')),
         js          = files.filter(file => file.endsWith('.js')), //.filter(file => file.endsWith('NonClinical.js')),
@@ -152,7 +188,7 @@ export default class Codebase{
     return sourceFiles
   }
 
-  async prepareTargetDirectory(){
+  async _prepareTargetDirectory(){
     let infoPath  = getAbsolutePath(this.targetDir, 'extjs2react.json'),
         generator = null
 
@@ -169,7 +205,7 @@ export default class Codebase{
     await fs.writeFile(infoPath, JSON.stringify({ generator: 'extjs2react' }, null, 2))
   }
 
-  saveSourceFile(sourceFile, code){
+  _saveSourceFile(sourceFile, code){
     writeFile(getPathInTargetDirForSource(sourceFile.codeFilePath), code)
   }
 
@@ -177,13 +213,13 @@ export default class Codebase{
     let classParts = _.flatten(classNames.map(className => className.split('.'))),
         classWords = _.flatten(classParts.map(classPart => classPart.split(/(?=[A-Z])/)))
 
-    this.addWords(classWords.filter(word => word.length > 3).map(word => _.capitalize(word)))
+    this._addWords(classWords.filter(word => word.length > 3).map(word => _.capitalize(word)))
   }
 
-  addWords(words){
+  _addWords(words){
     words = _.uniq([...(this.words.map(w => w[0])), ...words]).sort((w1, w2) => {
       let diff = w1.length - w2.length
-      return diff === 0 ? (this.customWords.includes(w1) ? 1 : -1) : diff
+      return diff === 0 ? (this._customWords.includes(w1) ? 1 : -1) : diff
     })
 
     this.words = words.map(word => [word, new RegExp(word, 'gi')])

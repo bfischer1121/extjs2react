@@ -63,3 +63,4 @@ typings/
 /config.json
 config.json
 framework.json
+snapshots/codebase.json

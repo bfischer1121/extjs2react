@@ -20,6 +20,19 @@ export const asyncMap = async (array, callback) => {
   return results
 }
 
+const getSnapshotPath = id => getAbsolutePath(__dirname, '..', 'snapshots', `${id}.json`)
+
+export const readSnapshot = async (id) => {
+  try{
+    return await fs.readJson(getSnapshotPath(id))
+  }
+  catch(e){
+    return null
+  }
+}
+
+export const saveSnapshot = async (id, data) => await writeFile(getSnapshotPath(id), JSON.stringify(data, null, 2))
+
 export const getConfig = () => {
   let config = fs.readJsonSync(getAbsolutePath(__dirname, '..', 'config.json'))
 

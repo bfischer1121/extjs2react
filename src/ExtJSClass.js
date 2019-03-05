@@ -6,62 +6,134 @@ import { Ast, code, logError, getConfig } from './Util'
 import SourceFile from './SourceFile'
 
 export default class ExtJSClass{
-  parentClassName = null
-  parentClass     = null
+  parentClass = null
 
-  className    = null
-  classAliases = []
+  className = null
 
   props = {}
   state = {}
 
+  static fromSnapshot(sourceFile, { className, exportName, parentClassName, classAliases, aliasesUsed, methodCalls }){
+    let cls = new this(sourceFile, className)
+
+    cls.fromSnapshot = true
+
+    cls.exportName      = exportName
+    cls.parentClassName = parentClassName
+    cls.classAliases    = classAliases
+    cls.aliasesUsed     = aliasesUsed
+    cls.methodCalls     = methodCalls
+
+    return cls
+  }
+
+  toSnapshot(){
+    return {
+      className       : this.className,
+      exportName      : this.exportName,
+      parentClassName : this.parentClassName,
+      classAliases    : this.classAliases,
+      aliasesUsed     : this.aliasesUsed,
+      methodCalls     : this.methodCalls
+    }
+  }
+
   constructor(sourceFile, className, ast, createdFn){
     this.sourceFile = sourceFile
     this.className  = className
-    this.ast        = ast
-    this.createdFn  = createdFn
-
-    this.parentClassName = Ast.getConfig(this.ast, 'extend')
-    this.classAliases    = _.uniq(this.getAliasesFromNodes(Ast.getProperties(this.ast, ['xtype', 'alias'])))
+    this._ast       = ast
+    this._createdFn = createdFn
   }
 
-  getUnqualifiedClassName(){
+  get parentClassName(){
+    if(_.isUndefined(this._parentClassName)){
+      this._parentClassName = Ast.getConfig(this._ast, 'extend')
+    }
+
+    return this._parentClassName
+  }
+
+  set parentClassName(name){
+    this._parentClassName = name || null
+  }
+
+  get classAliases(){
+    if(_.isUndefined(this._classAliases)){
+      this._classAliases = _.uniq(this._getAliasesFromNodes(Ast.getProperties(this._ast, ['xtype', 'alias'])))
+    }
+
+    return this._classAliases
+  }
+
+  set classAliases(aliases){
+    this._classAliases = aliases
+  }
+
+  get unqualifiedClassName(){
     let parts = this.className.split('.')
     return parts[parts.length - 1]
   }
 
-  getFileSearchRegExp(){
+  get fileSearchRegExp(){
     return new RegExp(`(${this.className})\\W+?`, 'g')
   }
 
-  getMethodCalls(){
-    let calls = []
+  get methodCalls(){
+    if(_.isUndefined(this._methodCalls)){
+      let calls = []
 
-    visit(this.ast, {
-      visitCallExpression: function(path){
-        calls.push(Ast.getMethodCall(path.node))
-        this.traverse(path)
-      }
-    })
+      visit(this._ast, {
+        visitCallExpression: function(path){
+          calls.push(Ast.getMethodCall(path.node))
+          this.traverse(path)
+        }
+      })
 
-    return calls
+      this._methodCalls = calls
+    }
+
+    return this._methodCalls
   }
 
-  getAliasesUsed(){
-    let nodes       = [],
-        configNames = ['xtype', 'alias', 'controller', 'viewModel']
-
-    visit(this.ast, {
-      visitObjectExpression: function(path){
-        nodes.push(...path.node.properties.filter(p => configNames.includes(p.key.name)))
-        this.traverse(path)
-      }
-    })
-
-    return _.uniq(_.difference(this.getAliasesFromNodes(nodes), this.classAliases))
+  set methodCalls(calls){
+    this._methodCalls = calls
   }
 
-  getAliasesFromNodes(nodes){
+  get aliasesUsed(){
+    if(_.isUndefined(this._aliasesUsed)){
+      let nodes       = [],
+          configNames = ['xtype', 'alias', 'controller', 'viewModel']
+
+      visit(this._ast, {
+        visitObjectExpression: function(path){
+          nodes.push(...path.node.properties.filter(p => configNames.includes(p.key.name)))
+          this.traverse(path)
+        }
+      })
+
+      this._aliasesUsed = _.uniq(_.difference(this._getAliasesFromNodes(nodes), this.classAliases))
+    }
+
+    return this._aliasesUsed
+  }
+
+  set aliasesUsed(aliases){
+    this._aliasesUsed = aliases
+  }
+
+  get exportName(){
+    if(_.isUndefined(this._exportName)){
+      this._exportName = this.sourceFile.getExportName(this)
+    }
+
+    return this._exportName
+  }
+
+  set exportName(name){
+    this._exportName = name
+  }
+
+  _getAliasesFromNodes(nodes){
     let handleNode = (aliases, node, configName) => {
       let prefix = {
         xtype      : 'widget.',
@@ -101,10 +173,6 @@ export default class ExtJSClass{
     }
 
     return nodes.reduce((aliases, node) => handleNode(aliases, node.value, node.key.name), [])
-  }
-
-  getExportName(){
-    return this.sourceFile.getExportName(this)
   }
 
   transpile(type = 'ES6'){
@@ -163,7 +231,7 @@ export default class ExtJSClass{
 
   getES6Class(){
     let exportCode  = this.sourceFile.classes.length === 1 ? 'export default' : 'export',
-        className   = this.getExportName(),
+        className   = this.exportName,
         parentName  = this.parentClass ? this.sourceFile.getImportNameForClassName(this.parentClass.className) : null,
         extendsCode = parentName ? ` extends ${parentName}` : '',
         methods     = [this.getRenderFn()]
@@ -173,9 +241,9 @@ export default class ExtJSClass{
   }
 
   getRenderFn(){
-    let identifier = b.jsxIdentifier(this.getExportName()),
+    let identifier = b.jsxIdentifier(this.exportName),
         props      = [],
-        items      = _.compact((Ast.getConfig(this.ast, 'items') || []).map(item => this.getJSXFromConfig(item)))
+        items      = _.compact((Ast.getConfig(this._ast, 'items') || []).map(item => this.getJSXFromConfig(item)))
 
     let jsx = b.jsxElement(
       b.jsxOpeningElement(identifier, props),
