@@ -20,7 +20,9 @@ export default class ExtJSClass{
     cls.parentClassName = snapshot.parentClassName
     cls.override        = snapshot.override
     cls.classAliases    = snapshot.classAliases
-    cls.classConfigs    = snapshot.classConfigs
+    cls.configs         = snapshot.configs
+    cls.cachedConfigs   = snapshot.cachedConfigs
+    cls.eventedConfigs  = snapshot.eventedConfigs
     cls.aliasesUsed     = snapshot.aliasesUsed
     cls.methodCalls     = snapshot.methodCalls
 
@@ -34,7 +36,9 @@ export default class ExtJSClass{
       parentClassName : this.parentClassName || undefined,
       override        : this.override        || undefined,
       classAliases    : this.classAliases,
-      classConfigs    : this.classConfigs,
+      configs         : this.configs,
+      cachedConfigs   : this.cachedConfigs,
+      eventedConfigs  : this.eventedConfigs,
       aliasesUsed     : this.aliasesUsed,
       methodCalls     : this.methodCalls
     }
@@ -103,20 +107,40 @@ export default class ExtJSClass{
     this._classAliases = aliases
   }
 
-  get classConfigs(){
-    if(_.isUndefined(this._classConfigs)){
-      let config          = Ast.getProperty(this._ast, 'config'),
-          configs         = Ast.isObject(config) ? config.properties.map(node => Ast.getPropertyName(node)) : [],
-          ancestorConfigs = this.ancestors.reduce((configs, cls) => [...configs, ...cls.classConfigs], [])
-
-      this._classConfigs = _.difference(configs, ancestorConfigs)
+  get configs(){
+    if(_.isUndefined(this._configs)){
+      this._configs = this._getLocalConfigs('configs')
     }
 
-    return this._classConfigs
+    return this._configs
   }
 
-  set classConfigs(configs){
-    this._classConfigs = configs
+  set configs(configs){
+    this._configs = configs
+  }
+
+  get cachedConfigs(){
+    if(_.isUndefined(this._cachedConfigs)){
+      this._cachedConfigs = this._getLocalConfigs('cachedConfigs')
+    }
+
+    return this._cachedConfigs
+  }
+
+  set cachedConfigs(configs){
+    this._cachedConfigs = configs
+  }
+
+  get eventedConfigs(){
+    if(_.isUndefined(this._eventedConfigs)){
+      this._eventedConfigs = this._getLocalConfigs('eventedConfigs')
+    }
+
+    return this._eventedConfigs
+  }
+
+  set eventedConfigs(configs){
+    this._eventedConfigs = configs
   }
 
   get fileSearchRegExp(){
@@ -176,6 +200,16 @@ export default class ExtJSClass{
 
   set exportName(name){
     this._exportName = name
+  }
+
+  _getLocalConfigs(configType){
+    let key = { configs: 'config', cachedConfigs: 'cachedConfig', eventedConfigs: 'eventedConfig' }[configType]
+
+    let config          = Ast.getProperty(this._ast, key),
+        configs         = Ast.isObject(config) ? config.properties.map(node => Ast.getPropertyName(node)) : [],
+        ancestorConfigs = this.ancestors.reduce((configs, cls) => [...configs, ...cls[configType]], [])
+
+    return _.difference(configs, ancestorConfigs).sort((c1, c2) => c1.localeCompare(c2))
   }
 
   _getClassReferenceConfig(name){
