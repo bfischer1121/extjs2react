@@ -258,7 +258,6 @@ export default class ExtJSClass{
 
   isComponent(){
     for(let parentClass = this; parentClass; parentClass = parentClass.parentClass){
-      console.log({ parentClass: parentClass.className })
       if(parentClass.className === 'Ext.Widget'){
         return true
       }
@@ -271,7 +270,7 @@ export default class ExtJSClass{
     let exportCode  = this.sourceFile.classes.length === 1 ? 'export default' : 'export',
         className   = this.exportName,
         parentName  = this.parentClass ? this.sourceFile.getImportNameForClassName(this.parentClass.className) : null,
-        extendsCode = parentName ? ` extends ${parentName}` : ''
+        extendsCode = (parentName && this.isComponent()) ? ` extends ${parentName}` : ''
 
     // controller, viewModel, cls, items, listeners, bind
     return code(
@@ -297,7 +296,7 @@ export default class ExtJSClass{
   }
 
   getRenderFn(){
-    let identifier = b.jsxIdentifier(this.exportName),
+    let identifier = b.jsxIdentifier(this.sourceFile.getImportNameForClassName(this.parentClass.className)),
         props      = [],
         items      = _.compact((Ast.getConfig(this._ast, 'items') || []).map(item => this.getJSXFromConfig(item)))
 
