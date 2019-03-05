@@ -128,8 +128,24 @@ class AST{
     return t.Literal.check(node) && _.isString(node.value)
   }
 
+  isBoolean(node){
+    return t.Literal.check(node) && _.isBoolean(node.value)
+  }
+
+  isNull(node){
+    return t.Literal.check(node) && _.isNull(node.value)
+  }
+
   isObject(node){
     return t.ObjectExpression.check(node)
+  }
+
+  isArray(node){
+    return t.ArrayExpression.check(node)
+  }
+
+  isTernary(node){
+    return t.ConditionalExpression.check(node)
   }
 
   getConfig(config, name){
@@ -139,7 +155,7 @@ class AST{
       return undefined
     }
 
-    if(property.type === 'ArrayExpression'){
+    if(this.isArray(property)){
       return property.elements
     }
 

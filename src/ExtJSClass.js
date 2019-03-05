@@ -13,6 +13,8 @@ export default class ExtJSClass{
   props = {}
   state = {}
 
+  extractedProps = {}
+
   static fromSnapshot(sourceFile, { className, exportName, parentClassName, classAliases, aliasesUsed, methodCalls }){
     let cls = new this(sourceFile, className)
 
@@ -146,24 +148,24 @@ export default class ExtJSClass{
       // controller : String / Object / Ext.app.ViewController
       // viewModel  : String / Object / Ext.app.ViewModel
 
-      if(t.Literal.check(node) && _.isString(node.value)){
+      if(Ast.isString(node)){
         return [...aliases, prefix + node.value]
       }
 
-      if(t.Literal.check(node) && _.isNull(node.value)){
+      if(Ast.isNull(node)){
         return aliases
       }
 
-      if(t.ArrayExpression.check(node) && ['xtype', 'alias'].includes(configName)){
+      if(Ast.isArray(node) && ['xtype', 'alias'].includes(configName)){
         return node.elements.reduce((aliases, node) => handleNode(aliases, node, configName), aliases)
       }
 
-      if(t.ObjectExpression.check(node) && ['controller', 'viewModel'].includes(configName)){
+      if(Ast.isObject(node) && ['controller', 'viewModel'].includes(configName)){
         let typeNode = Ast.getProperty(node, 'type')
         return typeNode ? handleNode(aliases, typeNode, configName) : aliases
       }
 
-      if(t.ConditionalExpression.check(node)){
+      if(Ast.isTernary(node)){
         return [node.consequent, node.alternate].reduce((aliases, node) => handleNode(aliases, node, configName), aliases)
       }
 
@@ -252,9 +254,14 @@ export default class ExtJSClass{
       items.length === 0
     )
 
+    let extractedProps = Object.keys(this.extractedProps).map(name => (
+      `const ${name} = ${Ast.toString(this.extractedProps[name])}`
+    )).join('\n\n')
+
     return code(
       'render(props){',
       [
+        extractedProps + (extractedProps.length ? '\n' : ''),
         'return (',
         [this.getCodeFromJSX(jsx)],
         ')',
@@ -270,6 +277,7 @@ export default class ExtJSClass{
       return prettier.format(jsx, { parser: 'babel', printWidth: 200 }).replace(/;\s*$/, '')
     }
     catch(e){
+      console.log(`Error formatting JSX (${this.className})`, e)
       return jsx
     }
   }
@@ -305,17 +313,50 @@ export default class ExtJSClass{
     let getPropName = configName => ({ 'cls': 'className' }[configName] || configName)
 
     return Ast.getPropertiesExcept(config, 'extend', 'xtype', 'items').map(({ key, value }) => {
-      let prop = value => b.jsxAttribute(b.jsxIdentifier(getPropName(key.name || key.value)), value)
+      let name = getPropName(key.name || key.value),
+          prop = value => b.jsxAttribute(b.jsxIdentifier(name), value)
 
-      if(value.type === 'Literal' && _.isString(value.value)){
-        return prop(value)
+      if(this._shouldExtractJSXValue(value)){
+        value = b.identifier(this._extractProp(name, value))
       }
 
-      if(value.type === 'Literal' && _.isBoolean(value.value) && !!value.value){
+      if(Ast.isBoolean(value) && !!value.value){
         return prop(null)
+      }
+
+      if(Ast.isString(value)){
+        return prop(value)
       }
 
       return prop(b.jsxExpressionContainer(value))
     })
+  }
+
+  _shouldExtractJSXValue(node){
+    let checkRe = /<[^>]+>|,|\./ig,
+        extract = false
+
+    visit(node, {
+      visitLiteral: function(path){
+        if(Ast.isString(path.node) && checkRe.test(path.node.value)){
+          extract = true
+        }
+
+        this.traverse(path)
+      }
+    })
+
+    return extract
+  }
+
+  _extractProp(name, value, instance = 1){
+    let keyedName = `${name}${instance === 1 ? '' : instance}`
+
+    if(this.extractedProps[keyedName]){
+      return this._extractProp(name, value, instance + 1)
+    }
+
+    this.extractedProps[keyedName] = value
+    return keyedName
   }
 }
