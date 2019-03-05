@@ -8,6 +8,7 @@ export default class SourceFile{
   classes = []
 
   _importNames = {}
+  _exportNames = {}
 
   unknownAliases    = []
   unknownClassNames = []
@@ -22,8 +23,8 @@ export default class SourceFile{
     return sourceFile
   }
 
-  static fromSnapshot(codebase, { codeFilePath, importFilePath, parseable, classes }){
-    let sourceFile = new this({ codebase, codeFilePath, importFilePath })
+  static fromSnapshot(codebase, { codeFilePath, parseable, classes }){
+    let sourceFile = new this({ codebase, codeFilePath })
 
     sourceFile.fromSnapshot = true
 
@@ -35,20 +36,22 @@ export default class SourceFile{
 
   toSnapshot(){
     return {
-      codeFilePath   : this.codeFilePath,
-      importFilePath : this.importFilePath,
-      parseable      : this.parseable,
-      classes        : this.classes.map(cls => cls.toSnapshot())
+      codeFilePath : this.codeFilePath,
+      parseable    : this.parseable,
+      classes      : this.classes.map(cls => cls.toSnapshot())
     }
   }
 
-  constructor({ codebase, codeFilePath, importFilePath, source, ast }){
+  constructor({ codebase, codeFilePath, source, ast }){
     this._codebase = codebase
     this._source   = source
     this._ast      = ast
 
-    this.codeFilePath   = codeFilePath
-    this.importFilePath = importFilePath
+    this.codeFilePath = codeFilePath
+  }
+
+  get importFilePath(){
+    return this._codebase.manifestFilePath || this.codeFilePath
   }
 
   get _ast(){
@@ -95,7 +98,7 @@ export default class SourceFile{
     let imports = sourceFiles.map(sourceFile => {
       let importNames = _.intersection(sourceFile.classes, classes).map(cls => this.getImportNameForClassName(cls.className)),
           specifiers  = sourceFile.classes.length > 1 ? '{ ' + importNames.join(', ') + ' }' : importNames[0],
-          source      = getRelativePath(this.codeFilePath, sourceFile.importFilePath).replace(/\.js$/, '')
+          source      = getRelativePath(this.codeFilePath, sourceFile.importFilePath).replace(/\.js$/, '').replace(/\/index$/, '')
 
       return `import ${specifiers} from '${source}'`
     })
@@ -164,7 +167,16 @@ export default class SourceFile{
     return this._importNames[className]
   }
 
-  initImports(){
+  getExportNameForClassName(className){
+    if(!this._initializedExportNames){
+      this.classes.forEach(cls => this._exportNames[cls.className] = this._getExportName(cls))
+      this._initializedExportNames = true
+    }
+
+    return this._exportNames[className]
+  }
+
+  init(){
     let aliases    = this._aliasesUsed,
         classNames = this._classNamesUsed,
         classes    = []
@@ -193,28 +205,18 @@ export default class SourceFile{
     })
   }
 
-  getExportName(cls){
-    if(!this.classes.includes(cls)){
-      throw 'getExportName should be called via ExtJSClass'
-    }
-
+  _getExportName(cls){
     if(!cls.classAliases.length){
-      return cls.unqualifiedClassName
+      return cls.className.split('.').reverse().slice(0, -1).map(p => p[0].toUpperCase() + p.slice(1)).join('')
     }
 
     let parts      = cls.classAliases[0].split('.'),
-        namespace  = parts.slice(0, parts.length - 1).join('.'),
+        namespace  = parts.slice(0, parts.length - 1).map(p => _.capitalize(p)).join(''),
         alias      = _.capitalize(parts[parts.length - 1].replace(/.*-/, '')),
-        exportName = this._codebase.words.reduce((alias, [word, wordRe]) => alias.replace(wordRe, word), alias)
+        exportName = this._codebase.words.reduce((alias, [word, wordRe]) => alias.replace(wordRe, word), alias),
+        suffix     = { 'viewmodel': 'Model' }[namespace] || namespace
 
-    let suffix = {
-      'controller' : 'Controller',
-      'viewmodel'  : 'Model',
-      'proxy'      : 'Proxy',
-      'store'      : 'Store'
-    }[namespace] || ''
-
-    return exportName + suffix
+    return exportName + (suffix === 'Widget' ? '' : suffix)
   }
 
   _getMatches(regExp){

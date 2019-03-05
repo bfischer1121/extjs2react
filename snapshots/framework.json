@@ -1,13 +1,12 @@
 {
   "sourceFiles": [
     {
-      "codeFilePath": "../medlium-client/ext/build/ext-modern-all-debug.js",
-      "importFilePath": "../medlium-client/ext/build/ext-modern-all-debug.js",
+      "codeFilePath": "index.js",
       "parseable": true,
       "classes": [
         {
           "className": "Ext.mixin.Identifiable",
-          "exportName": "Identifiable",
+          "exportName": "IdentifiableMixin",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -21,7 +20,7 @@
         },
         {
           "className": "Ext.util.HashMap",
-          "exportName": "HashMap",
+          "exportName": "HashMapUtil",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -87,7 +86,7 @@
         },
         {
           "className": "Ext.promise.Deferred",
-          "exportName": "Deferred",
+          "exportName": "DeferredPromise",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -108,7 +107,7 @@
         },
         {
           "className": "Ext.mixin.Factoryable",
-          "exportName": "Factoryable",
+          "exportName": "FactoryableMixin",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -121,7 +120,7 @@
         },
         {
           "className": "Ext.data.request.Base",
-          "exportName": "Base",
+          "exportName": "BaseRequestData",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -147,7 +146,7 @@
         },
         {
           "className": "Ext.data.flash.BinaryXhr",
-          "exportName": "BinaryXhr",
+          "exportName": "BinaryXhrFlashData",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -187,7 +186,7 @@
         },
         {
           "className": "Ext.data.request.Ajax",
-          "exportName": "Ajax",
+          "exportName": "AjaxRequest",
           "classAliases": [
             "request.ajax"
           ],
@@ -268,7 +267,7 @@
         },
         {
           "className": "Ext.data.request.Form",
-          "exportName": "Form",
+          "exportName": "FormRequest",
           "classAliases": [
             "request.form"
           ],
@@ -330,7 +329,7 @@
         },
         {
           "className": "Ext.data.Connection",
-          "exportName": "Connection",
+          "exportName": "ConnectionData",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -549,7 +548,7 @@
         },
         {
           "className": "Ext.util.LruCache",
-          "exportName": "LruCache",
+          "exportName": "LruCacheUtil",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -602,7 +601,7 @@
         },
         {
           "className": "Ext.util.Positionable",
-          "exportName": "Positionable",
+          "exportName": "PositionableUtil",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -736,7 +735,7 @@
         },
         {
           "className": "Ext.dom.UnderlayPool",
-          "exportName": "UnderlayPool",
+          "exportName": "UnderlayPoolDom",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -752,7 +751,7 @@
         },
         {
           "className": "Ext.dom.Underlay",
-          "exportName": "Underlay",
+          "exportName": "UnderlayDom",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -784,7 +783,7 @@
         },
         {
           "className": "Ext.dom.Shadow",
-          "exportName": "Shadow",
+          "exportName": "ShadowDom",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -800,7 +799,7 @@
         },
         {
           "className": "Ext.dom.Shim",
-          "exportName": "Shim",
+          "exportName": "ShimDom",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -809,7 +808,7 @@
         },
         {
           "className": "Ext.dom.ElementEvent",
-          "exportName": "ElementEvent",
+          "exportName": "ElementEventDom",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -841,7 +840,7 @@
         },
         {
           "className": "Ext.event.publisher.Publisher",
-          "exportName": "Publisher",
+          "exportName": "PublisherPublisherEvent",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -855,7 +854,7 @@
         },
         {
           "className": "Ext.util.Offset",
-          "exportName": "Offset",
+          "exportName": "OffsetUtil",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -875,7 +874,7 @@
         },
         {
           "className": "Ext.util.Point",
-          "exportName": "Point",
+          "exportName": "PointUtil",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -897,7 +896,7 @@
         },
         {
           "className": "Ext.event.Event",
-          "exportName": "Event",
+          "exportName": "EventEvent",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -960,7 +959,7 @@
         },
         {
           "className": "Ext.event.publisher.Dom",
-          "exportName": "Dom",
+          "exportName": "DomPublisherEvent",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -1024,7 +1023,7 @@
         },
         {
           "className": "Ext.event.publisher.Gesture",
-          "exportName": "Gesture",
+          "exportName": "GesturePublisherEvent",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -1106,7 +1105,7 @@
         },
         {
           "className": "Ext.mixin.Templatable",
-          "exportName": "Templatable",
+          "exportName": "TemplatableMixin",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -1167,7 +1166,7 @@
         },
         {
           "className": "Ext.util.sizemonitor.Abstract",
-          "exportName": "Abstract",
+          "exportName": "AbstractSizemonitorUtil",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -1199,7 +1198,7 @@
         },
         {
           "className": "Ext.util.sizemonitor.Scroll",
-          "exportName": "Scroll",
+          "exportName": "ScrollSizemonitorUtil",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -1213,14 +1212,14 @@
         },
         {
           "className": "Ext.util.SizeMonitor",
-          "exportName": "SizeMonitor",
+          "exportName": "SizeMonitorUtil",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": []
         },
         {
           "className": "Ext.event.publisher.ElementSize",
-          "exportName": "ElementSize",
+          "exportName": "ElementSizePublisherEvent",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -1239,7 +1238,7 @@
         },
         {
           "className": "Ext.util.paintmonitor.Abstract",
-          "exportName": "Abstract",
+          "exportName": "AbstractPaintmonitorUtil",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -1260,7 +1259,7 @@
         },
         {
           "className": "Ext.util.paintmonitor.CssAnimation",
-          "exportName": "CssAnimation",
+          "exportName": "CssAnimationPaintmonitorUtil",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -1272,14 +1271,14 @@
         },
         {
           "className": "Ext.util.PaintMonitor",
-          "exportName": "PaintMonitor",
+          "exportName": "PaintMonitorUtil",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": []
         },
         {
           "className": "Ext.event.publisher.ElementPaint",
-          "exportName": "ElementPaint",
+          "exportName": "ElementPaintPublisherEvent",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -1292,7 +1291,8 @@
         },
         {
           "className": "Ext.overrides.dom.Element",
-          "exportName": "Element",
+          "exportName": "ElementDomOverrides",
+          "override": "Ext.dom.Element",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -1371,7 +1371,7 @@
         },
         {
           "className": "Ext.mixin.Inheritable",
-          "exportName": "Inheritable",
+          "exportName": "InheritableMixin",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -1409,7 +1409,7 @@
         },
         {
           "className": "Ext.mixin.Bindable",
-          "exportName": "Bindable",
+          "exportName": "BindableMixin",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -1499,7 +1499,7 @@
         },
         {
           "className": "Ext.mixin.ComponentDelegation",
-          "exportName": "ComponentDelegation",
+          "exportName": "ComponentDelegationMixin",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -1519,7 +1519,7 @@
         },
         {
           "className": "Ext.plugin.Abstract",
-          "exportName": "Abstract",
+          "exportName": "AbstractPlugin",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -1543,7 +1543,7 @@
         },
         {
           "className": "Ext.mixin.Focusable",
-          "exportName": "Focusable",
+          "exportName": "FocusableMixin",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -1658,7 +1658,7 @@
         },
         {
           "className": "Ext.mixin.Accessible",
-          "exportName": "Accessible",
+          "exportName": "AccessibleMixin",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -1920,7 +1920,7 @@
         },
         {
           "className": "Ext.mixin.Traversable",
-          "exportName": "Traversable",
+          "exportName": "TraversableMixin",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -1961,7 +1961,7 @@
         },
         {
           "className": "Ext.fx.easing.Abstract",
-          "exportName": "Abstract",
+          "exportName": "AbstractEasingFx",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -1972,7 +1972,7 @@
         },
         {
           "className": "Ext.fx.easing.Linear",
-          "exportName": "Linear",
+          "exportName": "LinearEasing",
           "classAliases": [
             "easing.linear"
           ],
@@ -1989,7 +1989,7 @@
         },
         {
           "className": "Ext.util.translatable.Abstract",
-          "exportName": "Abstract",
+          "exportName": "AbstractTranslatableUtil",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -2050,7 +2050,8 @@
         },
         {
           "className": "Ext.overrides.Widget",
-          "exportName": "Widget",
+          "exportName": "WidgetOverrides",
+          "override": "Ext.Widget",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -2425,7 +2426,7 @@
         },
         {
           "className": "Ext.util.XTemplateParser",
-          "exportName": "XTemplateParser",
+          "exportName": "XTemplateParserUtil",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -2473,7 +2474,7 @@
         },
         {
           "className": "Ext.util.XTemplateCompiler",
-          "exportName": "XTemplateCompiler",
+          "exportName": "XTemplateCompilerUtil",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -2583,7 +2584,7 @@
         },
         {
           "className": "Ext.util.translatable.Dom",
-          "exportName": "Dom",
+          "exportName": "DomTranslatable",
           "classAliases": [
             "translatable.dom"
           ],
@@ -2595,7 +2596,7 @@
         },
         {
           "className": "Ext.util.translatable.CssPosition",
-          "exportName": "CssPosition",
+          "exportName": "CssPositionTranslatable",
           "classAliases": [
             "translatable.cssposition"
           ],
@@ -2612,7 +2613,7 @@
         },
         {
           "className": "Ext.util.translatable.CssTransform",
-          "exportName": "CssTransform",
+          "exportName": "CssTransformTranslatable",
           "classAliases": [
             "translatable.csstransform"
           ],
@@ -2631,7 +2632,7 @@
         },
         {
           "className": "Ext.util.translatable.ScrollPosition",
-          "exportName": "ScrollPosition",
+          "exportName": "ScrollPositionTranslatable",
           "classAliases": [
             "translatable.scrollposition"
           ],
@@ -2656,7 +2657,7 @@
         },
         {
           "className": "Ext.scroll.Scroller",
-          "exportName": "Scroller",
+          "exportName": "ScrollerScroller",
           "classAliases": [
             "scroller.scroller"
           ],
@@ -3317,7 +3318,7 @@
         },
         {
           "className": "Ext.fx.State",
-          "exportName": "State",
+          "exportName": "StateFx",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -3334,7 +3335,7 @@
         },
         {
           "className": "Ext.fx.animation.Abstract",
-          "exportName": "Abstract",
+          "exportName": "AbstractAnimationFx",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -3381,7 +3382,7 @@
         },
         {
           "className": "Ext.fx.animation.Slide",
-          "exportName": "Slide",
+          "exportName": "SlideAnimation",
           "classAliases": [
             "animation.slide",
             "animation.slideIn"
@@ -3417,7 +3418,7 @@
         },
         {
           "className": "Ext.fx.animation.SlideOut",
-          "exportName": "Slideout",
+          "exportName": "SlideoutAnimation",
           "classAliases": [
             "animation.slideOut"
           ],
@@ -3426,7 +3427,7 @@
         },
         {
           "className": "Ext.fx.animation.Fade",
-          "exportName": "Fade",
+          "exportName": "FadeAnimation",
           "classAliases": [
             "animation.fade",
             "animation.fadeIn"
@@ -3443,7 +3444,7 @@
         },
         {
           "className": "Ext.fx.animation.FadeOut",
-          "exportName": "Fadeout",
+          "exportName": "FadeoutAnimation",
           "classAliases": [
             "animation.fadeOut"
           ],
@@ -3452,7 +3453,7 @@
         },
         {
           "className": "Ext.fx.animation.Flip",
-          "exportName": "Flip",
+          "exportName": "FlipAnimation",
           "classAliases": [
             "animation.flip"
           ],
@@ -3470,7 +3471,7 @@
         },
         {
           "className": "Ext.fx.animation.Pop",
-          "exportName": "Pop",
+          "exportName": "PopAnimation",
           "classAliases": [
             "animation.pop",
             "animation.popIn"
@@ -3493,7 +3494,7 @@
         },
         {
           "className": "Ext.fx.animation.PopOut",
-          "exportName": "Popout",
+          "exportName": "PopoutAnimation",
           "classAliases": [
             "animation.popOut"
           ],
@@ -3502,7 +3503,7 @@
         },
         {
           "className": "Ext.fx.Animation",
-          "exportName": "Animation",
+          "exportName": "AnimationFx",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -3513,7 +3514,8 @@
         },
         {
           "className": "Ext.overrides.Progress",
-          "exportName": "Progress",
+          "exportName": "ProgressOverrides",
+          "override": "Ext.Progress",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -3531,7 +3533,7 @@
         },
         {
           "className": "Ext.app.EventDomain",
-          "exportName": "EventDomain",
+          "exportName": "EventDomainApp",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -3566,7 +3568,7 @@
         },
         {
           "className": "Ext.app.domain.Component",
-          "exportName": "Component",
+          "exportName": "ComponentDomainApp",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -3582,7 +3584,7 @@
         },
         {
           "className": "Ext.app.EventBus",
-          "exportName": "EventBus",
+          "exportName": "EventBusApp",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -3595,7 +3597,7 @@
         },
         {
           "className": "Ext.app.domain.Global",
-          "exportName": "Global",
+          "exportName": "GlobalDomainApp",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -3606,7 +3608,7 @@
         },
         {
           "className": "Ext.route.Action",
-          "exportName": "Action",
+          "exportName": "ActionRoute",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -3659,7 +3661,7 @@
         },
         {
           "className": "Ext.route.Route",
-          "exportName": "Route",
+          "exportName": "RouteRoute",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -3708,14 +3710,14 @@
         },
         {
           "className": "Ext.util.Observable",
-          "exportName": "Observable",
+          "exportName": "ObservableUtil",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": []
         },
         {
           "className": "Ext.util.History",
-          "exportName": "History",
+          "exportName": "HistoryUtil",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -3749,7 +3751,7 @@
         },
         {
           "className": "Ext.route.Router",
-          "exportName": "Router",
+          "exportName": "RouterRoute",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -3801,7 +3803,7 @@
         },
         {
           "className": "Ext.route.Mixin",
-          "exportName": "Mixin",
+          "exportName": "MixinRoute",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -3835,7 +3837,7 @@
         },
         {
           "className": "Ext.app.BaseController",
-          "exportName": "BaseController",
+          "exportName": "BaseControllerApp",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -3858,14 +3860,14 @@
         },
         {
           "className": "Ext.app.Util",
-          "exportName": "Util",
+          "exportName": "UtilApp",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": []
         },
         {
           "className": "Ext.util.Filter",
-          "exportName": "Filter",
+          "exportName": "FilterUtil",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -3928,7 +3930,7 @@
         },
         {
           "className": "Ext.util.AbstractMixedCollection",
-          "exportName": "AbstractMixedCollection",
+          "exportName": "AbstractMixedCollectionUtil",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -4023,7 +4025,7 @@
         },
         {
           "className": "Ext.util.Sorter",
-          "exportName": "Sorter",
+          "exportName": "SorterUtil",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -4049,7 +4051,7 @@
         },
         {
           "className": "Ext.util.Sortable",
-          "exportName": "Sortable",
+          "exportName": "SortableUtil",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -4095,7 +4097,7 @@
         },
         {
           "className": "Ext.util.MixedCollection",
-          "exportName": "MixedCollection",
+          "exportName": "MixedCollectionUtil",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -4124,7 +4126,7 @@
         },
         {
           "className": "Ext.util.CollectionKey",
-          "exportName": "CollectionKey",
+          "exportName": "CollectionKeyUtil",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -4166,7 +4168,7 @@
         },
         {
           "className": "Ext.util.Grouper",
-          "exportName": "Grouper",
+          "exportName": "GrouperUtil",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -4185,7 +4187,7 @@
         },
         {
           "className": "Ext.util.Collection",
-          "exportName": "Collection",
+          "exportName": "CollectionUtil",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -4483,7 +4485,7 @@
         },
         {
           "className": "Ext.data.Range",
-          "exportName": "Range",
+          "exportName": "RangeData",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -4501,7 +4503,7 @@
         },
         {
           "className": "Ext.util.ObjectTemplate",
-          "exportName": "ObjectTemplate",
+          "exportName": "ObjectTemplateUtil",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -4526,7 +4528,7 @@
         },
         {
           "className": "Ext.data.schema.Role",
-          "exportName": "Role",
+          "exportName": "RoleSchemaData",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -4620,7 +4622,7 @@
         },
         {
           "className": "Ext.data.schema.Association",
-          "exportName": "Association",
+          "exportName": "AssociationSchemaData",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -4629,7 +4631,7 @@
         },
         {
           "className": "Ext.data.schema.OneToOne",
-          "exportName": "OneToOne",
+          "exportName": "OneToOneSchemaData",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -4677,7 +4679,7 @@
         },
         {
           "className": "Ext.data.schema.ManyToOne",
-          "exportName": "ManyToOne",
+          "exportName": "ManyToOneSchemaData",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -4764,7 +4766,7 @@
         },
         {
           "className": "Ext.data.schema.ManyToMany",
-          "exportName": "ManyToMany",
+          "exportName": "ManyToManySchemaData",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -4819,7 +4821,7 @@
         },
         {
           "className": "Ext.util.Inflector",
-          "exportName": "Inflector",
+          "exportName": "InflectorUtil",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -4839,7 +4841,7 @@
         },
         {
           "className": "Ext.data.schema.Namer",
-          "exportName": "Default",
+          "exportName": "DefaultNamer",
           "classAliases": [
             "namer.default"
           ],
@@ -4886,7 +4888,7 @@
         },
         {
           "className": "Ext.data.schema.Schema",
-          "exportName": "Default",
+          "exportName": "DefaultSchema",
           "classAliases": [
             "schema.default"
           ],
@@ -5026,7 +5028,7 @@
         },
         {
           "className": "Ext.data.AbstractStore",
-          "exportName": "AbstractStore",
+          "exportName": "AbstractStoreData",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -5189,7 +5191,7 @@
         },
         {
           "className": "Ext.data.Error",
-          "exportName": "Error",
+          "exportName": "ErrorData",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -5198,7 +5200,7 @@
         },
         {
           "className": "Ext.data.ErrorCollection",
-          "exportName": "ErrorCollection",
+          "exportName": "ErrorCollectionData",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -5216,7 +5218,7 @@
         },
         {
           "className": "Ext.data.operation.Operation",
-          "exportName": "Operation",
+          "exportName": "OperationOperationData",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -5268,7 +5270,7 @@
         },
         {
           "className": "Ext.data.operation.Create",
-          "exportName": "Create",
+          "exportName": "CreateDataOperation",
           "classAliases": [
             "data.operation.create"
           ],
@@ -5280,7 +5282,7 @@
         },
         {
           "className": "Ext.data.operation.Destroy",
-          "exportName": "Destroy",
+          "exportName": "DestroyDataOperation",
           "classAliases": [
             "data.operation.destroy"
           ],
@@ -5295,7 +5297,7 @@
         },
         {
           "className": "Ext.data.operation.Read",
-          "exportName": "Read",
+          "exportName": "ReadDataOperation",
           "classAliases": [
             "data.operation.read"
           ],
@@ -5307,7 +5309,7 @@
         },
         {
           "className": "Ext.data.operation.Update",
-          "exportName": "Update",
+          "exportName": "UpdateDataOperation",
           "classAliases": [
             "data.operation.update"
           ],
@@ -5319,7 +5321,7 @@
         },
         {
           "className": "Ext.data.validator.Validator",
-          "exportName": "Base",
+          "exportName": "BaseDataValidator",
           "classAliases": [
             "data.validator.base"
           ],
@@ -5331,7 +5333,7 @@
         },
         {
           "className": "Ext.data.field.Field",
-          "exportName": "Auto",
+          "exportName": "AutoDataField",
           "classAliases": [
             "data.field.auto"
           ],
@@ -5371,7 +5373,7 @@
         },
         {
           "className": "Ext.data.field.Boolean",
-          "exportName": "Bool",
+          "exportName": "BoolDataField",
           "classAliases": [
             "data.field.bool",
             "data.field.boolean"
@@ -5384,7 +5386,7 @@
         },
         {
           "className": "Ext.data.field.Date",
-          "exportName": "Date",
+          "exportName": "DateDataField",
           "classAliases": [
             "data.field.date"
           ],
@@ -5403,7 +5405,7 @@
         },
         {
           "className": "Ext.data.field.Integer",
-          "exportName": "Int",
+          "exportName": "IntDataField",
           "classAliases": [
             "data.field.int",
             "data.field.integer"
@@ -5421,7 +5423,7 @@
         },
         {
           "className": "Ext.data.field.Number",
-          "exportName": "Float",
+          "exportName": "FloatDataField",
           "classAliases": [
             "data.field.float",
             "data.field.number"
@@ -5435,7 +5437,7 @@
         },
         {
           "className": "Ext.data.field.String",
-          "exportName": "String",
+          "exportName": "StringDataField",
           "classAliases": [
             "data.field.string"
           ],
@@ -5446,7 +5448,7 @@
         },
         {
           "className": "Ext.data.identifier.Generator",
-          "exportName": "Default",
+          "exportName": "DefaultDataIdentifier",
           "classAliases": [
             "data.identifier.default"
           ],
@@ -5460,7 +5462,7 @@
         },
         {
           "className": "Ext.data.identifier.Sequential",
-          "exportName": "Sequential",
+          "exportName": "SequentialDataIdentifier",
           "classAliases": [
             "data.identifier.sequential"
           ],
@@ -5469,7 +5471,7 @@
         },
         {
           "className": "Ext.data.Model",
-          "exportName": "Model",
+          "exportName": "ModelData",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -5710,7 +5712,7 @@
         },
         {
           "className": "Ext.data.ResultSet",
-          "exportName": "ResultSet",
+          "exportName": "ResultSetData",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -5721,7 +5723,7 @@
         },
         {
           "className": "Ext.data.reader.Reader",
-          "exportName": "Base",
+          "exportName": "BaseReader",
           "classAliases": [
             "reader.base"
           ],
@@ -5840,7 +5842,7 @@
         },
         {
           "className": "Ext.data.writer.Writer",
-          "exportName": "Base",
+          "exportName": "BaseWriter",
           "classAliases": [
             "writer.base"
           ],
@@ -5922,7 +5924,7 @@
         },
         {
           "className": "Ext.data.proxy.Client",
-          "exportName": "Client",
+          "exportName": "ClientProxyData",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -5976,7 +5978,7 @@
         },
         {
           "className": "Ext.data.ProxyStore",
-          "exportName": "ProxyStore",
+          "exportName": "ProxyStoreData",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -6123,14 +6125,14 @@
         },
         {
           "className": "Ext.util.Group",
-          "exportName": "Group",
+          "exportName": "GroupUtil",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": []
         },
         {
           "className": "Ext.data.Group",
-          "exportName": "Group",
+          "exportName": "GroupData",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -6142,7 +6144,7 @@
         },
         {
           "className": "Ext.data.LocalStore",
-          "exportName": "LocalStore",
+          "exportName": "LocalStoreData",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -6397,7 +6399,7 @@
         },
         {
           "className": "Ext.data.reader.Json",
-          "exportName": "Json",
+          "exportName": "JsonReader",
           "classAliases": [
             "reader.json"
           ],
@@ -6440,7 +6442,7 @@
         },
         {
           "className": "Ext.data.writer.Json",
-          "exportName": "Json",
+          "exportName": "JsonWriter",
           "classAliases": [
             "writer.json"
           ],
@@ -6470,7 +6472,7 @@
         },
         {
           "className": "Ext.util.SorterCollection",
-          "exportName": "SorterCollection",
+          "exportName": "SorterCollectionUtil",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -6528,7 +6530,7 @@
         },
         {
           "className": "Ext.util.FilterCollection",
-          "exportName": "FilterCollection",
+          "exportName": "FilterCollectionUtil",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -6560,7 +6562,7 @@
         },
         {
           "className": "Ext.util.GroupCollection",
-          "exportName": "GroupCollection",
+          "exportName": "GroupCollectionUtil",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -6882,7 +6884,7 @@
         },
         {
           "className": "Ext.data.reader.Array",
-          "exportName": "Array",
+          "exportName": "ArrayReader",
           "classAliases": [
             "reader.array"
           ],
@@ -6905,7 +6907,7 @@
         },
         {
           "className": "Ext.data.StoreManager",
-          "exportName": "StoreManager",
+          "exportName": "StoreManagerData",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -6929,7 +6931,7 @@
         },
         {
           "className": "Ext.app.domain.Store",
-          "exportName": "Store",
+          "exportName": "StoreDomainApp",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -6943,7 +6945,7 @@
         },
         {
           "className": "Ext.app.Controller",
-          "exportName": "Controller",
+          "exportName": "ControllerApp",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -7033,7 +7035,7 @@
         },
         {
           "className": "Ext.app.Application",
-          "exportName": "Application",
+          "exportName": "ApplicationApp",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -7125,7 +7127,7 @@
         },
         {
           "className": "Ext.util.ItemCollection",
-          "exportName": "ItemCollection",
+          "exportName": "ItemCollectionUtil",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -7136,7 +7138,7 @@
         },
         {
           "className": "Ext.mixin.Queryable",
-          "exportName": "Queryable",
+          "exportName": "QueryableMixin",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -7166,7 +7168,7 @@
         },
         {
           "className": "Ext.mixin.Container",
-          "exportName": "Container",
+          "exportName": "ContainerMixin",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -7192,7 +7194,7 @@
         },
         {
           "className": "Ext.util.KeyMap",
-          "exportName": "KeyMap",
+          "exportName": "KeyMapUtil",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -7251,7 +7253,7 @@
         },
         {
           "className": "Ext.util.KeyNav",
-          "exportName": "KeyNav",
+          "exportName": "KeyNavUtil",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -7279,7 +7281,7 @@
         },
         {
           "className": "Ext.mixin.FocusableContainer",
-          "exportName": "FocusableContainer",
+          "exportName": "FocusableContainerMixin",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -7640,7 +7642,7 @@
         },
         {
           "className": "Ext.mixin.Hookable",
-          "exportName": "Hookable",
+          "exportName": "HookableMixin",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -7650,7 +7652,7 @@
         },
         {
           "className": "Ext.util.Wrapper",
-          "exportName": "Wrapper",
+          "exportName": "WrapperUtil",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -7673,7 +7675,7 @@
         },
         {
           "className": "Ext.layout.wrapper.BoxDock",
-          "exportName": "BoxDock",
+          "exportName": "BoxDockWrapperLayout",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -7729,7 +7731,7 @@
         },
         {
           "className": "Ext.layout.wrapper.Inner",
-          "exportName": "Inner",
+          "exportName": "InnerWrapperLayout",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -7739,7 +7741,7 @@
         },
         {
           "className": "Ext.layout.Auto",
-          "exportName": "Default",
+          "exportName": "DefaultLayout",
           "classAliases": [
             "layout.default",
             "layout.auto"
@@ -7946,7 +7948,7 @@
         },
         {
           "className": "Ext.layout.card.fx.Abstract",
-          "exportName": "Abstract",
+          "exportName": "AbstractLayoutCardFx",
           "classAliases": [
             "layout.card.fx.abstract"
           ],
@@ -7968,7 +7970,7 @@
         },
         {
           "className": "Ext.layout.card.fx.Style",
-          "exportName": "Style",
+          "exportName": "StyleFxCardLayout",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -8014,7 +8016,7 @@
         },
         {
           "className": "Ext.layout.card.fx.Cover",
-          "exportName": "Cover",
+          "exportName": "CoverLayoutCardFx",
           "classAliases": [
             "layout.card.fx.cover"
           ],
@@ -8023,7 +8025,7 @@
         },
         {
           "className": "Ext.layout.card.fx.Cube",
-          "exportName": "Cube",
+          "exportName": "CubeLayoutCardFx",
           "classAliases": [
             "layout.card.fx.cube"
           ],
@@ -8032,7 +8034,7 @@
         },
         {
           "className": "Ext.layout.card.fx.Serial",
-          "exportName": "Serial",
+          "exportName": "SerialFxCardLayout",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -8045,7 +8047,7 @@
         },
         {
           "className": "Ext.layout.card.fx.Fade",
-          "exportName": "Fade",
+          "exportName": "FadeLayoutCardFx",
           "classAliases": [
             "layout.card.fx.fade"
           ],
@@ -8054,7 +8056,7 @@
         },
         {
           "className": "Ext.layout.card.fx.Flip",
-          "exportName": "Flip",
+          "exportName": "FlipLayoutCardFx",
           "classAliases": [
             "layout.card.fx.flip"
           ],
@@ -8069,7 +8071,7 @@
         },
         {
           "className": "Ext.layout.card.fx.Pop",
-          "exportName": "Pop",
+          "exportName": "PopLayoutCardFx",
           "classAliases": [
             "layout.card.fx.pop"
           ],
@@ -8078,7 +8080,7 @@
         },
         {
           "className": "Ext.layout.card.fx.Reveal",
-          "exportName": "Reveal",
+          "exportName": "RevealLayoutCardFx",
           "classAliases": [
             "layout.card.fx.reveal"
           ],
@@ -8087,7 +8089,7 @@
         },
         {
           "className": "Ext.layout.card.fx.Scroll",
-          "exportName": "Scroll",
+          "exportName": "ScrollLayoutCardFx",
           "classAliases": [
             "layout.card.fx.scroll"
           ],
@@ -8133,7 +8135,7 @@
         },
         {
           "className": "Ext.layout.card.fx.ScrollCover",
-          "exportName": "ScrollCover",
+          "exportName": "ScrollCoverLayoutCardFx",
           "classAliases": [
             "layout.card.fx.scrollcover"
           ],
@@ -8166,7 +8168,7 @@
         },
         {
           "className": "Ext.layout.card.fx.ScrollReveal",
-          "exportName": "ScrollReveal",
+          "exportName": "ScrollRevealLayoutCardFx",
           "classAliases": [
             "layout.card.fx.scrollreveal"
           ],
@@ -8197,7 +8199,7 @@
         },
         {
           "className": "Ext.layout.card.fx.Slide",
-          "exportName": "Slide",
+          "exportName": "SlideLayoutCardFx",
           "classAliases": [
             "layout.card.fx.slide"
           ],
@@ -8206,7 +8208,7 @@
         },
         {
           "className": "Ext.layout.Card",
-          "exportName": "Card",
+          "exportName": "CardLayout",
           "classAliases": [
             "layout.card"
           ],
@@ -8292,7 +8294,7 @@
         },
         {
           "className": "Ext.util.InputBlocker",
-          "exportName": "InputBlocker",
+          "exportName": "InputBlockerUtil",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -8308,7 +8310,7 @@
         },
         {
           "className": "Ext.viewport.Ios",
-          "exportName": "Ios",
+          "exportName": "IosViewport",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -8340,7 +8342,7 @@
         },
         {
           "className": "Ext.viewport.Android",
-          "exportName": "Android",
+          "exportName": "AndroidViewport",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -8382,7 +8384,7 @@
         },
         {
           "className": "Ext.viewport.WindowsPhone",
-          "exportName": "WindowsPhone",
+          "exportName": "WindowsPhoneViewport",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -8404,7 +8406,7 @@
         },
         {
           "className": "Ext.viewport.Viewport",
-          "exportName": "Viewport",
+          "exportName": "ViewportViewport",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -8413,7 +8415,8 @@
         },
         {
           "className": "Ext.overrides.app.Application",
-          "exportName": "Application",
+          "exportName": "ApplicationAppOverrides",
+          "override": "Ext.app.Application",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -8428,7 +8431,7 @@
         },
         {
           "className": "Ext.app.Profile",
-          "exportName": "Profile",
+          "exportName": "ProfileApp",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -8454,7 +8457,7 @@
         },
         {
           "className": "Ext.app.domain.View",
-          "exportName": "View",
+          "exportName": "ViewDomainApp",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -8508,7 +8511,7 @@
         },
         {
           "className": "Ext.util.Bag",
-          "exportName": "Bag",
+          "exportName": "BagUtil",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -8547,7 +8550,7 @@
         },
         {
           "className": "Ext.util.Scheduler",
-          "exportName": "Scheduler",
+          "exportName": "SchedulerUtil",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -8611,7 +8614,7 @@
         },
         {
           "className": "Ext.data.Batch",
-          "exportName": "Batch",
+          "exportName": "BatchData",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -8641,7 +8644,7 @@
         },
         {
           "className": "Ext.data.matrix.Slice",
-          "exportName": "Slice",
+          "exportName": "SliceMatrixData",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -8658,7 +8661,7 @@
         },
         {
           "className": "Ext.data.matrix.Side",
-          "exportName": "Side",
+          "exportName": "SideMatrixData",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -8673,7 +8676,7 @@
         },
         {
           "className": "Ext.data.matrix.Matrix",
-          "exportName": "Matrix",
+          "exportName": "MatrixMatrixData",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -8691,7 +8694,7 @@
         },
         {
           "className": "Ext.data.session.ChangesVisitor",
-          "exportName": "ChangesVisitor",
+          "exportName": "ChangesVisitorSessionData",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -8711,7 +8714,7 @@
         },
         {
           "className": "Ext.data.session.ChildChangesVisitor",
-          "exportName": "ChildChangesVisitor",
+          "exportName": "ChildChangesVisitorSessionData",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -8725,7 +8728,7 @@
         },
         {
           "className": "Ext.data.session.BatchVisitor",
-          "exportName": "BatchVisitor",
+          "exportName": "BatchVisitorSessionData",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -8741,7 +8744,7 @@
         },
         {
           "className": "Ext.mixin.Dirty",
-          "exportName": "Dirty",
+          "exportName": "DirtyMixin",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -8758,7 +8761,7 @@
         },
         {
           "className": "Ext.data.Session",
-          "exportName": "Session",
+          "exportName": "SessionData",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -8925,7 +8928,7 @@
         },
         {
           "className": "Ext.util.Schedulable",
-          "exportName": "Schedulable",
+          "exportName": "SchedulableUtil",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -8943,7 +8946,7 @@
         },
         {
           "className": "Ext.app.bind.BaseBinding",
-          "exportName": "BaseBinding",
+          "exportName": "BaseBindingBindApp",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -8965,7 +8968,7 @@
         },
         {
           "className": "Ext.app.bind.Binding",
-          "exportName": "Binding",
+          "exportName": "BindingBindApp",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -8995,7 +8998,7 @@
         },
         {
           "className": "Ext.app.bind.AbstractStub",
-          "exportName": "AbstractStub",
+          "exportName": "AbstractStubBindApp",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -9025,7 +9028,7 @@
         },
         {
           "className": "Ext.app.bind.Stub",
-          "exportName": "Stub",
+          "exportName": "StubBindApp",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -9122,7 +9125,7 @@
         },
         {
           "className": "Ext.app.bind.LinkStub",
-          "exportName": "LinkStub",
+          "exportName": "LinkStubBindApp",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -9149,7 +9152,7 @@
         },
         {
           "className": "Ext.app.bind.RootStub",
-          "exportName": "RootStub",
+          "exportName": "RootStubBindApp",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -9189,7 +9192,7 @@
         },
         {
           "className": "Ext.app.bind.Multi",
-          "exportName": "Multi",
+          "exportName": "MultiBindApp",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -9225,7 +9228,7 @@
         },
         {
           "className": "Ext.app.bind.Formula",
-          "exportName": "Formula",
+          "exportName": "FormulaBindApp",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -9262,7 +9265,7 @@
         },
         {
           "className": "Ext.util.Fly",
-          "exportName": "Fly",
+          "exportName": "FlyUtil",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -9274,7 +9277,7 @@
         },
         {
           "className": "Ext.parse.Symbol",
-          "exportName": "Symbol",
+          "exportName": "SymbolParse",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -9290,7 +9293,7 @@
         },
         {
           "className": "Ext.parse.symbol.Constant",
-          "exportName": "Constant",
+          "exportName": "ConstantSymbolParse",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -9299,7 +9302,7 @@
         },
         {
           "className": "Ext.parse.symbol.Infix",
-          "exportName": "Infix",
+          "exportName": "InfixSymbolParse",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -9308,7 +9311,7 @@
         },
         {
           "className": "Ext.parse.symbol.InfixRight",
-          "exportName": "InfixRight",
+          "exportName": "InfixRightSymbolParse",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -9317,7 +9320,7 @@
         },
         {
           "className": "Ext.parse.symbol.Paren",
-          "exportName": "Paren",
+          "exportName": "ParenSymbolParse",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -9332,7 +9335,7 @@
         },
         {
           "className": "Ext.parse.symbol.Prefix",
-          "exportName": "Prefix",
+          "exportName": "PrefixSymbolParse",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -9341,7 +9344,7 @@
         },
         {
           "className": "Ext.app.bind.Parser",
-          "exportName": "Parser",
+          "exportName": "ParserBindApp",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -9410,7 +9413,7 @@
         },
         {
           "className": "Ext.app.bind.Template",
-          "exportName": "Template",
+          "exportName": "TemplateBindApp",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -9434,7 +9437,7 @@
         },
         {
           "className": "Ext.app.bind.TemplateBinding",
-          "exportName": "TemplateBinding",
+          "exportName": "TemplateBindingBindApp",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -9534,7 +9537,7 @@
         },
         {
           "className": "Ext.app.ViewModel",
-          "exportName": "DefaultModel",
+          "exportName": "DefaultViewmodel",
           "classAliases": [
             "viewmodel.default"
           ],
@@ -9662,7 +9665,7 @@
         },
         {
           "className": "Ext.app.domain.Controller",
-          "exportName": "Controller",
+          "exportName": "ControllerDomainApp",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -9676,7 +9679,7 @@
         },
         {
           "className": "Ext.direct.Manager",
-          "exportName": "Manager",
+          "exportName": "ManagerDirect",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -9734,7 +9737,7 @@
         },
         {
           "className": "Ext.direct.Provider",
-          "exportName": "Provider",
+          "exportName": "ProviderDirect",
           "classAliases": [
             "direct.provider"
           ],
@@ -9756,7 +9759,7 @@
         },
         {
           "className": "Ext.app.domain.Direct",
-          "exportName": "Direct",
+          "exportName": "DirectDomainApp",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -9766,7 +9769,7 @@
         },
         {
           "className": "Ext.data.PageMap",
-          "exportName": "PageMap",
+          "exportName": "PageMapData",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -10142,7 +10145,7 @@
         },
         {
           "className": "Ext.data.JsonP",
-          "exportName": "JsonP",
+          "exportName": "JsonPData",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -10255,7 +10258,7 @@
         },
         {
           "className": "Ext.data.ModelManager",
-          "exportName": "ModelManager",
+          "exportName": "ModelManagerData",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -10269,7 +10272,7 @@
         },
         {
           "className": "Ext.data.NodeInterface",
-          "exportName": "NodeInterface",
+          "exportName": "NodeInterfaceData",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -10566,7 +10569,7 @@
         },
         {
           "className": "Ext.data.TreeModel",
-          "exportName": "TreeModel",
+          "exportName": "TreeModelData",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": []
@@ -10636,7 +10639,7 @@
         },
         {
           "className": "Ext.data.Request",
-          "exportName": "Request",
+          "exportName": "RequestData",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -11065,14 +11068,14 @@
         },
         {
           "className": "Ext.data.Types",
-          "exportName": "Types",
+          "exportName": "TypesData",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": []
         },
         {
           "className": "Ext.data.Validation",
-          "exportName": "Validation",
+          "exportName": "ValidationData",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -11083,7 +11086,7 @@
         },
         {
           "className": "Ext.data.reader.Xml",
-          "exportName": "Xml",
+          "exportName": "XmlReader",
           "classAliases": [
             "reader.xml"
           ],
@@ -11121,7 +11124,7 @@
         },
         {
           "className": "Ext.data.writer.Xml",
-          "exportName": "Xml",
+          "exportName": "XmlWriter",
           "classAliases": [
             "writer.xml"
           ],
@@ -11168,7 +11171,7 @@
         },
         {
           "className": "Ext.data.identifier.Negative",
-          "exportName": "Negative",
+          "exportName": "NegativeDataIdentifier",
           "classAliases": [
             "data.identifier.negative"
           ],
@@ -11177,7 +11180,7 @@
         },
         {
           "className": "Ext.data.identifier.Uuid",
-          "exportName": "Uuid",
+          "exportName": "UuidDataIdentifier",
           "classAliases": [
             "data.identifier.uuid"
           ],
@@ -11212,7 +11215,7 @@
         },
         {
           "className": "Ext.data.proxy.WebStorage",
-          "exportName": "WebStorage",
+          "exportName": "WebStorageProxyData",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -11396,7 +11399,7 @@
         },
         {
           "className": "Ext.data.summary.Base",
-          "exportName": "Base",
+          "exportName": "BaseDataSummary",
           "classAliases": [
             "data.summary.base"
           ],
@@ -11408,7 +11411,7 @@
         },
         {
           "className": "Ext.data.summary.Sum",
-          "exportName": "Sum",
+          "exportName": "SumDataSummary",
           "classAliases": [
             "data.summary.sum"
           ],
@@ -11419,7 +11422,7 @@
         },
         {
           "className": "Ext.data.summary.Average",
-          "exportName": "Average",
+          "exportName": "AverageDataSummary",
           "classAliases": [
             "data.summary.average"
           ],
@@ -11430,7 +11433,7 @@
         },
         {
           "className": "Ext.data.summary.Count",
-          "exportName": "Count",
+          "exportName": "CountDataSummary",
           "classAliases": [
             "data.summary.count"
           ],
@@ -11439,7 +11442,7 @@
         },
         {
           "className": "Ext.data.summary.Max",
-          "exportName": "Max",
+          "exportName": "MaxDataSummary",
           "classAliases": [
             "data.summary.max"
           ],
@@ -11451,7 +11454,7 @@
         },
         {
           "className": "Ext.data.summary.Min",
-          "exportName": "Min",
+          "exportName": "MinDataSummary",
           "classAliases": [
             "data.summary.min"
           ],
@@ -11463,7 +11466,7 @@
         },
         {
           "className": "Ext.data.validator.AbstractDate",
-          "exportName": "AbstractDate",
+          "exportName": "AbstractDateValidatorData",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -11478,7 +11481,7 @@
         },
         {
           "className": "Ext.data.validator.Bound",
-          "exportName": "Bound",
+          "exportName": "BoundDataValidator",
           "classAliases": [
             "data.validator.bound"
           ],
@@ -11504,7 +11507,7 @@
         },
         {
           "className": "Ext.data.validator.Format",
-          "exportName": "Format",
+          "exportName": "FormatDataValidator",
           "classAliases": [
             "data.validator.format"
           ],
@@ -11520,7 +11523,7 @@
         },
         {
           "className": "Ext.data.validator.CIDRv4",
-          "exportName": "Cidrv4",
+          "exportName": "Cidrv4DataValidator",
           "classAliases": [
             "data.validator.cidrv4"
           ],
@@ -11529,7 +11532,7 @@
         },
         {
           "className": "Ext.data.validator.CIDRv6",
-          "exportName": "Cidrv6",
+          "exportName": "Cidrv6DataValidator",
           "classAliases": [
             "data.validator.cidrv6"
           ],
@@ -11538,7 +11541,7 @@
         },
         {
           "className": "Ext.data.validator.Number",
-          "exportName": "Number",
+          "exportName": "NumberDataValidator",
           "classAliases": [
             "data.validator.number"
           ],
@@ -11570,7 +11573,7 @@
         },
         {
           "className": "Ext.data.validator.Currency",
-          "exportName": "Currency",
+          "exportName": "CurrencyDataValidator",
           "classAliases": [
             "data.validator.currency"
           ],
@@ -11598,7 +11601,7 @@
         },
         {
           "className": "Ext.data.validator.CurrencyUS",
-          "exportName": "Us",
+          "exportName": "UsDataValidator",
           "classAliases": [
             "data.validator.currency-us"
           ],
@@ -11607,7 +11610,7 @@
         },
         {
           "className": "Ext.data.validator.Date",
-          "exportName": "Date",
+          "exportName": "DateDataValidator",
           "classAliases": [
             "data.validator.date"
           ],
@@ -11616,7 +11619,7 @@
         },
         {
           "className": "Ext.data.validator.DateTime",
-          "exportName": "DateTime",
+          "exportName": "DateTimeDataValidator",
           "classAliases": [
             "data.validator.datetime"
           ],
@@ -11625,7 +11628,7 @@
         },
         {
           "className": "Ext.data.validator.Email",
-          "exportName": "Email",
+          "exportName": "EmailDataValidator",
           "classAliases": [
             "data.validator.email"
           ],
@@ -11634,7 +11637,7 @@
         },
         {
           "className": "Ext.data.validator.List",
-          "exportName": "List",
+          "exportName": "ListDataValidator",
           "classAliases": [
             "data.validator.list"
           ],
@@ -11647,7 +11650,7 @@
         },
         {
           "className": "Ext.data.validator.Exclusion",
-          "exportName": "Exclusion",
+          "exportName": "ExclusionDataValidator",
           "classAliases": [
             "data.validator.exclusion"
           ],
@@ -11660,7 +11663,7 @@
         },
         {
           "className": "Ext.data.validator.IPAddress",
-          "exportName": "IpAddress",
+          "exportName": "IpAddressDataValidator",
           "classAliases": [
             "data.validator.ipaddress"
           ],
@@ -11669,7 +11672,7 @@
         },
         {
           "className": "Ext.data.validator.Inclusion",
-          "exportName": "Inclusion",
+          "exportName": "InclusionDataValidator",
           "classAliases": [
             "data.validator.inclusion"
           ],
@@ -11682,7 +11685,7 @@
         },
         {
           "className": "Ext.data.validator.Length",
-          "exportName": "Length",
+          "exportName": "LengthDataValidator",
           "classAliases": [
             "data.validator.length"
           ],
@@ -11693,7 +11696,7 @@
         },
         {
           "className": "Ext.data.validator.Presence",
-          "exportName": "Presence",
+          "exportName": "PresenceDataValidator",
           "classAliases": [
             "data.validator.presence"
           ],
@@ -11705,7 +11708,7 @@
         },
         {
           "className": "Ext.data.validator.NotNull",
-          "exportName": "NotNull",
+          "exportName": "NotNullDataValidator",
           "classAliases": [
             "data.validator.notnull"
           ],
@@ -11714,7 +11717,7 @@
         },
         {
           "className": "Ext.data.validator.Phone",
-          "exportName": "Phone",
+          "exportName": "PhoneDataValidator",
           "classAliases": [
             "data.validator.phone"
           ],
@@ -11723,7 +11726,7 @@
         },
         {
           "className": "Ext.data.validator.Range",
-          "exportName": "Range",
+          "exportName": "RangeDataValidator",
           "classAliases": [
             "data.validator.range"
           ],
@@ -11736,7 +11739,7 @@
         },
         {
           "className": "Ext.data.validator.Time",
-          "exportName": "Time",
+          "exportName": "TimeDataValidator",
           "classAliases": [
             "data.validator.time"
           ],
@@ -11745,7 +11748,7 @@
         },
         {
           "className": "Ext.data.validator.Url",
-          "exportName": "Url",
+          "exportName": "UrlDataValidator",
           "classAliases": [
             "data.validator.url"
           ],
@@ -11754,14 +11757,14 @@
         },
         {
           "className": "Ext.data.virtual.Group",
-          "exportName": "Group",
+          "exportName": "GroupVirtualData",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": []
         },
         {
           "className": "Ext.data.virtual.Page",
-          "exportName": "Page",
+          "exportName": "PageVirtualData",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -11780,7 +11783,7 @@
         },
         {
           "className": "Ext.data.virtual.PageMap",
-          "exportName": "PageMap",
+          "exportName": "PageMapVirtualData",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -11851,7 +11854,7 @@
         },
         {
           "className": "Ext.data.virtual.Range",
-          "exportName": "Range",
+          "exportName": "RangeVirtualData",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -11998,7 +12001,7 @@
         },
         {
           "className": "Ext.direct.Event",
-          "exportName": "Event",
+          "exportName": "EventDirect",
           "classAliases": [
             "direct.event"
           ],
@@ -12009,7 +12012,7 @@
         },
         {
           "className": "Ext.direct.RemotingEvent",
-          "exportName": "Rpc",
+          "exportName": "RpcDirect",
           "classAliases": [
             "direct.rpc"
           ],
@@ -12020,7 +12023,7 @@
         },
         {
           "className": "Ext.direct.ExceptionEvent",
-          "exportName": "Exception",
+          "exportName": "ExceptionDirect",
           "classAliases": [
             "direct.exception"
           ],
@@ -12029,7 +12032,7 @@
         },
         {
           "className": "Ext.direct.JsonProvider",
-          "exportName": "JsonProvider",
+          "exportName": "JsonProviderDirect",
           "classAliases": [
             "direct.jsonprovider"
           ],
@@ -12050,7 +12053,7 @@
         },
         {
           "className": "Ext.util.TaskRunner",
-          "exportName": "TaskRunner",
+          "exportName": "TaskRunnerUtil",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -12086,7 +12089,7 @@
         },
         {
           "className": "Ext.direct.PollingProvider",
-          "exportName": "PollingProvider",
+          "exportName": "PollingProviderDirect",
           "classAliases": [
             "direct.pollingprovider"
           ],
@@ -12125,7 +12128,7 @@
         },
         {
           "className": "Ext.direct.RemotingMethod",
-          "exportName": "RemotingMethod",
+          "exportName": "RemotingMethodDirect",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -12164,7 +12167,7 @@
         },
         {
           "className": "Ext.direct.Transaction",
-          "exportName": "Transaction",
+          "exportName": "TransactionDirect",
           "classAliases": [
             "direct.transaction"
           ],
@@ -12177,7 +12180,7 @@
         },
         {
           "className": "Ext.direct.RemotingProvider",
-          "exportName": "RemotingProvider",
+          "exportName": "RemotingProviderDirect",
           "classAliases": [
             "direct.remotingprovider"
           ],
@@ -12258,7 +12261,7 @@
         },
         {
           "className": "Ext.dom.Fly",
-          "exportName": "Fly",
+          "exportName": "FlyDom",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -12271,7 +12274,7 @@
         },
         {
           "className": "Ext.dom.CompositeElementLite",
-          "exportName": "CompositeElementLite",
+          "exportName": "CompositeElementLiteDom",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -12325,7 +12328,7 @@
         },
         {
           "className": "Ext.dom.CompositeElement",
-          "exportName": "CompositeElement",
+          "exportName": "CompositeElementDom",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -12334,7 +12337,7 @@
         },
         {
           "className": "Ext.dom.GarbageCollector",
-          "exportName": "GarbageCollector",
+          "exportName": "GarbageCollectorDom",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -12359,7 +12362,7 @@
         },
         {
           "className": "Ext.dom.TouchAction",
-          "exportName": "TouchAction",
+          "exportName": "TouchActionDom",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -12405,7 +12408,7 @@
         },
         {
           "className": "Ext.drag.Constraint",
-          "exportName": "Base",
+          "exportName": "BaseDragConstraint",
           "classAliases": [
             "drag.constraint.base"
           ],
@@ -12444,7 +12447,7 @@
         },
         {
           "className": "Ext.drag.Info",
-          "exportName": "Info",
+          "exportName": "InfoDrag",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -12497,7 +12500,7 @@
         },
         {
           "className": "Ext.drag.Item",
-          "exportName": "Item",
+          "exportName": "ItemDrag",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -12524,7 +12527,7 @@
         },
         {
           "className": "Ext.drag.Manager",
-          "exportName": "Manager",
+          "exportName": "ManagerDrag",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -12563,7 +12566,7 @@
         },
         {
           "className": "Ext.drag.Source",
-          "exportName": "Source",
+          "exportName": "SourceDrag",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -12649,7 +12652,7 @@
         },
         {
           "className": "Ext.drag.Target",
-          "exportName": "Target",
+          "exportName": "TargetDrag",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -12706,7 +12709,7 @@
         },
         {
           "className": "Ext.drag.proxy.None",
-          "exportName": "None",
+          "exportName": "NoneDragProxy",
           "classAliases": [
             "drag.proxy.none"
           ],
@@ -12727,7 +12730,7 @@
         },
         {
           "className": "Ext.drag.proxy.Original",
-          "exportName": "Original",
+          "exportName": "OriginalDragProxy",
           "classAliases": [
             "drag.proxy.original"
           ],
@@ -12740,7 +12743,7 @@
         },
         {
           "className": "Ext.drag.proxy.Placeholder",
-          "exportName": "Placeholder",
+          "exportName": "PlaceholderDragProxy",
           "classAliases": [
             "drag.proxy.placeholder"
           ],
@@ -12772,7 +12775,7 @@
         },
         {
           "className": "Ext.event.gesture.Recognizer",
-          "exportName": "Recognizer",
+          "exportName": "RecognizerGestureEvent",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -12789,7 +12792,7 @@
         },
         {
           "className": "Ext.event.gesture.SingleTouch",
-          "exportName": "SingleTouch",
+          "exportName": "SingleTouchGestureEvent",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -12798,7 +12801,7 @@
         },
         {
           "className": "Ext.event.gesture.DoubleTap",
-          "exportName": "DoubleTap",
+          "exportName": "DoubleTapGestureEvent",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -12832,7 +12835,7 @@
         },
         {
           "className": "Ext.event.gesture.Drag",
-          "exportName": "Drag",
+          "exportName": "DragGestureEvent",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -12872,7 +12875,7 @@
         },
         {
           "className": "Ext.event.gesture.Swipe",
-          "exportName": "Swipe",
+          "exportName": "SwipeGestureEvent",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -12898,7 +12901,7 @@
         },
         {
           "className": "Ext.event.gesture.EdgeSwipe",
-          "exportName": "EdgeSwipe",
+          "exportName": "EdgeSwipeGestureEvent",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -12922,7 +12925,7 @@
         },
         {
           "className": "Ext.event.gesture.LongPress",
-          "exportName": "LongPress",
+          "exportName": "LongPressGestureEvent",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -12949,7 +12952,7 @@
         },
         {
           "className": "Ext.event.gesture.MultiTouch",
-          "exportName": "MultiTouch",
+          "exportName": "MultiTouchGestureEvent",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -12959,7 +12962,7 @@
         },
         {
           "className": "Ext.event.gesture.Pinch",
-          "exportName": "Pinch",
+          "exportName": "PinchGestureEvent",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -12974,7 +12977,7 @@
         },
         {
           "className": "Ext.event.gesture.Rotate",
-          "exportName": "Rotate",
+          "exportName": "RotateGestureEvent",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -12993,7 +12996,7 @@
         },
         {
           "className": "Ext.event.gesture.Tap",
-          "exportName": "Tap",
+          "exportName": "TapGestureEvent",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -13012,7 +13015,7 @@
         },
         {
           "className": "Ext.event.publisher.Focus",
-          "exportName": "Focus",
+          "exportName": "FocusPublisherEvent",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -13038,7 +13041,7 @@
         },
         {
           "className": "Ext.fx.runner.Css",
-          "exportName": "Css",
+          "exportName": "CssRunnerFx",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -13080,7 +13083,7 @@
         },
         {
           "className": "Ext.fx.runner.CssTransition",
-          "exportName": "CssTransition",
+          "exportName": "CssTransitionRunnerFx",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -13203,14 +13206,14 @@
         },
         {
           "className": "Ext.fx.Runner",
-          "exportName": "Runner",
+          "exportName": "RunnerFx",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": []
         },
         {
           "className": "Ext.fx.animation.Cube",
-          "exportName": "Cube",
+          "exportName": "CubeAnimation",
           "classAliases": [
             "animation.cube"
           ],
@@ -13234,7 +13237,7 @@
         },
         {
           "className": "Ext.fx.animation.Wipe",
-          "exportName": "Wipe",
+          "exportName": "WipeAnimationFx",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -13254,14 +13257,14 @@
         },
         {
           "className": "Ext.fx.animation.WipeOut",
-          "exportName": "WipeOut",
+          "exportName": "WipeOutAnimationFx",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": []
         },
         {
           "className": "Ext.fx.easing.Bounce",
-          "exportName": "Bounce",
+          "exportName": "BounceEasingFx",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -13276,7 +13279,7 @@
         },
         {
           "className": "Ext.fx.easing.Momentum",
-          "exportName": "Momentum",
+          "exportName": "MomentumEasingFx",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -13294,7 +13297,7 @@
         },
         {
           "className": "Ext.fx.easing.BoundMomentum",
-          "exportName": "BoundMomentum",
+          "exportName": "BoundMomentumEasingFx",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -13328,7 +13331,7 @@
         },
         {
           "className": "Ext.fx.easing.EaseIn",
-          "exportName": "In",
+          "exportName": "InEasing",
           "classAliases": [
             "easing.ease-in"
           ],
@@ -13345,7 +13348,7 @@
         },
         {
           "className": "Ext.fx.easing.EaseOut",
-          "exportName": "Out",
+          "exportName": "OutEasing",
           "classAliases": [
             "easing.ease-out"
           ],
@@ -13362,7 +13365,7 @@
         },
         {
           "className": "Ext.fx.easing.Easing",
-          "exportName": "Easing",
+          "exportName": "EasingEasingFx",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -13371,7 +13374,7 @@
         },
         {
           "className": "Ext.fx.runner.CssAnimation",
-          "exportName": "CssAnimation",
+          "exportName": "CssAnimationRunnerFx",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -13413,7 +13416,7 @@
         },
         {
           "className": "Ext.list.AbstractTreeItem",
-          "exportName": "AbstractTreeItem",
+          "exportName": "AbstractTreeItemList",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -13508,7 +13511,7 @@
         },
         {
           "className": "Ext.list.RootTreeItem",
-          "exportName": "RootTreeItem",
+          "exportName": "RootTreeItemList",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -13518,7 +13521,7 @@
         },
         {
           "className": "Ext.mixin.ItemRippler",
-          "exportName": "ItemRippler",
+          "exportName": "ItemRipplerMixin",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -13619,7 +13622,8 @@
         },
         {
           "className": "Ext.overrides.list.TreeItem",
-          "exportName": "TreeItem",
+          "exportName": "TreeItemListOverrides",
+          "override": "Ext.list.TreeItem",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -13785,7 +13789,8 @@
         },
         {
           "className": "Ext.overrides.list.Tree",
-          "exportName": "Tree",
+          "exportName": "TreeListOverrides",
+          "override": "Ext.list.Tree",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -13797,7 +13802,7 @@
         },
         {
           "className": "Ext.mixin.ConfigState",
-          "exportName": "ConfigState",
+          "exportName": "ConfigStateMixin",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -13809,7 +13814,7 @@
         },
         {
           "className": "Ext.mixin.Selectable",
-          "exportName": "Selectable",
+          "exportName": "SelectableMixin",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -13918,7 +13923,7 @@
         },
         {
           "className": "Ext.mixin.StoreWatcher",
-          "exportName": "StoreWatcher",
+          "exportName": "StoreWatcherMixin",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -13943,7 +13948,7 @@
         },
         {
           "className": "Ext.mixin.StyleCacher",
-          "exportName": "StyleCacher",
+          "exportName": "StyleCacherMixin",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -13953,7 +13958,7 @@
         },
         {
           "className": "Ext.perf.Monitor",
-          "exportName": "Monitor",
+          "exportName": "MonitorPerf",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -13999,7 +14004,7 @@
         },
         {
           "className": "Ext.plugin.AbstractClipboard",
-          "exportName": "AbstractClipboard",
+          "exportName": "AbstractClipboardPlugin",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -14074,7 +14079,7 @@
         },
         {
           "className": "Ext.plugin.MouseEnter",
-          "exportName": "MouseEnter",
+          "exportName": "MouseEnterPlugin",
           "classAliases": [
             "plugin.mouseenter"
           ],
@@ -14099,7 +14104,7 @@
         },
         {
           "className": "Ext.sparkline.Shape",
-          "exportName": "Shape",
+          "exportName": "ShapeSparkline",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -14108,7 +14113,7 @@
         },
         {
           "className": "Ext.sparkline.CanvasBase",
-          "exportName": "CanvasBase",
+          "exportName": "CanvasBaseSparkline",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -14130,7 +14135,7 @@
         },
         {
           "className": "Ext.sparkline.CanvasCanvas",
-          "exportName": "CanvasCanvas",
+          "exportName": "CanvasCanvasSparkline",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -14181,7 +14186,7 @@
         },
         {
           "className": "Ext.sparkline.VmlCanvas",
-          "exportName": "VmlCanvas",
+          "exportName": "VmlCanvasSparkline",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -14223,7 +14228,7 @@
         },
         {
           "className": "Ext.util.Color",
-          "exportName": "Color",
+          "exportName": "ColorUtil",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -14369,7 +14374,8 @@
         },
         {
           "className": "Ext.override.sparkline.Base",
-          "exportName": "Base",
+          "exportName": "BaseSparklineOverride",
+          "override": "Ext.sparkline.Base",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -14384,7 +14390,7 @@
         },
         {
           "className": "Ext.sparkline.BarBase",
-          "exportName": "BarBase",
+          "exportName": "BarBaseSparkline",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -14401,7 +14407,7 @@
         },
         {
           "className": "Ext.sparkline.RangeMap",
-          "exportName": "RangeMap",
+          "exportName": "RangeMapSparkline",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -14868,7 +14874,7 @@
         },
         {
           "className": "Ext.util.Base64",
-          "exportName": "Base64",
+          "exportName": "Base64Util",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -14914,7 +14920,7 @@
         },
         {
           "className": "Ext.util.DelimitedValue",
-          "exportName": "DelimitedValue",
+          "exportName": "DelimitedValueUtil",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -14943,14 +14949,14 @@
         },
         {
           "className": "Ext.util.CSV",
-          "exportName": "CSV",
+          "exportName": "CSVUtil",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": []
         },
         {
           "className": "Ext.util.ClickRepeater",
-          "exportName": "ClickRepeater",
+          "exportName": "ClickRepeaterUtil",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -15012,7 +15018,7 @@
         },
         {
           "className": "Ext.util.Cookies",
-          "exportName": "Cookies",
+          "exportName": "CookiesUtil",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -15026,7 +15032,7 @@
         },
         {
           "className": "Ext.util.LocalStorage",
-          "exportName": "LocalStorage",
+          "exportName": "LocalStorageUtil",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -15057,7 +15063,7 @@
         },
         {
           "className": "Ext.util.Spans",
-          "exportName": "Spans",
+          "exportName": "SpansUtil",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -15079,21 +15085,21 @@
         },
         {
           "className": "Ext.util.TsvDecoder",
-          "exportName": "TsvDecoder",
+          "exportName": "TsvDecoderUtil",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": []
         },
         {
           "className": "Ext.util.TaskManager",
-          "exportName": "TaskManager",
+          "exportName": "TaskManagerUtil",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": []
         },
         {
           "className": "Ext.util.TextMetrics",
-          "exportName": "TextMetrics",
+          "exportName": "TextMetricsUtil",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -15120,7 +15126,7 @@
         },
         {
           "className": "Ext.util.paintmonitor.OverflowChange",
-          "exportName": "OverflowChange",
+          "exportName": "OverflowChangePaintmonitorUtil",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -15132,7 +15138,7 @@
         },
         {
           "className": "Ext.util.sizemonitor.OverflowChange",
-          "exportName": "OverflowChange",
+          "exportName": "OverflowChangeSizemonitorUtil",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -15150,7 +15156,7 @@
         },
         {
           "className": "Ext.util.translatable.ScrollParent",
-          "exportName": "ScrollParent",
+          "exportName": "ScrollParentTranslatable",
           "classAliases": [
             "translatable.scrollparent"
           ],
@@ -15211,7 +15217,7 @@
         },
         {
           "className": "Ext.mixin.Toolable",
-          "exportName": "Toolable",
+          "exportName": "ToolableMixin",
           "classAliases": [],
           "aliasesUsed": [
             "widget.tool"
@@ -15267,7 +15273,7 @@
         },
         {
           "className": "Ext.layout.Box",
-          "exportName": "Box",
+          "exportName": "BoxLayout",
           "classAliases": [
             "layout.box"
           ],
@@ -15542,7 +15548,8 @@
         },
         {
           "className": "Ext.panel.Collapsible",
-          "exportName": "Collapsible",
+          "exportName": "CollapsiblePanel",
+          "override": "Ext.Panel",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -15584,7 +15591,8 @@
         },
         {
           "className": "Ext.panel.Resizable",
-          "exportName": "Resizable",
+          "exportName": "ResizablePanel",
+          "override": "Ext.Panel",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -16096,7 +16104,7 @@
         },
         {
           "className": "Ext.field.trigger.Base",
-          "exportName": "Base",
+          "exportName": "BaseTrigger",
           "classAliases": [
             "trigger.base"
           ],
@@ -16561,7 +16569,7 @@
         },
         {
           "className": "Ext.layout.VBox",
-          "exportName": "Vbox",
+          "exportName": "VboxLayout",
           "classAliases": [
             "layout.vbox"
           ],
@@ -16861,7 +16869,7 @@
         },
         {
           "className": "Ext.menu.Manager",
-          "exportName": "Manager",
+          "exportName": "ManagerMenu",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -17206,7 +17214,7 @@
         },
         {
           "className": "Ext.behavior.Behavior",
-          "exportName": "Behavior",
+          "exportName": "BehaviorBehavior",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -17215,14 +17223,14 @@
         },
         {
           "className": "Ext.carousel.Item",
-          "exportName": "Item",
+          "exportName": "ItemCarousel",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": []
         },
         {
           "className": "Ext.util.TranslatableGroup",
-          "exportName": "TranslatableGroup",
+          "exportName": "TranslatableGroupUtil",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -17394,7 +17402,7 @@
         },
         {
           "className": "Ext.carousel.Infinite",
-          "exportName": "Infinite",
+          "exportName": "InfiniteCarousel",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -17437,7 +17445,7 @@
         },
         {
           "className": "Ext.dataview.Location",
-          "exportName": "Location",
+          "exportName": "LocationDataview",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -17486,7 +17494,7 @@
         },
         {
           "className": "Ext.dataview.NavigationModel",
-          "exportName": "Dataview",
+          "exportName": "DataviewNavmodel",
           "classAliases": [
             "navmodel.dataview"
           ],
@@ -17633,7 +17641,7 @@
         },
         {
           "className": "Ext.dataview.selection.Selection",
-          "exportName": "Selection",
+          "exportName": "SelectionSelectionDataview",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -17648,7 +17656,7 @@
         },
         {
           "className": "Ext.dataview.selection.Rows",
-          "exportName": "Rows",
+          "exportName": "RowsSelection",
           "classAliases": [
             "selection.rows"
           ],
@@ -17747,7 +17755,7 @@
         },
         {
           "className": "Ext.dataview.selection.Records",
-          "exportName": "Records",
+          "exportName": "RecordsSelection",
           "classAliases": [
             "selection.records"
           ],
@@ -17882,7 +17890,7 @@
         },
         {
           "className": "Ext.dataview.selection.Model",
-          "exportName": "Dataview",
+          "exportName": "DataviewSelmodel",
           "classAliases": [
             "selmodel.dataview"
           ],
@@ -18023,7 +18031,7 @@
         },
         {
           "className": "Ext.dataview.Abstract",
-          "exportName": "Abstract",
+          "exportName": "AbstractDataview",
           "classAliases": [],
           "aliasesUsed": [
             "widget.emptytext",
@@ -18419,7 +18427,7 @@
         },
         {
           "className": "Ext.dataview.GenericItem",
-          "exportName": "GenericItem",
+          "exportName": "GenericItemDataview",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -18558,7 +18566,7 @@
         },
         {
           "className": "Ext.dataview.Pinnable",
-          "exportName": "Pinnable",
+          "exportName": "PinnableDataview",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -18596,7 +18604,7 @@
         },
         {
           "className": "Ext.dataview.Disclosable",
-          "exportName": "Disclosable",
+          "exportName": "DisclosableDataview",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -19156,7 +19164,7 @@
         },
         {
           "className": "Ext.dataview.BoundListLocation",
-          "exportName": "BoundListLocation",
+          "exportName": "BoundListLocationDataview",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -19174,7 +19182,7 @@
         },
         {
           "className": "Ext.dataview.BoundListNavigationModel",
-          "exportName": "BoundList",
+          "exportName": "BoundListNavmodel",
           "classAliases": [
             "navmodel.boundlist"
           ],
@@ -19453,7 +19461,7 @@
         },
         {
           "className": "Ext.layout.HBox",
-          "exportName": "Hbox",
+          "exportName": "HboxLayout",
           "classAliases": [
             "layout.hbox"
           ],
@@ -19863,7 +19871,7 @@
         },
         {
           "className": "Ext.dataview.listswiper.ListSwiper",
-          "exportName": "Listswiper",
+          "exportName": "ListswiperPlugin",
           "classAliases": [
             "plugin.listswiper"
           ],
@@ -20208,7 +20216,7 @@
         },
         {
           "className": "Ext.dataview.plugin.ItemTip",
-          "exportName": "Dataviewtip",
+          "exportName": "DataviewtipPlugin",
           "classAliases": [
             "plugin.dataviewtip"
           ],
@@ -20250,7 +20258,7 @@
         },
         {
           "className": "Ext.dataview.plugin.ListPaging",
-          "exportName": "ListPaging",
+          "exportName": "ListPagingPlugin",
           "classAliases": [
             "plugin.listpaging"
           ],
@@ -20341,7 +20349,7 @@
         },
         {
           "className": "Ext.dataview.plugin.SortableList",
-          "exportName": "SortableList",
+          "exportName": "SortableListPlugin",
           "classAliases": [
             "plugin.sortablelist"
           ],
@@ -20396,7 +20404,7 @@
         },
         {
           "className": "Ext.dataview.pullrefresh.Item",
-          "exportName": "Item",
+          "exportName": "ItemPullrefreshDataview",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -20425,7 +20433,7 @@
         },
         {
           "className": "Ext.dataview.pullrefresh.PullRefresh",
-          "exportName": "Pullrefresh",
+          "exportName": "PullrefreshPlugin",
           "classAliases": [
             "plugin.pullrefresh"
           ],
@@ -20551,7 +20559,7 @@
         },
         {
           "className": "Ext.field.BoxLabelable",
-          "exportName": "BoxLabelable",
+          "exportName": "BoxLabelableField",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -21198,7 +21206,7 @@
         },
         {
           "className": "Ext.field.Manager",
-          "exportName": "Manager",
+          "exportName": "ManagerField",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -21425,7 +21433,7 @@
         },
         {
           "className": "Ext.layout.Carousel",
-          "exportName": "Carousel",
+          "exportName": "CarouselLayout",
           "classAliases": [
             "layout.carousel"
           ],
@@ -22326,7 +22334,7 @@
         },
         {
           "className": "Ext.form.Borders",
-          "exportName": "Borders",
+          "exportName": "BordersForm",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -22879,7 +22887,7 @@
         },
         {
           "className": "Ext.field.trigger.Component",
-          "exportName": "Component",
+          "exportName": "ComponentTrigger",
           "classAliases": [
             "trigger.component"
           ],
@@ -22901,7 +22909,7 @@
         },
         {
           "className": "Ext.field.trigger.File",
-          "exportName": "File",
+          "exportName": "FileTrigger",
           "classAliases": [
             "trigger.file"
           ],
@@ -23113,7 +23121,7 @@
         },
         {
           "className": "Ext.grid.Location",
-          "exportName": "Location",
+          "exportName": "LocationGrid",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -23237,7 +23245,7 @@
         },
         {
           "className": "Ext.grid.NavigationModel",
-          "exportName": "Grid",
+          "exportName": "GridNavmodel",
           "classAliases": [
             "navmodel.grid"
           ],
@@ -24332,7 +24340,7 @@
         },
         {
           "className": "Ext.grid.selection.Cells",
-          "exportName": "Cells",
+          "exportName": "CellsSelection",
           "classAliases": [
             "selection.cells"
           ],
@@ -24429,7 +24437,7 @@
         },
         {
           "className": "Ext.grid.selection.Columns",
-          "exportName": "Columns",
+          "exportName": "ColumnsSelection",
           "classAliases": [
             "selection.columns"
           ],
@@ -24510,7 +24518,7 @@
         },
         {
           "className": "Ext.grid.selection.Replicator",
-          "exportName": "SelectionReplicator",
+          "exportName": "SelectionReplicatorPlugin",
           "classAliases": [
             "plugin.selectionreplicator"
           ],
@@ -24559,7 +24567,7 @@
         },
         {
           "className": "Ext.grid.selection.SelectionExtender",
-          "exportName": "SelectionExtender",
+          "exportName": "SelectionExtenderSelectionGrid",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -24857,7 +24865,7 @@
         },
         {
           "className": "Ext.grid.selection.Model",
-          "exportName": "Grid",
+          "exportName": "GridSelmodel",
           "classAliases": [
             "selmodel.grid"
           ],
@@ -25160,7 +25168,7 @@
         },
         {
           "className": "Ext.grid.plugin.ColumnResizing",
-          "exportName": "ColumnResizing",
+          "exportName": "ColumnResizingPlugin",
           "classAliases": [
             "plugin.columnresizing",
             "plugin.gridcolumnresizing"
@@ -25547,7 +25555,7 @@
         },
         {
           "className": "Ext.grid.plugin.CellEditing",
-          "exportName": "GridCellEditing",
+          "exportName": "GridCellEditingPlugin",
           "classAliases": [
             "plugin.gridcellediting",
             "plugin.cellediting"
@@ -25591,7 +25599,7 @@
         },
         {
           "className": "Ext.grid.plugin.Clipboard",
-          "exportName": "Clipboard",
+          "exportName": "ClipboardPlugin",
           "classAliases": [
             "plugin.clipboard"
           ],
@@ -25641,7 +25649,7 @@
         },
         {
           "className": "Ext.grid.plugin.Editable",
-          "exportName": "GridEditable",
+          "exportName": "GridEditablePlugin",
           "classAliases": [
             "plugin.grideditable"
           ],
@@ -25713,7 +25721,7 @@
         },
         {
           "className": "Ext.grid.plugin.PagingToolbar",
-          "exportName": "PagingToolbar",
+          "exportName": "PagingToolbarPlugin",
           "classAliases": [
             "plugin.pagingtoolbar",
             "plugin.gridpagingtoolbar"
@@ -25827,7 +25835,7 @@
         },
         {
           "className": "Ext.grid.plugin.RowExpander",
-          "exportName": "RowExpander",
+          "exportName": "RowExpanderPlugin",
           "classAliases": [
             "plugin.rowexpander"
           ],
@@ -25856,7 +25864,7 @@
         },
         {
           "className": "Ext.grid.plugin.RowOperations",
-          "exportName": "RowOperations",
+          "exportName": "RowOperationsPlugin",
           "classAliases": [
             "plugin.rowoperations",
             "plugin.multiselection",
@@ -25915,7 +25923,7 @@
         },
         {
           "className": "Ext.grid.plugin.Summary",
-          "exportName": "GridSummary",
+          "exportName": "GridSummaryPlugin",
           "classAliases": [
             "plugin.gridsummary",
             "plugin.summaryrow",
@@ -25978,7 +25986,7 @@
         },
         {
           "className": "Ext.layout.Fit",
-          "exportName": "Fit",
+          "exportName": "FitLayout",
           "classAliases": [
             "layout.fit"
           ],
@@ -25987,7 +25995,7 @@
         },
         {
           "className": "Ext.grid.plugin.ViewOptions",
-          "exportName": "GridViewOptions",
+          "exportName": "GridViewOptionsPlugin",
           "classAliases": [
             "plugin.gridviewoptions"
           ],
@@ -26153,7 +26161,7 @@
         },
         {
           "className": "Ext.layout.Center",
-          "exportName": "Center",
+          "exportName": "CenterLayout",
           "classAliases": [
             "layout.center"
           ],
@@ -26162,7 +26170,7 @@
         },
         {
           "className": "Ext.layout.Float",
-          "exportName": "Float",
+          "exportName": "FloatLayout",
           "classAliases": [
             "layout.float"
           ],
@@ -26175,7 +26183,7 @@
         },
         {
           "className": "Ext.layout.Form",
-          "exportName": "Form",
+          "exportName": "FormLayout",
           "classAliases": [
             "layout.form"
           ],
@@ -26199,7 +26207,7 @@
         },
         {
           "className": "Ext.layout.overflow.Scroller",
-          "exportName": "Scroller",
+          "exportName": "ScrollerLayoutOverflow",
           "classAliases": [
             "layout.overflow.scroller"
           ],
@@ -26347,7 +26355,7 @@
         },
         {
           "className": "Ext.list.Location",
-          "exportName": "Location",
+          "exportName": "LocationList",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -26367,7 +26375,7 @@
         },
         {
           "className": "Ext.mixin.Progressable",
-          "exportName": "Progressable",
+          "exportName": "ProgressableMixin",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -26395,7 +26403,7 @@
         },
         {
           "className": "Ext.navigation.Bar",
-          "exportName": "Bar",
+          "exportName": "BarNavigation",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -26602,7 +26610,7 @@
         },
         {
           "className": "Ext.panel.Collapser",
-          "exportName": "Collapser",
+          "exportName": "CollapserPanel",
           "classAliases": [],
           "aliasesUsed": [
             "widget.panel",
@@ -26958,7 +26966,7 @@
         },
         {
           "className": "Ext.panel.Resizer",
-          "exportName": "Resizer",
+          "exportName": "ResizerPanel",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -27104,7 +27112,7 @@
         },
         {
           "className": "Ext.plugin.Responsive",
-          "exportName": "Responsive",
+          "exportName": "ResponsivePlugin",
           "classAliases": [
             "plugin.responsive"
           ],
@@ -27124,7 +27132,7 @@
         },
         {
           "className": "Ext.plugin.TabGuard",
-          "exportName": "TabGuard",
+          "exportName": "TabGuardPlugin",
           "classAliases": [
             "plugin.tabguard"
           ],
@@ -27336,7 +27344,7 @@
         },
         {
           "className": "Ext.tip.Manager",
-          "exportName": "Manager",
+          "exportName": "ManagerTip",
           "classAliases": [],
           "aliasesUsed": [
             "widget.tooltip"
@@ -27401,7 +27409,7 @@
         },
         {
           "className": "Ext.util.Audio",
-          "exportName": "Audio",
+          "exportName": "AudioUtil",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -27417,7 +27425,7 @@
         },
         {
           "className": "Ext.util.BufferedCollection",
-          "exportName": "BufferedCollection",
+          "exportName": "BufferedCollectionUtil",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -27430,7 +27438,7 @@
         },
         {
           "className": "Ext.util.Draggable",
-          "exportName": "Draggable",
+          "exportName": "DraggableUtil",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -27514,7 +27522,7 @@
         },
         {
           "className": "Ext.util.Geolocation",
-          "exportName": "Geolocation",
+          "exportName": "GeolocationUtil",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -27560,7 +27568,7 @@
         },
         {
           "className": "Ext.util.LineSegment",
-          "exportName": "LineSegment",
+          "exportName": "LineSegmentUtil",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -27586,7 +27594,7 @@
         },
         {
           "className": "Ext.util.PositionMap",
-          "exportName": "PositionMap",
+          "exportName": "PositionMapUtil",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -27605,7 +27613,7 @@
         },
         {
           "className": "Ext.util.TranslatableList",
-          "exportName": "TranslatableList",
+          "exportName": "TranslatableListUtil",
           "classAliases": [],
           "aliasesUsed": [],
           "methodCalls": [
@@ -27616,7 +27624,7 @@
         },
         {
           "className": "Ext.util.translatable.Component",
-          "exportName": "Component",
+          "exportName": "ComponentTranslatable",
           "classAliases": [
             "translatable.component"
           ],

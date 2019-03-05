@@ -8,14 +8,10 @@ import Framework from './src/Framework'
 import { getConfig, getAbsolutePath } from './src/Util'
 
 (async () => {
-  let { sourceDir, targetDir, sdkFilePath, frameworkDirName, words } = getConfig()
+  let { sourceDir, targetDir, sdkFilePath, frameworkTargetDir, words } = getConfig()
 
-  let framework = await Framework.loadSnapshot('framework', {
-    sourceDir: sdkFilePath,
-    targetDir: getAbsolutePath(targetDir, frameworkDirName)
-  })
-
-  let codebase = await Codebase.factory({ sourceDir, targetDir, words, parentCodebase: framework })
+  let framework = await Framework.loadSnapshot('framework', { sourceDir: sdkFilePath, targetDir: frameworkTargetDir }),
+      codebase  = await Codebase.factory({ sourceDir, targetDir, words, parentCodebase: framework })
 
   await codebase.saveSnapshot('codebase')
 
@@ -29,5 +25,6 @@ import { getConfig, getAbsolutePath } from './src/Util'
     return
   }
 
-  codebase.transpile()
+  await codebase.transpile()
+  await framework.transpile()
 })()

@@ -8,7 +8,9 @@ import {
   Ast,
   getAbsolutePath,
   readFile,
-  asyncForEach
+  writeFile,
+  asyncForEach,
+  code
 } from './Util'
 
 export default class Framework extends Codebase{
@@ -16,68 +18,44 @@ export default class Framework extends Codebase{
     let sdkFilePath = this.sourceDir
 
     let sdkFile = await SourceFile.factory({
-      codebase       : this,
-      codeFilePath   : sdkFilePath,
-      importFilePath : sdkFilePath,
-      source         : await readFile(sdkFilePath)
+      codebase     : this,
+      codeFilePath : 'index.js',
+      source       : await readFile(sdkFilePath)
     })
 
     return [sdkFile]
   }
 
-  async getInfo(sdkFilePath){
-    let filePath = getAbsolutePath(__dirname, '..', 'framework.json'),
-        getInfo  = () => fs.readJsonSync(filePath)
-
-    try{
-      return getInfo()
-    }
-    catch(e){
-      let sdk       = await readFile(sdkFilePath),
-          ast       = recast.parse(sdk),
-          normalize = config => _.compact(_.isArray(config) ? config : [config]),
-          aliases   = {}
-
-      visit(ast, {
-        visitCallExpression: function(path){
-          let { node } = path
- 
-          if(Ast.getMethodCall(node) === 'Ext.define'){
-            let [className, data] = node.arguments
-
-            if(Ast.isString(className) && Ast.isObject(data)){
-              let xtype = normalize(Ast.getConfig(data, 'xtype')).map(xtype => `widget.${xtype}`),
-                  alias = normalize(Ast.getConfig(data, 'alias'))
-
-              if(xtype.length || alias.length){
-                [...xtype, ...alias].forEach(alias => aliases[alias] = className.value)
-              }
-            }
-          }
-
-          this.traverse(path)
-        }
-      })
-
-      await fs.writeFile(filePath, JSON.stringify({ aliases }, null, 2))
-      return getInfo()
-    }
+  get manifestFilePath(){
+    return getAbsolutePath(this.targetDir, 'index.js')
   }
 
-  async initSodurceFiles(){
-    let components = [
-      {
-        className : 'Button',
-        xtype     : 'button',
-        props     : [{ name: 'cls', usage: 42 }],
-        usage     : 42,
-        filePath  : `./components/${className}`
+  async transpile(){
+    let widgets = [],
+        classes = []
+
+    this.sourceFiles[0].classes.forEach(cls => {
+      // ExtJS doesn't create referenceable classes from overrides, so discard
+      if(cls.override){
+        return
       }
-    ]
-  }
 
-  transpile(){
-    
+      let xtype = (cls.classAliases.find(alias => alias.startsWith('widget.')) || '').replace(/^widget\./, '')
+
+      xtype
+        ? widgets.push(`export const ${cls.exportName} = reactify('${xtype}')`)
+        : classes.push(`export const ${cls.exportName} = window.${cls.className}`)
+    })
+
+    let framework = code(
+      `import { reactify } from '@extjs/reactor'`,
+      '',
+      ...widgets,
+      '',
+      ...classes
+    )
+
+    writeFile(this.manifestFilePath, framework)
   }
 
   getIndexFileCode(classes){

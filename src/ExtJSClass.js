@@ -15,13 +15,14 @@ export default class ExtJSClass{
 
   extractedProps = {}
 
-  static fromSnapshot(sourceFile, { className, exportName, parentClassName, classAliases, aliasesUsed, methodCalls }){
+  static fromSnapshot(sourceFile, { className, exportName, parentClassName, override, classAliases, aliasesUsed, methodCalls }){
     let cls = new this(sourceFile, className)
 
     cls.fromSnapshot = true
 
     cls.exportName      = exportName
     cls.parentClassName = parentClassName
+    cls.override        = override
     cls.classAliases    = classAliases
     cls.aliasesUsed     = aliasesUsed
     cls.methodCalls     = methodCalls
@@ -34,6 +35,7 @@ export default class ExtJSClass{
       className       : this.className,
       exportName      : this.exportName,
       parentClassName : this.parentClassName,
+      override        : this.override,
       classAliases    : this.classAliases,
       aliasesUsed     : this.aliasesUsed,
       methodCalls     : this.methodCalls
@@ -57,6 +59,18 @@ export default class ExtJSClass{
 
   set parentClassName(name){
     this._parentClassName = name || null
+  }
+
+  get override(){
+    if(_.isUndefined(this._override)){
+      this._override = Ast.getConfig(this._ast, 'override')
+    }
+
+    return this._override
+  }
+
+  set override(override){
+    this._override = override || null
   }
 
   get classAliases(){
@@ -125,7 +139,7 @@ export default class ExtJSClass{
 
   get exportName(){
     if(_.isUndefined(this._exportName)){
-      this._exportName = this.sourceFile.getExportName(this)
+      this._exportName = this.sourceFile.getExportNameForClassName(this.className)
     }
 
     return this._exportName
@@ -178,8 +192,8 @@ export default class ExtJSClass{
   }
 
   transpile(type = 'ES6'){
-    return type === 'reactified'
-      ? this.getReactifiedClass()
+    return type === 'reactify'
+      ? this.getReactifyClass()
       : this.getES6Class()
   }
 

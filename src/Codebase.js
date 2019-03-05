@@ -43,11 +43,11 @@ export default class Codebase{
       snapshot = await readSnapshot(id)
     }
 
-    return this.fromSnapshot(config.parentCodebase, snapshot)
+    return this.fromSnapshot(config, snapshot)
   }
 
-  static fromSnapshot(parentCodebase, { sourceFiles, unparseable, words }){
-    let codebase = new this({ parentCodebase, words })
+  static fromSnapshot(config, { sourceFiles, unparseable, words }){
+    let codebase = new this({ ...config, words })
 
     codebase.fromSnapshot = true
 
@@ -130,10 +130,6 @@ export default class Codebase{
       this._saveSourceFile(sourceFile, sourceFile.transpile())
       //sourceFile.missingFiles.forEach(className => logError(`Unknown file for class: ${className}`))
     })
-
-    if(this.parentCodebase){
-      await this.parentCodebase.transpile()
-    }
   }
 
   _addSourceFiles(){
@@ -163,7 +159,7 @@ export default class Codebase{
     })
 
     this._addWordsFromClassNames(classes.map(cls => cls.className))
-    this.sourceFiles.forEach(sourceFile => sourceFile.initImports())
+    this.sourceFiles.forEach(sourceFile => sourceFile.init())
   }
 
   async _loadSourceFiles(){
@@ -173,15 +169,14 @@ export default class Codebase{
   async _doLoadSourceFiles(){
     let files       = getFilesRecursively(this.sourceDir),
         unparseable = files.filter(file => !file.endsWith('.js')),
-        js          = files.filter(file => file.endsWith('.js')), //.filter(file => file.endsWith('NonClinical.js')),
+        js          = files.filter(file => file.endsWith('.js')),
         sourceFiles = []
 
     await asyncForEach(js, async filePath => {
       let sourceFile = await SourceFile.factory({
-        codebase       : this,
-        codeFilePath   : filePath,
-        importFilePath : filePath,
-        source         : await readFile(filePath)
+        codebase     : this,
+        codeFilePath : filePath,
+        source       : await readFile(filePath)
       })
 
       sourceFile.parseable ? sourceFiles.push(sourceFile) : unparseable.push(filePath)
