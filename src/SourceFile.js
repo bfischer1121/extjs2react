@@ -103,7 +103,9 @@ export default class SourceFile{
       return `import ${specifiers} from '${source}'`
     })
 
-    imports.unshift(`import React from 'react'`)
+    if(this.classes.find(cls => cls.isComponent())){
+      imports.unshift(`import React from 'react'`)
+    }
 
     return code(...imports)
   }
