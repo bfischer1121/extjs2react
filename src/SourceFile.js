@@ -104,7 +104,7 @@ export default class SourceFile{
     })
 
     if(this.classes.find(cls => cls.isComponent())){
-      imports.unshift(`import React from 'react'`)
+      imports.unshift(`import React, { Component } from 'react'`)
     }
 
     return code(...imports)
@@ -228,16 +228,18 @@ export default class SourceFile{
 
   _getExportName(cls){
     if(!cls.classAliases.length){
-      return cls.className.split('.').reverse().slice(0, -1).map(p => p[0].toUpperCase() + p.slice(1)).join('')
+      let name = cls.className.split('.').reverse().slice(0, -1).map(p => p[0].toUpperCase() + p.slice(1)).join('')
+      return name === 'Component' ? 'ExtJSComponent' : name
     }
 
     let parts      = cls.classAliases[0].split('.'),
         namespace  = parts.slice(0, parts.length - 1).map(p => _.capitalize(p)).join(''),
         alias      = _.capitalize(parts[parts.length - 1].replace(/.*-/, '')),
         exportName = this.codebase.words.reduce((alias, [word, wordRe]) => alias.replace(wordRe, word), alias),
-        suffix     = { 'viewmodel': 'Model' }[namespace] || namespace
+        suffix     = { 'viewmodel': 'Model' }[namespace] || namespace,
+        name       = exportName + (suffix === 'Widget' ? '' : suffix)
 
-    return exportName + (suffix === 'Widget' ? '' : suffix)
+    return name === 'Component' ? 'ExtJSComponent' : name
   }
 
   _getMatches(regExp){

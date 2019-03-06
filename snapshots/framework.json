@@ -5041,7 +5041,7 @@
         },
         {
           "className": "Ext.Component",
-          "exportName": "Component",
+          "exportName": "ExtJSComponent",
           "parentClassName": "Ext.Widget",
           "alternateClassNames": [
             "Ext.lib.Component",
@@ -11630,12 +11630,10 @@
             "autoBlurInput",
             "autoMaximize",
             "autoRender",
-            "height",
             "menus",
             "orientation",
             "preventZooming",
-            "swipeThreshold",
-            "width"
+            "swipeThreshold"
           ],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -21332,7 +21330,6 @@
           "mixins": [],
           "configs": [
             "defaultButtonUI",
-            "minHeight",
             "title"
           ],
           "cachedConfigs": [],
@@ -21668,10 +21665,6 @@
           ],
           "mixins": [],
           "configs": [
-            "bottom",
-            "left",
-            "right",
-            "top",
             "transparent"
           ],
           "cachedConfigs": [],
@@ -21872,9 +21865,7 @@
             "widget.audio"
           ],
           "mixins": [],
-          "configs": [
-            "cls"
-          ],
+          "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
           "aliasesUsed": [],
@@ -22409,7 +22400,6 @@
             "autoComplete",
             "autoCorrect",
             "autoHideInputMask",
-            "bodyAlign",
             "bubbleEvents",
             "clearable",
             "editable",
@@ -22827,7 +22817,6 @@
           ],
           "mixins": [],
           "configs": [
-            "cls",
             "indicator",
             "message",
             "messageCls"
@@ -23453,10 +23442,8 @@
           ],
           "mixins": [],
           "configs": [
-            "cls",
             "defaultButtonUI",
             "maxButtonWidth",
-            "minHeight",
             "title",
             "titleAlign"
           ],
@@ -23531,7 +23518,6 @@
           "classAliases": [],
           "mixins": [],
           "configs": [
-            "centered",
             "maxQueue",
             "message",
             "messageAnimation",
@@ -27746,12 +27732,9 @@
           "mixins": [],
           "configs": [
             "align",
-            "cls",
             "displayField",
             "flex",
-            "itemTpl",
             "name",
-            "scrollable",
             "showTitle",
             "title",
             "value",
@@ -27840,13 +27823,8 @@
           ],
           "mixins": [],
           "configs": [
-            "bottom",
             "cancelButton",
-            "centered",
             "doneButton",
-            "height",
-            "left",
-            "right",
             "slots",
             "toolbar",
             "toolbarPosition",
@@ -30090,8 +30068,7 @@
           "configs": [
             "liveUpdate",
             "readOnly",
-            "slider",
-            "tabIndex"
+            "slider"
           ],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -30951,7 +30928,6 @@
           ],
           "configs": [
             "column",
-            "hidden",
             "record",
             "value"
           ],
@@ -31295,10 +31271,8 @@
           "configs": [
             "columns",
             "defaultColumnUI",
-            "docked",
             "grid",
             "reserveScrollbar",
-            "scrollable",
             "sortable",
             "verticalOverflow"
           ],
@@ -31546,7 +31520,6 @@
             "ignoreExport",
             "menu",
             "menuDisabled",
-            "minWidth",
             "renderer",
             "resizable",
             "scope",
@@ -32475,9 +32448,7 @@
             "widget.checkcell"
           ],
           "mixins": [],
-          "configs": [
-            "disabled"
-          ],
+          "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
           "aliasesUsed": [],
@@ -33117,7 +33088,6 @@
             "columnsMenuItem",
             "headerContainer",
             "hideHeaders",
-            "itemsFocusable",
             "multiColumnSort",
             "rowNumbers",
             "sortable",
@@ -35512,7 +35482,6 @@
           ],
           "mixins": [],
           "configs": [
-            "cls",
             "tabBar",
             "tabBarPosition"
           ],
