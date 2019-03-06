@@ -454,7 +454,7 @@ export default class ExtJSClass{
         methods     = this.getMethods()
 
     if(properties.length){
-      classBody.push([properties])
+      classBody.push([properties, '\n'])
     }
 
     if(methods.length){
@@ -478,7 +478,11 @@ export default class ExtJSClass{
     let defaultProps = this.classMembers.configs.filter(node => this.localConfigs.includes(Ast.getPropertyName(node)))
 
     if(defaultProps.length){
-      properties.push(`static defaultProps = ${Ast.toString(b.objectExpression(defaultProps))}\n`)
+      properties.push(code(
+        'static defaultProps = {',
+          [defaultProps.map(prop => Ast.toString(prop)).join(',\n')],
+        '}'
+      ))
     }
 
     return properties.join('\n\n')
