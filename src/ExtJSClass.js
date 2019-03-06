@@ -21,6 +21,7 @@ export default class ExtJSClass{
     cls.override            = snapshot.override
     cls.alternateClassNames = snapshot.alternateClassNames
     cls.classAliases        = snapshot.classAliases
+    cls.mixins              = snapshot.mixins
     cls.configs             = snapshot.configs
     cls.cachedConfigs       = snapshot.cachedConfigs
     cls.eventedConfigs      = snapshot.eventedConfigs
@@ -38,6 +39,7 @@ export default class ExtJSClass{
       override            : this.override        || undefined,
       alternateClassNames : this.alternateClassNames,
       classAliases        : this.classAliases,
+      mixins              : this.mixins,
       configs             : this.configs,
       cachedConfigs       : this.cachedConfigs,
       eventedConfigs      : this.eventedConfigs,
@@ -120,6 +122,45 @@ export default class ExtJSClass{
 
   set classAliases(aliases){
     this._classAliases = aliases
+  }
+
+  get mixins(){
+    if(_.isUndefined(this._mixins)){
+      this._mixins = this._getClassReferenceConfig('mixins') || []
+    }
+
+    return this._mixins
+  }
+
+  set mixins(mixins){
+    this._mixins = mixins
+  }
+
+  get localAndInheritedConfigs(){
+    if(_.isUndefined(this._localAndInheritedConfigs)){
+       this._localAndInheritedConfigs = [...(this.localConfigs), ...(this.inheritedConfigs)]
+     }
+
+     return this._localAndInheritedConfigs
+  }
+
+  get localConfigs(){
+    if(_.isUndefined(this._localConfigs)){
+       this._localConfigs = [...(this.configs), ...(this.cachedConfigs), ...(this.eventedConfigs)]
+     }
+
+     return this._localConfigs
+  }
+
+  get inheritedConfigs(){
+    if(_.isUndefined(this._inheritedConfigs)){
+       this._inheritedConfigs = _.flattenDeep(_.compact([
+         this.parentClass,
+         ...(this.mixins.map(mixin => this.sourceFile.codebase.getClassForClassName(mixin)))
+       ]).map(cls => cls.localAndInheritedConfigs))
+     }
+
+     return this._inheritedConfigs
   }
 
   get configs(){
