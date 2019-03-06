@@ -7,6 +7,7 @@
         {
           "className": "Ext.Mixin",
           "exportName": "Mixin",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -40,6 +41,7 @@
         {
           "className": "Ext.util.Event",
           "exportName": "EventUtil",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -111,6 +113,7 @@
         {
           "className": "Ext.mixin.Identifiable",
           "exportName": "IdentifiableMixin",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -129,6 +132,7 @@
           "className": "Ext.mixin.Observable",
           "exportName": "ObservableMixin",
           "parentClassName": "Ext.Mixin",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -249,6 +253,7 @@
         {
           "className": "Ext.util.HashMap",
           "exportName": "HashMapUtil",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "keyFn"
@@ -295,6 +300,7 @@
         {
           "className": "Ext.AbstractManager",
           "exportName": "AbstractManager",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -323,6 +329,7 @@
         {
           "className": "Ext.promise.Consequence",
           "exportName": "ConsequencePromise",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -347,6 +354,7 @@
         {
           "className": "Ext.promise.Deferred",
           "exportName": "DeferredPromise",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -371,6 +379,7 @@
         {
           "className": "Ext.promise.Promise",
           "exportName": "PromisePromise",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -421,6 +430,7 @@
         {
           "className": "Ext.Promise",
           "exportName": "Promise",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -440,6 +450,7 @@
           "className": "Ext.Deferred",
           "exportName": "Deferred",
           "parentClassName": "Ext.promise.Deferred",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -535,6 +546,7 @@
         {
           "className": "Ext.mixin.Factoryable",
           "exportName": "FactoryableMixin",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -551,6 +563,7 @@
         {
           "className": "Ext.data.request.Base",
           "exportName": "BaseRequestData",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -580,6 +593,7 @@
         {
           "className": "Ext.data.flash.BinaryXhr",
           "exportName": "BinaryXhrFlashData",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -624,6 +638,7 @@
           "className": "Ext.data.request.Ajax",
           "exportName": "AjaxRequest",
           "parentClassName": "Ext.data.request.Base",
+          "alternateClassNames": [],
           "classAliases": [
             "request.ajax"
           ],
@@ -709,6 +724,7 @@
           "className": "Ext.data.request.Form",
           "exportName": "FormRequest",
           "parentClassName": "Ext.data.request.Base",
+          "alternateClassNames": [],
           "classAliases": [
             "request.form"
           ],
@@ -774,6 +790,7 @@
         {
           "className": "Ext.data.Connection",
           "exportName": "ConnectionData",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "async",
@@ -867,6 +884,7 @@
           "className": "Ext.Ajax",
           "exportName": "Ajax",
           "parentClassName": "Ext.data.Connection",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -877,6 +895,7 @@
         {
           "className": "Ext.AnimationQueue",
           "exportName": "AnimationQueue",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -968,6 +987,7 @@
           "className": "Ext.mixin.Bufferable",
           "exportName": "BufferableMixin",
           "parentClassName": "Ext.Mixin",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -1013,6 +1033,9 @@
         {
           "className": "Ext.ComponentManager",
           "exportName": "ComponentManager",
+          "alternateClassNames": [
+            "Ext.ComponentMgr"
+          ],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -1073,6 +1096,7 @@
           "className": "Ext.util.LruCache",
           "exportName": "LruCacheUtil",
           "parentClassName": "Ext.util.HashMap",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "maxSize"
@@ -1108,6 +1132,7 @@
         {
           "className": "Ext.ComponentQuery",
           "exportName": "ComponentQuery",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -1118,6 +1143,9 @@
         {
           "className": "Ext.Evented",
           "exportName": "Evented",
+          "alternateClassNames": [
+            "Ext.EventedBase"
+          ],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -1137,6 +1165,7 @@
         {
           "className": "Ext.util.Positionable",
           "exportName": "PositionableUtil",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -1274,6 +1303,7 @@
         {
           "className": "Ext.dom.UnderlayPool",
           "exportName": "UnderlayPoolDom",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -1293,6 +1323,7 @@
         {
           "className": "Ext.dom.Underlay",
           "exportName": "UnderlayDom",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -1329,6 +1360,9 @@
           "className": "Ext.dom.Shadow",
           "exportName": "ShadowDom",
           "parentClassName": "Ext.dom.Underlay",
+          "alternateClassNames": [
+            "Ext.Shadow"
+          ],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -1349,6 +1383,7 @@
           "className": "Ext.dom.Shim",
           "exportName": "ShimDom",
           "parentClassName": "Ext.dom.Underlay",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -1362,6 +1397,7 @@
           "className": "Ext.dom.ElementEvent",
           "exportName": "ElementEventDom",
           "parentClassName": "Ext.util.Event",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -1397,6 +1433,7 @@
         {
           "className": "Ext.event.publisher.Publisher",
           "exportName": "PublisherPublisherEvent",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -1414,6 +1451,7 @@
         {
           "className": "Ext.util.Offset",
           "exportName": "OffsetUtil",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -1437,6 +1475,7 @@
         {
           "className": "Ext.util.Region",
           "exportName": "RegionUtil",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -1598,6 +1637,7 @@
           "className": "Ext.util.Point",
           "exportName": "PointUtil",
           "parentClassName": "Ext.util.Region",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -1623,6 +1663,9 @@
         {
           "className": "Ext.event.Event",
           "exportName": "EventEvent",
+          "alternateClassNames": [
+            "Ext.EventObjectImpl"
+          ],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -1690,6 +1733,7 @@
           "className": "Ext.event.publisher.Dom",
           "exportName": "DomPublisherEvent",
           "parentClassName": "Ext.event.publisher.Publisher",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -1758,6 +1802,7 @@
           "className": "Ext.event.publisher.Gesture",
           "exportName": "GesturePublisherEvent",
           "parentClassName": "Ext.event.publisher.Dom",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -1844,6 +1889,7 @@
           "className": "Ext.mixin.Templatable",
           "exportName": "TemplatableMixin",
           "parentClassName": "Ext.Mixin",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -1867,6 +1913,7 @@
         {
           "className": "Ext.TaskQueue",
           "exportName": "TaskQueue",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -1911,6 +1958,7 @@
         {
           "className": "Ext.util.sizemonitor.Abstract",
           "exportName": "AbstractSizemonitorUtil",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "args",
@@ -1952,6 +2000,7 @@
           "className": "Ext.util.sizemonitor.Scroll",
           "exportName": "ScrollSizemonitorUtil",
           "parentClassName": "Ext.util.sizemonitor.Abstract",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -1969,6 +2018,7 @@
         {
           "className": "Ext.util.SizeMonitor",
           "exportName": "SizeMonitorUtil",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -1980,6 +2030,7 @@
           "className": "Ext.event.publisher.ElementSize",
           "exportName": "ElementSizePublisherEvent",
           "parentClassName": "Ext.event.publisher.Publisher",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -2002,6 +2053,7 @@
         {
           "className": "Ext.util.paintmonitor.Abstract",
           "exportName": "AbstractPaintmonitorUtil",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "args",
@@ -2032,6 +2084,7 @@
           "className": "Ext.util.paintmonitor.CssAnimation",
           "exportName": "CssAnimationPaintmonitorUtil",
           "parentClassName": "Ext.util.paintmonitor.Abstract",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -2047,6 +2100,7 @@
         {
           "className": "Ext.util.PaintMonitor",
           "exportName": "PaintMonitorUtil",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -2058,6 +2112,7 @@
           "className": "Ext.event.publisher.ElementPaint",
           "exportName": "ElementPaintPublisherEvent",
           "parentClassName": "Ext.event.publisher.Publisher",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -2074,6 +2129,9 @@
         {
           "className": "Ext.dom.Element",
           "exportName": "ElementDom",
+          "alternateClassNames": [
+            "Ext.Element"
+          ],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -2861,6 +2919,7 @@
           "className": "Ext.overrides.dom.Element",
           "exportName": "ElementDomOverrides",
           "override": "Ext.dom.Element",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -2894,6 +2953,9 @@
           "className": "Ext.GlobalEvents",
           "exportName": "GlobalEvents",
           "parentClassName": "Ext.mixin.Observable",
+          "alternateClassNames": [
+            "Ext.globalEvents"
+          ],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -2929,6 +2991,7 @@
         {
           "className": "Ext.Glyph",
           "exportName": "Glyph",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -2951,6 +3014,7 @@
           "className": "Ext.mixin.Inheritable",
           "exportName": "InheritableMixin",
           "parentClassName": "Ext.Mixin",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -2992,6 +3056,7 @@
         {
           "className": "Ext.mixin.Bindable",
           "exportName": "BindableMixin",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "bind",
@@ -3094,6 +3159,7 @@
           "className": "Ext.mixin.ComponentDelegation",
           "exportName": "ComponentDelegationMixin",
           "parentClassName": "Ext.Mixin",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -3117,6 +3183,9 @@
         {
           "className": "Ext.plugin.Abstract",
           "exportName": "AbstractPlugin",
+          "alternateClassNames": [
+            "Ext.AbstractPlugin"
+          ],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -3144,6 +3213,7 @@
         {
           "className": "Ext.mixin.Pluggable",
           "exportName": "PluggableMixin",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "plugins"
@@ -3181,6 +3251,7 @@
           "className": "Ext.mixin.Keyboard",
           "exportName": "KeyboardMixin",
           "parentClassName": "Ext.Mixin",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "keyMap",
@@ -3242,6 +3313,7 @@
         {
           "className": "Ext.mixin.Focusable",
           "exportName": "FocusableMixin",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -3361,6 +3433,7 @@
           "className": "Ext.mixin.Accessible",
           "exportName": "AccessibleMixin",
           "parentClassName": "Ext.Mixin",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "ariaAttributes"
@@ -3382,6 +3455,9 @@
           "className": "Ext.Widget",
           "exportName": "Widget",
           "parentClassName": "Ext.Evented",
+          "alternateClassNames": [
+            "Ext.Gadget"
+          ],
           "classAliases": [
             "widget.widget"
           ],
@@ -3651,6 +3727,7 @@
           "className": "Ext.mixin.Traversable",
           "exportName": "TraversableMixin",
           "parentClassName": "Ext.Mixin",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -3695,6 +3772,7 @@
         {
           "className": "Ext.fx.easing.Abstract",
           "exportName": "AbstractEasingFx",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "startTime",
@@ -3713,6 +3791,7 @@
           "className": "Ext.fx.easing.Linear",
           "exportName": "LinearEasing",
           "parentClassName": "Ext.fx.easing.Abstract",
+          "alternateClassNames": [],
           "classAliases": [
             "easing.linear"
           ],
@@ -3737,6 +3816,7 @@
           "className": "Ext.util.translatable.Abstract",
           "exportName": "AbstractTranslatableUtil",
           "parentClassName": "Ext.Evented",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "easing",
@@ -3806,6 +3886,7 @@
           "className": "Ext.overrides.Widget",
           "exportName": "WidgetOverrides",
           "override": "Ext.Widget",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "alignSelf",
@@ -4143,6 +4224,7 @@
         {
           "className": "Ext.util.Format",
           "exportName": "FormatUtil",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -4233,6 +4315,7 @@
         {
           "className": "Ext.Template",
           "exportName": "Template",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -4291,6 +4374,7 @@
         {
           "className": "Ext.util.XTemplateParser",
           "exportName": "XTemplateParserUtil",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -4343,6 +4427,7 @@
           "className": "Ext.util.XTemplateCompiler",
           "exportName": "XTemplateCompilerUtil",
           "parentClassName": "Ext.util.XTemplateParser",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -4439,6 +4524,7 @@
           "className": "Ext.XTemplate",
           "exportName": "XTemplate",
           "parentClassName": "Ext.Template",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -4461,6 +4547,7 @@
           "className": "Ext.util.translatable.Dom",
           "exportName": "DomTranslatable",
           "parentClassName": "Ext.util.translatable.Abstract",
+          "alternateClassNames": [],
           "classAliases": [
             "translatable.dom"
           ],
@@ -4479,6 +4566,7 @@
           "className": "Ext.util.translatable.CssPosition",
           "exportName": "CssPositionTranslatable",
           "parentClassName": "Ext.util.translatable.Dom",
+          "alternateClassNames": [],
           "classAliases": [
             "translatable.cssposition"
           ],
@@ -4500,6 +4588,7 @@
           "className": "Ext.util.translatable.CssTransform",
           "exportName": "CssTransformTranslatable",
           "parentClassName": "Ext.util.translatable.Dom",
+          "alternateClassNames": [],
           "classAliases": [
             "translatable.csstransform"
           ],
@@ -4522,6 +4611,7 @@
         {
           "className": "Ext.util.CSS",
           "exportName": "CSSUtil",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -4580,6 +4670,7 @@
           "className": "Ext.util.translatable.ScrollPosition",
           "exportName": "ScrollPositionTranslatable",
           "parentClassName": "Ext.util.translatable.Dom",
+          "alternateClassNames": [],
           "classAliases": [
             "translatable.scrollposition"
           ],
@@ -4609,6 +4700,7 @@
           "className": "Ext.scroll.Scroller",
           "exportName": "ScrollerScroller",
           "parentClassName": "Ext.Evented",
+          "alternateClassNames": [],
           "classAliases": [
             "scroller.scroller"
           ],
@@ -4844,6 +4936,10 @@
           "className": "Ext.Component",
           "exportName": "Component",
           "parentClassName": "Ext.Widget",
+          "alternateClassNames": [
+            "Ext.lib.Component",
+            "Ext.Gadget"
+          ],
           "classAliases": [
             "widget.component"
           ],
@@ -5286,6 +5382,7 @@
         {
           "className": "Ext.ProgressBase",
           "exportName": "ProgressBase",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "textTpl",
@@ -5299,6 +5396,10 @@
         {
           "className": "Ext.Progress",
           "exportName": "Progress",
+          "parentClassName": "Ext.Gadget",
+          "alternateClassNames": [
+            "Ext.ProgressBarWidget"
+          ],
           "classAliases": [
             "widget.progress",
             "widget.progressbarwidget"
@@ -5308,7 +5409,6 @@
             "text"
           ],
           "cachedConfigs": [
-            "cls",
             "textCls"
           ],
           "eventedConfigs": [],
@@ -5341,6 +5441,7 @@
         {
           "className": "Ext.fx.State",
           "exportName": "StateFx",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -5362,6 +5463,7 @@
           "className": "Ext.fx.animation.Abstract",
           "exportName": "AbstractAnimationFx",
           "parentClassName": "Ext.Evented",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "after",
@@ -5434,6 +5536,9 @@
           "className": "Ext.fx.animation.Slide",
           "exportName": "SlideAnimation",
           "parentClassName": "Ext.fx.animation.Abstract",
+          "alternateClassNames": [
+            "Ext.fx.animation.SlideIn"
+          ],
           "classAliases": [
             "animation.slide",
             "animation.slideIn"
@@ -5481,6 +5586,7 @@
           "className": "Ext.fx.animation.SlideOut",
           "exportName": "SlideoutAnimation",
           "parentClassName": "Ext.fx.animation.Slide",
+          "alternateClassNames": [],
           "classAliases": [
             "animation.slideOut"
           ],
@@ -5494,6 +5600,9 @@
           "className": "Ext.fx.animation.Fade",
           "exportName": "FadeAnimation",
           "parentClassName": "Ext.fx.animation.Abstract",
+          "alternateClassNames": [
+            "Ext.fx.animation.FadeIn"
+          ],
           "classAliases": [
             "animation.fade",
             "animation.fadeIn"
@@ -5517,6 +5626,7 @@
           "className": "Ext.fx.animation.FadeOut",
           "exportName": "FadeoutAnimation",
           "parentClassName": "Ext.fx.animation.Fade",
+          "alternateClassNames": [],
           "classAliases": [
             "animation.fadeOut"
           ],
@@ -5530,6 +5640,7 @@
           "className": "Ext.fx.animation.Flip",
           "exportName": "FlipAnimation",
           "parentClassName": "Ext.fx.animation.Abstract",
+          "alternateClassNames": [],
           "classAliases": [
             "animation.flip"
           ],
@@ -5555,6 +5666,9 @@
           "className": "Ext.fx.animation.Pop",
           "exportName": "PopAnimation",
           "parentClassName": "Ext.fx.animation.Abstract",
+          "alternateClassNames": [
+            "Ext.fx.animation.PopIn"
+          ],
           "classAliases": [
             "animation.pop",
             "animation.popIn"
@@ -5584,6 +5698,7 @@
           "className": "Ext.fx.animation.PopOut",
           "exportName": "PopoutAnimation",
           "parentClassName": "Ext.fx.animation.Pop",
+          "alternateClassNames": [],
           "classAliases": [
             "animation.popOut"
           ],
@@ -5596,6 +5711,7 @@
         {
           "className": "Ext.fx.Animation",
           "exportName": "AnimationFx",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -5611,6 +5727,7 @@
           "className": "Ext.overrides.Progress",
           "exportName": "ProgressOverrides",
           "override": "Ext.Progress",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -5632,6 +5749,7 @@
         {
           "className": "Ext.app.EventDomain",
           "exportName": "EventDomainApp",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -5671,6 +5789,7 @@
           "className": "Ext.app.domain.Component",
           "exportName": "ComponentDomainApp",
           "parentClassName": "Ext.app.EventDomain",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -5690,6 +5809,7 @@
         {
           "className": "Ext.app.EventBus",
           "exportName": "EventBusApp",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -5707,6 +5827,7 @@
           "className": "Ext.app.domain.Global",
           "exportName": "GlobalDomainApp",
           "parentClassName": "Ext.app.EventDomain",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -5721,6 +5842,7 @@
         {
           "className": "Ext.route.Action",
           "exportName": "ActionRoute",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "actions",
@@ -5781,6 +5903,7 @@
         {
           "className": "Ext.route.Route",
           "exportName": "RouteRoute",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "allowInactive",
@@ -5840,6 +5963,7 @@
           "className": "Ext.util.Observable",
           "exportName": "ObservableUtil",
           "parentClassName": "Ext.mixin.Observable",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -5850,6 +5974,9 @@
         {
           "className": "Ext.util.History",
           "exportName": "HistoryUtil",
+          "alternateClassNames": [
+            "Ext.History"
+          ],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -5887,6 +6014,7 @@
         {
           "className": "Ext.route.Router",
           "exportName": "RouterRoute",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "hashbang",
@@ -5947,6 +6075,7 @@
           "className": "Ext.route.Mixin",
           "exportName": "MixinRoute",
           "parentClassName": "Ext.Mixin",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "routes"
@@ -5986,6 +6115,7 @@
         {
           "className": "Ext.app.BaseController",
           "exportName": "BaseControllerApp",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "control",
@@ -6016,6 +6146,7 @@
         {
           "className": "Ext.app.Util",
           "exportName": "UtilApp",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -6026,6 +6157,7 @@
         {
           "className": "Ext.util.Filter",
           "exportName": "FilterUtil",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "anyMatch",
@@ -6106,6 +6238,7 @@
         {
           "className": "Ext.util.AbstractMixedCollection",
           "exportName": "AbstractMixedCollectionUtil",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -6204,6 +6337,7 @@
         {
           "className": "Ext.util.Sorter",
           "exportName": "SorterUtil",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "direction",
@@ -6240,6 +6374,7 @@
         {
           "className": "Ext.util.Sortable",
           "exportName": "SortableUtil",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "sorters"
@@ -6292,6 +6427,7 @@
           "className": "Ext.util.MixedCollection",
           "exportName": "MixedCollectionUtil",
           "parentClassName": "Ext.util.AbstractMixedCollection",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -6324,6 +6460,7 @@
         {
           "className": "Ext.util.CollectionKey",
           "exportName": "CollectionKeyUtil",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "collection",
@@ -6376,6 +6513,7 @@
           "className": "Ext.util.Grouper",
           "exportName": "GrouperUtil",
           "parentClassName": "Ext.util.Sorter",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "groupFn",
@@ -6401,6 +6539,7 @@
         {
           "className": "Ext.util.Collection",
           "exportName": "CollectionUtil",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "autoFilter",
@@ -6718,6 +6857,7 @@
         {
           "className": "Ext.data.Range",
           "exportName": "RangeData",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -6739,6 +6879,7 @@
         {
           "className": "Ext.util.ObjectTemplate",
           "exportName": "ObjectTemplateUtil",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -6767,6 +6908,7 @@
         {
           "className": "Ext.data.schema.Role",
           "exportName": "RoleSchemaData",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -6864,6 +7006,7 @@
         {
           "className": "Ext.data.schema.Association",
           "exportName": "AssociationSchemaData",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -6877,6 +7020,7 @@
           "className": "Ext.data.schema.OneToOne",
           "exportName": "OneToOneSchemaData",
           "parentClassName": "Ext.data.schema.Association",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -6929,6 +7073,7 @@
           "className": "Ext.data.schema.ManyToOne",
           "exportName": "ManyToOneSchemaData",
           "parentClassName": "Ext.data.schema.Association",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -7020,6 +7165,7 @@
           "className": "Ext.data.schema.ManyToMany",
           "exportName": "ManyToManySchemaData",
           "parentClassName": "Ext.data.schema.Association",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -7078,6 +7224,7 @@
         {
           "className": "Ext.util.Inflector",
           "exportName": "InflectorUtil",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -7101,6 +7248,7 @@
         {
           "className": "Ext.data.schema.Namer",
           "exportName": "DefaultNamer",
+          "alternateClassNames": [],
           "classAliases": [
             "namer.default"
           ],
@@ -7151,6 +7299,7 @@
         {
           "className": "Ext.data.schema.Schema",
           "exportName": "DefaultSchema",
+          "alternateClassNames": [],
           "classAliases": [
             "schema.default"
           ],
@@ -7301,6 +7450,7 @@
         {
           "className": "Ext.data.AbstractStore",
           "exportName": "AbstractStoreData",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "autoDestroy",
@@ -7481,6 +7631,7 @@
         {
           "className": "Ext.data.Error",
           "exportName": "ErrorData",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "field",
@@ -7497,6 +7648,9 @@
           "className": "Ext.data.ErrorCollection",
           "exportName": "ErrorCollectionData",
           "parentClassName": "Ext.util.MixedCollection",
+          "alternateClassNames": [
+            "Ext.data.Errors"
+          ],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -7518,6 +7672,9 @@
         {
           "className": "Ext.data.operation.Operation",
           "exportName": "OperationOperationData",
+          "alternateClassNames": [
+            "Ext.data.Operation"
+          ],
           "classAliases": [],
           "configs": [
             "batch",
@@ -7590,6 +7747,7 @@
           "className": "Ext.data.operation.Create",
           "exportName": "CreateDataOperation",
           "parentClassName": "Ext.data.operation.Operation",
+          "alternateClassNames": [],
           "classAliases": [
             "data.operation.create"
           ],
@@ -7606,6 +7764,7 @@
           "className": "Ext.data.operation.Destroy",
           "exportName": "DestroyDataOperation",
           "parentClassName": "Ext.data.operation.Operation",
+          "alternateClassNames": [],
           "classAliases": [
             "data.operation.destroy"
           ],
@@ -7625,6 +7784,7 @@
           "className": "Ext.data.operation.Read",
           "exportName": "ReadDataOperation",
           "parentClassName": "Ext.data.operation.Operation",
+          "alternateClassNames": [],
           "classAliases": [
             "data.operation.read"
           ],
@@ -7649,6 +7809,7 @@
           "className": "Ext.data.operation.Update",
           "exportName": "UpdateDataOperation",
           "parentClassName": "Ext.data.operation.Operation",
+          "alternateClassNames": [],
           "classAliases": [
             "data.operation.update"
           ],
@@ -7664,6 +7825,7 @@
         {
           "className": "Ext.data.SortTypes",
           "exportName": "SortTypesData",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -7694,6 +7856,7 @@
         {
           "className": "Ext.data.validator.Validator",
           "exportName": "BaseDataValidator",
+          "alternateClassNames": [],
           "classAliases": [
             "data.validator.base"
           ],
@@ -7709,6 +7872,9 @@
         {
           "className": "Ext.data.field.Field",
           "exportName": "AutoDataField",
+          "alternateClassNames": [
+            "Ext.data.Field"
+          ],
           "classAliases": [
             "data.field.auto"
           ],
@@ -7753,6 +7919,7 @@
           "className": "Ext.data.field.Boolean",
           "exportName": "BoolDataField",
           "parentClassName": "Ext.data.field.Field",
+          "alternateClassNames": [],
           "classAliases": [
             "data.field.bool",
             "data.field.boolean"
@@ -7770,6 +7937,7 @@
           "className": "Ext.data.field.Date",
           "exportName": "DateDataField",
           "parentClassName": "Ext.data.field.Field",
+          "alternateClassNames": [],
           "classAliases": [
             "data.field.date"
           ],
@@ -7793,6 +7961,7 @@
           "className": "Ext.data.field.Integer",
           "exportName": "IntDataField",
           "parentClassName": "Ext.data.field.Field",
+          "alternateClassNames": [],
           "classAliases": [
             "data.field.int",
             "data.field.integer"
@@ -7815,6 +7984,7 @@
           "className": "Ext.data.field.Number",
           "exportName": "FloatDataField",
           "parentClassName": "Ext.data.field.Integer",
+          "alternateClassNames": [],
           "classAliases": [
             "data.field.float",
             "data.field.number"
@@ -7833,6 +8003,7 @@
           "className": "Ext.data.field.String",
           "exportName": "StringDataField",
           "parentClassName": "Ext.data.field.Field",
+          "alternateClassNames": [],
           "classAliases": [
             "data.field.string"
           ],
@@ -7847,6 +8018,7 @@
         {
           "className": "Ext.data.identifier.Generator",
           "exportName": "DefaultDataIdentifier",
+          "alternateClassNames": [],
           "classAliases": [
             "data.identifier.default"
           ],
@@ -7867,6 +8039,7 @@
           "className": "Ext.data.identifier.Sequential",
           "exportName": "SequentialDataIdentifier",
           "parentClassName": "Ext.data.identifier.Generator",
+          "alternateClassNames": [],
           "classAliases": [
             "data.identifier.sequential"
           ],
@@ -7883,6 +8056,9 @@
         {
           "className": "Ext.data.Model",
           "exportName": "ModelData",
+          "alternateClassNames": [
+            "Ext.data.Record"
+          ],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -8127,6 +8303,7 @@
         {
           "className": "Ext.data.ResultSet",
           "exportName": "ResultSetData",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "count",
@@ -8152,6 +8329,10 @@
         {
           "className": "Ext.data.reader.Reader",
           "exportName": "BaseReader",
+          "alternateClassNames": [
+            "Ext.data.Reader",
+            "Ext.data.DataReader"
+          ],
           "classAliases": [
             "reader.base"
           ],
@@ -8288,6 +8469,10 @@
         {
           "className": "Ext.data.writer.Writer",
           "exportName": "BaseWriter",
+          "alternateClassNames": [
+            "Ext.data.DataWriter",
+            "Ext.data.Writer"
+          ],
           "classAliases": [
             "writer.base"
           ],
@@ -8331,6 +8516,10 @@
         {
           "className": "Ext.data.proxy.Proxy",
           "exportName": "ProxyProxy",
+          "alternateClassNames": [
+            "Ext.data.DataProxy",
+            "Ext.data.Proxy"
+          ],
           "classAliases": [
             "proxy.proxy"
           ],
@@ -8392,6 +8581,9 @@
           "className": "Ext.data.proxy.Client",
           "exportName": "ClientProxyData",
           "parentClassName": "Ext.data.proxy.Proxy",
+          "alternateClassNames": [
+            "Ext.data.ClientProxy"
+          ],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -8405,6 +8597,9 @@
           "className": "Ext.data.proxy.Memory",
           "exportName": "MemoryProxy",
           "parentClassName": "Ext.data.proxy.Client",
+          "alternateClassNames": [
+            "Ext.data.MemoryProxy"
+          ],
           "classAliases": [
             "proxy.memory"
           ],
@@ -8458,6 +8653,7 @@
           "className": "Ext.data.ProxyStore",
           "exportName": "ProxyStoreData",
           "parentClassName": "Ext.data.AbstractStore",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "asynchronousLoad",
@@ -8619,6 +8815,7 @@
           "className": "Ext.util.Group",
           "exportName": "GroupUtil",
           "parentClassName": "Ext.util.Collection",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "groupKey"
@@ -8632,6 +8829,7 @@
           "className": "Ext.data.Group",
           "exportName": "GroupData",
           "parentClassName": "Ext.util.Group",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -8648,6 +8846,7 @@
           "className": "Ext.data.LocalStore",
           "exportName": "LocalStoreData",
           "parentClassName": "Ext.Mixin",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "extraKeys"
@@ -8768,6 +8967,9 @@
           "className": "Ext.data.proxy.Server",
           "exportName": "ServerProxy",
           "parentClassName": "Ext.data.proxy.Proxy",
+          "alternateClassNames": [
+            "Ext.data.ServerProxy"
+          ],
           "classAliases": [
             "proxy.server"
           ],
@@ -8887,6 +9089,10 @@
           "className": "Ext.data.proxy.Ajax",
           "exportName": "AjaxProxy",
           "parentClassName": "Ext.data.proxy.Server",
+          "alternateClassNames": [
+            "Ext.data.HttpProxy",
+            "Ext.data.AjaxProxy"
+          ],
           "classAliases": [
             "proxy.ajax"
           ],
@@ -8944,6 +9150,9 @@
           "className": "Ext.data.reader.Json",
           "exportName": "JsonReader",
           "parentClassName": "Ext.data.reader.Reader",
+          "alternateClassNames": [
+            "Ext.data.JsonReader"
+          ],
           "classAliases": [
             "reader.json"
           ],
@@ -8996,6 +9205,9 @@
           "className": "Ext.data.writer.Json",
           "exportName": "JsonWriter",
           "parentClassName": "Ext.data.writer.Writer",
+          "alternateClassNames": [
+            "Ext.data.JsonWriter"
+          ],
           "classAliases": [
             "writer.json"
           ],
@@ -9035,6 +9247,7 @@
           "className": "Ext.util.SorterCollection",
           "exportName": "SorterCollectionUtil",
           "parentClassName": "Ext.util.Collection",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "sorterOptionsFn",
@@ -9100,6 +9313,7 @@
           "className": "Ext.util.FilterCollection",
           "exportName": "FilterCollectionUtil",
           "parentClassName": "Ext.util.Collection",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -9136,6 +9350,7 @@
           "className": "Ext.util.GroupCollection",
           "exportName": "GroupCollectionUtil",
           "parentClassName": "Ext.util.Collection",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "itemRoot"
@@ -9242,6 +9457,7 @@
           "className": "Ext.data.Store",
           "exportName": "StoreStore",
           "parentClassName": "Ext.data.ProxyStore",
+          "alternateClassNames": [],
           "classAliases": [
             "store.store"
           ],
@@ -9475,6 +9691,9 @@
           "className": "Ext.data.reader.Array",
           "exportName": "ArrayReader",
           "parentClassName": "Ext.data.reader.Json",
+          "alternateClassNames": [
+            "Ext.data.ArrayReader"
+          ],
           "classAliases": [
             "reader.array"
           ],
@@ -9491,6 +9710,9 @@
           "className": "Ext.data.ArrayStore",
           "exportName": "ArrayStore",
           "parentClassName": "Ext.data.Store",
+          "alternateClassNames": [
+            "Ext.data.SimpleStore"
+          ],
           "classAliases": [
             "store.array"
           ],
@@ -9506,6 +9728,11 @@
           "className": "Ext.data.StoreManager",
           "exportName": "StoreManagerData",
           "parentClassName": "Ext.util.MixedCollection",
+          "alternateClassNames": [
+            "Ext.StoreMgr",
+            "Ext.data.StoreMgr",
+            "Ext.StoreManager"
+          ],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -9534,6 +9761,7 @@
           "className": "Ext.app.domain.Store",
           "exportName": "StoreDomainApp",
           "parentClassName": "Ext.app.EventDomain",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -9552,6 +9780,7 @@
           "className": "Ext.app.Controller",
           "exportName": "ControllerApp",
           "parentClassName": "Ext.app.BaseController",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "active",
@@ -9651,6 +9880,7 @@
           "className": "Ext.app.Application",
           "exportName": "ApplicationApp",
           "parentClassName": "Ext.app.Controller",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "appProperty",
@@ -9757,6 +9987,9 @@
           "className": "Ext.util.ItemCollection",
           "exportName": "ItemCollectionUtil",
           "parentClassName": "Ext.util.MixedCollection",
+          "alternateClassNames": [
+            "Ext.ItemCollection"
+          ],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -9771,6 +10004,7 @@
         {
           "className": "Ext.mixin.Queryable",
           "exportName": "QueryableMixin",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -9805,6 +10039,7 @@
           "className": "Ext.mixin.Container",
           "exportName": "ContainerMixin",
           "parentClassName": "Ext.Mixin",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -9834,6 +10069,9 @@
         {
           "className": "Ext.util.KeyMap",
           "exportName": "KeyMapUtil",
+          "alternateClassNames": [
+            "Ext.KeyMap"
+          ],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -9896,6 +10134,9 @@
         {
           "className": "Ext.util.KeyNav",
           "exportName": "KeyNavUtil",
+          "alternateClassNames": [
+            "Ext.KeyNav"
+          ],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -9928,6 +10169,7 @@
           "className": "Ext.mixin.FocusableContainer",
           "exportName": "FocusableContainerMixin",
           "parentClassName": "Ext.Mixin",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -10017,6 +10259,10 @@
           "className": "Ext.Container",
           "exportName": "Container",
           "parentClassName": "Ext.Component",
+          "alternateClassNames": [
+            "Ext.lib.Container",
+            "Ext.container.Container"
+          ],
           "classAliases": [
             "widget.container"
           ],
@@ -10311,6 +10557,7 @@
           "className": "Ext.mixin.Hookable",
           "exportName": "HookableMixin",
           "parentClassName": "Ext.Mixin",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -10324,6 +10571,7 @@
         {
           "className": "Ext.util.Wrapper",
           "exportName": "WrapperUtil",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -10350,6 +10598,7 @@
         {
           "className": "Ext.layout.wrapper.BoxDock",
           "exportName": "BoxDockWrapperLayout",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "container",
@@ -10415,6 +10664,7 @@
         {
           "className": "Ext.layout.wrapper.Inner",
           "exportName": "InnerWrapperLayout",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "container",
@@ -10431,6 +10681,9 @@
         {
           "className": "Ext.layout.Auto",
           "exportName": "DefaultLayout",
+          "alternateClassNames": [
+            "Ext.layout.Default"
+          ],
           "classAliases": [
             "layout.default",
             "layout.auto"
@@ -10600,6 +10853,7 @@
           "className": "Ext.Indicator",
           "exportName": "Indicator",
           "parentClassName": "Ext.Component",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.indicator"
           ],
@@ -10654,6 +10908,7 @@
           "className": "Ext.layout.card.fx.Abstract",
           "exportName": "AbstractLayoutCardFx",
           "parentClassName": "Ext.Evented",
+          "alternateClassNames": [],
           "classAliases": [
             "layout.card.fx.abstract"
           ],
@@ -10685,6 +10940,7 @@
           "className": "Ext.layout.card.fx.Style",
           "exportName": "StyleFxCardLayout",
           "parentClassName": "Ext.layout.card.fx.Abstract",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "inAnimation",
@@ -10738,6 +10994,7 @@
           "className": "Ext.layout.card.fx.Cover",
           "exportName": "CoverLayoutCardFx",
           "parentClassName": "Ext.layout.card.fx.Style",
+          "alternateClassNames": [],
           "classAliases": [
             "layout.card.fx.cover"
           ],
@@ -10751,6 +11008,7 @@
           "className": "Ext.layout.card.fx.Cube",
           "exportName": "CubeLayoutCardFx",
           "parentClassName": "Ext.layout.card.fx.Style",
+          "alternateClassNames": [],
           "classAliases": [
             "layout.card.fx.cube"
           ],
@@ -10764,6 +11022,7 @@
           "className": "Ext.layout.card.fx.Serial",
           "exportName": "SerialFxCardLayout",
           "parentClassName": "Ext.layout.card.fx.Style",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -10781,6 +11040,7 @@
           "className": "Ext.layout.card.fx.Fade",
           "exportName": "FadeLayoutCardFx",
           "parentClassName": "Ext.layout.card.fx.Serial",
+          "alternateClassNames": [],
           "classAliases": [
             "layout.card.fx.fade"
           ],
@@ -10794,6 +11054,7 @@
           "className": "Ext.layout.card.fx.Flip",
           "exportName": "FlipLayoutCardFx",
           "parentClassName": "Ext.layout.card.fx.Serial",
+          "alternateClassNames": [],
           "classAliases": [
             "layout.card.fx.flip"
           ],
@@ -10813,6 +11074,7 @@
           "className": "Ext.layout.card.fx.Pop",
           "exportName": "PopLayoutCardFx",
           "parentClassName": "Ext.layout.card.fx.Serial",
+          "alternateClassNames": [],
           "classAliases": [
             "layout.card.fx.pop"
           ],
@@ -10826,6 +11088,7 @@
           "className": "Ext.layout.card.fx.Reveal",
           "exportName": "RevealLayoutCardFx",
           "parentClassName": "Ext.layout.card.fx.Style",
+          "alternateClassNames": [],
           "classAliases": [
             "layout.card.fx.reveal"
           ],
@@ -10839,6 +11102,7 @@
           "className": "Ext.layout.card.fx.Scroll",
           "exportName": "ScrollLayoutCardFx",
           "parentClassName": "Ext.layout.card.fx.Abstract",
+          "alternateClassNames": [],
           "classAliases": [
             "layout.card.fx.scroll"
           ],
@@ -10889,6 +11153,7 @@
           "className": "Ext.layout.card.fx.ScrollCover",
           "exportName": "ScrollCoverLayoutCardFx",
           "parentClassName": "Ext.layout.card.fx.Scroll",
+          "alternateClassNames": [],
           "classAliases": [
             "layout.card.fx.scrollcover"
           ],
@@ -10926,6 +11191,7 @@
           "className": "Ext.layout.card.fx.ScrollReveal",
           "exportName": "ScrollRevealLayoutCardFx",
           "parentClassName": "Ext.layout.card.fx.Scroll",
+          "alternateClassNames": [],
           "classAliases": [
             "layout.card.fx.scrollreveal"
           ],
@@ -10961,6 +11227,7 @@
           "className": "Ext.layout.card.fx.Slide",
           "exportName": "SlideLayoutCardFx",
           "parentClassName": "Ext.layout.card.fx.Style",
+          "alternateClassNames": [],
           "classAliases": [
             "layout.card.fx.slide"
           ],
@@ -10974,6 +11241,7 @@
           "className": "Ext.layout.Card",
           "exportName": "CardLayout",
           "parentClassName": "Ext.layout.Auto",
+          "alternateClassNames": [],
           "classAliases": [
             "layout.card"
           ],
@@ -11065,6 +11333,7 @@
         {
           "className": "Ext.util.InputBlocker",
           "exportName": "InputBlockerUtil",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -11085,6 +11354,7 @@
           "className": "Ext.viewport.Default",
           "exportName": "Viewport",
           "parentClassName": "Ext.Container",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.viewport"
           ],
@@ -11346,6 +11616,7 @@
           "className": "Ext.viewport.Ios",
           "exportName": "IosViewport",
           "parentClassName": "Ext.viewport.Default",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -11382,6 +11653,7 @@
           "className": "Ext.viewport.Android",
           "exportName": "AndroidViewport",
           "parentClassName": "Ext.viewport.Default",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "translatable"
@@ -11430,6 +11702,9 @@
           "className": "Ext.viewport.WindowsPhone",
           "exportName": "WindowsPhoneViewport",
           "parentClassName": "Ext.viewport.Default",
+          "alternateClassNames": [
+            "Ext.viewport.WP"
+          ],
           "classAliases": [],
           "configs": [
             "translatable"
@@ -11457,6 +11732,7 @@
         {
           "className": "Ext.viewport.Viewport",
           "exportName": "ViewportViewport",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -11470,6 +11746,7 @@
           "className": "Ext.overrides.app.Application",
           "exportName": "ApplicationAppOverrides",
           "override": "Ext.app.Application",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "viewport"
@@ -11490,6 +11767,7 @@
         {
           "className": "Ext.app.Profile",
           "exportName": "ProfileApp",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "application",
@@ -11527,6 +11805,7 @@
           "className": "Ext.app.domain.View",
           "exportName": "ViewDomainApp",
           "parentClassName": "Ext.app.EventDomain",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -11543,6 +11822,7 @@
           "className": "Ext.app.ViewController",
           "exportName": "ControllerController",
           "parentClassName": "Ext.app.BaseController",
+          "alternateClassNames": [],
           "classAliases": [
             "controller.controller"
           ],
@@ -11591,6 +11871,7 @@
         {
           "className": "Ext.util.Bag",
           "exportName": "BagUtil",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -11633,6 +11914,7 @@
         {
           "className": "Ext.util.Scheduler",
           "exportName": "SchedulerUtil",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "cycleLimit",
@@ -11704,6 +11986,7 @@
         {
           "className": "Ext.data.Batch",
           "exportName": "BatchData",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "pauseOnException"
@@ -11739,6 +12022,7 @@
         {
           "className": "Ext.data.matrix.Slice",
           "exportName": "SliceMatrixData",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -11759,6 +12043,7 @@
         {
           "className": "Ext.data.matrix.Side",
           "exportName": "SideMatrixData",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -11777,6 +12062,7 @@
         {
           "className": "Ext.data.matrix.Matrix",
           "exportName": "MatrixMatrixData",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -11798,6 +12084,7 @@
         {
           "className": "Ext.data.session.ChangesVisitor",
           "exportName": "ChangesVisitorSessionData",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -11822,6 +12109,7 @@
           "className": "Ext.data.session.ChildChangesVisitor",
           "exportName": "ChildChangesVisitorSessionData",
           "parentClassName": "Ext.data.session.ChangesVisitor",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -11839,6 +12127,7 @@
         {
           "className": "Ext.data.session.BatchVisitor",
           "exportName": "BatchVisitorSessionData",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -11858,6 +12147,7 @@
         {
           "className": "Ext.mixin.Dirty",
           "exportName": "DirtyMixin",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "dirty"
@@ -11880,6 +12170,7 @@
         {
           "className": "Ext.data.Session",
           "exportName": "SessionData",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "autoDestroy",
@@ -12055,6 +12346,7 @@
         {
           "className": "Ext.util.Schedulable",
           "exportName": "SchedulableUtil",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -12077,6 +12369,7 @@
           "className": "Ext.app.bind.BaseBinding",
           "exportName": "BaseBindingBindApp",
           "parentClassName": "Ext.util.Schedulable",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -12103,6 +12396,7 @@
           "className": "Ext.app.bind.Binding",
           "exportName": "BindingBindApp",
           "parentClassName": "Ext.app.bind.BaseBinding",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -12137,6 +12431,7 @@
           "className": "Ext.app.bind.AbstractStub",
           "exportName": "AbstractStubBindApp",
           "parentClassName": "Ext.util.Schedulable",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -12171,6 +12466,7 @@
           "className": "Ext.app.bind.Stub",
           "exportName": "StubBindApp",
           "parentClassName": "Ext.app.bind.AbstractStub",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -12272,6 +12568,7 @@
           "className": "Ext.app.bind.LinkStub",
           "exportName": "LinkStubBindApp",
           "parentClassName": "Ext.app.bind.Stub",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -12303,6 +12600,7 @@
           "className": "Ext.app.bind.RootStub",
           "exportName": "RootStubBindApp",
           "parentClassName": "Ext.app.bind.AbstractStub",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -12347,6 +12645,7 @@
           "className": "Ext.app.bind.Multi",
           "exportName": "MultiBindApp",
           "parentClassName": "Ext.app.bind.BaseBinding",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -12387,6 +12686,7 @@
           "className": "Ext.app.bind.Formula",
           "exportName": "FormulaBindApp",
           "parentClassName": "Ext.util.Schedulable",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -12427,6 +12727,7 @@
         {
           "className": "Ext.util.Fly",
           "exportName": "FlyUtil",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -12443,6 +12744,7 @@
           "className": "Ext.parse.Tokenizer",
           "exportName": "TokenizerParse",
           "parentClassName": "Ext.util.Fly",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "keywords",
@@ -12494,6 +12796,7 @@
         {
           "className": "Ext.parse.Symbol",
           "exportName": "SymbolParse",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -12514,6 +12817,7 @@
           "className": "Ext.parse.symbol.Constant",
           "exportName": "ConstantSymbolParse",
           "parentClassName": "Ext.parse.Symbol",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -12527,6 +12831,7 @@
           "className": "Ext.parse.symbol.Infix",
           "exportName": "InfixSymbolParse",
           "parentClassName": "Ext.parse.Symbol",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -12540,6 +12845,7 @@
           "className": "Ext.parse.symbol.InfixRight",
           "exportName": "InfixRightSymbolParse",
           "parentClassName": "Ext.parse.symbol.Infix",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -12553,6 +12859,7 @@
           "className": "Ext.parse.symbol.Paren",
           "exportName": "ParenSymbolParse",
           "parentClassName": "Ext.parse.Symbol",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -12572,6 +12879,7 @@
           "className": "Ext.parse.symbol.Prefix",
           "exportName": "PrefixSymbolParse",
           "parentClassName": "Ext.parse.Symbol",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -12585,6 +12893,7 @@
           "className": "Ext.parse.Parser",
           "exportName": "ParserParse",
           "parentClassName": "Ext.util.Fly",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "constants",
@@ -12627,6 +12936,7 @@
           "className": "Ext.app.bind.Parser",
           "exportName": "ParserBindApp",
           "parentClassName": "Ext.parse.Parser",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -12699,6 +13009,7 @@
         {
           "className": "Ext.app.bind.Template",
           "exportName": "TemplateBindApp",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -12727,6 +13038,7 @@
           "className": "Ext.app.bind.TemplateBinding",
           "exportName": "TemplateBindingBindApp",
           "parentClassName": "Ext.app.bind.BaseBinding",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -12757,6 +13069,7 @@
           "className": "Ext.data.ChainedStore",
           "exportName": "ChainedStore",
           "parentClassName": "Ext.data.AbstractStore",
+          "alternateClassNames": [],
           "classAliases": [
             "store.chained"
           ],
@@ -12836,6 +13149,7 @@
         {
           "className": "Ext.app.ViewModel",
           "exportName": "DefaultViewmodel",
+          "alternateClassNames": [],
           "classAliases": [
             "viewmodel.default"
           ],
@@ -12979,6 +13293,7 @@
           "className": "Ext.app.domain.Controller",
           "exportName": "ControllerDomainApp",
           "parentClassName": "Ext.app.EventDomain",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -12996,6 +13311,7 @@
         {
           "className": "Ext.direct.Manager",
           "exportName": "ManagerDirect",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "varName"
@@ -13059,6 +13375,7 @@
         {
           "className": "Ext.direct.Provider",
           "exportName": "ProviderDirect",
+          "alternateClassNames": [],
           "classAliases": [
             "direct.provider"
           ],
@@ -13087,6 +13404,7 @@
           "className": "Ext.app.domain.Direct",
           "exportName": "DirectDomainApp",
           "parentClassName": "Ext.app.EventDomain",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -13101,6 +13419,7 @@
           "className": "Ext.data.PageMap",
           "exportName": "PageMapData",
           "parentClassName": "Ext.util.LruCache",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "pageSize",
@@ -13174,6 +13493,7 @@
           "className": "Ext.data.BufferedStore",
           "exportName": "BufferedStore",
           "parentClassName": "Ext.data.ProxyStore",
+          "alternateClassNames": [],
           "classAliases": [
             "store.buffered"
           ],
@@ -13437,6 +13757,9 @@
           "className": "Ext.data.proxy.Direct",
           "exportName": "DirectProxy",
           "parentClassName": "Ext.data.proxy.Server",
+          "alternateClassNames": [
+            "Ext.data.DirectProxy"
+          ],
           "classAliases": [
             "proxy.direct"
           ],
@@ -13491,6 +13814,7 @@
           "className": "Ext.data.DirectStore",
           "exportName": "DirectStore",
           "parentClassName": "Ext.data.Store",
+          "alternateClassNames": [],
           "classAliases": [
             "store.direct"
           ],
@@ -13508,6 +13832,7 @@
         {
           "className": "Ext.data.JsonP",
           "exportName": "JsonPData",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -13555,6 +13880,9 @@
           "className": "Ext.data.proxy.JsonP",
           "exportName": "JsonpProxy",
           "parentClassName": "Ext.data.proxy.Server",
+          "alternateClassNames": [
+            "Ext.data.ScriptTagProxy"
+          ],
           "classAliases": [
             "proxy.jsonp",
             "proxy.scripttag"
@@ -13609,6 +13937,7 @@
           "className": "Ext.data.JsonPStore",
           "exportName": "JsonpStore",
           "parentClassName": "Ext.data.Store",
+          "alternateClassNames": [],
           "classAliases": [
             "store.jsonp"
           ],
@@ -13625,6 +13954,7 @@
           "className": "Ext.data.JsonStore",
           "exportName": "JsonStore",
           "parentClassName": "Ext.data.Store",
+          "alternateClassNames": [],
           "classAliases": [
             "store.json"
           ],
@@ -13640,6 +13970,9 @@
         {
           "className": "Ext.data.ModelManager",
           "exportName": "ModelManagerData",
+          "alternateClassNames": [
+            "Ext.ModelMgr"
+          ],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -13657,6 +13990,7 @@
         {
           "className": "Ext.data.NodeInterface",
           "exportName": "NodeInterfaceData",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -13958,6 +14292,7 @@
           "className": "Ext.data.TreeModel",
           "exportName": "TreeModelData",
           "parentClassName": "Ext.data.Model",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -13969,6 +14304,7 @@
           "className": "Ext.data.NodeStore",
           "exportName": "NodeStore",
           "parentClassName": "Ext.data.Store",
+          "alternateClassNames": [],
           "classAliases": [
             "store.node"
           ],
@@ -14040,6 +14376,7 @@
         {
           "className": "Ext.data.Request",
           "exportName": "RequestData",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "action",
@@ -14080,6 +14417,7 @@
           "className": "Ext.data.TreeStore",
           "exportName": "TreeStore",
           "parentClassName": "Ext.data.Store",
+          "alternateClassNames": [],
           "classAliases": [
             "store.tree"
           ],
@@ -14510,6 +14848,7 @@
         {
           "className": "Ext.data.Types",
           "exportName": "TypesData",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -14521,6 +14860,7 @@
           "className": "Ext.data.Validation",
           "exportName": "ValidationData",
           "parentClassName": "Ext.data.Model",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -14535,6 +14875,10 @@
         {
           "className": "Ext.dom.Helper",
           "exportName": "HelperDom",
+          "alternateClassNames": [
+            "Ext.DomHelper",
+            "Ext.core.DomHelper"
+          ],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -14616,6 +14960,10 @@
         {
           "className": "Ext.dom.Query",
           "exportName": "QueryDom",
+          "alternateClassNames": [
+            "Ext.core.DomQuery",
+            "Ext.DomQuery"
+          ],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -14718,6 +15066,9 @@
           "className": "Ext.data.reader.Xml",
           "exportName": "XmlReader",
           "parentClassName": "Ext.data.reader.Reader",
+          "alternateClassNames": [
+            "Ext.data.XmlReader"
+          ],
           "classAliases": [
             "reader.xml"
           ],
@@ -14763,6 +15114,9 @@
           "className": "Ext.data.writer.Xml",
           "exportName": "XmlWriter",
           "parentClassName": "Ext.data.writer.Writer",
+          "alternateClassNames": [
+            "Ext.data.XmlWriter"
+          ],
           "classAliases": [
             "writer.xml"
           ],
@@ -14807,6 +15161,7 @@
           "className": "Ext.data.XmlStore",
           "exportName": "XmlStore",
           "parentClassName": "Ext.data.Store",
+          "alternateClassNames": [],
           "classAliases": [
             "store.xml"
           ],
@@ -14823,6 +15178,7 @@
           "className": "Ext.data.identifier.Negative",
           "exportName": "NegativeDataIdentifier",
           "parentClassName": "Ext.data.identifier.Sequential",
+          "alternateClassNames": [],
           "classAliases": [
             "data.identifier.negative"
           ],
@@ -14836,6 +15192,7 @@
           "className": "Ext.data.identifier.Uuid",
           "exportName": "UuidDataIdentifier",
           "parentClassName": "Ext.data.identifier.Generator",
+          "alternateClassNames": [],
           "classAliases": [
             "data.identifier.uuid"
           ],
@@ -14875,6 +15232,9 @@
           "className": "Ext.data.proxy.WebStorage",
           "exportName": "WebStorageProxyData",
           "parentClassName": "Ext.data.proxy.Client",
+          "alternateClassNames": [
+            "Ext.data.WebStorageProxy"
+          ],
           "classAliases": [],
           "configs": [
             "id"
@@ -15022,6 +15382,9 @@
           "className": "Ext.data.proxy.LocalStorage",
           "exportName": "LocalStorageProxy",
           "parentClassName": "Ext.data.proxy.WebStorage",
+          "alternateClassNames": [
+            "Ext.data.LocalStorageProxy"
+          ],
           "classAliases": [
             "proxy.localstorage"
           ],
@@ -15035,6 +15398,9 @@
           "className": "Ext.data.proxy.Rest",
           "exportName": "RestProxy",
           "parentClassName": "Ext.data.proxy.Ajax",
+          "alternateClassNames": [
+            "Ext.data.RestProxy"
+          ],
           "classAliases": [
             "proxy.rest"
           ],
@@ -15067,6 +15433,9 @@
           "className": "Ext.data.proxy.SessionStorage",
           "exportName": "SessionStorageProxy",
           "parentClassName": "Ext.data.proxy.WebStorage",
+          "alternateClassNames": [
+            "Ext.data.SessionStorageProxy"
+          ],
           "classAliases": [
             "proxy.sessionstorage"
           ],
@@ -15079,6 +15448,7 @@
         {
           "className": "Ext.data.summary.Base",
           "exportName": "BaseDataSummary",
+          "alternateClassNames": [],
           "classAliases": [
             "data.summary.base"
           ],
@@ -15095,6 +15465,7 @@
           "className": "Ext.data.summary.Sum",
           "exportName": "SumDataSummary",
           "parentClassName": "Ext.data.summary.Base",
+          "alternateClassNames": [],
           "classAliases": [
             "data.summary.sum"
           ],
@@ -15110,6 +15481,7 @@
           "className": "Ext.data.summary.Average",
           "exportName": "AverageDataSummary",
           "parentClassName": "Ext.data.summary.Sum",
+          "alternateClassNames": [],
           "classAliases": [
             "data.summary.average"
           ],
@@ -15125,6 +15497,7 @@
           "className": "Ext.data.summary.Count",
           "exportName": "CountDataSummary",
           "parentClassName": "Ext.data.summary.Base",
+          "alternateClassNames": [],
           "classAliases": [
             "data.summary.count"
           ],
@@ -15138,6 +15511,7 @@
           "className": "Ext.data.summary.Max",
           "exportName": "MaxDataSummary",
           "parentClassName": "Ext.data.summary.Base",
+          "alternateClassNames": [],
           "classAliases": [
             "data.summary.max"
           ],
@@ -15154,6 +15528,7 @@
           "className": "Ext.data.summary.Min",
           "exportName": "MinDataSummary",
           "parentClassName": "Ext.data.summary.Base",
+          "alternateClassNames": [],
           "classAliases": [
             "data.summary.min"
           ],
@@ -15170,6 +15545,7 @@
           "className": "Ext.data.validator.AbstractDate",
           "exportName": "AbstractDateValidatorData",
           "parentClassName": "Ext.data.validator.Validator",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "format",
@@ -15192,6 +15568,7 @@
           "className": "Ext.data.validator.Bound",
           "exportName": "BoundDataValidator",
           "parentClassName": "Ext.data.validator.Validator",
+          "alternateClassNames": [],
           "classAliases": [
             "data.validator.bound"
           ],
@@ -15229,6 +15606,7 @@
           "className": "Ext.data.validator.Format",
           "exportName": "FormatDataValidator",
           "parentClassName": "Ext.data.validator.Validator",
+          "alternateClassNames": [],
           "classAliases": [
             "data.validator.format"
           ],
@@ -15252,6 +15630,7 @@
           "className": "Ext.data.validator.CIDRv4",
           "exportName": "Cidrv4DataValidator",
           "parentClassName": "Ext.data.validator.Format",
+          "alternateClassNames": [],
           "classAliases": [
             "data.validator.cidrv4"
           ],
@@ -15265,6 +15644,7 @@
           "className": "Ext.data.validator.CIDRv6",
           "exportName": "Cidrv6DataValidator",
           "parentClassName": "Ext.data.validator.Format",
+          "alternateClassNames": [],
           "classAliases": [
             "data.validator.cidrv6"
           ],
@@ -15278,6 +15658,7 @@
           "className": "Ext.data.validator.Number",
           "exportName": "NumberDataValidator",
           "parentClassName": "Ext.data.validator.Validator",
+          "alternateClassNames": [],
           "classAliases": [
             "data.validator.number"
           ],
@@ -15318,6 +15699,7 @@
           "className": "Ext.data.validator.Currency",
           "exportName": "CurrencyDataValidator",
           "parentClassName": "Ext.data.validator.Number",
+          "alternateClassNames": [],
           "classAliases": [
             "data.validator.currency"
           ],
@@ -15354,6 +15736,7 @@
           "className": "Ext.data.validator.CurrencyUS",
           "exportName": "UsDataValidator",
           "parentClassName": "Ext.data.validator.Currency",
+          "alternateClassNames": [],
           "classAliases": [
             "data.validator.currency-us"
           ],
@@ -15367,6 +15750,7 @@
           "className": "Ext.data.validator.Date",
           "exportName": "DateDataValidator",
           "parentClassName": "Ext.data.validator.AbstractDate",
+          "alternateClassNames": [],
           "classAliases": [
             "data.validator.date"
           ],
@@ -15380,6 +15764,7 @@
           "className": "Ext.data.validator.DateTime",
           "exportName": "DateTimeDataValidator",
           "parentClassName": "Ext.data.validator.AbstractDate",
+          "alternateClassNames": [],
           "classAliases": [
             "data.validator.datetime"
           ],
@@ -15393,6 +15778,7 @@
           "className": "Ext.data.validator.Email",
           "exportName": "EmailDataValidator",
           "parentClassName": "Ext.data.validator.Format",
+          "alternateClassNames": [],
           "classAliases": [
             "data.validator.email"
           ],
@@ -15406,6 +15792,7 @@
           "className": "Ext.data.validator.List",
           "exportName": "ListDataValidator",
           "parentClassName": "Ext.data.validator.Validator",
+          "alternateClassNames": [],
           "classAliases": [
             "data.validator.list"
           ],
@@ -15426,6 +15813,7 @@
           "className": "Ext.data.validator.Exclusion",
           "exportName": "ExclusionDataValidator",
           "parentClassName": "Ext.data.validator.List",
+          "alternateClassNames": [],
           "classAliases": [
             "data.validator.exclusion"
           ],
@@ -15443,6 +15831,7 @@
           "className": "Ext.data.validator.IPAddress",
           "exportName": "IpAddressDataValidator",
           "parentClassName": "Ext.data.validator.Format",
+          "alternateClassNames": [],
           "classAliases": [
             "data.validator.ipaddress"
           ],
@@ -15456,6 +15845,7 @@
           "className": "Ext.data.validator.Inclusion",
           "exportName": "InclusionDataValidator",
           "parentClassName": "Ext.data.validator.List",
+          "alternateClassNames": [],
           "classAliases": [
             "data.validator.inclusion"
           ],
@@ -15473,6 +15863,7 @@
           "className": "Ext.data.validator.Length",
           "exportName": "LengthDataValidator",
           "parentClassName": "Ext.data.validator.Bound",
+          "alternateClassNames": [],
           "classAliases": [
             "data.validator.length"
           ],
@@ -15488,6 +15879,7 @@
           "className": "Ext.data.validator.Presence",
           "exportName": "PresenceDataValidator",
           "parentClassName": "Ext.data.validator.Validator",
+          "alternateClassNames": [],
           "classAliases": [
             "data.validator.presence"
           ],
@@ -15507,6 +15899,7 @@
           "className": "Ext.data.validator.NotNull",
           "exportName": "NotNullDataValidator",
           "parentClassName": "Ext.data.validator.Presence",
+          "alternateClassNames": [],
           "classAliases": [
             "data.validator.notnull"
           ],
@@ -15520,6 +15913,7 @@
           "className": "Ext.data.validator.Phone",
           "exportName": "PhoneDataValidator",
           "parentClassName": "Ext.data.validator.Format",
+          "alternateClassNames": [],
           "classAliases": [
             "data.validator.phone"
           ],
@@ -15533,6 +15927,7 @@
           "className": "Ext.data.validator.Range",
           "exportName": "RangeDataValidator",
           "parentClassName": "Ext.data.validator.Bound",
+          "alternateClassNames": [],
           "classAliases": [
             "data.validator.range"
           ],
@@ -15552,6 +15947,7 @@
           "className": "Ext.data.validator.Time",
           "exportName": "TimeDataValidator",
           "parentClassName": "Ext.data.validator.AbstractDate",
+          "alternateClassNames": [],
           "classAliases": [
             "data.validator.time"
           ],
@@ -15565,6 +15961,7 @@
           "className": "Ext.data.validator.Url",
           "exportName": "UrlDataValidator",
           "parentClassName": "Ext.data.validator.Format",
+          "alternateClassNames": [],
           "classAliases": [
             "data.validator.url"
           ],
@@ -15577,6 +15974,7 @@
         {
           "className": "Ext.data.virtual.Group",
           "exportName": "GroupVirtualData",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -15587,6 +15985,7 @@
         {
           "className": "Ext.data.virtual.Page",
           "exportName": "PageVirtualData",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -15609,6 +16008,7 @@
         {
           "className": "Ext.data.virtual.PageMap",
           "exportName": "PageMapVirtualData",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "cacheSize",
@@ -15688,6 +16088,7 @@
           "className": "Ext.data.virtual.Range",
           "exportName": "RangeVirtualData",
           "parentClassName": "Ext.data.Range",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -15723,6 +16124,7 @@
           "className": "Ext.data.virtual.Store",
           "exportName": "VirtualStore",
           "parentClassName": "Ext.data.ProxyStore",
+          "alternateClassNames": [],
           "classAliases": [
             "store.virtual"
           ],
@@ -15847,6 +16249,7 @@
         {
           "className": "Ext.direct.Event",
           "exportName": "EventDirect",
+          "alternateClassNames": [],
           "classAliases": [
             "direct.event"
           ],
@@ -15862,6 +16265,7 @@
           "className": "Ext.direct.RemotingEvent",
           "exportName": "RpcDirect",
           "parentClassName": "Ext.direct.Event",
+          "alternateClassNames": [],
           "classAliases": [
             "direct.rpc"
           ],
@@ -15877,6 +16281,7 @@
           "className": "Ext.direct.ExceptionEvent",
           "exportName": "ExceptionDirect",
           "parentClassName": "Ext.direct.RemotingEvent",
+          "alternateClassNames": [],
           "classAliases": [
             "direct.exception"
           ],
@@ -15890,6 +16295,7 @@
           "className": "Ext.direct.JsonProvider",
           "exportName": "JsonProviderDirect",
           "parentClassName": "Ext.direct.Provider",
+          "alternateClassNames": [],
           "classAliases": [
             "direct.jsonprovider"
           ],
@@ -15914,6 +16320,7 @@
         {
           "className": "Ext.util.TaskRunner",
           "exportName": "TaskRunnerUtil",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -15954,6 +16361,7 @@
           "className": "Ext.direct.PollingProvider",
           "exportName": "PollingProviderDirect",
           "parentClassName": "Ext.direct.JsonProvider",
+          "alternateClassNames": [],
           "classAliases": [
             "direct.pollingprovider"
           ],
@@ -15996,6 +16404,7 @@
         {
           "className": "Ext.direct.RemotingMethod",
           "exportName": "RemotingMethodDirect",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -16038,6 +16447,7 @@
         {
           "className": "Ext.direct.Transaction",
           "exportName": "TransactionDirect",
+          "alternateClassNames": [],
           "classAliases": [
             "direct.transaction"
           ],
@@ -16055,6 +16465,7 @@
           "className": "Ext.direct.RemotingProvider",
           "exportName": "RemotingProviderDirect",
           "parentClassName": "Ext.direct.JsonProvider",
+          "alternateClassNames": [],
           "classAliases": [
             "direct.remotingprovider"
           ],
@@ -16140,6 +16551,9 @@
           "className": "Ext.dom.Fly",
           "exportName": "FlyDom",
           "parentClassName": "Ext.dom.Element",
+          "alternateClassNames": [
+            "Ext.dom.Element.Fly"
+          ],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -16156,6 +16570,9 @@
         {
           "className": "Ext.dom.CompositeElementLite",
           "exportName": "CompositeElementLiteDom",
+          "alternateClassNames": [
+            "Ext.CompositeElementLite"
+          ],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -16214,6 +16631,9 @@
           "className": "Ext.dom.CompositeElement",
           "exportName": "CompositeElementDom",
           "parentClassName": "Ext.dom.CompositeElementLite",
+          "alternateClassNames": [
+            "Ext.CompositeElement"
+          ],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -16226,6 +16646,7 @@
         {
           "className": "Ext.dom.GarbageCollector",
           "exportName": "GarbageCollectorDom",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -16254,6 +16675,7 @@
         {
           "className": "Ext.dom.TouchAction",
           "exportName": "TouchActionDom",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -16303,6 +16725,7 @@
         {
           "className": "Ext.drag.Constraint",
           "exportName": "BaseDragConstraint",
+          "alternateClassNames": [],
           "classAliases": [
             "drag.constraint.base"
           ],
@@ -16354,6 +16777,7 @@
         {
           "className": "Ext.drag.Info",
           "exportName": "InfoDrag",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -16410,6 +16834,7 @@
         {
           "className": "Ext.drag.Item",
           "exportName": "ItemDrag",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "autoDestroy",
@@ -16445,6 +16870,7 @@
         {
           "className": "Ext.drag.Manager",
           "exportName": "ManagerDrag",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -16488,6 +16914,7 @@
           "className": "Ext.drag.Source",
           "exportName": "SourceDrag",
           "parentClassName": "Ext.drag.Item",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "activateOnLongPress",
@@ -16586,6 +17013,7 @@
           "className": "Ext.drag.Target",
           "exportName": "TargetDrag",
           "parentClassName": "Ext.drag.Item",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "invalidCls",
@@ -16649,6 +17077,7 @@
         {
           "className": "Ext.drag.proxy.None",
           "exportName": "NoneDragProxy",
+          "alternateClassNames": [],
           "classAliases": [
             "drag.proxy.none"
           ],
@@ -16676,6 +17105,7 @@
           "className": "Ext.drag.proxy.Original",
           "exportName": "OriginalDragProxy",
           "parentClassName": "Ext.drag.proxy.None",
+          "alternateClassNames": [],
           "classAliases": [
             "drag.proxy.original"
           ],
@@ -16693,6 +17123,7 @@
           "className": "Ext.drag.proxy.Placeholder",
           "exportName": "PlaceholderDragProxy",
           "parentClassName": "Ext.drag.proxy.None",
+          "alternateClassNames": [],
           "classAliases": [
             "drag.proxy.placeholder"
           ],
@@ -16734,6 +17165,7 @@
         {
           "className": "Ext.event.gesture.Recognizer",
           "exportName": "RecognizerGestureEvent",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "callbackScope",
@@ -16758,6 +17190,7 @@
           "className": "Ext.event.gesture.SingleTouch",
           "exportName": "SingleTouchGestureEvent",
           "parentClassName": "Ext.event.gesture.Recognizer",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -16771,6 +17204,7 @@
           "className": "Ext.event.gesture.DoubleTap",
           "exportName": "DoubleTapGestureEvent",
           "parentClassName": "Ext.event.gesture.SingleTouch",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "maxDuration",
@@ -16813,6 +17247,7 @@
           "className": "Ext.event.gesture.Drag",
           "exportName": "DragGestureEvent",
           "parentClassName": "Ext.event.gesture.SingleTouch",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "minDistance"
@@ -16859,6 +17294,7 @@
           "className": "Ext.event.gesture.Swipe",
           "exportName": "SwipeGestureEvent",
           "parentClassName": "Ext.event.gesture.SingleTouch",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "maxDuration",
@@ -16893,6 +17329,7 @@
           "className": "Ext.event.gesture.EdgeSwipe",
           "exportName": "EdgeSwipeGestureEvent",
           "parentClassName": "Ext.event.gesture.Swipe",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -16921,6 +17358,7 @@
           "className": "Ext.event.gesture.LongPress",
           "exportName": "LongPressGestureEvent",
           "parentClassName": "Ext.event.gesture.SingleTouch",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "minDuration",
@@ -16955,6 +17393,7 @@
           "className": "Ext.event.gesture.MultiTouch",
           "exportName": "MultiTouchGestureEvent",
           "parentClassName": "Ext.event.gesture.Recognizer",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -16969,6 +17408,7 @@
           "className": "Ext.event.gesture.Pinch",
           "exportName": "PinchGestureEvent",
           "parentClassName": "Ext.event.gesture.MultiTouch",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -16988,6 +17428,7 @@
           "className": "Ext.event.gesture.Rotate",
           "exportName": "RotateGestureEvent",
           "parentClassName": "Ext.event.gesture.MultiTouch",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -17011,6 +17452,7 @@
           "className": "Ext.event.gesture.Tap",
           "exportName": "TapGestureEvent",
           "parentClassName": "Ext.event.gesture.SingleTouch",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "moveDistance"
@@ -17036,6 +17478,7 @@
           "className": "Ext.event.publisher.Focus",
           "exportName": "FocusPublisherEvent",
           "parentClassName": "Ext.event.publisher.Dom",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -17065,6 +17508,7 @@
         {
           "className": "Ext.field.InputMask",
           "exportName": "InputMaskField",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "pattern"
@@ -17199,6 +17643,7 @@
           "className": "Ext.fx.runner.Css",
           "exportName": "CssRunnerFx",
           "parentClassName": "Ext.Evented",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -17245,6 +17690,9 @@
           "className": "Ext.fx.runner.CssTransition",
           "exportName": "CssTransitionRunnerFx",
           "parentClassName": "Ext.fx.runner.Css",
+          "alternateClassNames": [
+            "Ext.Animator"
+          ],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -17371,6 +17819,7 @@
         {
           "className": "Ext.fx.Runner",
           "exportName": "RunnerFx",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -17382,6 +17831,7 @@
           "className": "Ext.fx.animation.Cube",
           "exportName": "CubeAnimation",
           "parentClassName": "Ext.fx.animation.Abstract",
+          "alternateClassNames": [],
           "classAliases": [
             "animation.cube"
           ],
@@ -17412,6 +17862,9 @@
           "className": "Ext.fx.animation.Wipe",
           "exportName": "WipeAnimationFx",
           "parentClassName": "Ext.fx.Animation",
+          "alternateClassNames": [
+            "Ext.fx.animation.WipeIn"
+          ],
           "classAliases": [],
           "configs": [
             "direction",
@@ -17440,6 +17893,7 @@
           "className": "Ext.fx.animation.WipeOut",
           "exportName": "WipeOutAnimationFx",
           "parentClassName": "Ext.fx.animation.Wipe",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -17451,6 +17905,7 @@
           "className": "Ext.fx.easing.Bounce",
           "exportName": "BounceEasingFx",
           "parentClassName": "Ext.fx.easing.Abstract",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "acceleration",
@@ -17474,6 +17929,7 @@
           "className": "Ext.fx.easing.Momentum",
           "exportName": "MomentumEasingFx",
           "parentClassName": "Ext.fx.easing.Abstract",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "acceleration",
@@ -17500,6 +17956,7 @@
           "className": "Ext.fx.easing.BoundMomentum",
           "exportName": "BoundMomentumEasingFx",
           "parentClassName": "Ext.fx.easing.Abstract",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "bounce",
@@ -17545,6 +18002,7 @@
           "className": "Ext.fx.easing.EaseIn",
           "exportName": "InEasing",
           "parentClassName": "Ext.fx.easing.Linear",
+          "alternateClassNames": [],
           "classAliases": [
             "easing.ease-in"
           ],
@@ -17568,6 +18026,7 @@
           "className": "Ext.fx.easing.EaseOut",
           "exportName": "OutEasing",
           "parentClassName": "Ext.fx.easing.Linear",
+          "alternateClassNames": [],
           "classAliases": [
             "easing.ease-out"
           ],
@@ -17590,6 +18049,7 @@
         {
           "className": "Ext.fx.easing.Easing",
           "exportName": "EasingEasingFx",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -17603,6 +18063,7 @@
           "className": "Ext.fx.runner.CssAnimation",
           "exportName": "CssAnimationRunnerFx",
           "parentClassName": "Ext.fx.runner.Css",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -17649,6 +18110,7 @@
           "className": "Ext.list.AbstractTreeItem",
           "exportName": "AbstractTreeItemList",
           "parentClassName": "Ext.Widget",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "iconClsProperty",
@@ -17765,6 +18227,7 @@
           "className": "Ext.list.RootTreeItem",
           "exportName": "RootTreeItemList",
           "parentClassName": "Ext.list.AbstractTreeItem",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -17778,6 +18241,7 @@
         {
           "className": "Ext.mixin.ItemRippler",
           "exportName": "ItemRipplerMixin",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "itemRipple"
@@ -17809,6 +18273,7 @@
           "className": "Ext.list.TreeItem",
           "exportName": "TreeListItem",
           "parentClassName": "Ext.list.AbstractTreeItem",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.treelistitem"
           ],
@@ -17891,6 +18356,7 @@
           "className": "Ext.overrides.list.TreeItem",
           "exportName": "TreeItemListOverrides",
           "override": "Ext.list.TreeItem",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -17921,6 +18387,8 @@
         {
           "className": "Ext.list.Tree",
           "exportName": "TreeList",
+          "parentClassName": "Ext.Gadget",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.treelist"
           ],
@@ -17935,8 +18403,7 @@
             "selection",
             "selectOnExpander",
             "singleExpand",
-            "store",
-            "ui"
+            "store"
           ],
           "cachedConfigs": [
             "animation",
@@ -18081,6 +18548,7 @@
           "className": "Ext.overrides.list.Tree",
           "exportName": "TreeListOverrides",
           "override": "Ext.list.Tree",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -18097,6 +18565,7 @@
           "className": "Ext.mixin.ConfigProxy",
           "exportName": "ConfigProxyMixin",
           "parentClassName": "Ext.Mixin",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -18138,6 +18607,7 @@
           "className": "Ext.mixin.ConfigState",
           "exportName": "ConfigStateMixin",
           "parentClassName": "Ext.Mixin",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -18154,6 +18624,7 @@
           "className": "Ext.mixin.Mashup",
           "exportName": "MashupMixin",
           "parentClassName": "Ext.Mixin",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -18178,6 +18649,7 @@
           "className": "Ext.mixin.Responsive",
           "exportName": "ResponsiveMixin",
           "parentClassName": "Ext.Mixin",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "responsiveConfig",
@@ -18236,6 +18708,7 @@
           "className": "Ext.mixin.Selectable",
           "exportName": "SelectableMixin",
           "parentClassName": "Ext.Mixin",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "allowDeselect",
@@ -18360,6 +18833,7 @@
         {
           "className": "Ext.mixin.StoreWatcher",
           "exportName": "StoreWatcherMixin",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "dataSource",
@@ -18396,6 +18870,7 @@
           "className": "Ext.mixin.StyleCacher",
           "exportName": "StyleCacherMixin",
           "parentClassName": "Ext.Mixin",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -18409,6 +18884,7 @@
         {
           "className": "Ext.perf.Accumulator",
           "exportName": "AccumulatorPerf",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -18440,6 +18916,9 @@
         {
           "className": "Ext.perf.Monitor",
           "exportName": "MonitorPerf",
+          "alternateClassNames": [
+            "Ext.Perf"
+          ],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -18490,6 +18969,7 @@
           "className": "Ext.plugin.AbstractClipboard",
           "exportName": "AbstractClipboardPlugin",
           "parentClassName": "Ext.plugin.Abstract",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "gridListeners",
@@ -18576,6 +19056,7 @@
           "className": "Ext.plugin.MouseEnter",
           "exportName": "MouseEnterPlugin",
           "parentClassName": "Ext.plugin.Abstract",
+          "alternateClassNames": [],
           "classAliases": [
             "plugin.mouseenter"
           ],
@@ -18604,6 +19085,7 @@
         {
           "className": "Ext.sparkline.Shape",
           "exportName": "ShapeSparkline",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -18616,6 +19098,7 @@
         {
           "className": "Ext.sparkline.CanvasBase",
           "exportName": "CanvasBaseSparkline",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -18642,6 +19125,7 @@
           "className": "Ext.sparkline.CanvasCanvas",
           "exportName": "CanvasCanvasSparkline",
           "parentClassName": "Ext.sparkline.CanvasBase",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -18697,6 +19181,7 @@
           "className": "Ext.sparkline.VmlCanvas",
           "exportName": "VmlCanvasSparkline",
           "parentClassName": "Ext.sparkline.CanvasBase",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -18742,6 +19227,9 @@
         {
           "className": "Ext.util.Color",
           "exportName": "ColorUtil",
+          "alternateClassNames": [
+            "Ext.draw.Color"
+          ],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -18818,6 +19306,8 @@
         {
           "className": "Ext.sparkline.Base",
           "exportName": "Sparkline",
+          "parentClassName": "Ext.Gadget",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.sparkline"
           ],
@@ -18911,6 +19401,7 @@
           "className": "Ext.override.sparkline.Base",
           "exportName": "BaseSparklineOverride",
           "override": "Ext.sparkline.Base",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -18930,6 +19421,7 @@
           "className": "Ext.sparkline.BarBase",
           "exportName": "BarBaseSparkline",
           "parentClassName": "Ext.sparkline.Base",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -18950,6 +19442,7 @@
         {
           "className": "Ext.sparkline.RangeMap",
           "exportName": "RangeMapSparkline",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -18968,6 +19461,7 @@
           "className": "Ext.sparkline.Bar",
           "exportName": "Sparklinebar",
           "parentClassName": "Ext.sparkline.BarBase",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.sparklinebar"
           ],
@@ -19054,6 +19548,7 @@
           "className": "Ext.sparkline.Box",
           "exportName": "Sparklinebox",
           "parentClassName": "Ext.sparkline.Base",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.sparklinebox"
           ],
@@ -19175,6 +19670,7 @@
           "className": "Ext.sparkline.Bullet",
           "exportName": "SparklineBullet",
           "parentClassName": "Ext.sparkline.Base",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.sparklinebullet"
           ],
@@ -19251,6 +19747,7 @@
           "className": "Ext.sparkline.Discrete",
           "exportName": "SparklineDiscrete",
           "parentClassName": "Ext.sparkline.BarBase",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.sparklinediscrete"
           ],
@@ -19298,6 +19795,7 @@
           "className": "Ext.sparkline.Line",
           "exportName": "SparklineLine",
           "parentClassName": "Ext.sparkline.Base",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.sparklineline"
           ],
@@ -19430,6 +19928,7 @@
           "className": "Ext.sparkline.Pie",
           "exportName": "Sparklinepie",
           "parentClassName": "Ext.sparkline.Base",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.sparklinepie"
           ],
@@ -19477,6 +19976,7 @@
           "className": "Ext.sparkline.TriState",
           "exportName": "SparklinetriState",
           "parentClassName": "Ext.sparkline.BarBase",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.sparklinetristate"
           ],
@@ -19519,6 +20019,7 @@
         {
           "className": "Ext.util.Base64",
           "exportName": "Base64Util",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -19568,6 +20069,7 @@
         {
           "className": "Ext.util.DelimitedValue",
           "exportName": "DelimitedValueUtil",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -19601,6 +20103,7 @@
           "className": "Ext.util.CSV",
           "exportName": "CSVUtil",
           "parentClassName": "Ext.util.DelimitedValue",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -19611,6 +20114,9 @@
         {
           "className": "Ext.util.ClickRepeater",
           "exportName": "ClickRepeaterUtil",
+          "alternateClassNames": [
+            "Ext.util.TapRepeater"
+          ],
           "classAliases": [],
           "configs": [
             "disabled",
@@ -19680,6 +20186,7 @@
         {
           "className": "Ext.util.Cookies",
           "exportName": "CookiesUtil",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -19697,6 +20204,7 @@
         {
           "className": "Ext.util.LocalStorage",
           "exportName": "LocalStorageUtil",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -19731,6 +20239,7 @@
         {
           "className": "Ext.util.Spans",
           "exportName": "SpansUtil",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -19757,6 +20266,9 @@
           "className": "Ext.util.TsvDecoder",
           "exportName": "TsvDecoderUtil",
           "parentClassName": "Ext.util.DelimitedValue",
+          "alternateClassNames": [
+            "Ext.util.TSV"
+          ],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -19768,6 +20280,9 @@
           "className": "Ext.util.TaskManager",
           "exportName": "TaskManagerUtil",
           "parentClassName": "Ext.util.TaskRunner",
+          "alternateClassNames": [
+            "Ext.TaskManager"
+          ],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -19778,6 +20293,7 @@
         {
           "className": "Ext.util.TextMetrics",
           "exportName": "TextMetricsUtil",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -19809,6 +20325,7 @@
           "className": "Ext.util.paintmonitor.OverflowChange",
           "exportName": "OverflowChangePaintmonitorUtil",
           "parentClassName": "Ext.util.paintmonitor.Abstract",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -19825,6 +20342,7 @@
           "className": "Ext.util.sizemonitor.OverflowChange",
           "exportName": "OverflowChangeSizemonitorUtil",
           "parentClassName": "Ext.util.sizemonitor.Abstract",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -19847,6 +20365,7 @@
           "className": "Ext.util.translatable.ScrollParent",
           "exportName": "ScrollParentTranslatable",
           "parentClassName": "Ext.util.translatable.Dom",
+          "alternateClassNames": [],
           "classAliases": [
             "translatable.scrollparent"
           ],
@@ -19870,6 +20389,7 @@
           "className": "Ext.AbstractComponent",
           "exportName": "AbstractComponent",
           "parentClassName": "Ext.Widget",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -19881,6 +20401,9 @@
           "className": "Ext.Tool",
           "exportName": "Tool",
           "parentClassName": "Ext.Component",
+          "alternateClassNames": [
+            "Ext.panel.Tool"
+          ],
           "classAliases": [
             "widget.tool",
             "widget.paneltool"
@@ -19923,6 +20446,7 @@
         {
           "className": "Ext.mixin.Toolable",
           "exportName": "ToolableMixin",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "defaultToolWeights",
@@ -19987,6 +20511,7 @@
           "className": "Ext.layout.Box",
           "exportName": "BoxLayout",
           "parentClassName": "Ext.layout.Auto",
+          "alternateClassNames": [],
           "classAliases": [
             "layout.box"
           ],
@@ -20087,6 +20612,7 @@
           "className": "Ext.Button",
           "exportName": "Button",
           "parentClassName": "Ext.Component",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.button"
           ],
@@ -20253,6 +20779,7 @@
           "className": "Ext.Title",
           "exportName": "Title",
           "parentClassName": "Ext.Component",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.title"
           ],
@@ -20270,6 +20797,7 @@
           "className": "Ext.Spacer",
           "exportName": "Spacer",
           "parentClassName": "Ext.Component",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.spacer"
           ],
@@ -20285,6 +20813,7 @@
           "className": "Ext.Toolbar",
           "exportName": "Toolbar",
           "parentClassName": "Ext.Container",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.toolbar"
           ],
@@ -20322,6 +20851,9 @@
           "className": "Ext.Panel",
           "exportName": "Panel",
           "parentClassName": "Ext.Container",
+          "alternateClassNames": [
+            "Ext.panel.Panel"
+          ],
           "classAliases": [
             "widget.panel"
           ],
@@ -20539,6 +21071,7 @@
           "className": "Ext.panel.Collapsible",
           "exportName": "CollapsiblePanel",
           "override": "Ext.Panel",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "collapsed",
@@ -20588,6 +21121,7 @@
           "className": "Ext.panel.Resizable",
           "exportName": "ResizablePanel",
           "override": "Ext.Panel",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "resizable"
@@ -20610,6 +21144,7 @@
           "className": "Ext.Mask",
           "exportName": "Mask",
           "parentClassName": "Ext.Component",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.mask"
           ],
@@ -20639,6 +21174,7 @@
           "className": "Ext.Sheet",
           "exportName": "Sheet",
           "parentClassName": "Ext.Panel",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.sheet"
           ],
@@ -20690,6 +21226,7 @@
           "className": "Ext.ActionSheet",
           "exportName": "ActionSheet",
           "parentClassName": "Ext.Sheet",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.actionsheet"
           ],
@@ -20702,6 +21239,7 @@
         {
           "className": "Ext.Anim",
           "exportName": "Anim",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -20738,6 +21276,7 @@
           "className": "Ext.Media",
           "exportName": "Media",
           "parentClassName": "Ext.Component",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.media"
           ],
@@ -20805,6 +21344,7 @@
           "className": "Ext.Audio",
           "exportName": "Audio",
           "parentClassName": "Ext.Media",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.audio"
           ],
@@ -20825,6 +21365,7 @@
           "className": "Ext.Decorator",
           "exportName": "Decorator",
           "parentClassName": "Ext.Component",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "component"
@@ -20871,6 +21412,10 @@
           "className": "Ext.Dialog",
           "exportName": "Dialog",
           "parentClassName": "Ext.Panel",
+          "alternateClassNames": [
+            "Ext.Window",
+            "Ext.window.Window"
+          ],
           "classAliases": [
             "widget.dialog",
             "widget.window"
@@ -21005,6 +21550,9 @@
           "className": "Ext.field.Field",
           "exportName": "Field",
           "parentClassName": "Ext.Component",
+          "alternateClassNames": [
+            "Ext.form.Field"
+          ],
           "classAliases": [
             "widget.field"
           ],
@@ -21178,6 +21726,7 @@
           "className": "Ext.field.Input",
           "exportName": "InputField",
           "parentClassName": "Ext.field.Field",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.inputfield"
           ],
@@ -21220,6 +21769,7 @@
           "className": "Ext.field.trigger.Base",
           "exportName": "BaseTrigger",
           "parentClassName": "Ext.Widget",
+          "alternateClassNames": [],
           "classAliases": [
             "trigger.base"
           ],
@@ -21252,6 +21802,7 @@
           "className": "Ext.field.trigger.Trigger",
           "exportName": "Trigger",
           "parentClassName": "Ext.field.trigger.Base",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.trigger",
             "trigger.trigger"
@@ -21298,6 +21849,7 @@
           "className": "Ext.field.trigger.Clear",
           "exportName": "ClearTrigger",
           "parentClassName": "Ext.field.trigger.Trigger",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.cleartrigger",
             "trigger.clear"
@@ -21312,6 +21864,9 @@
           "className": "Ext.field.Text",
           "exportName": "TextField",
           "parentClassName": "Ext.field.Input",
+          "alternateClassNames": [
+            "Ext.form.Text"
+          ],
           "classAliases": [
             "widget.textfield"
           ],
@@ -21547,6 +22102,7 @@
           "className": "Ext.Editor",
           "exportName": "Editor",
           "parentClassName": "Ext.Container",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.editor"
           ],
@@ -21647,6 +22203,9 @@
           "className": "Ext.Img",
           "exportName": "Image",
           "parentClassName": "Ext.Component",
+          "alternateClassNames": [
+            "Ext.Image"
+          ],
           "classAliases": [
             "widget.image",
             "widget.img"
@@ -21711,6 +22270,7 @@
           "className": "Ext.Label",
           "exportName": "Label",
           "parentClassName": "Ext.Component",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.label"
           ],
@@ -21724,6 +22284,7 @@
           "className": "Ext.LoadMask",
           "exportName": "LoadMask",
           "parentClassName": "Ext.Mask",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.loadmask"
           ],
@@ -21748,6 +22309,9 @@
           "className": "Ext.field.TextArea",
           "exportName": "TextAreaField",
           "parentClassName": "Ext.field.Text",
+          "alternateClassNames": [
+            "Ext.form.TextArea"
+          ],
           "classAliases": [
             "widget.textareafield"
           ],
@@ -21766,6 +22330,7 @@
           "className": "Ext.layout.VBox",
           "exportName": "VboxLayout",
           "parentClassName": "Ext.layout.Box",
+          "alternateClassNames": [],
           "classAliases": [
             "layout.vbox"
           ],
@@ -21779,6 +22344,7 @@
           "className": "Ext.MessageBox",
           "exportName": "Messagebox",
           "parentClassName": "Ext.Dialog",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.messagebox"
           ],
@@ -21859,6 +22425,9 @@
           "className": "Ext.SegmentedButton",
           "exportName": "SegmentedButton",
           "parentClassName": "Ext.Container",
+          "alternateClassNames": [
+            "Ext.button.Segmented"
+          ],
           "classAliases": [
             "widget.segmentedbutton"
           ],
@@ -22009,6 +22578,9 @@
           "className": "Ext.menu.Item",
           "exportName": "MenuItem",
           "parentClassName": "Ext.Component",
+          "alternateClassNames": [
+            "Ext.menu.TextItem"
+          ],
           "classAliases": [
             "widget.menuitem"
           ],
@@ -22107,6 +22679,9 @@
         {
           "className": "Ext.menu.Manager",
           "exportName": "ManagerMenu",
+          "alternateClassNames": [
+            "Ext.menu.MenuMgr"
+          ],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -22138,6 +22713,7 @@
           "className": "Ext.menu.Menu",
           "exportName": "Menu",
           "parentClassName": "Ext.Panel",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.menu"
           ],
@@ -22268,6 +22844,7 @@
           "className": "Ext.SplitButton",
           "exportName": "SplitButton",
           "parentClassName": "Ext.Button",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.splitbutton"
           ],
@@ -22324,6 +22901,7 @@
           "className": "Ext.TitleBar",
           "exportName": "Titlebar",
           "parentClassName": "Ext.Container",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.titlebar"
           ],
@@ -22402,6 +22980,7 @@
           "className": "Ext.Toast",
           "exportName": "Toast",
           "parentClassName": "Ext.Sheet",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "centered",
@@ -22457,6 +23036,7 @@
           "className": "Ext.Video",
           "exportName": "Video",
           "parentClassName": "Ext.Media",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.video"
           ],
@@ -22499,6 +23079,7 @@
         {
           "className": "Ext.behavior.Behavior",
           "exportName": "BehaviorBehavior",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -22512,6 +23093,7 @@
           "className": "Ext.carousel.Item",
           "exportName": "ItemCarousel",
           "parentClassName": "Ext.Decorator",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "translatable"
@@ -22525,6 +23107,7 @@
           "className": "Ext.util.TranslatableGroup",
           "exportName": "TranslatableGroupUtil",
           "parentClassName": "Ext.util.translatable.Abstract",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "activeIndex",
@@ -22548,6 +23131,9 @@
           "className": "Ext.carousel.Carousel",
           "exportName": "Carousel",
           "parentClassName": "Ext.Container",
+          "alternateClassNames": [
+            "Ext.Carousel"
+          ],
           "classAliases": [
             "widget.carousel"
           ],
@@ -22716,6 +23302,7 @@
           "className": "Ext.carousel.Infinite",
           "exportName": "InfiniteCarousel",
           "parentClassName": "Ext.carousel.Carousel",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "innerItemConfig",
@@ -22765,6 +23352,7 @@
         {
           "className": "Ext.dataview.Location",
           "exportName": "LocationDataview",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -22818,6 +23406,7 @@
           "className": "Ext.dataview.NavigationModel",
           "exportName": "DataviewNavmodel",
           "parentClassName": "Ext.Evented",
+          "alternateClassNames": [],
           "classAliases": [
             "navmodel.dataview"
           ],
@@ -22971,6 +23560,7 @@
         {
           "className": "Ext.dataview.selection.Selection",
           "exportName": "SelectionSelectionDataview",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "selectionModel"
@@ -22992,6 +23582,7 @@
           "className": "Ext.dataview.selection.Rows",
           "exportName": "RowsSelection",
           "parentClassName": "Ext.dataview.selection.Selection",
+          "alternateClassNames": [],
           "classAliases": [
             "selection.rows"
           ],
@@ -23097,6 +23688,7 @@
           "className": "Ext.dataview.selection.Records",
           "exportName": "RecordsSelection",
           "parentClassName": "Ext.dataview.selection.Rows",
+          "alternateClassNames": [],
           "classAliases": [
             "selection.records"
           ],
@@ -23236,6 +23828,7 @@
           "className": "Ext.dataview.selection.Model",
           "exportName": "DataviewSelmodel",
           "parentClassName": "Ext.Evented",
+          "alternateClassNames": [],
           "classAliases": [
             "selmodel.dataview"
           ],
@@ -23382,6 +23975,7 @@
           "className": "Ext.dataview.EmptyText",
           "exportName": "EmptyText",
           "parentClassName": "Ext.Component",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.emptytext"
           ],
@@ -23395,6 +23989,7 @@
           "className": "Ext.dataview.Abstract",
           "exportName": "AbstractDataview",
           "parentClassName": "Ext.Container",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "emptyState",
@@ -23822,6 +24417,7 @@
         {
           "className": "Ext.dataview.GenericItem",
           "exportName": "GenericItemDataview",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "contentCls",
@@ -23846,6 +24442,9 @@
           "className": "Ext.dataview.DataItem",
           "exportName": "DataItem",
           "parentClassName": "Ext.Container",
+          "alternateClassNames": [
+            "Ext.dataview.component.DataItem"
+          ],
           "classAliases": [
             "widget.dataitem"
           ],
@@ -23884,6 +24483,7 @@
           "className": "Ext.dataview.Component",
           "exportName": "ComponentDataview",
           "parentClassName": "Ext.dataview.Abstract",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.componentdataview"
           ],
@@ -24018,6 +24618,7 @@
         {
           "className": "Ext.dataview.Pinnable",
           "exportName": "PinnableDataview",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "pinned"
@@ -24034,6 +24635,7 @@
           "className": "Ext.dataview.ItemHeader",
           "exportName": "ItemHeader",
           "parentClassName": "Ext.Component",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.itemheader"
           ],
@@ -24068,6 +24670,7 @@
         {
           "className": "Ext.dataview.Disclosable",
           "exportName": "DisclosableDataview",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -24085,6 +24688,9 @@
           "className": "Ext.dataview.SimpleListItem",
           "exportName": "SimpleListItem",
           "parentClassName": "Ext.Component",
+          "alternateClassNames": [
+            "Ext.dataview.component.SimpleListItem"
+          ],
           "classAliases": [
             "widget.simplelistitem"
           ],
@@ -24108,6 +24714,9 @@
           "className": "Ext.dataview.List",
           "exportName": "List",
           "parentClassName": "Ext.dataview.Component",
+          "alternateClassNames": [
+            "Ext.List"
+          ],
           "classAliases": [
             "widget.list"
           ],
@@ -24670,6 +25279,7 @@
           "className": "Ext.dataview.BoundListLocation",
           "exportName": "BoundListLocationDataview",
           "parentClassName": "Ext.dataview.Location",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -24692,6 +25302,7 @@
           "className": "Ext.dataview.BoundListNavigationModel",
           "exportName": "BoundListNavmodel",
           "parentClassName": "Ext.dataview.NavigationModel",
+          "alternateClassNames": [],
           "classAliases": [
             "navmodel.boundlist"
           ],
@@ -24756,6 +25367,7 @@
           "className": "Ext.dataview.BoundList",
           "exportName": "BoundList",
           "parentClassName": "Ext.dataview.List",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.boundlist"
           ],
@@ -24771,6 +25383,9 @@
           "className": "Ext.dataview.DataView",
           "exportName": "Dataview",
           "parentClassName": "Ext.dataview.Abstract",
+          "alternateClassNames": [
+            "Ext.DataView"
+          ],
           "classAliases": [
             "widget.dataview"
           ],
@@ -24853,6 +25468,9 @@
           "className": "Ext.dataview.IndexBar",
           "exportName": "Indexbar",
           "parentClassName": "Ext.Component",
+          "alternateClassNames": [
+            "Ext.IndexBar"
+          ],
           "classAliases": [
             "widget.indexbar"
           ],
@@ -24983,6 +25601,9 @@
           "className": "Ext.dataview.ListItem",
           "exportName": "ListItem",
           "parentClassName": "Ext.dataview.DataItem",
+          "alternateClassNames": [
+            "Ext.dataview.component.ListItem"
+          ],
           "classAliases": [
             "widget.listitem"
           ],
@@ -25003,6 +25624,7 @@
           "className": "Ext.layout.HBox",
           "exportName": "HboxLayout",
           "parentClassName": "Ext.layout.Box",
+          "alternateClassNames": [],
           "classAliases": [
             "layout.hbox"
           ],
@@ -25016,6 +25638,9 @@
           "className": "Ext.dataview.NestedList",
           "exportName": "NestedList",
           "parentClassName": "Ext.Container",
+          "alternateClassNames": [
+            "Ext.NestedList"
+          ],
           "classAliases": [
             "widget.nestedlist"
           ],
@@ -25251,6 +25876,7 @@
           "className": "Ext.dataview.listswiper.Item",
           "exportName": "ListswiperItem",
           "parentClassName": "Ext.Container",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.listswiperitem"
           ],
@@ -25285,6 +25911,7 @@
           "className": "Ext.dataview.listswiper.Accordion",
           "exportName": "ListswiperAccordion",
           "parentClassName": "Ext.dataview.listswiper.Item",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.listswiperaccordion"
           ],
@@ -25467,6 +26094,7 @@
           "className": "Ext.dataview.listswiper.ListSwiper",
           "exportName": "ListswiperPlugin",
           "parentClassName": "Ext.plugin.Abstract",
+          "alternateClassNames": [],
           "classAliases": [
             "plugin.listswiper"
           ],
@@ -25545,6 +26173,7 @@
           "className": "Ext.dataview.listswiper.Stepper",
           "exportName": "ListswiperStepper",
           "parentClassName": "Ext.dataview.listswiper.Item",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.listswiperstepper"
           ],
@@ -25662,6 +26291,7 @@
           "className": "Ext.tip.ToolTip",
           "exportName": "Tooltip",
           "parentClassName": "Ext.Panel",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.tooltip"
           ],
@@ -25855,6 +26485,7 @@
           "className": "Ext.dataview.plugin.ItemTip",
           "exportName": "DataviewtipPlugin",
           "parentClassName": "Ext.tip.ToolTip",
+          "alternateClassNames": [],
           "classAliases": [
             "plugin.dataviewtip"
           ],
@@ -25903,6 +26534,9 @@
           "className": "Ext.dataview.plugin.ListPaging",
           "exportName": "ListPagingPlugin",
           "parentClassName": "Ext.plugin.Abstract",
+          "alternateClassNames": [
+            "Ext.plugin.ListPaging"
+          ],
           "classAliases": [
             "plugin.listpaging"
           ],
@@ -26005,6 +26639,9 @@
           "className": "Ext.dataview.plugin.SortableList",
           "exportName": "SortableListPlugin",
           "parentClassName": "Ext.plugin.Abstract",
+          "alternateClassNames": [
+            "Ext.plugin.SortableList"
+          ],
           "classAliases": [
             "plugin.sortablelist"
           ],
@@ -26067,6 +26704,7 @@
           "className": "Ext.dataview.pullrefresh.Item",
           "exportName": "ItemPullrefreshDataview",
           "parentClassName": "Ext.Component",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "lastUpdated",
@@ -26086,6 +26724,7 @@
           "className": "Ext.dataview.pullrefresh.Bar",
           "exportName": "Pullrefreshbar",
           "parentClassName": "Ext.dataview.pullrefresh.Item",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.pullrefreshbar"
           ],
@@ -26116,6 +26755,9 @@
           "className": "Ext.dataview.pullrefresh.PullRefresh",
           "exportName": "PullrefreshPlugin",
           "parentClassName": "Ext.plugin.Abstract",
+          "alternateClassNames": [
+            "Ext.plugin.PullRefresh"
+          ],
           "classAliases": [
             "plugin.pullrefresh"
           ],
@@ -26239,6 +26881,7 @@
           "className": "Ext.dataview.pullrefresh.Spinner",
           "exportName": "PullrefreshSpinner",
           "parentClassName": "Ext.dataview.pullrefresh.Item",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.pullrefreshspinner"
           ],
@@ -26261,6 +26904,7 @@
           "className": "Ext.field.BoxLabelable",
           "exportName": "BoxLabelableField",
           "parentClassName": "Ext.Mixin",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "boxLabel",
@@ -26282,6 +26926,9 @@
           "className": "Ext.field.Checkbox",
           "exportName": "Checkbox",
           "parentClassName": "Ext.field.Input",
+          "alternateClassNames": [
+            "Ext.form.Checkbox"
+          ],
           "classAliases": [
             "widget.checkbox",
             "widget.checkboxfield"
@@ -26333,6 +26980,7 @@
           "className": "Ext.field.trigger.Expand",
           "exportName": "ExpandTrigger",
           "parentClassName": "Ext.field.trigger.Trigger",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.expandtrigger",
             "trigger.expand"
@@ -26347,6 +26995,7 @@
           "className": "Ext.field.Picker",
           "exportName": "PickerField",
           "parentClassName": "Ext.field.Text",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.pickerfield"
           ],
@@ -26466,6 +27115,7 @@
           "className": "Ext.picker.Slot",
           "exportName": "PickerSlot",
           "parentClassName": "Ext.dataview.DataView",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.pickerslot"
           ],
@@ -26557,6 +27207,9 @@
           "className": "Ext.picker.Picker",
           "exportName": "Picker",
           "parentClassName": "Ext.Sheet",
+          "alternateClassNames": [
+            "Ext.Picker"
+          ],
           "classAliases": [
             "widget.picker"
           ],
@@ -26643,6 +27296,7 @@
           "className": "Ext.picker.Tablet",
           "exportName": "TabletPicker",
           "parentClassName": "Ext.Panel",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.tabletpicker"
           ],
@@ -26656,6 +27310,9 @@
           "className": "Ext.field.Select",
           "exportName": "SelectField",
           "parentClassName": "Ext.field.Picker",
+          "alternateClassNames": [
+            "Ext.form.Select"
+          ],
           "classAliases": [
             "widget.selectfield"
           ],
@@ -26876,6 +27533,9 @@
           "className": "Ext.field.ComboBox",
           "exportName": "Combobox",
           "parentClassName": "Ext.field.Select",
+          "alternateClassNames": [
+            "Ext.form.field.ComboBox"
+          ],
           "classAliases": [
             "widget.combobox",
             "widget.comboboxfield"
@@ -27014,6 +27674,7 @@
         {
           "className": "Ext.field.Manager",
           "exportName": "ManagerField",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -27104,6 +27765,7 @@
           "className": "Ext.field.Container",
           "exportName": "ContainerField",
           "parentClassName": "Ext.field.Field",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.containerfield",
             "widget.fieldcontainer"
@@ -27160,6 +27822,7 @@
           "className": "Ext.field.trigger.Date",
           "exportName": "DateTrigger",
           "parentClassName": "Ext.field.trigger.Trigger",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.datetrigger",
             "trigger.date"
@@ -27174,6 +27837,9 @@
           "className": "Ext.picker.Date",
           "exportName": "DatePicker",
           "parentClassName": "Ext.picker.Picker",
+          "alternateClassNames": [
+            "Ext.DatePicker"
+          ],
           "classAliases": [
             "widget.datepicker"
           ],
@@ -27266,6 +27932,7 @@
           "className": "Ext.layout.Carousel",
           "exportName": "CarouselLayout",
           "parentClassName": "Ext.layout.Auto",
+          "alternateClassNames": [],
           "classAliases": [
             "layout.carousel"
           ],
@@ -27362,6 +28029,7 @@
           "className": "Ext.panel.DateView",
           "exportName": "DateView",
           "parentClassName": "Ext.Widget",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.dateview"
           ],
@@ -27465,6 +28133,7 @@
           "className": "Ext.panel.Title",
           "exportName": "PanelTitle",
           "parentClassName": "Ext.Component",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.paneltitle"
           ],
@@ -27509,6 +28178,7 @@
           "className": "Ext.panel.DateTitle",
           "exportName": "DateTitle",
           "parentClassName": "Ext.panel.Title",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.datetitle"
           ],
@@ -27536,6 +28206,7 @@
           "className": "Ext.panel.YearPicker",
           "exportName": "YearPicker",
           "parentClassName": "Ext.dataview.BoundList",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.yearpicker"
           ],
@@ -27579,6 +28250,7 @@
           "className": "Ext.panel.Date",
           "exportName": "DatePanel",
           "parentClassName": "Ext.Panel",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.datepanel"
           ],
@@ -28004,6 +28676,10 @@
           "className": "Ext.field.Date",
           "exportName": "DateField",
           "parentClassName": "Ext.field.Picker",
+          "alternateClassNames": [
+            "Ext.form.DatePicker",
+            "Ext.field.DatePicker"
+          ],
           "classAliases": [
             "widget.datefield",
             "widget.datepickerfield"
@@ -28101,6 +28777,9 @@
           "className": "Ext.field.DatePickerNative",
           "exportName": "DatePickerNativeField",
           "parentClassName": "Ext.field.Date",
+          "alternateClassNames": [
+            "Ext.form.DatePickerNative"
+          ],
           "classAliases": [
             "widget.datepickernativefield"
           ],
@@ -28122,6 +28801,9 @@
           "className": "Ext.field.Display",
           "exportName": "DisplayField",
           "parentClassName": "Ext.field.Field",
+          "alternateClassNames": [
+            "Ext.form.Display"
+          ],
           "classAliases": [
             "widget.displayfield"
           ],
@@ -28151,6 +28833,9 @@
           "className": "Ext.field.Email",
           "exportName": "EmailField",
           "parentClassName": "Ext.field.Text",
+          "alternateClassNames": [
+            "Ext.form.Email"
+          ],
           "classAliases": [
             "widget.emailfield"
           ],
@@ -28164,6 +28849,7 @@
           "className": "Ext.field.File",
           "exportName": "FileField",
           "parentClassName": "Ext.field.Text",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.filefield"
           ],
@@ -28202,6 +28888,7 @@
           "className": "Ext.field.FileButton",
           "exportName": "FileButton",
           "parentClassName": "Ext.Button",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.filebutton"
           ],
@@ -28229,6 +28916,9 @@
           "className": "Ext.field.Hidden",
           "exportName": "HiddenField",
           "parentClassName": "Ext.field.Input",
+          "alternateClassNames": [
+            "Ext.form.Hidden"
+          ],
           "classAliases": [
             "widget.hiddenfield"
           ],
@@ -28242,6 +28932,9 @@
           "className": "Ext.field.Number",
           "exportName": "NumberField",
           "parentClassName": "Ext.field.Text",
+          "alternateClassNames": [
+            "Ext.form.Number"
+          ],
           "classAliases": [
             "widget.numberfield"
           ],
@@ -28306,6 +28999,7 @@
         {
           "className": "Ext.form.Borders",
           "exportName": "BordersForm",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "fieldSeparators",
@@ -28325,6 +29019,7 @@
           "className": "Ext.field.Panel",
           "exportName": "FieldPanel",
           "parentClassName": "Ext.Panel",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.fieldpanel"
           ],
@@ -28383,6 +29078,7 @@
           "className": "Ext.field.trigger.Reveal",
           "exportName": "RevealTrigger",
           "parentClassName": "Ext.field.trigger.Trigger",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.revealtrigger",
             "trigger.reveal"
@@ -28397,6 +29093,9 @@
           "className": "Ext.field.Password",
           "exportName": "PasswordField",
           "parentClassName": "Ext.field.Text",
+          "alternateClassNames": [
+            "Ext.form.Password"
+          ],
           "classAliases": [
             "widget.passwordfield"
           ],
@@ -28435,6 +29134,9 @@
           "className": "Ext.field.Radio",
           "exportName": "Radio",
           "parentClassName": "Ext.field.Checkbox",
+          "alternateClassNames": [
+            "Ext.form.Radio"
+          ],
           "classAliases": [
             "widget.radio",
             "widget.radiofield"
@@ -28461,6 +29163,7 @@
           "className": "Ext.field.trigger.Search",
           "exportName": "SearchTrigger",
           "parentClassName": "Ext.field.trigger.Trigger",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.searchtrigger",
             "trigger.search"
@@ -28475,6 +29178,9 @@
           "className": "Ext.field.Search",
           "exportName": "SearchField",
           "parentClassName": "Ext.field.Text",
+          "alternateClassNames": [
+            "Ext.form.Search"
+          ],
           "classAliases": [
             "widget.searchfield"
           ],
@@ -28488,6 +29194,7 @@
           "className": "Ext.slider.Thumb",
           "exportName": "Thumb",
           "parentClassName": "Ext.Component",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.thumb"
           ],
@@ -28553,6 +29260,7 @@
           "className": "Ext.slider.Slider",
           "exportName": "Slider",
           "parentClassName": "Ext.Component",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.slider"
           ],
@@ -28705,6 +29413,9 @@
           "className": "Ext.field.Slider",
           "exportName": "SliderField",
           "parentClassName": "Ext.field.Field",
+          "alternateClassNames": [
+            "Ext.form.Slider"
+          ],
           "classAliases": [
             "widget.sliderfield"
           ],
@@ -28775,6 +29486,7 @@
           "className": "Ext.field.SingleSlider",
           "exportName": "SingleSliderField",
           "parentClassName": "Ext.field.Slider",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.singlesliderfield"
           ],
@@ -28800,6 +29512,7 @@
           "className": "Ext.field.trigger.SpinDown",
           "exportName": "SpinDownTrigger",
           "parentClassName": "Ext.field.trigger.Trigger",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.spindowntrigger",
             "trigger.spindown"
@@ -28814,6 +29527,7 @@
           "className": "Ext.field.trigger.SpinUp",
           "exportName": "SpinupTrigger",
           "parentClassName": "Ext.field.trigger.Trigger",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.spinuptrigger",
             "trigger.spinup"
@@ -28828,6 +29542,9 @@
           "className": "Ext.field.Spinner",
           "exportName": "SpinnerField",
           "parentClassName": "Ext.field.Number",
+          "alternateClassNames": [
+            "Ext.form.Spinner"
+          ],
           "classAliases": [
             "widget.spinnerfield"
           ],
@@ -28884,6 +29601,7 @@
           "className": "Ext.slider.Toggle",
           "exportName": "ToggleSlider",
           "parentClassName": "Ext.slider.Slider",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.toggleslider"
           ],
@@ -28927,6 +29645,9 @@
           "className": "Ext.field.Toggle",
           "exportName": "ToggleField",
           "parentClassName": "Ext.field.SingleSlider",
+          "alternateClassNames": [
+            "Ext.form.Toggle"
+          ],
           "classAliases": [
             "widget.togglefield"
           ],
@@ -28959,6 +29680,9 @@
           "className": "Ext.field.Url",
           "exportName": "UrlField",
           "parentClassName": "Ext.field.Text",
+          "alternateClassNames": [
+            "Ext.form.Url"
+          ],
           "classAliases": [
             "widget.urlfield"
           ],
@@ -28972,6 +29696,7 @@
           "className": "Ext.field.trigger.Component",
           "exportName": "ComponentTrigger",
           "parentClassName": "Ext.field.trigger.Base",
+          "alternateClassNames": [],
           "classAliases": [
             "trigger.component"
           ],
@@ -29000,6 +29725,7 @@
           "className": "Ext.field.trigger.File",
           "exportName": "FileTrigger",
           "parentClassName": "Ext.field.trigger.Component",
+          "alternateClassNames": [],
           "classAliases": [
             "trigger.file"
           ],
@@ -29015,6 +29741,7 @@
           "className": "Ext.field.trigger.Menu",
           "exportName": "MenuTrigger",
           "parentClassName": "Ext.field.trigger.Trigger",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.menutrigger",
             "trigger.menu"
@@ -29052,6 +29779,7 @@
           "className": "Ext.form.FieldSet",
           "exportName": "Fieldset",
           "parentClassName": "Ext.Container",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.fieldset"
           ],
@@ -29082,6 +29810,9 @@
           "className": "Ext.form.Panel",
           "exportName": "FormPanel",
           "parentClassName": "Ext.field.Panel",
+          "alternateClassNames": [
+            "Ext.form.FormPanel"
+          ],
           "classAliases": [
             "widget.formpanel"
           ],
@@ -29211,6 +29942,7 @@
           "className": "Ext.grid.CellEditor",
           "exportName": "CellEditor",
           "parentClassName": "Ext.Editor",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.celleditor"
           ],
@@ -29250,6 +29982,7 @@
           "className": "Ext.grid.Location",
           "exportName": "LocationGrid",
           "parentClassName": "Ext.dataview.Location",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -29378,6 +30111,7 @@
           "className": "Ext.grid.NavigationModel",
           "exportName": "GridNavmodel",
           "parentClassName": "Ext.dataview.NavigationModel",
+          "alternateClassNames": [],
           "classAliases": [
             "navmodel.grid"
           ],
@@ -29523,6 +30257,7 @@
           "className": "Ext.grid.cell.Base",
           "exportName": "GridCellBase",
           "parentClassName": "Ext.Widget",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.gridcellbase"
           ],
@@ -29606,6 +30341,7 @@
           "className": "Ext.grid.cell.Text",
           "exportName": "TextCell",
           "parentClassName": "Ext.grid.cell.Base",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.textcell"
           ],
@@ -29646,6 +30382,7 @@
           "className": "Ext.grid.cell.Cell",
           "exportName": "GridCell",
           "parentClassName": "Ext.grid.cell.Text",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.gridcell"
           ],
@@ -29701,6 +30438,7 @@
           "className": "Ext.grid.RowBody",
           "exportName": "RowBody",
           "parentClassName": "Ext.Component",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.rowbody"
           ],
@@ -29731,6 +30469,7 @@
           "className": "Ext.grid.Row",
           "exportName": "Gridrow",
           "parentClassName": "Ext.Component",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.gridrow"
           ],
@@ -29852,6 +30591,7 @@
           "className": "Ext.grid.HeaderContainer",
           "exportName": "HeaderContainer",
           "parentClassName": "Ext.Container",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.headercontainer"
           ],
@@ -29996,6 +30736,7 @@
           "className": "Ext.menu.CheckItem",
           "exportName": "MenuCheckItem",
           "parentClassName": "Ext.menu.Item",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.menucheckitem"
           ],
@@ -30071,6 +30812,9 @@
           "className": "Ext.grid.column.Column",
           "exportName": "GridColumn",
           "parentClassName": "Ext.grid.HeaderContainer",
+          "alternateClassNames": [
+            "Ext.grid.column.Template"
+          ],
           "classAliases": [
             "widget.gridcolumn",
             "widget.column",
@@ -30481,6 +31225,7 @@
           "className": "Ext.grid.cell.Date",
           "exportName": "DateCell",
           "parentClassName": "Ext.grid.cell.Text",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.datecell"
           ],
@@ -30503,6 +31248,7 @@
           "className": "Ext.grid.column.Date",
           "exportName": "DateColumn",
           "parentClassName": "Ext.grid.column.Column",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.datecolumn"
           ],
@@ -30521,6 +31267,7 @@
           "className": "Ext.grid.menu.Columns",
           "exportName": "GridColumnsMenu",
           "parentClassName": "Ext.menu.Item",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.gridcolumnsmenu"
           ],
@@ -30545,6 +31292,7 @@
           "className": "Ext.grid.menu.GroupByThis",
           "exportName": "GridGroupbyThisMenuItem",
           "parentClassName": "Ext.menu.Item",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.gridgroupbythismenuitem"
           ],
@@ -30558,6 +31306,7 @@
           "className": "Ext.grid.menu.ShowInGroups",
           "exportName": "GridShowinGroupsMenuItem",
           "parentClassName": "Ext.menu.CheckItem",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.gridshowingroupsmenuitem"
           ],
@@ -30571,6 +31320,7 @@
           "className": "Ext.menu.RadioItem",
           "exportName": "MenuRadioItem",
           "parentClassName": "Ext.menu.CheckItem",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.menuradioitem"
           ],
@@ -30603,6 +31353,7 @@
           "className": "Ext.grid.menu.SortAsc",
           "exportName": "GridSortascMenuItem",
           "parentClassName": "Ext.menu.RadioItem",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.gridsortascmenuitem"
           ],
@@ -30616,6 +31367,7 @@
           "className": "Ext.grid.menu.SortDesc",
           "exportName": "GridSortDescMenuItem",
           "parentClassName": "Ext.menu.RadioItem",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.gridsortdescmenuitem"
           ],
@@ -30629,6 +31381,7 @@
           "className": "Ext.grid.selection.Cells",
           "exportName": "CellsSelection",
           "parentClassName": "Ext.dataview.selection.Selection",
+          "alternateClassNames": [],
           "classAliases": [
             "selection.cells"
           ],
@@ -30730,6 +31483,7 @@
           "className": "Ext.grid.selection.Columns",
           "exportName": "ColumnsSelection",
           "parentClassName": "Ext.dataview.selection.Selection",
+          "alternateClassNames": [],
           "classAliases": [
             "selection.columns"
           ],
@@ -30815,6 +31569,7 @@
           "className": "Ext.grid.selection.Replicator",
           "exportName": "SelectionReplicatorPlugin",
           "parentClassName": "Ext.plugin.Abstract",
+          "alternateClassNames": [],
           "classAliases": [
             "plugin.selectionreplicator"
           ],
@@ -30867,6 +31622,7 @@
         {
           "className": "Ext.grid.selection.SelectionExtender",
           "exportName": "SelectionExtenderSelectionGrid",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -30975,6 +31731,7 @@
           "className": "Ext.grid.cell.Number",
           "exportName": "NumberCell",
           "parentClassName": "Ext.grid.cell.Text",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.numbercell"
           ],
@@ -30998,6 +31755,7 @@
           "className": "Ext.grid.cell.Check",
           "exportName": "CheckCell",
           "parentClassName": "Ext.grid.cell.Base",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.checkcell"
           ],
@@ -31039,6 +31797,7 @@
           "className": "Ext.grid.column.Check",
           "exportName": "CheckColumn",
           "parentClassName": "Ext.grid.column.Column",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.checkcolumn"
           ],
@@ -31102,6 +31861,7 @@
           "className": "Ext.grid.column.Selection",
           "exportName": "SelectionColumn",
           "parentClassName": "Ext.grid.column.Check",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.selectioncolumn"
           ],
@@ -31130,6 +31890,7 @@
           "className": "Ext.grid.column.Number",
           "exportName": "NumberColumn",
           "parentClassName": "Ext.grid.column.Column",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.numbercolumn"
           ],
@@ -31148,6 +31909,7 @@
           "className": "Ext.grid.cell.RowNumberer",
           "exportName": "RowNumbererCell",
           "parentClassName": "Ext.grid.cell.Number",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.rownumberercell"
           ],
@@ -31161,6 +31923,7 @@
           "className": "Ext.grid.column.RowNumberer",
           "exportName": "RowNumberer",
           "parentClassName": "Ext.grid.column.Number",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.rownumberer"
           ],
@@ -31208,6 +31971,7 @@
           "className": "Ext.grid.selection.Model",
           "exportName": "GridSelmodel",
           "parentClassName": "Ext.dataview.selection.Model",
+          "alternateClassNames": [],
           "classAliases": [
             "selmodel.grid"
           ],
@@ -31525,6 +32289,7 @@
           "className": "Ext.grid.plugin.ColumnResizing",
           "exportName": "ColumnResizingPlugin",
           "parentClassName": "Ext.Component",
+          "alternateClassNames": [],
           "classAliases": [
             "plugin.columnresizing",
             "plugin.gridcolumnresizing"
@@ -31592,6 +32357,7 @@
           "className": "Ext.grid.RowHeader",
           "exportName": "RowHeader",
           "parentClassName": "Ext.dataview.ItemHeader",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.rowheader"
           ],
@@ -31612,6 +32378,7 @@
           "className": "Ext.grid.Grid",
           "exportName": "Grid",
           "parentClassName": "Ext.dataview.List",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.grid"
           ],
@@ -31791,6 +32558,7 @@
           "className": "Ext.grid.PagingToolbar",
           "exportName": "PagingToolbar",
           "parentClassName": "Ext.Toolbar",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.pagingtoolbar"
           ],
@@ -31824,6 +32592,7 @@
           "className": "Ext.grid.SummaryRow",
           "exportName": "GridSummaryrow",
           "parentClassName": "Ext.grid.Row",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.gridsummaryrow"
           ],
@@ -31850,6 +32619,7 @@
           "className": "Ext.grid.cell.Boolean",
           "exportName": "BooleanCell",
           "parentClassName": "Ext.grid.cell.Text",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.booleancell"
           ],
@@ -31881,6 +32651,7 @@
           "className": "Ext.grid.cell.Expander",
           "exportName": "ExpanderCell",
           "parentClassName": "Ext.grid.cell.Base",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.expandercell"
           ],
@@ -31898,6 +32669,7 @@
           "className": "Ext.grid.cell.Widget",
           "exportName": "WidgetCell",
           "parentClassName": "Ext.grid.cell.Base",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.widgetcell"
           ],
@@ -31954,6 +32726,7 @@
           "className": "Ext.grid.column.Boolean",
           "exportName": "BooleanColumn",
           "parentClassName": "Ext.grid.column.Column",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.booleancolumn"
           ],
@@ -31974,6 +32747,7 @@
           "className": "Ext.grid.column.Text",
           "exportName": "TextColumn",
           "parentClassName": "Ext.grid.column.Column",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.textcolumn"
           ],
@@ -31989,6 +32763,7 @@
           "className": "Ext.grid.plugin.CellEditing",
           "exportName": "GridCellEditingPlugin",
           "parentClassName": "Ext.plugin.Abstract",
+          "alternateClassNames": [],
           "classAliases": [
             "plugin.gridcellediting",
             "plugin.cellediting"
@@ -32041,6 +32816,7 @@
           "className": "Ext.grid.plugin.Clipboard",
           "exportName": "ClipboardPlugin",
           "parentClassName": "Ext.plugin.AbstractClipboard",
+          "alternateClassNames": [],
           "classAliases": [
             "plugin.clipboard"
           ],
@@ -32095,6 +32871,7 @@
           "className": "Ext.grid.plugin.Editable",
           "exportName": "GridEditablePlugin",
           "parentClassName": "Ext.plugin.Abstract",
+          "alternateClassNames": [],
           "classAliases": [
             "plugin.grideditable"
           ],
@@ -32178,6 +32955,7 @@
           "className": "Ext.grid.plugin.PagingToolbar",
           "exportName": "PagingToolbarPlugin",
           "parentClassName": "Ext.plugin.Abstract",
+          "alternateClassNames": [],
           "classAliases": [
             "plugin.pagingtoolbar",
             "plugin.gridpagingtoolbar"
@@ -32305,6 +33083,7 @@
           "className": "Ext.grid.plugin.RowExpander",
           "exportName": "RowExpanderPlugin",
           "parentClassName": "Ext.plugin.Abstract",
+          "alternateClassNames": [],
           "classAliases": [
             "plugin.rowexpander"
           ],
@@ -32341,6 +33120,9 @@
           "className": "Ext.grid.plugin.RowOperations",
           "exportName": "RowOperationsPlugin",
           "parentClassName": "Ext.plugin.Abstract",
+          "alternateClassNames": [
+            "Ext.grid.plugin.MultiSelection"
+          ],
           "classAliases": [
             "plugin.rowoperations",
             "plugin.multiselection",
@@ -32414,6 +33196,9 @@
           "className": "Ext.grid.plugin.Summary",
           "exportName": "GridSummaryPlugin",
           "parentClassName": "Ext.plugin.Abstract",
+          "alternateClassNames": [
+            "Ext.grid.plugin.SummaryRow"
+          ],
           "classAliases": [
             "plugin.gridsummary",
             "plugin.summaryrow",
@@ -32459,6 +33244,7 @@
           "className": "Ext.grid.plugin.ViewOptionsListItem",
           "exportName": "ViewOptionsListItem",
           "parentClassName": "Ext.dataview.SimpleListItem",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.viewoptionslistitem"
           ],
@@ -32487,6 +33273,7 @@
           "className": "Ext.layout.Fit",
           "exportName": "FitLayout",
           "parentClassName": "Ext.layout.Auto",
+          "alternateClassNames": [],
           "classAliases": [
             "layout.fit"
           ],
@@ -32500,6 +33287,7 @@
           "className": "Ext.grid.plugin.ViewOptions",
           "exportName": "GridViewOptionsPlugin",
           "parentClassName": "Ext.plugin.Abstract",
+          "alternateClassNames": [],
           "classAliases": [
             "plugin.gridviewoptions"
           ],
@@ -32677,6 +33465,7 @@
           "className": "Ext.layout.Center",
           "exportName": "CenterLayout",
           "parentClassName": "Ext.layout.Auto",
+          "alternateClassNames": [],
           "classAliases": [
             "layout.center"
           ],
@@ -32690,6 +33479,7 @@
           "className": "Ext.layout.Float",
           "exportName": "FloatLayout",
           "parentClassName": "Ext.layout.Auto",
+          "alternateClassNames": [],
           "classAliases": [
             "layout.float"
           ],
@@ -32709,6 +33499,7 @@
           "className": "Ext.layout.Form",
           "exportName": "FormLayout",
           "parentClassName": "Ext.layout.Auto",
+          "alternateClassNames": [],
           "classAliases": [
             "layout.form"
           ],
@@ -32739,6 +33530,7 @@
         {
           "className": "Ext.layout.overflow.Scroller",
           "exportName": "ScrollerLayoutOverflow",
+          "alternateClassNames": [],
           "classAliases": [
             "layout.overflow.scroller"
           ],
@@ -32905,6 +33697,7 @@
           "className": "Ext.list.Location",
           "exportName": "LocationList",
           "parentClassName": "Ext.dataview.Location",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -32920,6 +33713,7 @@
           "className": "Ext.menu.Separator",
           "exportName": "MenuSeparator",
           "parentClassName": "Ext.Component",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.menuseparator"
           ],
@@ -32933,6 +33727,7 @@
           "className": "Ext.mixin.Progressable",
           "exportName": "ProgressableMixin",
           "parentClassName": "Ext.Mixin",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "dynamic",
@@ -32972,6 +33767,7 @@
           "className": "Ext.navigation.Bar",
           "exportName": "BarNavigation",
           "parentClassName": "Ext.TitleBar",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "android2Transforms",
@@ -33085,6 +33881,9 @@
           "className": "Ext.navigation.View",
           "exportName": "NavigationView",
           "parentClassName": "Ext.Container",
+          "alternateClassNames": [
+            "Ext.NavigationView"
+          ],
           "classAliases": [
             "widget.navigationview"
           ],
@@ -33197,6 +33996,7 @@
         {
           "className": "Ext.panel.Collapser",
           "exportName": "CollapserPanel",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "animation",
@@ -33516,6 +34316,7 @@
           "className": "Ext.panel.Header",
           "exportName": "PanelHeader",
           "parentClassName": "Ext.Container",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.panelheader"
           ],
@@ -33582,6 +34383,7 @@
         {
           "className": "Ext.panel.Resizer",
           "exportName": "ResizerPanel",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "constrainToParent",
@@ -33743,6 +34545,7 @@
           "className": "Ext.plugin.Responsive",
           "exportName": "ResponsivePlugin",
           "parentClassName": "Ext.mixin.Responsive",
+          "alternateClassNames": [],
           "classAliases": [
             "plugin.responsive"
           ],
@@ -33767,6 +34570,7 @@
           "className": "Ext.plugin.TabGuard",
           "exportName": "TabGuardPlugin",
           "parentClassName": "Ext.plugin.Abstract",
+          "alternateClassNames": [],
           "classAliases": [
             "plugin.tabguard"
           ],
@@ -33818,6 +34622,9 @@
           "className": "Ext.tab.Tab",
           "exportName": "Tab",
           "parentClassName": "Ext.Button",
+          "alternateClassNames": [
+            "Ext.Tab"
+          ],
           "classAliases": [
             "widget.tab"
           ],
@@ -33851,6 +34658,9 @@
           "className": "Ext.tab.Bar",
           "exportName": "Tabbar",
           "parentClassName": "Ext.Toolbar",
+          "alternateClassNames": [
+            "Ext.TabBar"
+          ],
           "classAliases": [
             "widget.tabbar"
           ],
@@ -33927,6 +34737,9 @@
           "className": "Ext.tab.Panel",
           "exportName": "TabPanel",
           "parentClassName": "Ext.Container",
+          "alternateClassNames": [
+            "Ext.TabPanel"
+          ],
           "classAliases": [
             "widget.tabpanel"
           ],
@@ -34007,6 +34820,7 @@
         {
           "className": "Ext.tip.Manager",
           "exportName": "ManagerTip",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "overflowTip",
@@ -34078,6 +34892,7 @@
         {
           "className": "Ext.util.Audio",
           "exportName": "AudioUtil",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -34098,6 +34913,7 @@
           "className": "Ext.util.BufferedCollection",
           "exportName": "BufferedCollectionUtil",
           "parentClassName": "Ext.util.Collection",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "pageSize",
@@ -34117,6 +34933,7 @@
         {
           "className": "Ext.util.Draggable",
           "exportName": "DraggableUtil",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "cls",
@@ -34215,6 +35032,9 @@
           "className": "Ext.util.Geolocation",
           "exportName": "GeolocationUtil",
           "parentClassName": "Ext.Evented",
+          "alternateClassNames": [
+            "Ext.util.GeoLocation"
+          ],
           "classAliases": [],
           "configs": [
             "accuracy",
@@ -34279,6 +35099,7 @@
         {
           "className": "Ext.util.LineSegment",
           "exportName": "LineSegmentUtil",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [],
           "cachedConfigs": [],
@@ -34308,6 +35129,7 @@
         {
           "className": "Ext.util.PositionMap",
           "exportName": "PositionMapUtil",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "minimumHeight"
@@ -34333,6 +35155,7 @@
           "className": "Ext.util.TranslatableList",
           "exportName": "TranslatableListUtil",
           "parentClassName": "Ext.util.translatable.Abstract",
+          "alternateClassNames": [],
           "classAliases": [],
           "configs": [
             "items"
@@ -34350,6 +35173,7 @@
           "className": "Ext.util.translatable.Component",
           "exportName": "ComponentTranslatable",
           "parentClassName": "Ext.util.translatable.CssTransform",
+          "alternateClassNames": [],
           "classAliases": [
             "translatable.component"
           ],
@@ -34382,6 +35206,9 @@
           "className": "Ext.grid.Tree",
           "exportName": "Tree",
           "parentClassName": "Ext.grid.Grid",
+          "alternateClassNames": [
+            "Ext.tree.Tree"
+          ],
           "classAliases": [
             "widget.tree"
           ],
@@ -34452,6 +35279,7 @@
           "className": "Ext.grid.cell.Tree",
           "exportName": "TreeCell",
           "parentClassName": "Ext.grid.cell.Cell",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.treecell"
           ],
@@ -34523,6 +35351,7 @@
           "className": "Ext.grid.column.Tree",
           "exportName": "TreeColumn",
           "parentClassName": "Ext.grid.column.Column",
+          "alternateClassNames": [],
           "classAliases": [
             "widget.treecolumn"
           ],

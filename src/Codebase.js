@@ -21,11 +21,12 @@ import {
 } from './Util'
 
 export default class Codebase{
-  unparseable = []
-  aliases     = {}
-  classes     = {}
-  _classRe    = []
-  words       = []
+  unparseable          = []
+  aliases              = {}
+  classes              = {}
+  _alternateClassNames = {}
+  _classRe             = []
+  words                = []
 
   static async factory(config){
     let codebase = new this(config)
@@ -89,6 +90,7 @@ export default class Codebase{
   }
 
   getClassForClassName(className){
+    className = this._alternateClassNames[className] || className
     return this.classes[className] || (this.parentCodebase ? this.parentCodebase.getClassForClassName(className) : null) || null
   }
 
@@ -149,7 +151,8 @@ export default class Codebase{
       }
 
       this.classes[cls.className] = cls
-      this._classRe.push(cls.fileSearchRegExp)
+      cls.alternateClassNames.forEach(name => this._alternateClassNames[name] = cls.className)
+      this._classRe.push(...cls.fileSearchRegExps)
     })
 
     this._addWordsFromClassNames(classes.map(cls => cls.className))

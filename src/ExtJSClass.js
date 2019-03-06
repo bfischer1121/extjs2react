@@ -16,31 +16,33 @@ export default class ExtJSClass{
 
     cls.fromSnapshot = true
 
-    cls.exportName      = snapshot.exportName
-    cls.parentClassName = snapshot.parentClassName
-    cls.override        = snapshot.override
-    cls.classAliases    = snapshot.classAliases
-    cls.configs         = snapshot.configs
-    cls.cachedConfigs   = snapshot.cachedConfigs
-    cls.eventedConfigs  = snapshot.eventedConfigs
-    cls.aliasesUsed     = snapshot.aliasesUsed
-    cls.methodCalls     = snapshot.methodCalls
+    cls.exportName          = snapshot.exportName
+    cls.parentClassName     = snapshot.parentClassName
+    cls.override            = snapshot.override
+    cls.alternateClassNames = snapshot.alternateClassNames
+    cls.classAliases        = snapshot.classAliases
+    cls.configs             = snapshot.configs
+    cls.cachedConfigs       = snapshot.cachedConfigs
+    cls.eventedConfigs      = snapshot.eventedConfigs
+    cls.aliasesUsed         = snapshot.aliasesUsed
+    cls.methodCalls         = snapshot.methodCalls
 
     return cls
   }
 
   toSnapshot(){
     return {
-      className       : this.className,
-      exportName      : this.exportName,
-      parentClassName : this.parentClassName || undefined,
-      override        : this.override        || undefined,
-      classAliases    : this.classAliases,
-      configs         : this.configs,
-      cachedConfigs   : this.cachedConfigs,
-      eventedConfigs  : this.eventedConfigs,
-      aliasesUsed     : this.aliasesUsed,
-      methodCalls     : this.methodCalls
+      className           : this.className,
+      exportName          : this.exportName,
+      parentClassName     : this.parentClassName || undefined,
+      override            : this.override        || undefined,
+      alternateClassNames : this.alternateClassNames,
+      classAliases        : this.classAliases,
+      configs             : this.configs,
+      cachedConfigs       : this.cachedConfigs,
+      eventedConfigs      : this.eventedConfigs,
+      aliasesUsed         : this.aliasesUsed,
+      methodCalls         : this.methodCalls
     }
   }
 
@@ -81,6 +83,19 @@ export default class ExtJSClass{
     }
 
     return ancestors
+  }
+
+  get alternateClassNames(){
+    if(_.isUndefined(this._alternateClassNames)){
+      let names = Ast.getConfig(this._ast, 'alternateClassName')
+      this._alternateClassNames = _.compact(_.isArray(names) ? names.map(name => name.value) : [names])
+    }
+
+    return this._alternateClassNames
+  }
+
+  set alternateClassNames(alternateClassNames){
+    this._alternateClassNames = alternateClassNames
   }
 
   get override(){
@@ -143,8 +158,8 @@ export default class ExtJSClass{
     this._eventedConfigs = configs
   }
 
-  get fileSearchRegExp(){
-    return new RegExp(`(${this.className})\\W+?`, 'g')
+  get fileSearchRegExps(){
+    return [this.className, ...(this.alternateClassNames)].map(name => new RegExp(`(${name})\\W+?`, 'g'))
   }
 
   get methodCalls(){
