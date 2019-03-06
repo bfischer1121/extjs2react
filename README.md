@@ -31,7 +31,7 @@ e.g., `FaceidSetup` → add `FaceID` to config → `FaceIDSetup` (if no effect, 
 - [x] `import` statements for fully-qualified class dependencies
 - [x] `import` statements for aliases
 - [ ] ExtJS classes → ES6 classes
-- [ ] `items` → JSX within render
+- [x] `items` → JSX within render
 - [ ] ViewModel → `state`, render
 - [ ] ViewController → Component methods, `props`, render
 - [ ] Utility methods → ES6, lodash

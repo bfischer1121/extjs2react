@@ -92,6 +92,8 @@ export const getRelativePath = (fromFile, toFile) => {
   return parts.join('/')
 }
 
+export const logInfo = message => console.log(message)
+
 export const logError = message => {
   //console.error(message)
 }

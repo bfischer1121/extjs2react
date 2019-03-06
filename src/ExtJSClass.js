@@ -11,6 +11,25 @@ export default class ExtJSClass{
 
   extractedProps = {}
 
+  static transformedProperties = [
+    'extend',
+    'xtype',
+    'alias',
+    'alternateClassName',
+    'override',
+    'singleton',
+    'statics',
+    'requires',
+    'mixins',
+    'config',
+    'cachedConfig',
+    'eventedConfig'
+  ]
+
+  static treatAsConfigs = [
+    'listeners'
+  ]
+
   static fromSnapshot(sourceFile, snapshot){
     let cls = new this(sourceFile, snapshot.className)
 
@@ -258,14 +277,49 @@ export default class ExtJSClass{
     this._exportName = name
   }
 
+  get classMembers(){
+    if(_.isUndefined(this._classMembers)){
+      let properties  = [],
+          configs     = [],
+          methods     = [],
+          configProps = (Ast.getProperty(this._ast, 'config') || {}).properties || [],
+          nodes       = [...configProps, ...Ast.getProperties(this._ast)]
+
+      nodes.forEach(node => {
+        let name = Ast.getPropertyName(node)
+
+        if(this.localAndInheritedConfigs.includes(name) || ExtJSClass.treatAsConfigs.includes(name)){
+          configs.push(node)
+          return
+        }
+
+        if(Ast.isFunction(node.value)){
+          methods.push(node)
+          return
+        }
+
+        if(!ExtJSClass.transformedProperties.includes(name)){
+          properties.push(node)
+        }
+      })
+
+      this._classMembers = { properties, configs, methods }
+    }
+
+    return this._classMembers
+  }
+
   _getLocalConfigs(configType){
-    let key = { configs: 'config', cachedConfigs: 'cachedConfig', eventedConfigs: 'eventedConfig' }[configType]
+    let key = {
+      configs        : 'config',
+      cachedConfigs  : 'cachedConfig',
+      eventedConfigs : 'eventedConfig'
+    }[configType]
 
-    let config          = Ast.getProperty(this._ast, key),
-        configs         = Ast.isObject(config) ? config.properties.map(node => Ast.getPropertyName(node)) : [],
-        ancestorConfigs = this.ancestors.reduce((configs, cls) => [...configs, ...cls[configType]], [])
+    let config  = Ast.getProperty(this._ast, key),
+        configs = Ast.isObject(config) ? config.properties.map(node => Ast.getPropertyName(node)) : []
 
-    return _.difference(configs, ancestorConfigs).sort((c1, c2) => c1.localeCompare(c2))
+    return _.difference(configs, this.inheritedConfigs).sort((c1, c2) => c1.localeCompare(c2))
   }
 
   _getClassReferenceConfig(name){
@@ -275,13 +329,19 @@ export default class ExtJSClass{
       return null
     }
 
-    if(Ast.isString(property)){
-      return property.value
+    let propertyToClassName = property => {
+      if(Ast.isString(property)){
+        return property.value
+      }
+
+      property = Ast.toString(property)
+
+      return this.sourceFile.codebase.getClassForClassName(property) ? property : null
     }
 
-    property = Ast.toString(property)
-
-    return this.sourceFile.codebase.getClassForClassName(property) ? property : null
+    return Ast.isArray(property)
+      ? property.elements.map(el => propertyToClassName(el))
+      : propertyToClassName(property)
   }
 
   _getAliasesFromNodes(nodes){
@@ -388,20 +448,44 @@ export default class ExtJSClass{
     let exportCode  = this.sourceFile.classes.length === 1 ? 'export default' : 'export',
         className   = this.exportName,
         parentName  = this.parentClass ? this.sourceFile.getImportNameForClassName(this.parentClass.className) : null,
-        extendsCode = this.isComponent() ? ' extends Component' : (parentName ? ` extends ${parentName}` : '')
+        extendsCode = this.isComponent() ? ' extends Component' : (parentName ? ` extends ${parentName}` : ''),
+        classBody   = [],
+        properties  = this.getProperties(),
+        methods     = this.getMethods()
+
+    if(properties.length){
+      classBody.push([properties])
+    }
+
+    if(methods.length){
+      classBody.push([methods])
+    }
 
     // controller, viewModel, cls, items, listeners, bind
     return code(
       `${exportCode} class ${className}${extendsCode}{`,
-        [this.getMethods()],
+        ...classBody,
       '}'
     )
   }
 
-  getMethods(){
-    let fns = Ast.getProperties(this._ast).filter(({ value }) => Ast.isFunction(value))
+  getProperties(){
+    let properties = this.classMembers.properties.map(node => {
+      this.sourceFile.codebase.logProperty(Ast.getPropertyName(node))
+      return Ast.toString(b.classProperty(node.key, node.value)).replace(/;$/, '')
+    })
 
-    let methods = fns.map(({ key, value }) => {
+    let defaultProps = this.classMembers.configs.filter(node => this.localConfigs.includes(Ast.getPropertyName(node)))
+
+    if(defaultProps.length){
+      properties.push(`static defaultProps = ${Ast.toString(b.objectExpression(defaultProps))}\n`)
+    }
+
+    return properties.join('\n\n')
+  }
+
+  getMethods(){
+    let methods = this.classMembers.methods.map(({ key, value }) => {
       let method = b.classMethod('method', key, value.params, value.body)
       return (value.async ? 'async ' : '') + Ast.toString(method).replace(/\) \{/, '){')
     })
@@ -415,8 +499,14 @@ export default class ExtJSClass{
 
   getRenderFn(){
     let identifier = b.jsxIdentifier(this.sourceFile.getImportNameForClassName(this.parentClass.className)),
-        props      = [],
         items      = _.compact((Ast.getConfig(this._ast, 'items') || []).map(item => this.getJSXFromConfig(item)))
+
+    let props = this.classMembers.configs.filter(node => !this.localConfigs.includes(Ast.getPropertyName(node)))
+
+    props = [
+      ...this.getPropsFromConfig(b.objectExpression(props)),
+      b.jsxSpreadAttribute(b.memberExpression(b.thisExpression(), b.identifier('props')))
+    ]
 
     let jsx = b.jsxElement(
       b.jsxOpeningElement(identifier, props),
@@ -425,20 +515,21 @@ export default class ExtJSClass{
       items.length === 0
     )
 
+    let renderBody = [
+      'return (',
+      [this.getCodeFromJSX(jsx)],
+      ')',
+    ]
+
     let extractedProps = Object.keys(this.extractedProps).map(name => (
       `const ${name} = ${Ast.toString(this.extractedProps[name])}`
     )).join('\n\n')
 
-    return code(
-      'render(props){',
-      [
-        extractedProps + (extractedProps.length ? '\n' : ''),
-        'return (',
-        [this.getCodeFromJSX(jsx)],
-        ')',
-      ],
-      '}'
-    )
+    if(extractedProps.length){
+      renderBody.unshift(extractedProps + '\n')
+    }
+
+    return code('render(props){', renderBody, '}')
   }
 
   getCodeFromJSX(jsx){
@@ -484,7 +575,7 @@ export default class ExtJSClass{
     let getPropName = configName => ({ 'cls': 'className' }[configName] || configName)
 
     return Ast.getPropertiesExcept(config, 'extend', 'xtype', 'items').map(node => {
-      let name  = Ast.getPropertyName(node),
+      let name  = getPropName(Ast.getPropertyName(node)),
           value = node.value,
           prop  = value => b.jsxAttribute(b.jsxIdentifier(name), value)
 

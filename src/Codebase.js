@@ -17,6 +17,7 @@ import {
   asyncForEach,
   copySourceFileToTargetDir,
   getPathInTargetDirForSource,
+  logInfo,
   logError
 } from './Util'
 
@@ -27,6 +28,7 @@ export default class Codebase{
   _alternateClassNames = {}
   _classRe             = []
   words                = []
+  _properties          = {}
 
   static async factory(config){
     let codebase = new this(config)
@@ -132,6 +134,19 @@ export default class Codebase{
       this._saveSourceFile(sourceFile, sourceFile.transpile())
       //sourceFile.missingFiles.forEach(className => logError(`Unknown file for class: ${className}`))
     })
+
+    this.logTopProperties()
+  }
+
+  logProperty(name){
+    this._properties[name] = this._properties[name] || 0
+    this._properties[name]++
+  }
+
+  logTopProperties(){
+    let props = Object.keys(this._properties).sort((p1, p2) => this._properties[p2] - this._properties[p1])
+    logInfo('*** Top Properties ***')
+    props.forEach(prop => logInfo(`${this._properties[prop]} => ${prop}`))
   }
 
   _addSourceFiles(){
