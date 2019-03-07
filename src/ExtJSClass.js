@@ -567,16 +567,32 @@ export default class ExtJSClass{
   }
 
   getMethods(){
-    let transformMethod = ({ key, value }) => {
-      let method = b.classMethod('method', key, value.params, value.body)
-      return (value.async ? 'async ' : '') + Ast.toString(method).replace(/\) \{/, '){')
+    let getMethodName = name => ({
+      'constructor': this.isComponent() ? 'REWRITE_constructor' : 'constructor'
+    }[name] || name)
+
+    let transformMethod = node => {
+      let name   = b.identifier(getMethodName(Ast.getPropertyName(node))),
+          method = b.classMethod('method', name, node.value.params, node.value.body)
+
+      return (node.value.async ? 'async ' : '') + Ast.toString(method).replace(/\) \{/, '){')
     }
 
-    let methods = []
+    let cmpConstructor = null,
+        methods        = []
 
     if(this.isComponent()){
       methods.push(this.getRenderFn())
     }
+
+    this.classMembers.methods.forEach(node => {
+      if(Ast.getPropertyName(node) === 'constructor'){
+        cmpConstructor = transformMethod(node)
+        return
+      }
+
+      methods.push(transformMethod(node))
+    })
 
     let constructor = this.getConstructorFn()
 
@@ -584,7 +600,9 @@ export default class ExtJSClass{
       methods.unshift(constructor)
     }
 
-    methods.push(...(this.classMembers.methods.map(transformMethod)))
+    if(cmpConstructor){
+      methods.unshift(cmpConstructor)
+    }
 
     if(this.controller){
       methods.push(...(this.controller.classMembers.methods.map(transformMethod)))
