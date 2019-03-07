@@ -520,16 +520,57 @@ export default class ExtJSClass{
   }
 
   getMethods(){
-    let methods = this.classMembers.methods.map(({ key, value }) => {
+    let transformMethod = ({ key, value }) => {
       let method = b.classMethod('method', key, value.params, value.body)
       return (value.async ? 'async ' : '') + Ast.toString(method).replace(/\) \{/, '){')
-    })
+    }
+
+    let methods     = [],
+        constructor = this.getConstructorFn()
+
+    if(constructor){
+      methods.push(constructor)
+    }
 
     if(this.isComponent()){
-      methods.unshift(this.getRenderFn())
+      methods.push(this.getRenderFn())
+    }
+
+    methods.push(...(this.classMembers.methods.map(transformMethod)))
+
+    if(this.controller){
+      methods.push(...(this.controller.classMembers.methods.map(transformMethod)))
     }
 
     return methods.join('\n\n')
+  }
+
+  getConstructorFn(){
+    let body = []
+
+    if(this.controller){
+      let methodRefs = this.controller.classMembers.methods.map(node => {
+        let name = Ast.getPropertyName(node)
+        return (/[^A-Z0-9]/i).test(name) ? `this[${name}]` : `this.${name}`
+      }).filter(ref => ref !== 'this.init')
+
+      let longestRef = Math.max(0, ...methodRefs.map(ref => ref.length))
+
+      body.push(...methodRefs.map(ref => `${ref.padEnd(longestRef)} = ${ref}.bind(this)`))
+    }
+
+    if(!body.length){
+      return null
+    }
+
+    return code(
+      'constructor(props){',
+        [
+          'super(props)\n',
+          ...body
+        ],
+      '}'
+    )
   }
 
   getRenderFn(){
@@ -564,7 +605,7 @@ export default class ExtJSClass{
       renderBody.unshift(extractedProps + '\n')
     }
 
-    return code('render(props){', renderBody, '}')
+    return code('render(){', renderBody, '}')
   }
 
   getCodeFromJSX(jsx){
