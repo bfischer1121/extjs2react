@@ -12,19 +12,24 @@ export default class ExtJSClass{
   extractedProps = {}
   listeners      = []
 
-  static transformedProperties = [
+  static transformedClassMembers = [
     'extend',
     'xtype',
     'alias',
     'alternateClassName',
     'override',
     'singleton',
-    'statics',
     'requires',
+    'statics',
     'mixins',
     'config',
     'cachedConfig',
     'eventedConfig'
+  ]
+
+  static transformedCmpClassMembers = [
+    'controller',
+    'items'
   ]
 
   static treatAsConfigs = [
@@ -332,7 +337,7 @@ export default class ExtJSClass{
     if(_.isUndefined(this._classMembers)){
       this._classMembers = {}
 
-      let kinds       = { configs: [], methods: [], properties: [], transformedProperties: [] },
+      let kinds       = { configs: [], methods: [], properties: [], transformedClassMembers: [] },
           configNodes = (Ast.getProperty(this._ast, 'config') || {}).properties || [],
           classNodes  = [...configNodes, ...Ast.getProperties(this._ast, null, ['config'])]
 
@@ -351,7 +356,7 @@ export default class ExtJSClass{
           return
         }
 
-        kinds[ExtJSClass.transformedProperties.includes(name) ? 'transformedProperties' : 'properties'].push(node)
+        kinds[this.transformedClassMembers.includes(name) ? 'transformedClassMembers' : 'properties'].push(node)
       })
 
       if(_.intersection(Object.keys(this._classMembers), Object.keys(kinds)).length){
@@ -362,6 +367,17 @@ export default class ExtJSClass{
     }
 
     return this._classMembers
+  }
+
+  get transformedClassMembers(){
+    if(_.isUndefined(this._transformedClassMembers)){
+      this._transformedClassMembers = [
+        ...ExtJSClass.transformedClassMembers,
+        ...(this.isComponent() ? ExtJSClass.transformedCmpClassMembers : [])
+      ]
+    }
+
+    return this._transformedClassMembers
   }
 
   _getLocalConfigs(configType){
@@ -612,7 +628,7 @@ export default class ExtJSClass{
     let props = this.classMembers.configs.filter(node => !this.localConfigs.includes(Ast.getPropertyName(node)))
 
     props = [
-      ...this.getPropsFromConfig(b.objectExpression(props)),
+      ...this.getPropsFromConfig(b.objectExpression(props), true),
       b.jsxSpreadAttribute(b.memberExpression(b.thisExpression(), b.identifier('props')))
     ]
 
@@ -681,10 +697,11 @@ export default class ExtJSClass{
     )
   }
 
-  getPropsFromConfig(node){
-    let getPropName = configName => ({ 'cls': 'className' }[configName] || configName)
+  getPropsFromConfig(node, rootEl = false){
+    let skippedConfigs = ['xtype', 'items', ...(rootEl ? this.transformedClassMembers : [])],
+        getPropName    = configName => ({ 'cls': 'className' }[configName] || configName)
 
-    let props = Ast.getPropertiesExcept(node, 'extend', 'xtype', 'items').map(node => {
+    let props = Ast.getPropertiesExcept(node, ...skippedConfigs).map(node => {
       let configName = Ast.getPropertyName(node)
 
       if(configName === 'handler'){
