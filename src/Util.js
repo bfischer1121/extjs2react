@@ -155,17 +155,7 @@ class AST{
   }
 
   getConfig(config, name){
-    let property = this.getProperty(config, name)
-
-    if(!property){
-      return undefined
-    }
-
-    if(this.isArray(property)){
-      return property.elements
-    }
-
-    return property.value
+    return this.toValue(this.getProperty(config, name))
   }
 
   getProperty(object, name){
@@ -185,6 +175,22 @@ class AST{
 
   getPropertyName(node){
     return node.key.name || node.key.value
+  }
+
+  toValue(node){
+    if(!node){
+      return undefined
+    }
+
+    if(this.isArray(node)){
+      return node.elements
+    }
+
+    if(this.isObject(node)){
+      return node.properties
+    }
+
+    return node.value
   }
 }
 

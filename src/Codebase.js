@@ -29,6 +29,7 @@ export default class Codebase{
   _classRe             = []
   words                = []
   _properties          = {}
+  allClassesRegistered = false
 
   static async factory(config){
     let codebase = new this(config)
@@ -171,6 +172,7 @@ export default class Codebase{
     })
 
     this._addWordsFromClassNames(classes.map(cls => cls.className))
+    this.allClassesRegistered = true
     this.sourceFiles.forEach(sourceFile => sourceFile.init())
   }
 

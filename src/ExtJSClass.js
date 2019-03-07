@@ -76,7 +76,9 @@ export default class ExtJSClass{
 
   get parentClassName(){
     if(_.isUndefined(this._parentClassName)){
-      this._parentClassName = this._getClassReferenceConfig('extend')
+      // don't use .classMembers because of circular dependency / timing issue
+      let extend = Ast.getProperty(this._ast, 'extend')
+      this._parentClassName = extend ? this._parseClassReferenceNode(extend) : null
     }
 
     return this._parentClassName
@@ -87,6 +89,10 @@ export default class ExtJSClass{
   }
 
   get parentClass(){
+    if(!this.sourceFile.codebase.allClassesRegistered){
+      throw new Error('Trying to access parentClass before all classes are registered with the codebase')
+    }
+
     if(_.isUndefined(this._parentClass)){
       this._parentClass = this.parentClassName
         ? this.sourceFile.codebase.getClassForClassName(this.parentClassName)
@@ -108,8 +114,9 @@ export default class ExtJSClass{
 
   get alternateClassNames(){
     if(_.isUndefined(this._alternateClassNames)){
+      // don't use .classMembers because of circular dependency / timing issue
       let names = Ast.getConfig(this._ast, 'alternateClassName')
-      this._alternateClassNames = _.compact(_.isArray(names) ? names.map(name => name.value) : [names])
+      this._alternateClassNames = _.compact(_.isArray(names) ? names.map(name => Ast.toValue(name)) : [names])
     }
 
     return this._alternateClassNames
@@ -121,7 +128,8 @@ export default class ExtJSClass{
 
   get override(){
     if(_.isUndefined(this._override)){
-      this._override = this._getClassReferenceConfig('override')
+      let { override } = this.classMembers
+      this._override = override ? this._parseClassReferenceNode(override) : null
     }
 
     return this._override
@@ -133,7 +141,14 @@ export default class ExtJSClass{
 
   get classAliases(){
     if(_.isUndefined(this._classAliases)){
-      this._classAliases = _.uniq(this._getAliasesFromNodes(Ast.getProperties(this._ast, ['xtype', 'alias'])))
+      // don't use .classMembers because of circular dependency / timing issue
+      let xtype = Ast.getProperty(this._ast, 'xtype'),
+          alias = Ast.getProperty(this._ast, 'alias')
+
+      this._classAliases = _.uniq([
+        ...(xtype ? this._getAliasesFromNode('xtype', xtype) : []),
+        ...(alias ? this._getAliasesFromNode('alias', alias) : [])
+      ])
     }
 
     return this._classAliases
@@ -145,7 +160,9 @@ export default class ExtJSClass{
 
   get mixins(){
     if(_.isUndefined(this._mixins)){
-      this._mixins = this._getClassReferenceConfig('mixins') || []
+      // don't use .classMembers because of circular dependency / timing issue
+      let mixins = Ast.getProperty(this._ast, 'mixins')
+      this._mixins = mixins ? (this._parseClassReferenceNode(mixins) || []) : []
     }
 
     return this._mixins
@@ -243,19 +260,35 @@ export default class ExtJSClass{
     this._methodCalls = calls
   }
 
+  get controller(){
+    let configNode = this.classMembers.controller,
+        alias      = configNode ? (this._getAliasesFromNode('controller', configNode) || [])[0] : null,
+        className  = alias ? this.sourceFile.codebase.getClassNameForAlias(alias) : null
+
+    return className ? this.sourceFile.codebase.getClassForClassName(className) : null
+  }
+
   get aliasesUsed(){
     if(_.isUndefined(this._aliasesUsed)){
-      let nodes       = [],
-          configNames = ['xtype', 'alias', 'controller', 'viewModel']
+      let me          = this,
+          configNames = ['xtype', 'alias', 'controller', 'viewModel'],
+          aliases     = []
 
       visit(this._ast, {
         visitObjectExpression: function(path){
-          nodes.push(...path.node.properties.filter(p => configNames.includes(Ast.getPropertyName(p))))
+          path.node.properties.forEach(node => {
+            let configName = Ast.getPropertyName(node)
+
+            if(configNames.includes(configName)){
+              aliases.push(...(me._getAliasesFromNode(configName, node.value)))
+            }
+          })
+
           this.traverse(path)
         }
       })
 
-      this._aliasesUsed = _.uniq(_.difference(this._getAliasesFromNodes(nodes), this.classAliases))
+      this._aliasesUsed = _.uniq(_.difference(aliases, this.classAliases))
     }
 
     return this._aliasesUsed
@@ -279,31 +312,35 @@ export default class ExtJSClass{
 
   get classMembers(){
     if(_.isUndefined(this._classMembers)){
-      let properties  = [],
-          configs     = [],
-          methods     = [],
-          configProps = (Ast.getProperty(this._ast, 'config') || {}).properties || [],
-          nodes       = [...configProps, ...Ast.getProperties(this._ast)]
+      this._classMembers = {}
 
-      nodes.forEach(node => {
+      let kinds       = { configs: [], methods: [], properties: [], transformedProperties: [] },
+          configNodes = (Ast.getProperty(this._ast, 'config') || {}).properties || [],
+          classNodes  = [...configNodes, ...Ast.getProperties(this._ast, null, ['config'])]
+
+      classNodes.forEach(node => {
         let name = Ast.getPropertyName(node)
 
+        this._classMembers[name] = node.value
+
         if(this.localAndInheritedConfigs.includes(name) || ExtJSClass.treatAsConfigs.includes(name)){
-          configs.push(node)
+          kinds.configs.push(node)
           return
         }
 
         if(Ast.isFunction(node.value)){
-          methods.push(node)
+          kinds.methods.push(node)
           return
         }
 
-        if(!ExtJSClass.transformedProperties.includes(name)){
-          properties.push(node)
-        }
+        kinds[ExtJSClass.transformedProperties.includes(name) ? 'transformedProperties' : 'properties'].push(node)
       })
 
-      this._classMembers = { properties, configs, methods }
+      if(_.intersection(Object.keys(this._classMembers), Object.keys(kinds)).length){
+        logError(`Class definition includes reserved member names (${this.className})`)
+      }
+
+      this._classMembers = { ...(this._classMembers), ...kinds }
     }
 
     return this._classMembers
@@ -317,41 +354,35 @@ export default class ExtJSClass{
     }[configType]
 
     let config  = Ast.getProperty(this._ast, key),
-        configs = Ast.isObject(config) ? config.properties.map(node => Ast.getPropertyName(node)) : []
+        configs = (Ast.getConfig(this._ast, key) || []).map(node => Ast.getPropertyName(node))
 
     return _.difference(configs, this.inheritedConfigs).sort((c1, c2) => c1.localeCompare(c2))
   }
 
-  _getClassReferenceConfig(name){
-    let property = Ast.getProperty(this._ast, name)
-
-    if(!property){
-      return null
-    }
-
-    let propertyToClassName = property => {
-      if(Ast.isString(property)){
-        return property.value
+  _parseClassReferenceNode(node){
+    let getClassName = node => {
+      if(Ast.isString(node)){
+        return node.value
       }
 
-      property = Ast.toString(property)
+      node = Ast.toString(node)
 
-      return this.sourceFile.codebase.getClassForClassName(property) ? property : null
+      return this.sourceFile.codebase.getClassForClassName(node) ? node : null
     }
 
-    return Ast.isArray(property)
-      ? property.elements.map(el => propertyToClassName(el))
-      : propertyToClassName(property)
+    return Ast.isArray(node)
+      ? node.elements.map(node => getClassName(node))
+      : getClassName(node)
   }
 
-  _getAliasesFromNodes(nodes){
-    let handleNode = (aliases, node, configName) => {
-      let prefix = {
-        xtype      : 'widget.',
-        viewModel  : 'viewmodel.',
-        controller : 'controller.'
-      }[configName] || ''
+  _getAliasesFromNode(configName, node){
+    let prefix = {
+      xtype      : 'widget.',
+      viewModel  : 'viewmodel.',
+      controller : 'controller.'
+    }[configName] || ''
 
+    let handleNode = (node, aliases = []) => {
       // xtype      : String
       // alias      : String / String[]
       // controller : String / Object / Ext.app.ViewController
@@ -366,16 +397,16 @@ export default class ExtJSClass{
       }
 
       if(Ast.isArray(node) && ['xtype', 'alias'].includes(configName)){
-        return node.elements.reduce((aliases, node) => handleNode(aliases, node, configName), aliases)
+        return node.elements.reduce((aliases, node) => handleNode(node, aliases), aliases)
       }
 
       if(Ast.isObject(node) && ['controller', 'viewModel'].includes(configName)){
         let typeNode = Ast.getProperty(node, 'type')
-        return typeNode ? handleNode(aliases, typeNode, configName) : aliases
+        return typeNode ? handleNode(typeNode, aliases) : aliases
       }
 
       if(Ast.isTernary(node)){
-        return [node.consequent, node.alternate].reduce((aliases, node) => handleNode(aliases, node, configName), aliases)
+        return [node.consequent, node.alternate].reduce((aliases, node) => handleNode(node, aliases), aliases)
       }
 
       console.log(`Error parsing ${configName} (${this.className}): ${Ast.toString(node)}`) // logError
@@ -383,7 +414,7 @@ export default class ExtJSClass{
       return aliases
     }
 
-    return nodes.reduce((aliases, node) => handleNode(aliases, node.value, Ast.getPropertyName(node)), [])
+    return handleNode(node)
   }
 
   transpile(type = 'ES6'){
@@ -503,7 +534,7 @@ export default class ExtJSClass{
 
   getRenderFn(){
     let identifier = b.jsxIdentifier(this.sourceFile.getImportNameForClassName(this.parentClass.className)),
-        items      = _.compact((Ast.getConfig(this._ast, 'items') || []).map(item => this.getJSXFromConfig(item)))
+        items      = _.compact((Ast.toValue(this.classMembers.items) || []).map(item => this.getJSXFromConfig(item)))
 
     let props = this.classMembers.configs.filter(node => !this.localConfigs.includes(Ast.getPropertyName(node)))
 
@@ -600,7 +631,7 @@ export default class ExtJSClass{
   }
 
   _shouldExtractJSXValue(node){
-    let checkRe = /<[^>]+>|,|\./ig,
+    let checkRe = /<[^>]+>|,|\.|\?/ig,
         extract = false
 
     visit(node, {
