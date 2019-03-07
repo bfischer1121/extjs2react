@@ -10,6 +10,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -45,6 +46,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -118,6 +120,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -140,6 +143,7 @@
           "mixins": [
             "Ext.mixin.Identifiable"
           ],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -264,6 +268,7 @@
           "mixins": [
             "Ext.mixin.Observable"
           ],
+          "plugins": [],
           "configs": [
             "keyFn"
           ],
@@ -312,6 +317,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -342,6 +348,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -368,6 +375,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -394,6 +402,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -446,6 +455,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -467,6 +477,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -564,6 +575,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -584,6 +596,7 @@
           "mixins": [
             "Ext.mixin.Factoryable"
           ],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -615,6 +628,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -663,6 +677,7 @@
             "request.ajax"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -750,6 +765,7 @@
             "request.form"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -814,7 +830,10 @@
           "exportName": "ConnectionData",
           "alternateClassNames": [],
           "classAliases": [],
-          "mixins": [],
+          "mixins": [
+            "Ext.mixin.Observable"
+          ],
+          "plugins": [],
           "configs": [
             "async",
             "autoAbort",
@@ -910,6 +929,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -922,6 +942,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -1015,6 +1036,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -1066,6 +1088,7 @@
           "mixins": [
             "Ext.mixin.Bufferable"
           ],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -1128,6 +1151,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "maxSize"
           ],
@@ -1165,6 +1189,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -1181,6 +1206,7 @@
           "mixins": [
             "Ext.mixin.Observable"
           ],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -1202,6 +1228,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -1341,6 +1368,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -1362,6 +1390,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -1402,6 +1431,7 @@
           ],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -1424,6 +1454,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -1439,6 +1470,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -1476,6 +1508,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -1495,6 +1528,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -1520,6 +1554,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -1683,6 +1718,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -1712,6 +1748,7 @@
           ],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -1781,6 +1818,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -1851,6 +1889,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -1939,6 +1978,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -1964,6 +2004,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -2012,6 +2053,7 @@
           "mixins": [
             "Ext.mixin.Templatable"
           ],
+          "plugins": [],
           "configs": [
             "args",
             "callback",
@@ -2055,6 +2097,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -2074,6 +2117,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -2087,6 +2131,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -2111,6 +2156,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "args",
             "callback",
@@ -2143,6 +2189,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -2160,6 +2207,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -2173,6 +2221,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -2196,6 +2245,7 @@
             "Ext.util.Positionable",
             "Ext.mixin.Observable"
           ],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -2985,6 +3035,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -3022,6 +3073,7 @@
           ],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -3059,6 +3111,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -3083,6 +3136,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -3126,6 +3180,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "bind",
             "controller",
@@ -3230,6 +3285,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -3257,6 +3313,7 @@
           ],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -3286,6 +3343,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "plugins"
           ],
@@ -3325,6 +3383,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "keyMap",
             "keyMapEnabled"
@@ -3388,6 +3447,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -3509,6 +3569,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "ariaAttributes"
           ],
@@ -3545,6 +3606,7 @@
             "Ext.mixin.Focusable",
             "Ext.mixin.Accessible"
           ],
+          "plugins": [],
           "configs": [
             "hideMode",
             "instanceCls",
@@ -3814,6 +3876,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -3860,6 +3923,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "startTime",
             "startValue"
@@ -3882,6 +3946,7 @@
             "easing.linear"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "duration",
             "endValue"
@@ -3908,6 +3973,7 @@
           "mixins": [
             "Ext.mixin.Factoryable"
           ],
+          "plugins": [],
           "configs": [
             "easing",
             "easingX",
@@ -3981,6 +4047,7 @@
           "mixins": [
             "Ext.mixin.Traversable"
           ],
+          "plugins": [],
           "configs": [
             "alignSelf",
             "alwaysOnTop",
@@ -4320,6 +4387,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -4412,6 +4480,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -4472,6 +4541,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -4526,6 +4596,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -4624,6 +4695,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -4650,6 +4722,7 @@
             "translatable.dom"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "element"
           ],
@@ -4670,6 +4743,7 @@
             "translatable.cssposition"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -4693,6 +4767,7 @@
             "translatable.csstransform"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -4715,6 +4790,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -4777,6 +4853,7 @@
             "translatable.scrollposition"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -4811,6 +4888,7 @@
             "Ext.mixin.Factoryable",
             "Ext.mixin.Bufferable"
           ],
+          "plugins": [],
           "configs": [
             "direction",
             "element",
@@ -5051,6 +5129,7 @@
             "widget.component"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "axisLock",
             "contentEl",
@@ -5493,6 +5572,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "textTpl",
             "value"
@@ -5516,6 +5596,7 @@
           "mixins": [
             "Ext.ProgressBase"
           ],
+          "plugins": [],
           "configs": [
             "animate",
             "text"
@@ -5556,6 +5637,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -5581,6 +5663,7 @@
           "mixins": [
             "Ext.mixin.Factoryable"
           ],
+          "plugins": [],
           "configs": [
             "after",
             "before",
@@ -5660,6 +5743,7 @@
             "animation.slideIn"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "containerBox",
             "elementBox",
@@ -5708,6 +5792,7 @@
             "animation.slideOut"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -5726,6 +5811,7 @@
             "animation.fadeIn"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "out"
           ],
@@ -5750,6 +5836,7 @@
             "animation.fadeOut"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -5765,6 +5852,7 @@
             "animation.flip"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "half",
             "out"
@@ -5795,6 +5883,7 @@
             "animation.popIn"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "out"
           ],
@@ -5825,6 +5914,7 @@
             "animation.popOut"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -5837,6 +5927,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -5854,6 +5945,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -5877,6 +5969,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -5918,6 +6011,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -5939,6 +6033,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -5958,6 +6053,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -5974,6 +6070,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "actions",
             "befores",
@@ -6036,6 +6133,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "allowInactive",
             "caseInsensitive",
@@ -6097,6 +6195,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -6110,7 +6209,10 @@
             "Ext.History"
           ],
           "classAliases": [],
-          "mixins": [],
+          "mixins": [
+            "Ext.util.Observable"
+          ],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -6150,6 +6252,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "hashbang",
             "multipleToken",
@@ -6212,6 +6315,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "routes"
           ],
@@ -6256,6 +6360,7 @@
             "Ext.mixin.Observable",
             "Ext.route.Mixin"
           ],
+          "plugins": [],
           "configs": [
             "control",
             "id",
@@ -6288,6 +6393,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -6300,6 +6406,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "anyMatch",
             "caseSensitive",
@@ -6381,7 +6488,10 @@
           "exportName": "AbstractMixedCollectionUtil",
           "alternateClassNames": [],
           "classAliases": [],
-          "mixins": [],
+          "mixins": [
+            "Ext.util.Observable"
+          ],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -6482,6 +6592,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "direction",
             "id",
@@ -6520,6 +6631,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "sorters"
           ],
@@ -6573,7 +6685,10 @@
           "parentClassName": "Ext.util.AbstractMixedCollection",
           "alternateClassNames": [],
           "classAliases": [],
-          "mixins": [],
+          "mixins": [
+            "Ext.util.Sortable"
+          ],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -6610,6 +6725,7 @@
           "mixins": [
             "Ext.mixin.Identifiable"
           ],
+          "plugins": [],
           "configs": [
             "collection",
             "keyFn",
@@ -6664,6 +6780,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "groupFn",
             "sortProperty"
@@ -6693,6 +6810,7 @@
           "mixins": [
             "Ext.mixin.Observable"
           ],
+          "plugins": [],
           "configs": [
             "autoFilter",
             "autoGroup",
@@ -7012,6 +7130,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -7035,6 +7154,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -7065,6 +7185,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -7164,6 +7285,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -7179,6 +7301,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -7233,6 +7356,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -7326,6 +7450,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -7386,6 +7511,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -7415,6 +7541,7 @@
           "mixins": [
             "Ext.mixin.Factoryable"
           ],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -7469,6 +7596,7 @@
           "mixins": [
             "Ext.mixin.Factoryable"
           ],
+          "plugins": [],
           "configs": [
             "defaultIdentifier",
             "keyCheckDelay",
@@ -7622,6 +7750,7 @@
             "Ext.mixin.Observable",
             "Ext.mixin.Factoryable"
           ],
+          "plugins": [],
           "configs": [
             "autoDestroy",
             "autoSort",
@@ -7804,6 +7933,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "field",
             "message"
@@ -7824,6 +7954,7 @@
           ],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -7849,6 +7980,7 @@
           ],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "batch",
             "callback",
@@ -7925,6 +8057,7 @@
             "data.operation.create"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -7943,6 +8076,7 @@
             "data.operation.destroy"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -7964,6 +8098,7 @@
             "data.operation.read"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "addRecords",
             "filters",
@@ -7990,6 +8125,7 @@
             "data.operation.update"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -8005,6 +8141,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -8041,6 +8178,7 @@
           "mixins": [
             "Ext.mixin.Factoryable"
           ],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -8062,6 +8200,7 @@
           "mixins": [
             "Ext.mixin.Factoryable"
           ],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -8109,6 +8248,7 @@
             "data.field.boolean"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -8127,6 +8267,7 @@
             "data.field.date"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -8153,6 +8294,7 @@
             "data.field.integer"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -8177,6 +8319,7 @@
             "data.field.number"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -8196,6 +8339,7 @@
             "data.field.string"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -8214,6 +8358,7 @@
           "mixins": [
             "Ext.mixin.Factoryable"
           ],
+          "plugins": [],
           "configs": [
             "id"
           ],
@@ -8236,6 +8381,7 @@
             "data.identifier.sequential"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "increment",
             "prefix",
@@ -8254,6 +8400,7 @@
           ],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -8500,6 +8647,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "count",
             "groupData",
@@ -8535,6 +8683,7 @@
             "Ext.mixin.Observable",
             "Ext.mixin.Factoryable"
           ],
+          "plugins": [],
           "configs": [
             "groupRootProperty",
             "implicitIncludes",
@@ -8678,6 +8827,7 @@
           "mixins": [
             "Ext.mixin.Factoryable"
           ],
+          "plugins": [],
           "configs": [
             "allDataOptions",
             "clientIdProperty",
@@ -8729,6 +8879,7 @@
             "Ext.mixin.Factoryable",
             "Ext.mixin.Observable"
           ],
+          "plugins": [],
           "configs": [
             "batchActions",
             "batchOrder",
@@ -8792,6 +8943,7 @@
           ],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -8811,6 +8963,7 @@
             "proxy.memory"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "clearOnRead",
             "data",
@@ -8864,6 +9017,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "asynchronousLoad",
             "autoLoad",
@@ -9027,6 +9181,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "groupKey"
           ],
@@ -9042,6 +9197,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -9060,6 +9216,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "extraKeys"
           ],
@@ -9186,6 +9343,7 @@
             "proxy.server"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "api",
             "cacheString",
@@ -9310,6 +9468,7 @@
             "proxy.ajax"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "actionMethods",
             "binary",
@@ -9371,6 +9530,7 @@
             "reader.json"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "metaProperty",
             "preserveRawData",
@@ -9427,6 +9587,7 @@
             "writer.json"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "allowSingle",
             "encode",
@@ -9466,6 +9627,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "sorterOptionsFn",
             "sorterOptionsScope"
@@ -9533,6 +9695,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -9571,6 +9734,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "itemRoot"
           ],
@@ -9683,6 +9847,7 @@
           "mixins": [
             "Ext.data.LocalStore"
           ],
+          "plugins": [],
           "configs": [
             "associatedEntity",
             "clearOnPageLoad",
@@ -9920,6 +10085,7 @@
             "reader.array"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -9940,6 +10106,7 @@
             "store.array"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -9959,6 +10126,7 @@
           ],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -9989,6 +10157,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -10009,6 +10178,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "active",
             "application",
@@ -10110,6 +10280,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "appProperty",
             "currentProfile",
@@ -10220,6 +10391,7 @@
           ],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -10236,6 +10408,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -10272,6 +10445,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -10305,6 +10479,7 @@
           ],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -10371,6 +10546,7 @@
           ],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -10405,6 +10581,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -10505,6 +10682,7 @@
             "Ext.mixin.Container",
             "Ext.mixin.FocusableContainer"
           ],
+          "plugins": [],
           "configs": [
             "activeItemIndex",
             "autoDestroy",
@@ -10799,6 +10977,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -10816,6 +10995,7 @@
           "mixins": [
             "Ext.mixin.Hookable"
           ],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -10844,6 +11024,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "container",
             "direction",
@@ -10911,6 +11092,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "container",
             "manageBorders"
@@ -10937,6 +11119,7 @@
             "Ext.mixin.Observable",
             "Ext.mixin.Factoryable"
           ],
+          "plugins": [],
           "configs": [
             "animation",
             "container"
@@ -11107,6 +11290,7 @@
             "widget.indicator"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "activeIndex",
             "count",
@@ -11165,6 +11349,7 @@
           "mixins": [
             "Ext.mixin.Factoryable"
           ],
+          "plugins": [],
           "configs": [
             "direction",
             "duration",
@@ -11196,6 +11381,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "inAnimation",
             "outAnimation"
@@ -11253,6 +11439,7 @@
             "layout.card.fx.cover"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -11268,6 +11455,7 @@
             "layout.card.fx.cube"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -11281,6 +11469,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -11302,6 +11491,7 @@
             "layout.card.fx.fade"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -11317,6 +11507,7 @@
             "layout.card.fx.flip"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -11338,6 +11529,7 @@
             "layout.card.fx.pop"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -11353,6 +11545,7 @@
             "layout.card.fx.reveal"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -11368,6 +11561,7 @@
             "layout.card.fx.scroll"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -11420,6 +11614,7 @@
             "layout.card.fx.scrollcover"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -11459,6 +11654,7 @@
             "layout.card.fx.scrollreveal"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -11496,6 +11692,7 @@
             "layout.card.fx.slide"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -11511,6 +11708,7 @@
             "layout.card"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "indicator"
           ],
@@ -11602,6 +11800,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -11626,6 +11825,7 @@
             "widget.viewport"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "autoBlurInput",
             "autoMaximize",
@@ -11885,6 +12085,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -11923,6 +12124,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "translatable"
           ],
@@ -11975,6 +12177,7 @@
           ],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "translatable"
           ],
@@ -12004,6 +12207,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -12019,6 +12223,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "viewport"
           ],
@@ -12043,6 +12248,7 @@
           "mixins": [
             "Ext.mixin.Observable"
           ],
+          "plugins": [],
           "configs": [
             "application",
             "controllers",
@@ -12082,6 +12288,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -12104,6 +12311,7 @@
           "mixins": [
             "Ext.mixin.Factoryable"
           ],
+          "plugins": [],
           "configs": [
             "bindings",
             "closeViewAction"
@@ -12152,6 +12360,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -12198,6 +12407,7 @@
           "mixins": [
             "Ext.mixin.Observable"
           ],
+          "plugins": [],
           "configs": [
             "cycleLimit",
             "preSort",
@@ -12270,7 +12480,10 @@
           "exportName": "BatchData",
           "alternateClassNames": [],
           "classAliases": [],
-          "mixins": [],
+          "mixins": [
+            "Ext.mixin.Observable"
+          ],
+          "plugins": [],
           "configs": [
             "pauseOnException"
           ],
@@ -12308,6 +12521,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -12330,6 +12544,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -12350,6 +12565,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -12373,6 +12589,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -12399,6 +12616,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -12418,6 +12636,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -12439,6 +12658,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "dirty"
           ],
@@ -12466,6 +12686,7 @@
             "Ext.mixin.Dirty",
             "Ext.mixin.Observable"
           ],
+          "plugins": [],
           "configs": [
             "autoDestroy",
             "crudProperties",
@@ -12643,6 +12864,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -12667,6 +12889,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -12695,6 +12918,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -12731,6 +12955,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -12767,6 +12992,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -12870,6 +13096,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -12903,6 +13130,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -12949,6 +13177,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -12991,6 +13220,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -13033,6 +13263,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -13051,6 +13282,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "keywords",
             "operators"
@@ -13104,6 +13336,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -13126,6 +13359,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -13141,6 +13375,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -13156,6 +13391,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -13171,6 +13407,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -13192,6 +13429,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -13207,6 +13445,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "constants",
             "infix",
@@ -13251,6 +13490,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -13325,6 +13565,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -13355,6 +13596,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -13391,6 +13633,7 @@
           "mixins": [
             "Ext.data.LocalStore"
           ],
+          "plugins": [],
           "configs": [
             "source"
           ],
@@ -13475,6 +13718,7 @@
             "Ext.mixin.Factoryable",
             "Ext.mixin.Identifiable"
           ],
+          "plugins": [],
           "configs": [
             "data",
             "formulas",
@@ -13618,6 +13862,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -13639,6 +13884,7 @@
           "mixins": [
             "Ext.mixin.Observable"
           ],
+          "plugins": [],
           "configs": [
             "varName"
           ],
@@ -13708,6 +13954,7 @@
           "mixins": [
             "Ext.mixin.Observable"
           ],
+          "plugins": [],
           "configs": [
             "headers"
           ],
@@ -13736,6 +13983,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -13752,6 +14000,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "pageSize",
             "rootProperty",
@@ -13829,6 +14078,7 @@
             "store.buffered"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "data",
             "defaultViewSize",
@@ -14096,6 +14346,7 @@
             "proxy.direct"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "directFn",
             "metadata",
@@ -14152,6 +14403,7 @@
             "store.direct"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -14169,6 +14421,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -14223,6 +14476,7 @@
             "proxy.scripttag"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "autoAppendParams",
             "callbackKey",
@@ -14278,6 +14532,7 @@
             "store.jsonp"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -14296,6 +14551,7 @@
             "store.json"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -14313,6 +14569,7 @@
           ],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -14332,6 +14589,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -14637,6 +14895,7 @@
           "mixins": [
             "Ext.mixin.Queryable"
           ],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -14652,6 +14911,7 @@
             "store.node"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "folderSort",
             "node",
@@ -14723,6 +14983,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "action",
             "args",
@@ -14767,6 +15028,7 @@
             "store.tree"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "clearOnLoad",
             "defaultRootId",
@@ -15197,6 +15459,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -15210,6 +15473,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -15229,6 +15493,7 @@
           ],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -15315,6 +15580,7 @@
           ],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -15423,6 +15689,7 @@
             "reader.xml"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "namespace",
             "record"
@@ -15472,6 +15739,7 @@
             "writer.xml"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "defaultDocumentRoot",
             "documentRoot",
@@ -15518,6 +15786,7 @@
             "store.xml"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -15536,6 +15805,7 @@
             "data.identifier.negative"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -15551,6 +15821,7 @@
             "data.identifier.uuid"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -15592,6 +15863,7 @@
           ],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "id"
           ],
@@ -15745,6 +16017,7 @@
             "proxy.localstorage"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -15762,6 +16035,7 @@
             "proxy.rest"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "appendId",
             "format"
@@ -15798,6 +16072,7 @@
             "proxy.sessionstorage"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -15814,6 +16089,7 @@
           "mixins": [
             "Ext.mixin.Factoryable"
           ],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -15832,6 +16108,7 @@
             "data.summary.sum"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -15849,6 +16126,7 @@
             "data.summary.average"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -15866,6 +16144,7 @@
             "data.summary.count"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -15881,6 +16160,7 @@
             "data.summary.max"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -15899,6 +16179,7 @@
             "data.summary.min"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -15915,6 +16196,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "format",
             "message"
@@ -15941,6 +16223,7 @@
             "data.validator.bound"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "bothMessage",
             "emptyMessage",
@@ -15980,6 +16263,7 @@
             "data.validator.format"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "matcher",
             "message"
@@ -16005,6 +16289,7 @@
             "data.validator.cidrv4"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -16020,6 +16305,7 @@
             "data.validator.cidrv6"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -16035,6 +16321,7 @@
             "data.validator.number"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "decimalSeparator",
             "message",
@@ -16077,6 +16364,7 @@
             "data.validator.currency"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "spacer",
             "symbol",
@@ -16115,6 +16403,7 @@
             "data.validator.currency-us"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -16130,6 +16419,7 @@
             "data.validator.date"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -16145,6 +16435,7 @@
             "data.validator.datetime"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -16160,6 +16451,7 @@
             "data.validator.email"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -16175,6 +16467,7 @@
             "data.validator.list"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "list",
             "message"
@@ -16197,6 +16490,7 @@
             "data.validator.exclusion"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -16216,6 +16510,7 @@
             "data.validator.ipaddress"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -16231,6 +16526,7 @@
             "data.validator.inclusion"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -16250,6 +16546,7 @@
             "data.validator.length"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -16267,6 +16564,7 @@
             "data.validator.presence"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "allowEmpty",
             "message"
@@ -16288,6 +16586,7 @@
             "data.validator.notnull"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -16303,6 +16602,7 @@
             "data.validator.phone"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -16318,6 +16618,7 @@
             "data.validator.range"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "nanMessage"
           ],
@@ -16339,6 +16640,7 @@
             "data.validator.time"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -16354,6 +16656,7 @@
             "data.validator.url"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -16366,6 +16669,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -16378,6 +16682,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -16402,6 +16707,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "cacheSize",
             "concurrentLoading",
@@ -16483,6 +16789,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -16522,6 +16829,7 @@
             "store.virtual"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "data",
             "leadingBufferZone",
@@ -16648,6 +16956,7 @@
             "direct.event"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -16665,6 +16974,7 @@
             "direct.rpc"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -16682,6 +16992,7 @@
             "direct.exception"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -16697,6 +17008,7 @@
             "direct.jsonprovider"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -16721,6 +17033,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -16765,6 +17078,7 @@
             "direct.pollingprovider"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -16807,6 +17121,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -16853,6 +17168,7 @@
             "direct.transaction"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -16872,6 +17188,7 @@
             "direct.remotingprovider"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -16959,6 +17276,7 @@
           ],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -16979,6 +17297,7 @@
           ],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -17041,6 +17360,7 @@
           ],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -17055,6 +17375,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -17085,6 +17406,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -17140,6 +17462,7 @@
           "mixins": [
             "Ext.mixin.Factoryable"
           ],
+          "plugins": [],
           "configs": [
             "element",
             "horizontal",
@@ -17191,6 +17514,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -17252,6 +17576,7 @@
             "Ext.mixin.Observable",
             "Ext.mixin.Identifiable"
           ],
+          "plugins": [],
           "configs": [
             "autoDestroy",
             "component",
@@ -17289,6 +17614,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -17334,6 +17660,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "activateOnLongPress",
             "activeCls",
@@ -17434,6 +17761,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "invalidCls",
             "validCls"
@@ -17503,6 +17831,7 @@
           "mixins": [
             "Ext.mixin.Factoryable"
           ],
+          "plugins": [],
           "configs": [
             "source"
           ],
@@ -17532,6 +17861,7 @@
             "drag.proxy.original"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -17551,6 +17881,7 @@
             "drag.proxy.placeholder"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "cls",
             "cursorOffset",
@@ -17594,6 +17925,7 @@
           "mixins": [
             "Ext.mixin.Identifiable"
           ],
+          "plugins": [],
           "configs": [
             "callbackScope",
             "onRecognized"
@@ -17620,6 +17952,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -17635,6 +17968,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "maxDuration",
             "moveDistance",
@@ -17679,6 +18013,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "minDistance"
           ],
@@ -17727,6 +18062,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "maxDuration",
             "maxOffset",
@@ -17763,6 +18099,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -17793,6 +18130,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "minDuration",
             "moveDistance"
@@ -17829,6 +18167,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -17845,6 +18184,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -17866,6 +18206,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -17891,6 +18232,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "moveDistance"
           ],
@@ -17918,6 +18260,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -17949,6 +18292,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "pattern"
           ],
@@ -18085,6 +18429,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -18135,6 +18480,7 @@
           ],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -18263,6 +18609,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -18278,6 +18625,7 @@
             "animation.cube"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "out"
           ],
@@ -18310,6 +18658,7 @@
           ],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "direction",
             "easing",
@@ -18340,6 +18689,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -18353,6 +18703,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "acceleration",
             "springTension",
@@ -18378,6 +18729,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "acceleration",
             "friction",
@@ -18406,6 +18758,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "bounce",
             "maxMomentumValue",
@@ -18455,6 +18808,7 @@
             "easing.ease-in"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "exponent"
           ],
@@ -18480,6 +18834,7 @@
             "easing.ease-out"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "exponent"
           ],
@@ -18502,6 +18857,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -18517,6 +18873,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -18565,6 +18922,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "iconClsProperty",
             "indent",
@@ -18683,6 +19041,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -18698,6 +19057,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "itemRipple"
           ],
@@ -18733,6 +19093,7 @@
             "widget.treelistitem"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "rowCls"
           ],
@@ -18815,6 +19176,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -18852,6 +19214,7 @@
           "mixins": [
             "Ext.mixin.ItemRippler"
           ],
+          "plugins": [],
           "configs": [
             "defaults",
             "floatLeafItems",
@@ -19011,6 +19374,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -19029,6 +19393,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -19072,6 +19437,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -19090,6 +19456,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -19116,6 +19483,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "responsiveConfig",
             "responsiveFormulas"
@@ -19176,6 +19544,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "allowDeselect",
             "deselectOnContainerClick",
@@ -19302,6 +19671,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "dataSource",
             "owner",
@@ -19340,6 +19710,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -19355,6 +19726,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -19390,6 +19762,7 @@
           ],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -19442,6 +19815,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "gridListeners",
             "memory",
@@ -19532,6 +19906,7 @@
             "plugin.mouseenter"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -19560,6 +19935,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -19574,6 +19950,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -19602,6 +19979,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -19659,6 +20037,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -19708,6 +20087,7 @@
           ],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -19789,6 +20169,7 @@
             "widget.sparkline"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "values"
           ],
@@ -19882,6 +20263,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -19903,6 +20285,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -19925,6 +20308,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -19947,6 +20331,7 @@
             "widget.sparklinebar"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "barColor",
             "barSpacing",
@@ -20035,6 +20420,7 @@
             "widget.sparklinebox"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "boxFillColor",
             "boxLineColor",
@@ -20158,6 +20544,7 @@
             "widget.sparklinebullet"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "base",
             "performanceColor",
@@ -20236,6 +20623,7 @@
             "widget.sparklinediscrete"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "chartRangeClip",
             "chartRangeMax",
@@ -20285,6 +20673,7 @@
             "widget.sparklineline"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "chartRangeMax",
             "chartRangeMaxX",
@@ -20419,6 +20808,7 @@
             "widget.sparklinepie"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "borderColor",
             "borderWidth",
@@ -20468,6 +20858,7 @@
             "widget.sparklinetristate"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "barSpacing",
             "barWidth",
@@ -20510,6 +20901,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -20561,6 +20953,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -20596,6 +20989,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -20612,6 +21006,7 @@
           "mixins": [
             "Ext.mixin.Observable"
           ],
+          "plugins": [],
           "configs": [
             "disabled",
             "el",
@@ -20683,6 +21078,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -20702,6 +21098,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -20738,6 +21135,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -20768,6 +21166,7 @@
           ],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -20783,6 +21182,7 @@
           ],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -20795,6 +21195,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -20828,6 +21229,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -20846,6 +21248,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -20872,6 +21275,7 @@
             "translatable.scrollparent"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -20895,6 +21299,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -20913,6 +21318,7 @@
             "widget.paneltool"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "iconCls",
             "passive",
@@ -20954,6 +21360,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "defaultToolWeights",
             "toolDefaults",
@@ -21022,6 +21429,7 @@
             "layout.box"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "align",
             "constrainAlign",
@@ -21124,6 +21532,7 @@
             "widget.button"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "allowDepress",
             "arrow",
@@ -21292,6 +21701,7 @@
             "widget.title"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "title"
           ],
@@ -21311,6 +21721,7 @@
             "widget.spacer"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -21328,6 +21739,7 @@
             "widget.toolbar"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "defaultButtonUI",
             "title"
@@ -21370,6 +21782,7 @@
           "mixins": [
             "Ext.mixin.Toolable"
           ],
+          "plugins": [],
           "configs": [
             "anchor",
             "anchorPosition",
@@ -21587,6 +22000,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "collapsed",
             "collapsible"
@@ -21638,6 +22052,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "resizable"
           ],
@@ -21664,6 +22079,7 @@
             "widget.mask"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "transparent"
           ],
@@ -21691,6 +22107,7 @@
             "widget.sheet"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "cover",
             "enter",
@@ -21744,6 +22161,7 @@
             "widget.actionsheet"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -21756,6 +22174,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -21796,6 +22215,7 @@
             "widget.media"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "autoPause",
             "autoResume",
@@ -21865,6 +22285,7 @@
             "widget.audio"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -21883,6 +22304,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "component"
           ],
@@ -21937,6 +22359,7 @@
             "widget.window"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "constrainDrag",
             "dismissHandler",
@@ -22074,6 +22497,7 @@
             "widget.field"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "autoFitErrors",
             "error",
@@ -22249,6 +22673,7 @@
             "widget.inputfield"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "inputType",
             "inputValue",
@@ -22295,6 +22720,7 @@
           "mixins": [
             "Ext.mixin.Factoryable"
           ],
+          "plugins": [],
           "configs": [
             "field",
             "group",
@@ -22330,6 +22756,7 @@
             "trigger.trigger"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "focusOnTap",
             "handler",
@@ -22378,6 +22805,7 @@
             "trigger.clear"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -22395,6 +22823,7 @@
             "widget.textfield"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "autoCapitalize",
             "autoComplete",
@@ -22631,6 +23060,7 @@
             "widget.editor"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "field"
           ],
@@ -22736,6 +23166,7 @@
             "widget.img"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "backgroundCls",
             "imageCls",
@@ -22801,6 +23232,7 @@
             "widget.label"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -22816,6 +23248,7 @@
             "widget.loadmask"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "indicator",
             "message",
@@ -22843,6 +23276,7 @@
             "widget.textareafield"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "maxRows"
           ],
@@ -22863,6 +23297,7 @@
             "layout.vbox"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -22878,6 +23313,7 @@
             "widget.messagebox"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "defaultTextHeight",
             "message",
@@ -22962,6 +23398,7 @@
             "widget.segmentedbutton"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "allowDepress",
             "allowMultiple",
@@ -23116,6 +23553,7 @@
             "widget.menuitem"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "handler",
             "href",
@@ -23216,6 +23654,7 @@
           ],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -23251,6 +23690,7 @@
             "widget.menu"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "align",
             "autoHide",
@@ -23383,6 +23823,7 @@
             "widget.splitbutton"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "arrowHandler"
           ],
@@ -23441,6 +23882,7 @@
             "widget.titlebar"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "defaultButtonUI",
             "maxButtonWidth",
@@ -23517,6 +23959,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "maxQueue",
             "message",
@@ -23575,6 +24018,7 @@
             "widget.video"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "posterUrl",
             "showPosterOnPause"
@@ -23617,6 +24061,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -23632,6 +24077,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "translatable"
           ],
@@ -23647,6 +24093,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "activeIndex",
             "itemLength",
@@ -23676,6 +24123,7 @@
             "widget.carousel"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "animation",
             "bufferSize",
@@ -23844,6 +24292,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "innerItemConfig",
             "maxItemIndex"
@@ -23895,6 +24344,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -23955,6 +24405,7 @@
             "Ext.mixin.Factoryable",
             "Ext.mixin.Bufferable"
           ],
+          "plugins": [],
           "configs": [
             "disabled",
             "view"
@@ -24110,6 +24561,7 @@
           "mixins": [
             "Ext.mixin.Factoryable"
           ],
+          "plugins": [],
           "configs": [
             "selectionModel"
           ],
@@ -24135,6 +24587,7 @@
             "selection.rows"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "selected"
           ],
@@ -24242,6 +24695,7 @@
             "selection.records"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -24385,6 +24839,7 @@
           "mixins": [
             "Ext.mixin.Factoryable"
           ],
+          "plugins": [],
           "configs": [
             "deselectable",
             "disabled",
@@ -24533,6 +24988,7 @@
             "widget.emptytext"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -24549,6 +25005,7 @@
             "Ext.mixin.ConfigProxy",
             "Ext.mixin.ItemRippler"
           ],
+          "plugins": [],
           "configs": [
             "emptyState",
             "emptyText",
@@ -24978,6 +25435,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "contentCls",
             "innerCls",
@@ -25010,6 +25468,7 @@
           "mixins": [
             "Ext.dataview.GenericItem"
           ],
+          "plugins": [],
           "configs": [
             "dataMap",
             "itemCls"
@@ -25050,6 +25509,7 @@
             "widget.componentdataview"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "itemConfig",
             "itemContentCls",
@@ -25184,6 +25644,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "pinned"
           ],
@@ -25207,6 +25668,7 @@
             "Ext.mixin.Toolable",
             "Ext.dataview.Pinnable"
           ],
+          "plugins": [],
           "configs": [
             "contentWidth",
             "group"
@@ -25241,6 +25703,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -25269,6 +25732,7 @@
             "Ext.dataview.GenericItem",
             "Ext.dataview.Pinnable"
           ],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -25298,6 +25762,7 @@
           "mixins": [
             "Ext.mixin.Bufferable"
           ],
+          "plugins": [],
           "configs": [
             "bufferSize",
             "disclosureProperty",
@@ -25860,6 +26325,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -25886,6 +26352,7 @@
             "navmodel.boundlist"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "navigateOnSpace"
           ],
@@ -25952,6 +26419,7 @@
             "widget.boundlist"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -25971,6 +26439,7 @@
             "widget.dataview"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -26057,6 +26526,7 @@
             "widget.indexbar"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "animation",
             "autoHide",
@@ -26195,6 +26665,7 @@
             "Ext.mixin.Toolable",
             "Ext.dataview.Pinnable"
           ],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -26217,6 +26688,7 @@
             "layout.hbox"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -26234,6 +26706,7 @@
             "widget.nestedlist"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "allowDeselect",
             "backButton",
@@ -26471,6 +26944,7 @@
             "widget.listswiperitem"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "action",
             "leftActions",
@@ -26507,6 +26981,7 @@
             "widget.listswiperaccordion"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "actionDefaults",
             "actionUI",
@@ -26691,6 +27166,7 @@
             "plugin.listswiper"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "commitDelay",
             "directionLock",
@@ -26771,6 +27247,7 @@
             "widget.listswiperstepper"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "animation",
             "iconCls",
@@ -26890,6 +27367,7 @@
             "widget.tooltip"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "align",
             "alignDelegate",
@@ -27085,6 +27563,7 @@
             "plugin.dataviewtip"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "cmp"
           ],
@@ -27137,6 +27616,7 @@
             "plugin.listpaging"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "autoPaging",
             "bufferZone",
@@ -27243,6 +27723,7 @@
             "plugin.sortablelist"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "list",
             "source"
@@ -27305,6 +27786,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "lastUpdated",
             "pull",
@@ -27328,6 +27810,7 @@
             "widget.pullrefreshbar"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [
             "lastUpdatedDateFormat",
@@ -27364,6 +27847,7 @@
           "mixins": [
             "Ext.mixin.ConfigProxy"
           ],
+          "plugins": [],
           "configs": [
             "activateOffset",
             "autoSnapBack",
@@ -27489,6 +27973,7 @@
             "widget.pullrefreshspinner"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -27511,6 +27996,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "boxLabel",
             "boxLabelAlign"
@@ -27541,6 +28027,7 @@
           "mixins": [
             "Ext.field.BoxLabelable"
           ],
+          "plugins": [],
           "configs": [
             "checked"
           ],
@@ -27594,6 +28081,7 @@
             "trigger.expand"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -27609,6 +28097,7 @@
             "widget.pickerfield"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "edgePicker",
             "floatedPicker",
@@ -27730,6 +28219,7 @@
             "widget.pickerslot"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "align",
             "displayField",
@@ -27822,6 +28312,7 @@
             "widget.picker"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "cancelButton",
             "doneButton",
@@ -27905,6 +28396,7 @@
             "widget.tabletpicker"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -27922,6 +28414,7 @@
             "widget.selectfield"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "autoFocus",
             "autoFocusLast",
@@ -28147,6 +28640,7 @@
             "widget.comboboxfield"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "allQuery",
             "anyMatch",
@@ -28284,6 +28778,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -28382,6 +28877,7 @@
             "Ext.field.Manager",
             "Ext.mixin.ConfigProxy"
           ],
+          "plugins": [],
           "configs": [
             "container"
           ],
@@ -28440,6 +28936,7 @@
             "trigger.date"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -28457,6 +28954,7 @@
             "widget.datepicker"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "dayText",
             "monthText",
@@ -28551,6 +29049,7 @@
             "layout.carousel"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "frontIndex",
             "visibleChildren"
@@ -28649,6 +29148,7 @@
             "widget.dateview"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "monthOffset",
             "specialDates",
@@ -28754,6 +29254,7 @@
             "widget.paneltitle"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "icon",
             "iconCls",
@@ -28800,6 +29301,7 @@
             "widget.datetitle"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "split",
             "titleActive",
@@ -28829,6 +29331,7 @@
             "widget.yearpicker"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "defaultOffset",
             "end",
@@ -28874,6 +29377,7 @@
             "widget.datepanel"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "animation",
             "autoConfirm",
@@ -29305,6 +29809,7 @@
             "widget.datepickerfield"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "dateFormat",
             "destroyPickerOnHide",
@@ -29405,6 +29910,7 @@
             "widget.datepickernativefield"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -29430,6 +29936,7 @@
             "widget.displayfield"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "encodeHtml",
             "renderer"
@@ -29463,6 +29970,7 @@
             "widget.emailfield"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -29480,6 +29988,7 @@
           "mixins": [
             "Ext.mixin.ConfigProxy"
           ],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -29520,6 +30029,7 @@
             "widget.filebutton"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "accept",
             "capture",
@@ -29551,6 +30061,7 @@
             "widget.hiddenfield"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -29568,6 +30079,7 @@
             "widget.numberfield"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "decimals",
             "maxValue",
@@ -29632,6 +30144,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "fieldSeparators",
             "inputBorders"
@@ -29658,6 +30171,7 @@
             "Ext.field.Manager",
             "Ext.form.Borders"
           ],
+          "plugins": [],
           "configs": [
             "api",
             "baseParams",
@@ -29719,6 +30233,7 @@
             "trigger.reveal"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -29736,6 +30251,7 @@
             "widget.passwordfield"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "revealable",
             "revealed"
@@ -29779,6 +30295,7 @@
             "widget.radiofield"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -29807,6 +30324,7 @@
             "trigger.search"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -29824,6 +30342,7 @@
             "widget.searchfield"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -29839,6 +30358,7 @@
             "widget.thumb"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "dragMax",
             "dragMin",
@@ -29906,6 +30426,7 @@
             "widget.slider"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "allowThumbsOverlapping",
             "animation",
@@ -30065,6 +30586,7 @@
             "Ext.mixin.ConfigProxy",
             "Ext.field.BoxLabelable"
           ],
+          "plugins": [],
           "configs": [
             "liveUpdate",
             "readOnly",
@@ -30136,6 +30658,7 @@
             "widget.singlesliderfield"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -30164,6 +30687,7 @@
             "trigger.spindown"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -30180,6 +30704,7 @@
             "trigger.spinup"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -30197,6 +30722,7 @@
             "widget.spinnerfield"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "accelerateOnTapHold",
             "cycle",
@@ -30255,6 +30781,7 @@
             "widget.toggleslider"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "offThumbUi",
             "onThumbUi"
@@ -30302,6 +30829,7 @@
             "widget.togglefield"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "activeLabel",
             "inactiveLabel"
@@ -30338,6 +30866,7 @@
             "widget.urlfield"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -30353,6 +30882,7 @@
             "trigger.component"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "component"
           ],
@@ -30383,6 +30913,7 @@
             "trigger.file"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -30401,6 +30932,7 @@
             "trigger.menu"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "menu"
           ],
@@ -30441,6 +30973,7 @@
           "mixins": [
             "Ext.form.Borders"
           ],
+          "plugins": [],
           "configs": [
             "instructions",
             "title"
@@ -30475,6 +31008,7 @@
             "widget.formpanel"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "enableSubmissionForm",
             "enctype",
@@ -30606,6 +31140,7 @@
             "widget.celleditor"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "autoPin"
           ],
@@ -30645,6 +31180,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -30777,6 +31313,7 @@
             "navmodel.grid"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -30926,6 +31463,7 @@
           "mixins": [
             "Ext.mixin.Toolable"
           ],
+          "plugins": [],
           "configs": [
             "column",
             "record",
@@ -31010,6 +31548,7 @@
             "widget.textcell"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "encodeHtml",
             "rawValue",
@@ -31052,6 +31591,7 @@
             "widget.gridcell"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "formatter",
             "renderer",
@@ -31109,6 +31649,7 @@
             "widget.rowbody"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "widget"
           ],
@@ -31145,6 +31686,7 @@
             "Ext.dataview.GenericItem",
             "Ext.dataview.Pinnable"
           ],
+          "plugins": [],
           "configs": [
             "body",
             "defaultCellUI",
@@ -31268,6 +31810,7 @@
             "widget.headercontainer"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "columns",
             "defaultColumnUI",
@@ -31412,6 +31955,7 @@
             "widget.menucheckitem"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "checkChangeDisabled",
             "checked",
@@ -31496,6 +32040,7 @@
             "Ext.mixin.StyleCacher",
             "Ext.mixin.Toolable"
           ],
+          "plugins": [],
           "configs": [
             "align",
             "cell",
@@ -31905,6 +32450,7 @@
             "widget.datecell"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "format"
           ],
@@ -31929,6 +32475,7 @@
             "widget.datecolumn"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "format"
           ],
@@ -31949,6 +32496,7 @@
             "widget.gridcolumnsmenu"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -31975,6 +32523,7 @@
             "widget.gridgroupbythismenuitem"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -31990,6 +32539,7 @@
             "widget.gridshowingroupsmenuitem"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -32005,6 +32555,7 @@
             "widget.menuradioitem"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "allowUncheck",
             "group"
@@ -32039,6 +32590,7 @@
             "widget.gridsortascmenuitem"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -32054,6 +32606,7 @@
             "widget.gridsortdescmenuitem"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -32069,6 +32622,7 @@
             "selection.cells"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -32172,6 +32726,7 @@
             "selection.columns"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -32259,6 +32814,7 @@
             "plugin.selectionreplicator"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -32311,6 +32867,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -32423,6 +32980,7 @@
             "widget.numbercell"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "format"
           ],
@@ -32448,6 +33006,7 @@
             "widget.checkcell"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -32489,6 +33048,7 @@
             "widget.checkcolumn"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "headerCheckbox",
             "stopSelection"
@@ -32554,6 +33114,7 @@
             "widget.selectioncolumn"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -32584,6 +33145,7 @@
             "widget.numbercolumn"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "format"
           ],
@@ -32604,6 +33166,7 @@
             "widget.rownumberercell"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -32619,6 +33182,7 @@
             "widget.rownumberer"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -32668,6 +33232,7 @@
             "selmodel.grid"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "cells",
             "checkbox",
@@ -32988,6 +33553,7 @@
             "plugin.gridcolumnresizing"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "grid",
             "realtime"
@@ -33056,6 +33622,7 @@
             "widget.rowheader"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -33080,6 +33647,7 @@
           "mixins": [
             "Ext.mixin.ConfigProxy"
           ],
+          "plugins": [],
           "configs": [
             "columnLines",
             "columnMenu",
@@ -33260,6 +33828,7 @@
             "widget.pagingtoolbar"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "nextButton",
             "prevButton",
@@ -33295,6 +33864,7 @@
             "widget.gridsummaryrow"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "group"
           ],
@@ -33323,6 +33893,7 @@
             "widget.booleancell"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "falseText",
             "trueText",
@@ -33356,6 +33927,7 @@
             "widget.expandercell"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "collapsed"
           ],
@@ -33375,6 +33947,7 @@
             "widget.widgetcell"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "forceWidth",
             "widget"
@@ -33433,6 +34006,7 @@
             "widget.booleancolumn"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "falseText",
             "trueText",
@@ -33455,6 +34029,7 @@
             "widget.textcolumn"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -33473,6 +34048,7 @@
             "plugin.cellediting"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "grid",
             "selectOnEdit",
@@ -33526,6 +34102,7 @@
             "plugin.clipboard"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -33582,6 +34159,7 @@
             "plugin.grideditable"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "defaultFormConfig",
             "enableDeleteButton",
@@ -33670,6 +34248,7 @@
           "mixins": [
             "Ext.mixin.Hookable"
           ],
+          "plugins": [],
           "configs": [
             "buffer",
             "currentPage",
@@ -33798,6 +34377,7 @@
             "plugin.rowexpander"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "column",
             "grid"
@@ -33840,6 +34420,7 @@
             "plugin.gridmultiselection"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "cancelText",
             "deleteText",
@@ -33920,6 +34501,7 @@
             "Ext.mixin.Bufferable",
             "Ext.mixin.StoreWatcher"
           ],
+          "plugins": [],
           "configs": [
             "row"
           ],
@@ -33965,6 +34547,7 @@
             "widget.viewoptionslistitem"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -33995,6 +34578,7 @@
             "layout.fit"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -34010,6 +34594,7 @@
             "plugin.gridviewoptions"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "columnList",
             "grid",
@@ -34189,6 +34774,7 @@
             "layout.center"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -34204,6 +34790,7 @@
             "layout.float"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "direction"
           ],
@@ -34225,6 +34812,7 @@
             "layout.form"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "itemSpacing",
             "labelWidth"
@@ -34259,6 +34847,7 @@
           "mixins": [
             "Ext.mixin.Factoryable"
           ],
+          "plugins": [],
           "configs": [
             "animation",
             "arrows",
@@ -34425,6 +35014,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -34444,6 +35034,7 @@
             "widget.menuseparator"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -34457,6 +35048,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "dynamic",
             "maxProgressInput",
@@ -34498,6 +35090,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "android2Transforms",
             "animation",
@@ -34617,6 +35210,7 @@
             "widget.navigationview"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "defaultBackButtonText",
             "navigationBar",
@@ -34729,6 +35323,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "animation",
             "collapseAnimation",
@@ -35052,6 +35647,7 @@
             "widget.panelheader"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "icon",
             "iconAlign",
@@ -35118,6 +35714,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "constrainToParent",
             "dynamic",
@@ -35283,6 +35880,7 @@
             "plugin.responsive"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -35309,6 +35907,7 @@
             "plugin.tabguard"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -35364,6 +35963,7 @@
             "widget.tab"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "active",
             "closable",
@@ -35401,6 +36001,7 @@
             "widget.tabbar"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "animateIndicator",
             "defaultTabUI"
@@ -35481,6 +36082,7 @@
             "widget.tabpanel"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "tabBar",
             "tabBarPosition"
@@ -35560,6 +36162,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "overflowTip",
             "tooltip"
@@ -35633,6 +36236,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -35657,6 +36261,7 @@
           "mixins": [
             "Ext.mixin.Observable"
           ],
+          "plugins": [],
           "configs": [
             "pageSize",
             "totalCount"
@@ -35680,6 +36285,7 @@
           "mixins": [
             "Ext.mixin.Observable"
           ],
+          "plugins": [],
           "configs": [
             "cls",
             "component",
@@ -35782,6 +36388,7 @@
           ],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "accuracy",
             "allowHighAccuracy",
@@ -35848,6 +36455,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],
@@ -35879,6 +36487,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "minimumHeight"
           ],
@@ -35906,6 +36515,7 @@
           "alternateClassNames": [],
           "classAliases": [],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "items"
           ],
@@ -35927,6 +36537,7 @@
             "translatable.component"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "component"
           ],
@@ -35963,6 +36574,7 @@
             "widget.tree"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "displayField",
             "folderSort",
@@ -36035,6 +36647,7 @@
             "widget.treecell"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [
             "iconCls",
             "iconClsProperty",
@@ -36108,6 +36721,7 @@
             "widget.treecolumn"
           ],
           "mixins": [],
+          "plugins": [],
           "configs": [],
           "cachedConfigs": [],
           "eventedConfigs": [],

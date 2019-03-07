@@ -41,6 +41,7 @@ export default class ExtJSClass{
     cls.alternateClassNames = snapshot.alternateClassNames
     cls.classAliases        = snapshot.classAliases
     cls.mixins              = snapshot.mixins
+    cls.plugins             = snapshot.plugins
     cls.configs             = snapshot.configs
     cls.cachedConfigs       = snapshot.cachedConfigs
     cls.eventedConfigs      = snapshot.eventedConfigs
@@ -59,6 +60,7 @@ export default class ExtJSClass{
       alternateClassNames : this.alternateClassNames,
       classAliases        : this.classAliases,
       mixins              : this.mixins,
+      plugins             : this.plugins,
       configs             : this.configs,
       cachedConfigs       : this.cachedConfigs,
       eventedConfigs      : this.eventedConfigs,
@@ -78,7 +80,7 @@ export default class ExtJSClass{
     if(_.isUndefined(this._parentClassName)){
       // don't use .classMembers because of circular dependency / timing issue
       let extend = Ast.getProperty(this._ast, 'extend')
-      this._parentClassName = extend ? this._parseClassReferenceNode(extend) : null
+      this._parentClassName = extend ? (this._parseClassReferenceNode(extend)[0] || null) : null
     }
 
     return this._parentClassName
@@ -129,7 +131,7 @@ export default class ExtJSClass{
   get override(){
     if(_.isUndefined(this._override)){
       let { override } = this.classMembers
-      this._override = override ? this._parseClassReferenceNode(override) : null
+      this._override = override ? (this._parseClassReferenceNode(override)[0] || null) : null
     }
 
     return this._override
@@ -162,7 +164,7 @@ export default class ExtJSClass{
     if(_.isUndefined(this._mixins)){
       // don't use .classMembers because of circular dependency / timing issue
       let mixins = Ast.getProperty(this._ast, 'mixins')
-      this._mixins = mixins ? (this._parseClassReferenceNode(mixins) || []) : []
+      this._mixins = mixins ? this._parseClassReferenceNode(mixins) : []
     }
 
     return this._mixins
@@ -170,6 +172,20 @@ export default class ExtJSClass{
 
   set mixins(mixins){
     this._mixins = mixins
+  }
+
+  get plugins(){
+    if(_.isUndefined(this._plugins)){
+      // don't use .classMembers because of circular dependency / timing issue
+      let plugins = Ast.getProperty(this._ast, 'plugins')
+      this._plugins = plugins ? this._parseClassReferenceNode(plugins, 'plugin') : []
+    }
+
+    return this._plugins
+  }
+
+  set plugins(plugins){
+    this._plugins = plugins
   }
 
   get localAndInheritedConfigs(){
@@ -192,7 +208,8 @@ export default class ExtJSClass{
     if(_.isUndefined(this._inheritedConfigs)){
        this._inheritedConfigs = _.flattenDeep(_.compact([
          this.parentClass,
-         ...(this.mixins.map(mixin => this.sourceFile.codebase.getClassForClassName(mixin)))
+         ...(this.mixins.map(mixin => this.sourceFile.codebase.getClassForClassName(mixin))),
+         ...(this.plugins.map(plugin => this.sourceFile.codebase.getClassForClassName(plugin)))
        ]).map(cls => cls.localAndInheritedConfigs))
      }
 
@@ -359,20 +376,33 @@ export default class ExtJSClass{
     return _.difference(configs, this.inheritedConfigs).sort((c1, c2) => c1.localeCompare(c2))
   }
 
-  _parseClassReferenceNode(node){
+  _parseClassReferenceNode(node, aliasType = null){
     let getClassName = node => {
-      if(Ast.isString(node)){
-        return node.value
+      if(Ast.isObject(node)){
+        return [
+          node.properties.map(node => getClassName(node.key)),
+          node.properties.map(node => getClassName(node.value))
+        ]
       }
 
-      node = Ast.toString(node)
+      if(Ast.isArray(node)){
+        return node.elements.map(node => getClassName(node))
+      }
 
-      return this.sourceFile.codebase.getClassForClassName(node) ? node : null
+      let value = Ast.isString(node) ? node.value : Ast.toString(node)
+
+      if(this.sourceFile.codebase.getClassForClassName(value)){
+        return value
+      }
+
+      if(aliasType){
+        return this.sourceFile.codebase.getClassNameForAlias(`${aliasType}.${value}`) || null
+      }
+
+      return null
     }
 
-    return Ast.isArray(node)
-      ? node.elements.map(node => getClassName(node))
-      : getClassName(node)
+    return _.compact(_.flattenDeep([getClassName(node)]))
   }
 
   _getAliasesFromNode(configName, node){
