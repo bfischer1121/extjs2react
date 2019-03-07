@@ -235,7 +235,7 @@ export default class SourceFile{
     let parts      = cls.classAliases[0].split('.'),
         namespace  = parts.slice(0, parts.length - 1).map(p => _.capitalize(p)).join(''),
         alias      = _.capitalize(parts[parts.length - 1].replace(/.*-/, '')),
-        exportName = this.codebase.words.reduce((alias, [word, wordRe]) => alias.replace(wordRe, word), alias),
+        exportName = this.codebase.capitalize(alias),
         suffix     = { 'viewmodel': 'Model' }[namespace] || namespace,
         name       = exportName + (suffix === 'Widget' ? '' : suffix)
 

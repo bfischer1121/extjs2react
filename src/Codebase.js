@@ -27,9 +27,23 @@ export default class Codebase{
   classes              = {}
   _alternateClassNames = {}
   _classRe             = []
-  words                = []
   _properties          = {}
   allClassesRegistered = false
+
+  _words = [
+    'Change',
+    'Tap',
+    'HeaderPin',
+    'KeyUp',
+    'Initialize',
+    'Disclose',
+    'Record',
+    'Validated',
+    'Cmp',
+    'Icon',
+    'Mode',
+    'Width'
+  ]
 
   static async factory(config){
     let codebase = new this(config)
@@ -230,11 +244,18 @@ export default class Codebase{
   }
 
   _addWords(words){
-    words = _.uniq([...(this.words.map(w => w[0])), ...words]).sort((w1, w2) => {
+    let priorWords = _.isArray(this._words[0]) ? this._words.map(w => w[0]) : this._words
+
+    words = _.uniq([...priorWords, ...words]).sort((w1, w2) => {
       let diff = w1.length - w2.length
       return diff === 0 ? (this._customWords.includes(w1) ? 1 : -1) : diff
     })
 
-    this.words = words.map(word => [word, new RegExp(word, 'gi')])
+    this._words = words.map(word => [word, new RegExp(word, 'gi')])
+  }
+
+  capitalize(string){
+    string = this._words.reduce((string, [word, wordRe]) => string.replace(wordRe, word), string)
+    return string[0].toUpperCase() + string.slice(1)
   }
 }

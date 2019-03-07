@@ -10,6 +10,7 @@ export default class ExtJSClass{
   state = {}
 
   extractedProps = {}
+  listeners      = []
 
   static transformedProperties = [
     'extend',
@@ -555,15 +556,16 @@ export default class ExtJSClass{
       return (value.async ? 'async ' : '') + Ast.toString(method).replace(/\) \{/, '){')
     }
 
-    let methods     = [],
-        constructor = this.getConstructorFn()
-
-    if(constructor){
-      methods.push(constructor)
-    }
+    let methods = []
 
     if(this.isComponent()){
       methods.push(this.getRenderFn())
+    }
+
+    let constructor = this.getConstructorFn()
+
+    if(constructor){
+      methods.unshift(constructor)
     }
 
     methods.push(...(this.classMembers.methods.map(transformMethod)))
@@ -578,15 +580,15 @@ export default class ExtJSClass{
   getConstructorFn(){
     let body = []
 
-    if(this.controller){
-      let methodRefs = this.controller.classMembers.methods.map(node => {
-        let name = Ast.getPropertyName(node)
-        return (/[^A-Z0-9]/i).test(name) ? `this[${name}]` : `this.${name}`
-      }).filter(ref => ref !== 'this.init')
+    if(this.isComponent() && !this._listenersParsed){
+      throw new Error('Need to parse listeners before creating constructor')
+    }
 
-      let longestRef = Math.max(0, ...methodRefs.map(ref => ref.length))
+    if(this.listeners.length){
+      let listeners = _.uniq(this.listeners).sort((l1, l2) => l1.localeCompare(l2)),
+          longestFn = Math.max(0, ...listeners.map(fn => fn.length))
 
-      body.push(...methodRefs.map(ref => `${ref.padEnd(longestRef)} = ${ref}.bind(this)`))
+      body.push(...listeners.map(fn => `this.${fn.padEnd(longestFn)} = this.${fn}.bind(this)`))
     }
 
     if(!body.length){
@@ -635,6 +637,8 @@ export default class ExtJSClass{
       renderBody.unshift(extractedProps + '\n')
     }
 
+    this._listenersParsed = true
+
     return code('render(){', renderBody, '}')
   }
 
@@ -677,11 +681,21 @@ export default class ExtJSClass{
     )
   }
 
-  getPropsFromConfig(config){
+  getPropsFromConfig(node){
     let getPropName = configName => ({ 'cls': 'className' }[configName] || configName)
 
-    return Ast.getPropertiesExcept(config, 'extend', 'xtype', 'items').map(node => {
-      let name  = getPropName(Ast.getPropertyName(node)),
+    let props = Ast.getPropertiesExcept(node, 'extend', 'xtype', 'items').map(node => {
+      let configName = Ast.getPropertyName(node)
+
+      if(configName === 'handler'){
+        return this.getPropFromListener(node)
+      }
+
+      if(configName === 'listeners'){
+        return node.value.properties.map(node => this.getPropFromListener(node))
+      }
+
+      let name  = getPropName(configName),
           value = node.value,
           prop  = value => b.jsxAttribute(b.jsxIdentifier(name), value)
 
@@ -699,6 +713,26 @@ export default class ExtJSClass{
 
       return prop(b.jsxExpressionContainer(value))
     })
+
+    return _.compact(_.flattenDeep(props))
+  }
+
+  getPropFromListener(node){
+    let eventName = Ast.getPropertyName(node)
+
+    if(['element', 'scope'].includes(eventName)){
+      return null
+    }
+
+    let name  = 'on' + (eventName === 'handler' ? 'Tap' : this.sourceFile.codebase.capitalize(eventName)),
+        value = node.value
+
+    if(Ast.isString(value)){
+      this.listeners.push(value.value)
+      value = b.memberExpression(b.thisExpression(), b.identifier(value.value))
+    }
+
+    return b.jsxAttribute(b.jsxIdentifier(name), b.jsxExpressionContainer(value))
   }
 
   _shouldExtractJSXValue(node){
