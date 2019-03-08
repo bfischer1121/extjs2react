@@ -173,7 +173,7 @@ export default class SourceFile{
     }
 
     return [
-      Ast.toString(this._ast),
+      'try{' + Ast.toString(this._ast).replace(/Ext\.define\(/, '(') + '} catch(e){}',
       this._importsCode,
       this._exportsCode
     ].join('\n\n')
