@@ -82,6 +82,22 @@ export default class ExtJSClass{
     this._createdFn = createdFn
   }
 
+  get discard(){
+    return !!this.assimilatingClass
+  }
+
+  get assimilatingClass(){
+    return this._assimilatingClass
+  }
+
+  set assimilatingClass(cls){
+    if(this._assimilatingClass && this._assimilatingClass !== cls){
+      logError(`Assimilated ${this.className} into more than one class: ${this._assimilatingClass.className} and ${cls.className}`)
+    }
+
+    this._assimilatingClass = cls
+  }
+
   get parentClassName(){
     if(_.isUndefined(this._parentClassName)){
       // don't use .classMembers because of circular dependency / timing issue
@@ -284,11 +300,19 @@ export default class ExtJSClass{
   }
 
   get controller(){
-    let configNode = this.classMembers.controller,
-        alias      = configNode ? (this._getAliasesFromNode('controller', configNode) || [])[0] : null,
-        className  = alias ? this.sourceFile.codebase.getClassNameForAlias(alias) : null
+    if(!this._controller){
+      let configNode = this.classMembers.controller,
+          alias      = configNode ? (this._getAliasesFromNode('controller', configNode) || [])[0] : null,
+          className  = alias ? this.sourceFile.codebase.getClassNameForAlias(alias) : null
 
-    return className ? this.sourceFile.codebase.getClassForClassName(className) : null
+      this._controller = className ? this.sourceFile.codebase.getClassForClassName(className) : null
+
+      if(this._controller){
+        this._controller.assimilatingClass = this
+      }
+    }
+
+    return this._controller
   }
 
   get aliasesUsed(){
@@ -336,6 +360,10 @@ export default class ExtJSClass{
   get classMembers(){
     if(_.isUndefined(this._classMembers)){
       this._classMembers = {}
+
+      if(!this._ast){
+        return this._classMembers
+      }
 
       let kinds       = { configs: [], methods: [], properties: [], transformedClassMembers: [] },
           configNodes = (Ast.getProperty(this._ast, 'config') || {}).properties || [],
@@ -464,6 +492,11 @@ export default class ExtJSClass{
     return handleNode(node)
   }
 
+  init(){
+    // touching the controller getter will flag any assimilated class for potential discard
+    this.controller
+  }
+
   transpile(type = 'ES6'){
     return type === 'reactify'
       ? this.getReactifyClass()
@@ -523,7 +556,7 @@ export default class ExtJSClass{
   }
 
   getES6Class(){
-    let exportCode  = this.sourceFile.classes.length === 1 ? 'export default' : 'export',
+    let exportCode  = this.sourceFile.undiscardedClasses.length > 1 ? 'export' : 'export default',
         className   = this.exportName,
         parentName  = this.parentClass ? this.sourceFile.getImportNameForClassName(this.parentClass.className) : null,
         extendsCode = this.isComponent() ? ' extends Component' : (parentName ? ` extends ${parentName}` : ''),

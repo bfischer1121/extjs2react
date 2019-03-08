@@ -54,6 +54,10 @@ export default class SourceFile{
     return this.codebase.manifestFilePath || this.codeFilePath
   }
 
+  get undiscardedClasses(){
+    return this.classes.filter(cls => !cls.discard)
+  }
+
   get _ast(){
     if(!this.__ast && this.parseable){
       try{
@@ -83,6 +87,10 @@ export default class SourceFile{
     this._parseable = parseable
   }
 
+  get discard(){
+    return !this.undiscardedClasses.length
+  }
+
   get _astIsPerfect(){
     if(_.isUndefined(this.__astIsPerfect)){
       this.__astIsPerfect = (Ast.toString(this._ast) === this._source)
@@ -93,17 +101,17 @@ export default class SourceFile{
 
   get _importsCode(){
     let classes     = Object.keys(this._importNames).map(className => this.codebase.getClassForClassName(className)),
-        sourceFiles = _.uniq(classes.map(c => c.sourceFile))
+        sourceFiles = _.uniq(classes.filter(cls => !cls.discard).map(c => c.sourceFile))
 
     let imports = sourceFiles.map(sourceFile => {
-      let importNames = _.intersection(sourceFile.classes, classes).map(cls => this.getImportNameForClassName(cls.className)),
-          specifiers  = sourceFile.classes.length > 1 ? '{ ' + importNames.join(', ') + ' }' : importNames[0],
+      let importNames = _.intersection(sourceFile.undiscardedClasses, classes).map(cls => this.getImportNameForClassName(cls.className)),
+          specifiers  = sourceFile.undiscardedClasses.length > 1 ? '{ ' + importNames.join(', ') + ' }' : importNames[0],
           source      = getRelativePath(this.codeFilePath, sourceFile.importFilePath).replace(/\.js$/, '').replace(/\/index$/, '')
 
       return `import ${specifiers} from '${source}'`
     })
 
-    if(this.classes.find(cls => cls.isComponent())){
+    if(this.undiscardedClasses.find(cls => cls.isComponent())){
       imports.unshift(`import React, { Component } from 'react'`)
     }
 
@@ -111,11 +119,11 @@ export default class SourceFile{
   }
 
   get _exportsCode(){
-    return this.classes.map(cls => cls.transpile()).join('\n\n')
+    return this.undiscardedClasses.map(cls => cls.transpile()).join('\n\n')
   }
 
   get _aliasesUsed(){
-    return _.uniq(this.classes.reduce((aliases, cls) => ([...aliases, ...cls.aliasesUsed]), []))
+    return _.uniq(this.undiscardedClasses.reduce((aliases, cls) => ([...aliases, ...cls.aliasesUsed]), []))
   }
 
   get _classNamesUsed(){
@@ -218,7 +226,7 @@ export default class SourceFile{
 
     Object.keys(importNames).forEach(importName => {
       let classes = importNames[importName],
-          exports = this.classes.map(cls => cls.exportName)
+          exports = this.undiscardedClasses.map(cls => cls.exportName)
 
       classes.forEach((cls, i) => {
         this._importNames[cls.className] = importName + ((classes.length > 1 || exports.includes(cls.exportName)) ? (i + 1) : '')

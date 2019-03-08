@@ -145,7 +145,7 @@ export default class Codebase{
     await this._prepareTargetDirectory()
     this.unparseable.forEach(file => copySourceFileToTargetDir(file))
 
-    await asyncForEach(this.sourceFiles, async sourceFile => {
+    await asyncForEach(this.sourceFiles.filter(file => !file.discard), async sourceFile => {
       this._saveSourceFile(sourceFile, sourceFile.transpile())
       //sourceFile.missingFiles.forEach(className => logError(`Unknown file for class: ${className}`))
     })
@@ -187,6 +187,9 @@ export default class Codebase{
 
     this._addWordsFromClassNames(classes.map(cls => cls.className))
     this.allClassesRegistered = true
+
+    // all classes should be initialized before the source files are initialized
+    classes.forEach(cls => cls.init())
     this.sourceFiles.forEach(sourceFile => sourceFile.init())
   }
 

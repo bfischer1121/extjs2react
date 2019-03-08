@@ -34,7 +34,7 @@ export default class Framework extends Codebase{
     let widgets = [],
         classes = []
 
-    this.sourceFiles[0].classes.forEach(cls => {
+    this.sourceFiles[0].undiscardedClasses.forEach(cls => {
       // ExtJS doesn't create referenceable classes from overrides, so discard
       if(cls.override){
         return
