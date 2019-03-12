@@ -114,12 +114,7 @@ class AST{
   }
 
   getMethodCall(node){
-    let { object, property } = node.callee
-
-    return [
-      (t.ThisExpression.check(object) ? 'this' : (object || {}).name) || '',
-      (property || {}).name || ''
-    ].join('.')
+    return this.toString(node.callee)
   }
 
   isIdentifier(node){

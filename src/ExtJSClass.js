@@ -284,7 +284,12 @@ export default class ExtJSClass{
 
       visit(this._ast, {
         visitCallExpression: function(path){
-          calls.push(Ast.getMethodCall(path.node))
+          let call = Ast.getMethodCall(path.node)
+
+          if(!call.match(/[^A-Z0-9\_\$\.\[\]\(\)]/gi)){
+            calls.push(call)
+          }
+
           this.traverse(path)
         }
       })
