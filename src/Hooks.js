@@ -22,13 +22,19 @@ export const beforeTranspile = codebase => {
 
         if(transform){
           let [newMethodName] = transform.transform(path.node, ...methodName.match(transform.check).slice(1))
-          console.log(methodName, newMethodName)
           path.node.callee = Ast.from(newMethodName)
         }
 
         this.traverse(path)
       }
     })
-    
   })
+}
+
+const removeSemicolons = code => code.replace(/;$/gm, '')
+
+export const afterTranspile = code => {
+  code = removeSemicolons(code)
+
+  return code
 }

@@ -3,6 +3,7 @@ import recast from 'recast'
 import { builders as b, visit } from 'ast-types'
 import { Ast, code, getRelativePath, logError } from './Util'
 import ExtJSClass from './ExtJSClass'
+import * as hooks from './Hooks'
 
 export default class SourceFile{
   classes = []
@@ -181,12 +182,16 @@ export default class SourceFile{
     }
 
     let originalSource = Ast.toString(this._ast),
-        define         = /Ext\.define\(/
+        define         = /Ext\.define\(/,
+        code           = [this._importsCode, this._exportsCode].join('\n\n')
+
+    if(hooks.afterTranspile){
+      code = hooks.afterTranspile(code)
+    }
 
     return [
       originalSource.match(define) ? originalSource.replace(define, 'try{(') + '} catch(e){}' : originalSource,
-      this._importsCode,
-      this._exportsCode
+      code
     ].join('\n\n')
   }
 
