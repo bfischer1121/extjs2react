@@ -181,13 +181,24 @@ export default class SourceFile{
       throw 'Cannot transpile from snapshot'
     }
 
-    let originalSource = Ast.toString(this._ast),
-        define         = /Ext\.define\(/,
-        code           = [this._importsCode, this._exportsCode].join('\n\n')
+    let define = /Ext\.define\(/,
+        code   = [this._importsCode, this._exportsCode].join('\n\n')
 
     if(hooks.afterTranspile){
       code = hooks.afterTranspile(code)
     }
+
+    visit(this._ast, {
+      visitNode: function(path){
+        if(path.node.$delete){
+          path.prune()
+        }
+
+        this.traverse(path)
+      }
+    })
+
+    let originalSource = Ast.toString(this._ast)
 
     return [
       originalSource.match(define) ? originalSource.replace(define, 'try{(') + '} catch(e){}' : originalSource,

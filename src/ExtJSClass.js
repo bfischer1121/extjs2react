@@ -639,6 +639,8 @@ export default class ExtJSClass{
       let name   = b.identifier(getMethodName(Ast.getPropertyName(node))),
           method = b.classMethod('method', name, node.value.params, node.value.body)
 
+      node.$delete = true
+
       return (node.value.async ? 'async ' : '') + Ast.toString(method).replace(/\) \{/, '){')
     }
 
