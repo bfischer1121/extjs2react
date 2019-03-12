@@ -163,6 +163,18 @@ export default class ExtJSClass{
     this._override = override || null
   }
 
+  get singleton(){
+    if(_.isUndefined(this._singleton)){
+      this._singleton = !!this.classMembers.singleton
+    }
+
+    return this._singleton
+  }
+
+  set singleton(singleton){
+    this._singleton = !!singleton
+  }
+
   get classAliases(){
     if(_.isUndefined(this._classAliases)){
       // don't use .classMembers because of circular dependency / timing issue
@@ -640,7 +652,8 @@ export default class ExtJSClass{
 
     Ast.getProperties(this.ast, [
       ...(className ? ['xtype', 'alias'] : []),
-      ...(parentName ? ['extend'] : [])
+      ...(parentName ? ['extend'] : []),
+      'singleton'
     ]).map(node => node.$delete = true)
 
     if(properties.length){
@@ -665,7 +678,7 @@ export default class ExtJSClass{
       node.$delete = true
 
       return [
-        this.classMembers.static.properties.includes(node) ? 'static ' : '',
+        (this.singleton || this.classMembers.static.properties.includes(node)) ? 'static ' : '',
         Ast.toString(b.classProperty(node.key, node.value)).replace(/;$/, '')
       ].join('')
     })
@@ -697,7 +710,7 @@ export default class ExtJSClass{
       node.$delete = true
 
       return [
-        this.classMembers.static.methods.includes(node) ? 'static ' : '',
+        (this.singleton || this.classMembers.static.methods.includes(node)) ? 'static ' : '',
         node.value.async ? 'async ' : '',
         Ast.toString(method).replace(/\) \{/, '){')
       ].join('')

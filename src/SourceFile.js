@@ -223,7 +223,7 @@ export default class SourceFile{
     return _.compact([
       unparsedSource.match(define) ? unparsedSource.replace(define, 'try{(') + '} catch(e){}' : unparsedSource,
       code
-    ]).join('\n\n')
+    ]).join('\n\n').trim()
   }
 
   getImportNameForAlias(alias){
