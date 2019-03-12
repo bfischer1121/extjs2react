@@ -180,8 +180,11 @@ export default class SourceFile{
       throw 'Cannot transpile from snapshot'
     }
 
+    let originalSource = Ast.toString(this._ast),
+        define         = /Ext\.define\(/
+
     return [
-      'try{' + Ast.toString(this._ast).replace(/Ext\.define\(/, '(') + '} catch(e){}',
+      originalSource.match(define) ? originalSource.replace(define, 'try{(') + '} catch(e){}' : originalSource,
       this._importsCode,
       this._exportsCode
     ].join('\n\n')
