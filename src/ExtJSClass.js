@@ -370,8 +370,15 @@ export default class ExtJSClass{
         return this._classMembers
       }
 
-      let kinds       = { configs: [], methods: [], properties: [], transformedClassMembers: [] },
-          configNodes = (Ast.getProperty(this.ast, 'config') || {}).properties || [],
+      let kinds = {
+        configs     : [],
+        static      : { properties: [], methods: [] },
+        properties  : [],
+        methods     : [],
+        transformed : []
+      }
+
+      let configNodes = (Ast.getProperty(this.ast, 'config') || {}).properties || [],
           classNodes  = [...configNodes, ...Ast.getProperties(this.ast, null, ['config'])]
 
       classNodes.forEach(node => {
@@ -384,12 +391,19 @@ export default class ExtJSClass{
           return
         }
 
+        if(name === 'statics'){
+          Ast.getProperties(node.value).forEach(node => {
+            kinds.static[Ast.isFunction(node.value) ? 'methods' : 'properties'].push(node)
+          })
+          return
+        }
+
         if(Ast.isFunction(node.value)){
           kinds.methods.push(node)
           return
         }
 
-        kinds[this.transformedClassMembers.includes(name) ? 'transformedClassMembers' : 'properties'].push(node)
+        kinds[this.transformedClassMembers.includes(name) ? 'transformed' : 'properties'].push(node)
       })
 
       if(_.intersection(Object.keys(this._classMembers), Object.keys(kinds)).length){
@@ -514,10 +528,16 @@ export default class ExtJSClass{
         }
       })
 
-      let config = Ast.getPropertyNode(this.ast, 'config')
+      let reprune = false
 
-      if(config && Ast.isObject(config.value) && Ast.getProperties(config.value).length === 0){
-        config.$delete = true
+      Ast.getProperties(this.ast, ['config', 'statics']).forEach(node => {
+        if(Ast.isObject(node.value) && Ast.getProperties(node.value).length === 0){
+          node.$delete = true
+          reprune = true
+        }
+      })
+
+      if(reprune){
         prune()
       }
     }
@@ -618,13 +638,10 @@ export default class ExtJSClass{
         properties  = this.getProperties(),
         methods     = this.getMethods()
 
-    if(parentName){
-      (Ast.getPropertyNode(this.ast, 'extend') || {}).$delete = true
-    }
-
-    if(className){
-      Ast.getProperties(this.ast, ['xtype', 'alias']).map(node => node.$delete = true)
-    }
+    Ast.getProperties(this.ast, [
+      ...(className ? ['xtype', 'alias'] : []),
+      ...(parentName ? ['extend'] : [])
+    ]).map(node => node.$delete = true)
 
     if(properties.length){
       classBody.push([properties, '\n'])
@@ -643,10 +660,14 @@ export default class ExtJSClass{
   }
 
   getProperties(){
-    let properties = this.classMembers.properties.map(node => {
+    let properties = [...this.classMembers.static.properties, ...this.classMembers.properties].map(node => {
       this.sourceFile.codebase.logProperty(Ast.getPropertyName(node))
       node.$delete = true
-      return Ast.toString(b.classProperty(node.key, node.value)).replace(/;$/, '')
+
+      return [
+        this.classMembers.static.properties.includes(node) ? 'static ' : '',
+        Ast.toString(b.classProperty(node.key, node.value)).replace(/;$/, '')
+      ].join('')
     })
 
     let defaultProps = this.classMembers.configs.filter(node => this.localConfigs.includes(Ast.getPropertyName(node)))
@@ -675,7 +696,11 @@ export default class ExtJSClass{
 
       node.$delete = true
 
-      return (node.value.async ? 'async ' : '') + Ast.toString(method).replace(/\) \{/, '){')
+      return [
+        this.classMembers.static.methods.includes(node) ? 'static ' : '',
+        node.value.async ? 'async ' : '',
+        Ast.toString(method).replace(/\) \{/, '){')
+      ].join('')
     }
 
     let cmpConstructor = null,
@@ -685,7 +710,7 @@ export default class ExtJSClass{
       methods.push(this.getRenderFn())
     }
 
-    this.classMembers.methods.forEach(node => {
+    [...this.classMembers.static.methods, ...this.classMembers.methods].forEach(node => {
       if(Ast.getPropertyName(node) === 'constructor'){
         cmpConstructor = transformMethod(node)
         return
