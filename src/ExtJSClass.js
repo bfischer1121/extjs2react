@@ -614,6 +614,7 @@ export default class ExtJSClass{
   getProperties(){
     let properties = this.classMembers.properties.map(node => {
       this.sourceFile.codebase.logProperty(Ast.getPropertyName(node))
+      node.$delete = true
       return Ast.toString(b.classProperty(node.key, node.value)).replace(/;$/, '')
     })
 
