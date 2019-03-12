@@ -627,6 +627,8 @@ export default class ExtJSClass{
       ))
     }
 
+    defaultProps.forEach(node => node.$delete = true)
+
     return properties.join('\n\n')
   }
 
