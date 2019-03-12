@@ -3,6 +3,7 @@ import recast from 'recast'
 import { visit } from 'ast-types'
 import fs from 'fs-extra'
 import SourceFile from './SourceFile'
+import * as hooks from './Hooks'
 
 import {
   Ast,
@@ -144,6 +145,10 @@ export default class Codebase{
   async transpile(){
     await this._prepareTargetDirectory()
     this.unparseable.forEach(file => copySourceFileToTargetDir(file))
+
+    if(hooks.beforeTranspile){
+      hooks.beforeTranspile(this)
+    }
 
     await asyncForEach(this.sourceFiles.filter(file => !file.discard), async sourceFile => {
       this._saveSourceFile(sourceFile, sourceFile.transpile())
