@@ -49,6 +49,9 @@ export default class SourceFile{
 
     this._source  = source
     this._ast     = ast
+
+    // touch this property to determine it before any transformations
+    this._astIsPerfect
   }
 
   get importFilePath(){
@@ -188,15 +191,17 @@ export default class SourceFile{
       code = hooks.afterTranspile(code)
     }
 
-    visit(this._ast, {
-      visitNode: function(path){
-        if(path.node.$delete){
-          path.prune()
-        }
+    if(this._astIsPerfect){
+      visit(this._ast, {
+        visitNode: function(path){
+          if(path.node.$delete){
+            path.prune()
+          }
 
-        this.traverse(path)
-      }
-    })
+          this.traverse(path)
+        }
+      })
+    }
 
     let originalSource = Ast.toString(this._ast)
 
