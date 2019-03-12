@@ -192,9 +192,24 @@ export default class SourceFile{
     }
 
     if(this._astIsPerfect){
+      this.classes.forEach(cls => cls.pruneAST())
+
+      let asts = this.classes.map(cls => cls.ast)
+
       visit(this._ast, {
-        visitNode: function(path){
-          if(path.node.$delete){
+        visitCallExpression: function(path){
+          let { node } = path
+          let [className, classData] = node.arguments
+
+          let emptyClass = (
+            Ast.getMethodCall(node) === 'Ext.define' &&
+            node.arguments.length === 2 &&
+            Ast.isString(className) &&
+            asts.includes(classData) &&
+            Ast.getProperties(classData).length === 0
+          )
+
+          if(emptyClass){
             path.prune()
           }
 
@@ -203,12 +218,12 @@ export default class SourceFile{
       })
     }
 
-    let originalSource = Ast.toString(this._ast)
+    let unparsedSource = Ast.toString(this._ast).trim()
 
-    return [
-      originalSource.match(define) ? originalSource.replace(define, 'try{(') + '} catch(e){}' : originalSource,
+    return _.compact([
+      unparsedSource.match(define) ? unparsedSource.replace(define, 'try{(') + '} catch(e){}' : unparsedSource,
       code
-    ].join('\n\n')
+    ]).join('\n\n')
   }
 
   getImportNameForAlias(alias){

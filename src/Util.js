@@ -157,8 +157,12 @@ class AST{
     return this.toValue(this.getProperty(config, name))
   }
 
+  getPropertyNode(object, name){
+    return this.getProperties(object, [name])[0]
+  }
+
   getProperty(object, name){
-    return (this.getProperties(object, [name])[0] || {}).value
+    return (this.getPropertyNode(object, name) || {}).value
   }
 
   getPropertiesExcept(object, ...exclude){

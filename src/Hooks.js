@@ -15,7 +15,7 @@ export const beforeTranspile = codebase => {
   }))
 
   classes.forEach(cls => {
-    visit(cls._ast, {
+    visit(cls.ast, {
       visitCallExpression: function(path){
         let methodName = Ast.getMethodCall(path.node),
             transform  = transforms.find(({ check }) => methodName.match(check))

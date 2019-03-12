@@ -78,7 +78,7 @@ export default class ExtJSClass{
   constructor(sourceFile, className, ast, createdFn){
     this.sourceFile = sourceFile
     this.className  = className
-    this._ast       = ast
+    this.ast       = ast
     this._createdFn = createdFn
   }
 
@@ -101,7 +101,7 @@ export default class ExtJSClass{
   get parentClassName(){
     if(_.isUndefined(this._parentClassName)){
       // don't use .classMembers because of circular dependency / timing issue
-      let extend = Ast.getProperty(this._ast, 'extend')
+      let extend = Ast.getProperty(this.ast, 'extend')
       this._parentClassName = extend ? (this._parseClassReferenceNode(extend)[0] || null) : null
     }
 
@@ -139,7 +139,7 @@ export default class ExtJSClass{
   get alternateClassNames(){
     if(_.isUndefined(this._alternateClassNames)){
       // don't use .classMembers because of circular dependency / timing issue
-      let names = Ast.getConfig(this._ast, 'alternateClassName')
+      let names = Ast.getConfig(this.ast, 'alternateClassName')
       this._alternateClassNames = _.compact(_.isArray(names) ? names.map(name => Ast.toValue(name)) : [names])
     }
 
@@ -166,8 +166,8 @@ export default class ExtJSClass{
   get classAliases(){
     if(_.isUndefined(this._classAliases)){
       // don't use .classMembers because of circular dependency / timing issue
-      let xtype = Ast.getProperty(this._ast, 'xtype'),
-          alias = Ast.getProperty(this._ast, 'alias')
+      let xtype = Ast.getProperty(this.ast, 'xtype'),
+          alias = Ast.getProperty(this.ast, 'alias')
 
       this._classAliases = _.uniq([
         ...(xtype ? this._getAliasesFromNode('xtype', xtype) : []),
@@ -185,7 +185,7 @@ export default class ExtJSClass{
   get mixins(){
     if(_.isUndefined(this._mixins)){
       // don't use .classMembers because of circular dependency / timing issue
-      let mixins = Ast.getProperty(this._ast, 'mixins')
+      let mixins = Ast.getProperty(this.ast, 'mixins')
       this._mixins = mixins ? this._parseClassReferenceNode(mixins) : []
     }
 
@@ -199,7 +199,7 @@ export default class ExtJSClass{
   get plugins(){
     if(_.isUndefined(this._plugins)){
       // don't use .classMembers because of circular dependency / timing issue
-      let plugins = Ast.getProperty(this._ast, 'plugins')
+      let plugins = Ast.getProperty(this.ast, 'plugins')
       this._plugins = plugins ? this._parseClassReferenceNode(plugins, 'plugin') : []
     }
 
@@ -282,7 +282,7 @@ export default class ExtJSClass{
     if(_.isUndefined(this._methodCalls)){
       let calls = []
 
-      visit(this._ast, {
+      visit(this.ast, {
         visitCallExpression: function(path){
           let call = Ast.getMethodCall(path.node)
 
@@ -326,7 +326,7 @@ export default class ExtJSClass{
           configNames = ['xtype', 'alias', 'controller', 'viewModel'],
           aliases     = []
 
-      visit(this._ast, {
+      visit(this.ast, {
         visitObjectExpression: function(path){
           path.node.properties.forEach(node => {
             let configName = Ast.getPropertyName(node)
@@ -366,13 +366,13 @@ export default class ExtJSClass{
     if(_.isUndefined(this._classMembers)){
       this._classMembers = {}
 
-      if(!this._ast){
+      if(!this.ast){
         return this._classMembers
       }
 
       let kinds       = { configs: [], methods: [], properties: [], transformedClassMembers: [] },
-          configNodes = (Ast.getProperty(this._ast, 'config') || {}).properties || [],
-          classNodes  = [...configNodes, ...Ast.getProperties(this._ast, null, ['config'])]
+          configNodes = (Ast.getProperty(this.ast, 'config') || {}).properties || [],
+          classNodes  = [...configNodes, ...Ast.getProperties(this.ast, null, ['config'])]
 
       classNodes.forEach(node => {
         let name = Ast.getPropertyName(node)
@@ -420,8 +420,8 @@ export default class ExtJSClass{
       eventedConfigs : 'eventedConfig'
     }[configType]
 
-    let config  = Ast.getProperty(this._ast, key),
-        configs = (Ast.getConfig(this._ast, key) || []).map(node => Ast.getPropertyName(node))
+    let config  = Ast.getProperty(this.ast, key),
+        configs = (Ast.getConfig(this.ast, key) || []).map(node => Ast.getPropertyName(node))
 
     return _.difference(configs, this.inheritedConfigs).sort((c1, c2) => c1.localeCompare(c2))
   }
@@ -502,6 +502,29 @@ export default class ExtJSClass{
     this.controller
   }
 
+  pruneAST(){
+    let prune = () => {
+      visit(this.ast, {
+        visitNode: function(path){
+          if(path.node.$delete){
+            path.prune()
+          }
+
+          this.traverse(path)
+        }
+      })
+
+      let config = Ast.getPropertyNode(this.ast, 'config')
+
+      if(config && Ast.isObject(config.value) && Ast.getProperties(config.value).length === 0){
+        config.$delete = true
+        prune()
+      }
+    }
+
+    prune()
+  }
+
   transpile(type = 'ES6'){
     //this.convertXTypesToJSX()
 
@@ -513,7 +536,7 @@ export default class ExtJSClass{
   convertXTypesToJSX(){
     let me = this
 
-    visit(this._ast, {
+    visit(this.ast, {
       visitFunctionExpression: function(path){
         visit(path.node, {
           visitObjectExpression: function(path){
@@ -594,6 +617,14 @@ export default class ExtJSClass{
         classBody   = [],
         properties  = this.getProperties(),
         methods     = this.getMethods()
+
+    if(parentName){
+      (Ast.getPropertyNode(this.ast, 'extend') || {}).$delete = true
+    }
+
+    if(className){
+      Ast.getProperties(this.ast, ['xtype', 'alias']).map(node => node.$delete = true)
+    }
 
     if(properties.length){
       classBody.push([properties, '\n'])
