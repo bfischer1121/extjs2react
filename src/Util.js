@@ -105,6 +105,10 @@ export const code = (...lines) => {
 }
 
 class AST{
+  parseWithJSX(source){
+    return recast.parse(source, { parser: require('recast/parsers/babel') }).program.body[0]
+  }
+
   from(source){
     return recast.parse(source).program.body[0]
   }

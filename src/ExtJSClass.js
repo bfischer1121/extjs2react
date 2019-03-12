@@ -503,9 +503,35 @@ export default class ExtJSClass{
   }
 
   transpile(type = 'ES6'){
+    //this.convertXTypesToJSX()
+
     return type === 'reactify'
       ? this.getReactifyClass()
       : this.getES6Class()
+  }
+
+  convertXTypesToJSX(){
+    let me = this
+
+    visit(this._ast, {
+      visitFunctionExpression: function(path){
+        visit(path.node, {
+          visitObjectExpression: function(path){
+            if(path.node.properties.find(node => Ast.getPropertyName(node) === 'xtype')){
+              let jsx = me.getJSXFromConfig(path.node)
+
+              if(jsx){
+                path.replace(me.formatJSX(jsx))
+              }
+            }
+
+            this.traverse(path)
+          }
+        })
+
+        this.traverse(path)
+      }
+    })
   }
 
   getReactifiedClass(){
@@ -712,6 +738,19 @@ export default class ExtJSClass{
     this._listenersParsed = true
 
     return code('render(){', renderBody, '}')
+  }
+
+  formatJSX(ast){
+    let code = `let foo = ${Ast.toString(ast)}`
+
+    try{
+      let formatted = prettier.format(code, { parser: 'babel', printWidth: 200 }).replace(/;\s*$/, '')
+      return Ast.parseWithJSX(formatted).declarations[0].init
+    }
+    catch(e){
+      console.log(`Error formatting JSX (${this.className})`, e)
+      return ast
+    }
   }
 
   getCodeFromJSX(jsx){
