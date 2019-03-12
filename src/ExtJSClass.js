@@ -711,6 +711,8 @@ export default class ExtJSClass{
 
     let props = this.classMembers.configs.filter(node => !this.localConfigs.includes(Ast.getPropertyName(node)))
 
+    props.forEach(prop => prop.$delete = true)
+
     props = [
       ...this.getPropsFromConfig(b.objectExpression(props), true),
       b.jsxSpreadAttribute(b.memberExpression(b.thisExpression(), b.identifier('props')))
@@ -781,6 +783,8 @@ export default class ExtJSClass{
     if(!identifier){
       return null
     }
+
+    config.$delete = true
 
     if(!children.length){
       return b.jsxElement(b.jsxOpeningElement(identifier, props, true))
