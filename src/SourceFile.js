@@ -62,6 +62,28 @@ export default class SourceFile{
     return this.classes.filter(cls => !cls.discard)
   }
 
+  get classesUsed(){
+    if(!this._classesUsed){
+      let aliases    = this._aliasesUsed,
+          classNames = this._classNamesUsed,
+          classes    = []
+
+      aliases.forEach(alias => {
+        let className = this.codebase.getClassNameForAlias(alias)
+        className ? classNames.push(className) : this.unknown.aliases.push(alias)
+      })
+
+      classNames.forEach(className => {
+        let cls = this.codebase.getClassForClassName(className)
+        cls ? classes.push(cls) : this.unknown.classNames.push(className)
+      })
+
+      this._classesUsed = _.uniq(classes)
+    }
+
+    return this._classesUsed
+  }
+
   get _ast(){
     if(!this.__ast && this.parseable){
       try{
@@ -245,21 +267,10 @@ export default class SourceFile{
   }
 
   init(){
-    let aliases    = this._aliasesUsed,
-        classNames = this._classNamesUsed,
-        classes    = []
-
-    aliases.forEach(alias => {
-      let className = this.codebase.getClassNameForAlias(alias)
-      className ? classNames.push(className) : this.unknownAliases.push(alias)
-    })
-
-    classNames.forEach(className => {
-      let cls = this.codebase.getClassForClassName(className)
-      cls ? classes.push(cls) : this.unknownClassNames.push(className)
-    })
-
-    classes = _.uniq(classes)
+    let classes = _.uniq([
+      ...this.classesUsed,
+      ...(_.flattenDeep(this.classes.map(cls => cls.assimilatedClasses.map(cls => cls.sourceFile.classesUsed))))
+    ])
 
     let importNames = _.groupBy(classes, cls => cls.exportName)
 

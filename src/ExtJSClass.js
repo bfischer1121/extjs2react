@@ -98,6 +98,10 @@ export default class ExtJSClass{
     this._assimilatingClass = cls
   }
 
+  get assimilatedClasses(){
+    return _.compact([this.controller])
+  }
+
   get parentClassName(){
     if(_.isUndefined(this._parentClassName)){
       // don't use .classMembers because of circular dependency / timing issue
