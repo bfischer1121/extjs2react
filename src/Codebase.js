@@ -187,7 +187,7 @@ export default class Codebase{
 
       this.classes[cls.className] = cls
       cls.alternateClassNames.forEach(name => this._alternateClassNames[name] = cls.className)
-      this._classRe.push(...cls.fileSearchRegExps)
+      this._classRe.push(...(cls.fileSearchRegExps.map(re => ({ re, cls }))))
     })
 
     this._addWordsFromClassNames(classes.map(cls => cls.className))

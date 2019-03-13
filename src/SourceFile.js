@@ -11,8 +11,7 @@ export default class SourceFile{
   _importNames = {}
   _exportNames = {}
 
-  unknownAliases    = []
-  unknownClassNames = []
+  unknown = { aliases: [], classNames: [] }
 
   static async factory(config){
     let sourceFile = new this(config)
@@ -103,7 +102,7 @@ export default class SourceFile{
 
   get parseable(){
     if(_.isUndefined(this._parseable)){
-      this._parseable = this._getMatches(/Ext\.define\(\s*['|"][^'|"]+['|"]/g).length > 0
+      this._parseable = (/Ext\.define\(\s*['|"][^'|"]+['|"]/g).test(this._source)
     }
 
     return this._parseable
@@ -145,7 +144,8 @@ export default class SourceFile{
   }
 
   get _exportsCode(){
-    return this.undiscardedClasses.map(cls => cls.transpile()).join('\n\n')
+    let code = this.undiscardedClasses.map(cls => cls.transpile()).join('\n\n')
+    return this.replaceClassNames(code)
   }
 
   get _aliasesUsed(){
@@ -153,8 +153,11 @@ export default class SourceFile{
   }
 
   get _classNamesUsed(){
-    let internalCls = this.classes.map(cls => cls.className),
-        externalCls = this.codebase.classRe.reduce((classes, re) => [...classes, ...(this._getMatches(re).map(match => match[1]))], [])
+    let internalCls = this.classes.map(cls => cls.className)
+
+    let externalCls = this.codebase.classRe.reduce((classes, { re, cls }) => (
+      [...classes, ...(re.test(this._source) ? [cls.className] : [])
+    ]), [])
 
     return _.uniq(_.difference(externalCls, internalCls))
   }
@@ -248,6 +251,13 @@ export default class SourceFile{
     ]).join('\n\n').trim()
   }
 
+  replaceClassNames(code){
+    this.codebase.classRe.forEach(({ re, cls }) => {
+      code = code.replace(re, (match, name, extra) => this.getImportNameForClassName(cls.className) + extra)
+    })
+    return code
+  }
+
   getImportNameForAlias(alias){
     let className = this.codebase.getClassNameForAlias(alias)
     return className ? this.getImportNameForClassName(className) : null
@@ -298,16 +308,5 @@ export default class SourceFile{
         name       = exportName + (suffix === 'Widget' ? '' : suffix)
 
     return name === 'Component' ? 'ExtJSComponent' : name
-  }
-
-  _getMatches(regExp){
-    let matches = [],
-        match
-
-    while(match = regExp.exec(this._source)){
-      matches.push(match)
-    }
-
-    return matches
   }
 }
