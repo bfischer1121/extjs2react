@@ -48,7 +48,7 @@ export default class Framework extends Codebase{
     })
 
     let framework = code(
-      `import { reactify } from '@extjs/reactor'`,
+      `import { reactify } from '@sencha/ext-react'`,
       '',
       ...widgets,
       '',
