@@ -26,6 +26,14 @@ ExtJS classes are namespaced while, with modules, ES6 class names are generally 
 
 e.g., `FaceidSetup` → add `FaceID` to config → `FaceIDSetup` (if no effect, add `FaceIDSetup`)
 
+## ES6 Modules
+ExtJS dependency management is global, while ES6 dependencies are local. To make the transition, e2r builds a registry of all class names and aliases, determines each source file's requirements, and adds corresponding `import` and `export` statements. 
+
+This modularization can lead to circular dependencies. In webpack, the imported class will become undefined and, if extended, will produce the following error:
+`Unhandled Rejection (TypeError): Super expression must either be null or a function`
+
+To resolve these issues, I recommend using a tool like [circular-dependency-plugin](https://github.com/aackerman/circular-dependency-plugin) and refactoring the original code as needed.
+
 ## Progress
 ##### Architectural - generally non-breaking:
 - [x] `import` statements for fully-qualified class dependencies
