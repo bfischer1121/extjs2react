@@ -67,6 +67,8 @@ export const readFile = path => fs.readFile(path, 'utf8')
 
 export const writeFile = (path, data) => fs.outputFile(path, data, 'utf8')
 
+export const removeFile = path => fs.remove(path)
+
 export const getFilesRecursively = dir => (
   fs.readdirSync(dir).reduce((filePaths, fileName) => {
     let file = path.join(dir, fileName)
