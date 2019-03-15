@@ -169,7 +169,10 @@ export default class ExtJSClass{
 
   get singleton(){
     if(_.isUndefined(this._singleton)){
-      this._singleton = !!this.classMembers.singleton
+      this._singleton = (
+        !!this.classMembers.singleton ||
+        !!this.ancestors.find(cls => cls.className === 'Ext.app.Application')
+      )
     }
 
     return this._singleton
