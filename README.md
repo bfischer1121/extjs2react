@@ -36,13 +36,31 @@ To resolve these issues, I recommend using a tool like [circular-dependency-plug
 
 ## Progress
 ##### Architectural - generally non-breaking:
-- [x] `import` statements for fully-qualified class dependencies
-- [x] `import` statements for aliases
+- [x] ClassManager → ES6 modules
+  - [x] namespaced class names → simple names & references
+  - [x] import class dependencies
+  - [x] import alias dependencies
+  - [x] exports
+  - [x] name collision avoidance
+  - [x] resolve alternateClassName to primary
+  - [x] reactify all framework components w/ manifest
 - [ ] ExtJS classes → ES6 classes
-- [x] `items` → JSX within render
+  - [x] extends → `extend`
+  - [x] statics → `static`
+  - [x] singleton → `export` instance
+  - [x] config/cachedConfig/eventedConfig → ES6 accessors & calls
+  - [x] mixins → inline js (Object.assign)
+  - [ ] plugins
+- [x] Component
+  - [x] configs → props/defaultProps
+  - [x] items/cmp → JSX
+- [ ] ViewController
+  - [x] merge methods/configs/properties
+  - [ ] transform lifecycle methods
 - [ ] ViewModel → `state`, render
-- [ ] ViewController → Component methods, `props`, render
 - [ ] Utility methods → ES6, lodash
+  - [ ] Ext.Date
+  - [ ] Ext.String
 ##### Component (Optional) - generally break associated code, requiring manual fixing
 - [ ] Small subset of Components → open source libraries (w/ documented api loss)
   - [ ] Layouts (flexbox-compatible)
