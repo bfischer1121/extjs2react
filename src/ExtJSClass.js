@@ -532,6 +532,10 @@ export default class ExtJSClass{
     return handleNode(node)
   }
 
+  _deleteNode(node){
+    node.$delete = true
+  }
+
   init(){
     // touching the controller getter will flag any assimilated class for potential discard
     this.controller
@@ -553,7 +557,7 @@ export default class ExtJSClass{
 
       Ast.getProperties(this.ast, ['config', 'statics']).forEach(node => {
         if(Ast.isObject(node.value) && Ast.getProperties(node.value).length === 0){
-          node.$delete = true
+          this._deleteNode(node)
           reprune = true
         }
       })
@@ -664,7 +668,7 @@ export default class ExtJSClass{
       ...(className ? ['xtype', 'alias'] : []),
       ...(parentName ? ['extend'] : []),
       'singleton', 'mixins'
-    ]).map(node => node.$delete = true)
+    ]).map(this._deleteNode)
 
     if(properties.length){
       classBody.push([properties, '\n'])
@@ -696,9 +700,14 @@ export default class ExtJSClass{
   }
 
   getProperties(){
-    let properties = [...this.classMembers.static.properties, ...this.classMembers.properties].map(node => {
+    let properties = [
+      ...this.classMembers.static.properties,
+      ...this.classMembers.properties,
+      ...this.assimilatedClasses.reduce((properties, cls) => [...properties, ...cls.classMembers.static.properties], []),
+      ...this.assimilatedClasses.reduce((properties, cls) => [...properties, ...cls.classMembers.properties], [])
+    ].map(node => {
       this.sourceFile.codebase.logProperty(Ast.getPropertyName(node))
-      node.$delete = true
+      this._deleteNode(node)
 
       return [
         (this.singleton || this.classMembers.static.properties.includes(node)) ? 'static ' : '',
@@ -710,41 +719,44 @@ export default class ExtJSClass{
   }
 
   getConfigs(){
-    let configs = this.classMembers.configs.filter(node => this.localConfigs.includes(Ast.getPropertyName(node)))
+    let localConfigs  = this.classMembers.configs.filter(node => this.localConfigs.includes(Ast.getPropertyName(node))),
+        remoteConfigs = this.assimilatedClasses.reduce((configs, cls) => [...configs, ...cls.classMembers.configs], []),
+        deleteNodes   = configs => configs.forEach(this._deleteNode),
+        configs       = [...localConfigs, ...remoteConfigs],
+        configCode    = []
 
     if(!configs.length){
       return ''
     }
 
-    let deleteNodes = () => configs.forEach(node => node.$delete = true)
-
-    if(this.isComponent()){
-      let configCode = code(
+    if(this.isComponent() && localConfigs.length){
+      configCode.push(code(
         'static defaultProps = {',
-          [configs.map(node => Ast.toString(node)).join(',\n')],
+          [localConfigs.map(node => Ast.toString(node)).join(',\n')],
         '}'
-      )
+      ))
 
-      deleteNodes()
-
-      return configCode
+      deleteNodes(localConfigs)
+      configs = remoteConfigs
     }
 
-    let accessors   = configs.map(node => this.getAccessorsFromConfig(node)),
-        longestProp = Math.max(0, ...accessors.map(({ propertyName }) => propertyName.length))
+    if(configs.length){
+      let accessors   = configs.map(node => this.getAccessorsFromConfig(node)),
+          longestProp = Math.max(0, ...accessors.map(({ propertyName }) => propertyName.length))
 
-    let props = accessors
-      .sort((p1, p2) => (p1.propertyName.startsWith('_') ? 1 : 0) - (p2.propertyName.startsWith('_') ? 1 : 0))
-      .map(({ propertyName, defaultValue }) => `${propertyName.padEnd(longestProp)} = ${defaultValue}`)
+      let props = accessors
+        .sort((p1, p2) => (p1.propertyName.startsWith('_') ? 1 : 0) - (p2.propertyName.startsWith('_') ? 1 : 0))
+        .map(({ propertyName, defaultValue }) => `${propertyName.padEnd(longestProp)} = ${defaultValue}`)
 
-    let configCode = [
-      ...(props.length ? [props.join('\n')] : []),
-      ..._.compact(accessors.map(({ accessors }) => accessors))
-    ].join('\n\n')
+      configCode.push([
+        ...(props.length ? [props.join('\n')] : []),
+        ..._.compact(accessors.map(({ accessors }) => accessors))
+      ].join('\n\n'))
+    }
 
-    deleteNodes()
+    deleteNodes(configs)
 
-    return configCode
+    return configCode.join('\n\n')
   }
 
   getAccessorsFromConfig(node, evented = false){
@@ -771,13 +783,13 @@ export default class ExtJSClass{
 
     if(applyFn){
       beforeSet.push(`value = (${Ast.toString(applyFn)}).call(this, value, this._${name}Initialized ? this._${name} : undefined)`)
-      this.classMembers.methods.find(node => node.value === applyFn).$delete = true
+      this._deleteNode(this.classMembers.methods.find(node => node.value === applyFn))
     }
 
     if(updateFn){
       let update = `(${Ast.toString(updateFn)})(value, this._${name})`
       beforeSet.push(applyFn ? code(`if(typeof value !== 'undefined' && value !== this._${name}){`, [update], `}`) : update)
-      this.classMembers.methods.find(node => node.value === updateFn).$delete = true
+      this._deleteNode(this.classMembers.methods.find(node => node.value === updateFn))
     }
 
     if(evented){
@@ -821,7 +833,7 @@ export default class ExtJSClass{
       let name   = b.identifier(getMethodName(Ast.getPropertyName(node))),
           method = b.classMethod('method', name, node.value.params, node.value.body)
 
-      node.$delete = true
+      this._deleteNode(node)
 
       return [
         this.classMembers.static.methods.includes(node) ? 'static ' : '',
@@ -838,10 +850,11 @@ export default class ExtJSClass{
     }
 
     [
-      ...this.classMembers.static.methods,
-      ...this.classMembers.methods
-    ].filter(method => !method.$delete).forEach(node => {
-      if(Ast.getPropertyName(node) === 'constructor'){
+      ...[...this.classMembers.static.methods, ...this.classMembers.methods].filter(method => !method.$delete),
+      ...this.assimilatedClasses.reduce((methods, cls) => [...methods, ...cls.classMembers.static.methods], []),
+      ...this.assimilatedClasses.reduce((methods, cls) => [...methods, ...cls.classMembers.methods], [])
+    ].forEach(node => {
+      if(Ast.getPropertyName(node) === 'constructor' && this.classMembers.methods.includes(node)){
         cmpConstructor = transformMethod(node)
         return
       }
@@ -857,10 +870,6 @@ export default class ExtJSClass{
 
     if(cmpConstructor){
       methods.unshift(cmpConstructor)
-    }
-
-    if(this.controller){
-      methods.push(...(this.controller.classMembers.methods.map(transformMethod)))
     }
 
     return methods.join('\n\n')
@@ -900,7 +909,7 @@ export default class ExtJSClass{
 
     let props = this.classMembers.configs.filter(node => !this.localConfigs.includes(Ast.getPropertyName(node)))
 
-    props.forEach(prop => prop.$delete = true)
+    props.forEach(this._deleteNode)
 
     props = [
       ...this.getPropsFromConfig(b.objectExpression(props), true),
@@ -973,7 +982,7 @@ export default class ExtJSClass{
       return null
     }
 
-    config.$delete = true
+    this._deleteNode(config)
 
     if(!children.length){
       return b.jsxElement(b.jsxOpeningElement(identifier, props, true))
