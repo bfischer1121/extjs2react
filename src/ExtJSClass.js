@@ -233,11 +233,7 @@ export default class ExtJSClass{
   }
 
   get localAndInheritedAccessors(){
-    if(_.isUndefined(this._localAndInheritedAccessors)){
-       this._localAndInheritedAccessors = [...(this.accessors), ...(this.inheritedAccessors)]
-     }
-
-     return this._localAndInheritedAccessors
+    return [...(this.accessors), ...(this.inheritedAccessors)]
   }
 
   get inheritedAccessors(){
