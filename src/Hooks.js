@@ -5,6 +5,8 @@ import { Ast } from './Util'
 export const beforeTranspile = codebase => {
   let classes = codebase.sourceFiles.reduce((classes, sourceFile) => ([...classes, ...sourceFile.classes]), [])
 
+  const deleteCalls = ['this.initConfig']
+
   let transforms = {
     '*.app.*' : (node, appName, methodName) => ([`App.${methodName}`])
   }
@@ -23,6 +25,10 @@ export const beforeTranspile = codebase => {
         if(transform){
           let [newMethodName] = transform.transform(path.node, ...methodName.match(transform.check).slice(1))
           path.node.callee = Ast.from(newMethodName)
+        }
+
+        if(deleteCalls.includes(methodName)){
+          path.prune()
         }
 
         this.traverse(path)
