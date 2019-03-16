@@ -143,11 +143,6 @@ export default class SourceFile{
     return code(...imports)
   }
 
-  get _exportsCode(){
-    let code = this.undiscardedClasses.map(cls => cls.transpile()).join('\n\n')
-    return this.replaceClassNames(code)
-  }
-
   get _aliasesUsed(){
     return _.uniq(this.undiscardedClasses.reduce((aliases, cls) => ([...aliases, ...cls.aliasesUsed]), []))
   }
@@ -204,51 +199,114 @@ export default class SourceFile{
     })
   }
 
+  getUnparsedCode(){
+    if(this._astIsPerfect){
+      this.classes.forEach(cls => cls.pruneAST())
+      this.removeEmptyClasses()
+    }
+
+    let code   = Ast.toString(this._ast).trim(),
+        define = /Ext\.define\(/
+
+    return code.match(define) ? code.replace(define, 'try{(') + '} catch(e){}' : code
+  }
+
   transpile(){
     if(this.fromSnapshot){
       throw 'Cannot transpile from snapshot'
     }
 
-    let define = /Ext\.define\(/,
-        code   = [this._importsCode, this._exportsCode].join('\n\n')
+    let clsCode = this.undiscardedClasses.map(cls => cls.transpile()),
+        imports = this._importsCode,
+        exports = _.compact(clsCode.map(({ exportCode }) => exportCode)),
+        classes = _.compact(clsCode.map(({ classCode }) => classCode))
+
+    classes = classes.map(code => {
+      code = this.replaceClassNames(code)
+
+      let ast = Ast.parseWithJSX(code)
+
+      this.renameConfigCalls(ast)
+
+      return Ast.toString(ast)
+    })
+
+    let code = _.compact([
+      imports,
+      ...classes,
+      ...exports
+    ]).join('\n\n').trim()
 
     if(hooks.afterTranspile){
       code = hooks.afterTranspile(code)
     }
 
-    if(this._astIsPerfect){
-      this.classes.forEach(cls => cls.pruneAST())
+    return _.compact([this.getUnparsedCode(), code]).join('\n\n')
+  }
 
-      let asts = this.classes.map(cls => cls.ast)
+  renameConfigCalls(ast){
+    let classes = [
+      ...this.classes,
+      ...Object.keys(this._importNames).map(className => this.codebase.getClassForClassName(className))
+    ]
 
-      visit(this._ast, {
-        visitCallExpression: function(path){
-          let { node } = path
-          let [className, classData] = node.arguments
+    let accessors = _.uniq(classes.reduce((accessors, cls) => [...accessors, ...cls.localAndInheritedAccessors], []))
 
-          let emptyClass = (
-            Ast.getMethodCall(node) === 'Ext.define' &&
-            node.arguments.length === 2 &&
-            Ast.isString(className) &&
-            asts.includes(classData) &&
-            Ast.getProperties(classData).length === 0
-          )
+    visit(ast, {
+      visitCallExpression: function(path){
+        let { node } = path
 
-          if(emptyClass){
-            path.prune()
+        if(Ast.isMemberExpression(node.callee)){
+          let callee     = Ast.toString(node.callee).split('.'),
+              call       = callee[callee.length - 1],
+              isGetter   = call.startsWith('get'),
+              isSetter   = call.startsWith('set'),
+              configName = (call.slice(3)[0] || '').toLowerCase() + call.slice(4)
+
+          if((!isGetter && !isSetter) || !accessors.includes(configName)){
+            this.traverse(path)
+            return
           }
 
-          this.traverse(path)
+          callee = [...callee.slice(0, -1), configName].join('.')
+
+          if(isGetter && node.arguments.length === 0){
+            path.replace(Ast.from(callee))
+          }
+
+          if(isSetter && node.arguments.length === 1){
+            path.replace(Ast.from(`${callee} = ${Ast.toString(node.arguments[0])}`))
+          }
         }
-      })
-    }
 
-    let unparsedSource = Ast.toString(this._ast).trim()
+        this.traverse(path)
+      }
+    })
+  }
 
-    return _.compact([
-      unparsedSource.match(define) ? unparsedSource.replace(define, 'try{(') + '} catch(e){}' : unparsedSource,
-      code
-    ]).join('\n\n').trim()
+  removeEmptyClasses(){
+    let asts = this.classes.map(cls => cls.ast)
+
+    visit(this._ast, {
+      visitCallExpression: function(path){
+        let { node } = path
+        let [className, classData] = node.arguments
+
+        let emptyClass = (
+          Ast.getMethodCall(node) === 'Ext.define' &&
+          node.arguments.length === 2 &&
+          Ast.isString(className) &&
+          asts.includes(classData) &&
+          Ast.getProperties(classData).length === 0
+        )
+
+        if(emptyClass){
+          path.prune()
+        }
+
+        this.traverse(path)
+      }
+    })
   }
 
   replaceClassNames(code){

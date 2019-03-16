@@ -6,8 +6,9 @@ import { Ast, code, logError, getConfig } from './Util'
 import SourceFile from './SourceFile'
 
 export default class ExtJSClass{
-  props = {}
-  state = {}
+  props     = {}
+  state     = {}
+  accessors = []
 
   evented = false
 
@@ -229,6 +230,26 @@ export default class ExtJSClass{
 
   set plugins(plugins){
     this._plugins = plugins
+  }
+
+  get localAndInheritedAccessors(){
+    if(_.isUndefined(this._localAndInheritedAccessors)){
+       this._localAndInheritedAccessors = [...(this.accessors), ...(this.inheritedAccessors)]
+     }
+
+     return this._localAndInheritedAccessors
+  }
+
+  get inheritedAccessors(){
+    if(_.isUndefined(this._inheritedAccessors)){
+       this._inheritedAccessors = _.flattenDeep(_.compact([
+         this.parentClass,
+         ...(this.mixins.map(mixin => this.sourceFile.codebase.getClassForClassName(mixin))),
+         ...(this.plugins.map(plugin => this.sourceFile.codebase.getClassForClassName(plugin)))
+       ]).map(cls => cls.localAndInheritedAccessors))
+     }
+
+     return this._inheritedAccessors
   }
 
   get localAndInheritedConfigs(){
@@ -655,8 +676,7 @@ export default class ExtJSClass{
   }
 
   getES6Class(){
-    let exportCode  = this.sourceFile.undiscardedClasses.length > 1 ? 'export' : 'export default',
-        className   = this.exportName,
+    let className   = this.exportName,
         parentName  = this.parentClass ? this.sourceFile.getImportNameForClassName(this.parentClass.className) : null,
         extendsCode = this.isComponent() ? ' extends Component' : (parentName ? ` extends ${parentName}` : ''),
         classBody   = [],
@@ -688,15 +708,21 @@ export default class ExtJSClass{
 
     // controller, viewModel, cls, items, listeners, bind
 
-    let exportClass = (!mixins.length && !this.singleton)
+    let exportClass     = (!mixins.length && !this.singleton),
+        exportStatement = this.sourceFile.undiscardedClasses.length > 1 ? 'export' : 'export default'
 
-    return code(
-      (exportClass ? (exportCode + ' ') : '') + `class ${className}${extendsCode}{`,
+    let classCode = code(
+      (exportClass ? `${exportStatement} ` : '') + `class ${className}${extendsCode}{`,
         ...classBody,
-      '}',
-      ...(mixins.length ? ['', ...mixins] : []),
-      ...(exportClass ? [] : ['', exportCode + ' ' + (this.singleton ? `(new ${className}())` : className)])
+      '}'
     )
+
+    let exportCode = code(
+      ...(mixins.length ? [...mixins, ''] : []),
+      ...(exportClass ? [] : [this.singleton ? `${exportStatement} (new ${className}())` : `${exportStatement} ${className}`])
+    )
+
+    return { classCode, exportCode }
   }
 
   getProperties(){
@@ -742,11 +768,13 @@ export default class ExtJSClass{
 
     if(configs.length){
       let accessors   = configs.map(node => this.getAccessorsFromConfig(node)),
-          longestProp = Math.max(0, ...accessors.map(({ propertyName }) => propertyName.length))
+          longestProp = Math.max(0, ...accessors.map(({ internalName }) => internalName.length))
+
+      this.accessors = _.compact(accessors.map(({ externalName }) => externalName))
 
       let props = accessors
-        .sort((p1, p2) => (p1.propertyName.startsWith('_') ? 1 : 0) - (p2.propertyName.startsWith('_') ? 1 : 0))
-        .map(({ propertyName, defaultValue }) => `${propertyName.padEnd(longestProp)} = ${defaultValue}`)
+        .sort((p1, p2) => (p1.internalName.startsWith('_') ? 1 : 0) - (p2.internalName.startsWith('_') ? 1 : 0))
+        .map(({ internalName, defaultValue }) => `${internalName.padEnd(longestProp)} = ${defaultValue}`)
 
       configCode.push([
         ...(props.length ? [props.join('\n')] : []),
@@ -770,7 +798,7 @@ export default class ExtJSClass{
         beforeSet    = []
 
     if(!applyFn && !updateFn && !evented){
-      return { propertyName: name, defaultValue }
+      return { externalName: name, internalName: name, defaultValue }
     }
 
     if(applyFn || updateFn){
@@ -821,7 +849,7 @@ export default class ExtJSClass{
       '}'
     )
 
-    return { propertyName: `_${name}`, defaultValue, accessors }
+    return { externalName: name, internalName: `_${name}`, defaultValue, accessors }
   }
 
   getMethods(){

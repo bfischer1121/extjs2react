@@ -147,6 +147,10 @@ class AST{
     return t.ArrayExpression.check(node)
   }
 
+  isMemberExpression(node){
+    return t.MemberExpression.check(node)
+  }
+
   isTernary(node){
     return t.ConditionalExpression.check(node)
   }
