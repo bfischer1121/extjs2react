@@ -9,6 +9,8 @@ export default class ExtJSClass{
   props = {}
   state = {}
 
+  evented = false
+
   extractedProps = {}
   listeners      = []
 
@@ -655,6 +657,7 @@ export default class ExtJSClass{
         extendsCode = this.isComponent() ? ' extends Component' : (parentName ? ` extends ${parentName}` : ''),
         classBody   = [],
         properties  = this.getProperties(),
+        configs     = this.getConfigs(),
         methods     = this.getMethods()
 
     Ast.getProperties(this.ast, [
@@ -665,6 +668,10 @@ export default class ExtJSClass{
 
     if(properties.length){
       classBody.push([properties, '\n'])
+    }
+
+    if(configs.length){
+      classBody.push([configs, '\n'])
     }
 
     if(methods.length){
@@ -699,19 +706,110 @@ export default class ExtJSClass{
       ].join('')
     })
 
-    let defaultProps = this.classMembers.configs.filter(node => this.localConfigs.includes(Ast.getPropertyName(node)))
+    return properties.join('\n\n')
+  }
 
-    if(defaultProps.length){
-      properties.push(code(
+  getConfigs(){
+    let configs = this.classMembers.configs.filter(node => this.localConfigs.includes(Ast.getPropertyName(node)))
+
+    if(!configs.length){
+      return ''
+    }
+
+    let deleteNodes = () => configs.forEach(node => node.$delete = true)
+
+    if(this.isComponent()){
+      let configCode = code(
         'static defaultProps = {',
-          [defaultProps.map(prop => Ast.toString(prop)).join(',\n')],
+          [configs.map(node => Ast.toString(node)).join(',\n')],
+        '}'
+      )
+
+      deleteNodes()
+
+      return configCode
+    }
+
+    let accessors   = configs.map(node => this.getAccessorsFromConfig(node)),
+        longestProp = Math.max(0, ...accessors.map(({ propertyName }) => propertyName.length))
+
+    let props = accessors
+      .sort((p1, p2) => (p1.propertyName.startsWith('_') ? 1 : 0) - (p2.propertyName.startsWith('_') ? 1 : 0))
+      .map(({ propertyName, defaultValue }) => `${propertyName.padEnd(longestProp)} = ${defaultValue}`)
+
+    let configCode = [
+      ...(props.length ? [props.join('\n')] : []),
+      ..._.compact(accessors.map(({ accessors }) => accessors))
+    ].join('\n\n')
+
+    deleteNodes()
+
+    return configCode
+  }
+
+  getAccessorsFromConfig(node, evented = false){
+    let name         = Ast.toString(node.key),
+        defaultValue = Ast.toString(node.value).replace(/;$/, ''),
+        capitalized  = name[0].toUpperCase() + name.slice(1),
+        applyFn      = this.classMembers[`apply${capitalized}`],
+        updateFn     = this.classMembers[`update${capitalized}`],
+        eventName    = `${name.toLowerCase()}change`,
+        beforeGet    = [],
+        beforeSet    = []
+
+    if(!applyFn && !updateFn && !evented){
+      return { propertyName: name, defaultValue }
+    }
+
+    if(applyFn || updateFn){
+      beforeGet.push(code(
+        `if(!this._${name}Initialized){`,
+          [`this.${name} = this._${name}`],
         '}'
       ))
     }
 
-    defaultProps.forEach(node => node.$delete = true)
+    if(applyFn){
+      beforeSet.push(`value = (${Ast.toString(applyFn)}).call(this, value, this._${name}Initialized ? this._${name} : undefined)`)
+      this.classMembers.methods.find(node => node.value === applyFn).$delete = true
+    }
 
-    return properties.join('\n\n')
+    if(updateFn){
+      let update = `(${Ast.toString(updateFn)})(value, this._${name})`
+      beforeSet.push(applyFn ? code(`if(typeof value !== 'undefined' && value !== this._${name}){`, [update], `}`) : update)
+      this.classMembers.methods.find(node => node.value === updateFn).$delete = true
+    }
+
+    if(evented){
+      this.evented = true
+      beforeSet.push(
+        `if(this._${name}Initialized)`,
+          [`this.dispatchEvent(${eventName}, this, value, this._${name})`],
+        '}'
+      )
+    }
+
+    if(applyFn || updateFn){
+      beforeSet.push(`this._${name}Initialized = true`)
+    }
+
+    let accessors = code(
+      `get ${name}(){`,
+        [
+          ...(beforeGet.length ? [beforeGet.join('\n\n') + '\n'] : []),
+          `return this._${name}`
+        ],
+      '}',
+      '',
+      `set ${name}(value){`,
+        [
+          ...(beforeSet.length ? [beforeSet.join('\n\n') + '\n'] : []),
+          `this._${name} = value`
+        ],
+      '}'
+    )
+
+    return { propertyName: `_${name}`, defaultValue, accessors }
   }
 
   getMethods(){
@@ -739,7 +837,10 @@ export default class ExtJSClass{
       methods.push(this.getRenderFn())
     }
 
-    [...this.classMembers.static.methods, ...this.classMembers.methods].forEach(node => {
+    [
+      ...this.classMembers.static.methods,
+      ...this.classMembers.methods
+    ].filter(method => !method.$delete).forEach(node => {
       if(Ast.getPropertyName(node) === 'constructor'){
         cmpConstructor = transformMethod(node)
         return
@@ -815,7 +916,7 @@ export default class ExtJSClass{
 
     let renderBody = [
       'return (',
-      [this.getCodeFromJSX(jsx)],
+        [this.getCodeFromJSX(jsx)],
       ')',
     ]
 
