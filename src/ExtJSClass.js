@@ -672,10 +672,14 @@ export default class ExtJSClass{
     }
 
     // controller, viewModel, cls, items, listeners, bind
+
+    let exportClass = (!mixins.length && !this.singleton)
+
     return code(
-      `${exportCode} class ${className}${extendsCode}{`,
+      (exportClass ? (exportCode + ' ') : '') + `class ${className}${extendsCode}{`,
         ...classBody,
       '}'
+      ...(exportClass ? [] : ['', exportCode + ' ' + (this.singleton ? `(new ${className}())` : className)])
     )
   }
 
@@ -717,7 +721,7 @@ export default class ExtJSClass{
       node.$delete = true
 
       return [
-        (this.singleton || this.classMembers.static.methods.includes(node)) ? 'static ' : '',
+        this.classMembers.static.methods.includes(node) ? 'static ' : '',
         node.value.async ? 'async ' : '',
         Ast.toString(method).replace(/\) \{/, '){')
       ].join('')
