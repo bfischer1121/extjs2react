@@ -660,7 +660,7 @@ export default class ExtJSClass{
     Ast.getProperties(this.ast, [
       ...(className ? ['xtype', 'alias'] : []),
       ...(parentName ? ['extend'] : []),
-      'singleton'
+      'singleton', 'mixins'
     ]).map(node => node.$delete = true)
 
     if(properties.length){
@@ -671,6 +671,10 @@ export default class ExtJSClass{
       classBody.push([methods])
     }
 
+    let mixins = this.mixins.map(mixinClassName => (
+      `Object.assign(${className}.prototype, ${this.sourceFile.getImportNameForClassName(mixinClassName)}.prototype)`
+    ))
+
     // controller, viewModel, cls, items, listeners, bind
 
     let exportClass = (!mixins.length && !this.singleton)
@@ -678,7 +682,8 @@ export default class ExtJSClass{
     return code(
       (exportClass ? (exportCode + ' ') : '') + `class ${className}${extendsCode}{`,
         ...classBody,
-      '}'
+      '}',
+      ...(mixins.length ? ['', ...mixins] : []),
       ...(exportClass ? [] : ['', exportCode + ' ' + (this.singleton ? `(new ${className}())` : className)])
     )
   }
