@@ -124,25 +124,6 @@ export default class SourceFile{
     return this.__astIsPerfect
   }
 
-  get _importsCode(){
-    let classes     = Object.keys(this._importNames).map(className => this.codebase.getClassForClassName(className)),
-        sourceFiles = _.uniq(classes.filter(cls => !cls.discard).map(c => c.sourceFile))
-
-    let imports = sourceFiles.map(sourceFile => {
-      let importNames = _.intersection(sourceFile.undiscardedClasses, classes).map(cls => this.getImportNameForClassName(cls.className)),
-          specifiers  = sourceFile.undiscardedClasses.length > 1 ? '{ ' + importNames.join(', ') + ' }' : importNames[0],
-          source      = getRelativePath(this.codeFilePath, sourceFile.importFilePath).replace(/\.js$/, '').replace(/\/index$/, '')
-
-      return `import ${specifiers} from '${source}'`
-    })
-
-    if(this.undiscardedClasses.find(cls => cls.isComponent())){
-      imports.unshift(`import React, { Component } from 'react'`)
-    }
-
-    return code(...imports)
-  }
-
   get _aliasesUsed(){
     return _.uniq(this.undiscardedClasses.reduce((aliases, cls) => ([...aliases, ...cls.aliasesUsed]), []))
   }
@@ -216,10 +197,10 @@ export default class SourceFile{
       throw 'Cannot transpile from snapshot'
     }
 
-    let clsCode = this.undiscardedClasses.map(cls => cls.transpile()),
-        imports = this._importsCode,
-        exports = _.compact(clsCode.map(({ exportCode }) => exportCode)),
-        classes = _.compact(clsCode.map(({ classCode }) => classCode))
+    let clsCode   = this.undiscardedClasses.map(cls => cls.transpile()),
+        exports   = _.compact(clsCode.map(({ exportCode }) => exportCode)),
+        classes   = _.compact(clsCode.map(({ classCode }) => classCode)),
+        libraries = _.uniq(this.undiscardedClasses.reduce((lib, cls) => [...lib, ...cls.libraries], []))
 
     classes = classes.map(code => {
       code = this.replaceClassNames(code)
@@ -229,11 +210,13 @@ export default class SourceFile{
       this.renameConfigCalls(ast)
 
       if(hooks.afterTranspile){
-        hooks.afterTranspile(ast)
+        libraries.push(...hooks.afterTranspile(ast))
       }
 
       return Ast.toString(ast)
     })
+
+    let imports = this.getImportsCode(_.uniq(libraries))
 
     let code = _.compact([
       imports,
@@ -246,6 +229,28 @@ export default class SourceFile{
     }
 
     return _.compact([this.getUnparsedCode(), code]).join('\n\n')
+  }
+
+  getImportsCode(libraries){
+    let libStatements = [
+      ['App',   `import App from 'app'`],
+      ['React', `import React, { Component } from 'react'`],
+      ['_',   `import _ from 'lodash'`]
+    ]
+
+    let classes     = Object.keys(this._importNames).map(className => this.codebase.getClassForClassName(className)),
+        sourceFiles = _.uniq(classes.filter(cls => !cls.discard).map(c => c.sourceFile)),
+        imports     = libStatements.filter(([lib]) => libraries.includes(lib)).map(([lib, statement]) => statement)
+
+    sourceFiles.forEach(sourceFile => {
+      let importNames = _.intersection(sourceFile.undiscardedClasses, classes).map(cls => this.getImportNameForClassName(cls.className)),
+          specifiers  = sourceFile.undiscardedClasses.length > 1 ? '{ ' + importNames.join(', ') + ' }' : importNames[0],
+          source      = getRelativePath(this.codeFilePath, sourceFile.importFilePath).replace(/\.js$/, '').replace(/\/index$/, '')
+
+      imports.push(`import ${specifiers} from '${source}'`)
+    })
+
+    return code(...imports)
   }
 
   renameConfigCalls(ast){

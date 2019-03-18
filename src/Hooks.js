@@ -9,13 +9,16 @@ export const beforeTranspile = codebase => {
 export const afterTranspile = ast => {
   const deleteCalls = ['this.initConfig']
 
+  let libraries = []
+
   let transforms = {
-    '*.app.*' : (node, appName, methodName) => ([`App.${methodName}`])
+    '*.app.*' : { fn: (node, appName, methodName) => ([`App.${methodName}`]), lib: 'App' }
   }
 
   transforms = Object.keys(transforms).map(key => ({
     check     : new RegExp('^' + key.replace(/\./g, '\\.').replace(/\*/g, '([A-Z0-9_]+)') + '$', 'i'),
-    transform : transforms[key]
+    transform : transforms[key].fn || transforms[key],
+    library   : transforms[key].lib || null
   }))
 
   let getContext = path => {
@@ -36,6 +39,10 @@ export const afterTranspile = ast => {
       if(transform){
         let [newExpression] = transform.transform(path.node, ...expression.match(transform.check).slice(1))
         path.replace(Ast.from(newExpression))
+
+        if(transform.library && !libraries.includes(transform.library)){
+          libraries.push(transform.library)
+        }
       }
 
       this.traverse(path)
@@ -61,6 +68,8 @@ export const afterTranspile = ast => {
       this.traverse(path)
     }
   })
+
+  return libraries
 }
 
 const removeSemicolons = code => code.replace(/;$/gm, '')

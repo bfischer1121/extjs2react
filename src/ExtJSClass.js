@@ -85,6 +85,10 @@ export default class ExtJSClass{
     this._createdFn = createdFn
   }
 
+  get libraries(){
+    return this.isComponent() ? ['React'] : []
+  }
+
   get discard(){
     return !!this.assimilatingClass
   }
