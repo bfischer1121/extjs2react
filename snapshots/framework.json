@@ -5039,7 +5039,7 @@
         },
         {
           "className": "Ext.Component",
-          "exportName": "ExtJSComponent",
+          "exportName": "Component",
           "parentClassName": "Ext.Widget",
           "alternateClassNames": [
             "Ext.lib.Component",

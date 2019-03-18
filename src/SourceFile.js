@@ -248,8 +248,11 @@ export default class SourceFile{
 
     sourceFiles.forEach(sourceFile => {
       let importNames = _.intersection(sourceFile.undiscardedClasses, classes).map(cls => this.getImportNameForClassName(cls.className)),
-          specifiers  = sourceFile.undiscardedClasses.length > 1 ? '{ ' + importNames.join(', ') + ' }' : importNames[0],
           source      = getRelativePath(this.codeFilePath, sourceFile.importFilePath).replace(/\.js$/, '').replace(/\/index$/, '')
+
+      let specifiers = sourceFile.undiscardedClasses.length > 1
+        ? '{ ' + importNames.sort((s1, s2) => s1.localeCompare(s2)).join(', ') + ' }'
+        : importNames[0]
 
       sourceAliases.forEach(([check, alias]) => {
         if(check.test(source)){
@@ -380,17 +383,15 @@ export default class SourceFile{
 
   _getExportName(cls){
     if(!cls.classAliases.length){
-      let name = cls.className.split('.').reverse().slice(0, -1).map(p => p[0].toUpperCase() + p.slice(1)).join('')
-      return name === 'Component' ? 'ExtJSComponent' : name
+      return cls.className.split('.').reverse().slice(0, -1).map(p => p[0].toUpperCase() + p.slice(1)).join('')
     }
 
     let parts      = cls.classAliases[0].split('.'),
         namespace  = parts.slice(0, parts.length - 1).map(p => _.capitalize(p)).join(''),
         alias      = _.capitalize(parts[parts.length - 1].replace(/.*-/, '')),
         exportName = this.codebase.capitalize(alias),
-        suffix     = { 'viewmodel': 'Model' }[namespace] || namespace,
-        name       = exportName + (suffix === 'Widget' ? '' : suffix)
+        suffix     = { 'viewmodel': 'Model' }[namespace] || namespace
 
-    return name === 'Component' ? 'ExtJSComponent' : name
+    return exportName + (suffix === 'Widget' ? '' : suffix)
   }
 }
