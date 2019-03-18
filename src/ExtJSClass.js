@@ -86,7 +86,7 @@ export default class ExtJSClass{
   }
 
   get libraries(){
-    return this.isComponent() ? ['React'] : []
+    return this.isComponent() ? ['react'] : []
   }
 
   get discard(){

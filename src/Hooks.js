@@ -12,7 +12,7 @@ export const afterTranspile = ast => {
   let libraries = []
 
   let transforms = {
-    '*.app.*' : { fn: (node, appName, methodName) => ([`App.${methodName}`]), lib: 'App' }
+    '*.app.*' : { fn: (node, appName, methodName) => ([`App.${methodName}`]), lib: 'app' }
   }
 
   transforms = Object.keys(transforms).map(key => ({

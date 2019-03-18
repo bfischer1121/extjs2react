@@ -232,25 +232,42 @@ export default class SourceFile{
   }
 
   getImportsCode(libraries){
-    let libStatements = [
-      ['App',   `import App from 'app'`],
-      ['React', `import React, { Component } from 'react'`],
-      ['_',   `import _ from 'lodash'`]
+    let libImports = [
+      { specifiers: 'App',   source: 'app' },
+      { specifiers: 'React', source: 'react' },
+      { specifiers: '_',     source: 'lodash' }
+    ]
+
+    let sourceAliases = [
+      [/\/framework$/, 'framework']
     ]
 
     let classes     = Object.keys(this._importNames).map(className => this.codebase.getClassForClassName(className)),
         sourceFiles = _.uniq(classes.filter(cls => !cls.discard).map(c => c.sourceFile)),
-        imports     = libStatements.filter(([lib]) => libraries.includes(lib)).map(([lib, statement]) => statement)
+        imports     = libImports.filter(lib => libraries.includes(lib.source))
 
     sourceFiles.forEach(sourceFile => {
       let importNames = _.intersection(sourceFile.undiscardedClasses, classes).map(cls => this.getImportNameForClassName(cls.className)),
           specifiers  = sourceFile.undiscardedClasses.length > 1 ? '{ ' + importNames.join(', ') + ' }' : importNames[0],
           source      = getRelativePath(this.codeFilePath, sourceFile.importFilePath).replace(/\.js$/, '').replace(/\/index$/, '')
 
-      imports.push(`import ${specifiers} from '${source}'`)
+      sourceAliases.forEach(([check, alias]) => {
+        if(check.test(source)){
+          source = alias
+        }
+      })
+
+      imports.push({ specifiers, source })
     })
 
-    return code(...imports)
+    let importOrder = [...libImports.map(({ source }) => source), ...sourceAliases.map(a => a[1])].reverse()
+
+    imports = imports.sort(({ source: s1 }, { source: s2 }) => {
+      let order = importOrder.indexOf(s2) - importOrder.indexOf(s1)
+      return order === 0 ? s1.localeCompare(s2) : order
+    })
+
+    return code(...imports.map(({ specifiers, source }) => `import ${specifiers} from '${source}'`))
   }
 
   renameConfigCalls(ast){
