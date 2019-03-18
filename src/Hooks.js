@@ -3,8 +3,10 @@ import _ from 'lodash'
 import { Ast } from './Util'
 
 export const beforeTranspile = codebase => {
-  let classes = codebase.sourceFiles.reduce((classes, sourceFile) => ([...classes, ...sourceFile.classes]), [])
+  
+}
 
+export const afterTranspile = ast => {
   const deleteCalls = ['this.initConfig']
 
   let transforms = {
@@ -12,34 +14,58 @@ export const beforeTranspile = codebase => {
   }
 
   transforms = Object.keys(transforms).map(key => ({
-    check     : new RegExp('^' + key.replace(/\./g, '\\.').replace(/\*/g, '([^\\.]+)') + '$'),
+    check     : new RegExp('^' + key.replace(/\./g, '\\.').replace(/\*/g, '([A-Z0-9_]+)') + '$', 'i'),
     transform : transforms[key]
   }))
 
-  classes.forEach(cls => {
-    visit(cls.ast, {
-      visitCallExpression: function(path){
-        let methodName = Ast.getMethodCall(path.node),
-            transform  = transforms.find(({ check }) => methodName.match(check))
+  let getContext = path => {
+    let methodPath = Ast.up(path, Ast.isMethod),
+        classPath  = Ast.up(path, Ast.isClass)
 
-        if(transform){
-          let [newMethodName] = transform.transform(path.node, ...methodName.match(transform.check).slice(1))
-          path.node.callee = Ast.from(newMethodName)
-        }
+    return {
+      method        : methodPath ? methodPath.node.key.name : null,
+      extendedClass : classPath ? ((classPath.node.superClass || {}).name || null) : null
+    }
+  }
 
-        if(deleteCalls.includes(methodName)){
-          path.prune()
-        }
+  visit(ast, {
+    visitMemberExpression: function(path){
+      let expression = Ast.toString(path.node),
+          transform  = transforms.find(({ check }) => expression.match(check))
 
-        this.traverse(path)
+      if(transform){
+        let [newExpression] = transform.transform(path.node, ...expression.match(transform.check).slice(1))
+        path.replace(Ast.from(newExpression))
       }
-    })
+
+      this.traverse(path)
+    },
+
+    visitCallExpression: function(path){
+      let fnName = Ast.toString(path.node.callee)
+
+      if(deleteCalls.includes(fnName)){
+        path.prune()
+      }
+
+      if(fnName === 'this.callParent'){
+        let context = getContext(path)
+
+        if(context.method === 'constructor'){
+          if(!context.extendedClass){
+            path.prune()
+          }
+        }
+      }
+
+      this.traverse(path)
+    }
   })
 }
 
 const removeSemicolons = code => code.replace(/;$/gm, '')
 
-export const afterTranspile = code => {
+export const beforeSave = code => {
   code = removeSemicolons(code)
 
   return code

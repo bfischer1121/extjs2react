@@ -119,6 +119,16 @@ class AST{
     return recast.print(ast).code
   }
 
+  up(path, test){
+    for(let parent = path.parent; parent; parent = parent.parent){
+      if(test(parent.node)){
+        return parent
+      }
+    }
+
+    return null
+  }
+
   getMethodCall(node){
     return this.toString(node.callee)
   }
@@ -157,6 +167,14 @@ class AST{
 
   isFunction(node){
     return t.FunctionExpression.check(node)
+  }
+
+  isClass(node){
+    return t.ClassDeclaration.check(node)
+  }
+
+  isMethod(node){
+    return t.ClassMethod.check(node) || t.MethodDefinition.check(node)
   }
 
   getConfig(config, name){

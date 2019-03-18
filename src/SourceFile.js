@@ -228,6 +228,10 @@ export default class SourceFile{
 
       this.renameConfigCalls(ast)
 
+      if(hooks.afterTranspile){
+        hooks.afterTranspile(ast)
+      }
+
       return Ast.toString(ast)
     })
 
@@ -237,8 +241,8 @@ export default class SourceFile{
       ...exports
     ]).join('\n\n').trim()
 
-    if(hooks.afterTranspile){
-      code = hooks.afterTranspile(code)
+    if(hooks.beforeSave){
+      code = hooks.beforeSave(code)
     }
 
     return _.compact([this.getUnparsedCode(), code]).join('\n\n')
