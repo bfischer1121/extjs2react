@@ -991,13 +991,24 @@ export default class ExtJSClass{
     }
   }
 
-  getJSXFromConfig(config){
+  getJSXFromConfig(config, xtype = null){
     if(!t.ObjectExpression.check(config)){
       return null
     }
 
-    let xtype      = Ast.getConfig(config, 'xtype'),
-        importName = xtype ? this.sourceFile.getImportNameForAlias(`widget.${xtype}`) : null,
+    xtype = xtype || Ast.getProperty(config, 'xtype')
+
+    if(Ast.isTernary(xtype)){
+      let [consequent, alternate] = [xtype.consequent, xtype.alternate].reduce((jsx, xtype) => (
+        [...jsx, this.getJSXFromConfig(config, xtype)]
+      ), [])
+
+      return b.jsxExpressionContainer(b.conditionalExpression(xtype.test, consequent, alternate))
+    }
+
+    xtype = Ast.toValue(xtype)
+
+    let importName = xtype ? this.sourceFile.getImportNameForAlias(`widget.${xtype}`) : null,
         identifier = importName ? b.jsxIdentifier(importName) : null,
         props      = this.getPropsFromConfig(config),
         children   = _.compact((Ast.getConfig(config, 'items') || []).map(item => this.getJSXFromConfig(item)))
