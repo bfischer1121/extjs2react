@@ -676,13 +676,14 @@ export default class ExtJSClass{
   }
 
   getES6Class(){
-    let className   = this.exportName,
-        parentName  = this.parentClass ? this.sourceFile.getImportNameForClassName(this.parentClass.className) : null,
-        extendsCode = this.isComponent() ? ' extends Component' : (parentName ? ` extends ${parentName}` : ''),
-        classBody   = [],
-        properties  = this.getProperties(),
-        configs     = this.getConfigs(),
-        methods     = this.getMethods()
+    let className     = this.exportName,
+        parentName    = this.parentClass ? this.sourceFile.getImportNameForClassName(this.parentClass.className) : null,
+        classBody     = [],
+        staticProps   = this.getStaticProperties(),
+        properties    = this.getProperties(),
+        configs       = this.getConfigs(),
+        staticMethods = this.getStaticMethods(),
+        methods       = this.getMethods()
 
     Ast.getProperties(this.ast, [
       ...(className ? ['xtype', 'alias'] : []),
@@ -690,58 +691,60 @@ export default class ExtJSClass{
       'singleton', 'mixins'
     ]).map(this._deleteNode)
 
-    if(properties.length){
-      classBody.push([properties, '\n'])
-    }
-
-    if(configs.length){
-      classBody.push([configs, '\n'])
-    }
-
-    if(methods.length){
-      classBody.push([methods])
-    }
-
     let mixins = this.mixins.map(mixinClassName => (
       `Object.assign(${className}.prototype, ${this.sourceFile.getImportNameForClassName(mixinClassName)}.prototype)`
     ))
 
     // controller, viewModel, cls, items, listeners, bind
 
-    let exportClass     = (!mixins.length && !this.singleton),
+    let exportClass     = (!mixins.length && !this.singleton && !this.isComponent()),
         exportStatement = this.sourceFile.undiscardedClasses.length > 1 ? 'export' : 'export default'
-
-    let classCode = code(
-      (exportClass ? `${exportStatement} ` : '') + `class ${className}${extendsCode}{`,
-        ...classBody,
-      '}'
-    )
 
     let exportCode = code(
       ...(mixins.length ? [...mixins, ''] : []),
       ...(exportClass ? [] : [this.singleton ? `${exportStatement} (new ${className}())` : `${exportStatement} ${className}`])
     )
 
+    let getCode = (...members) => _.compact(members.map(members => members.join('\n\n'))).join('\n\n')
+
+    if(this.isComponent()){
+      let body = getCode(properties, configs, methods)
+
+      let classCode = code(
+        `function ${className}(props){`,
+          ...(body.length ? [[body]] : []),
+          this.getRenderFn(),
+        '}',
+        ...((staticMethods.length || staticProps.length) ? ['', getCode(staticMethods, staticProps)] : [])
+      )
+
+      return { classCode, exportCode }
+    }
+
+    let head = _.compact([
+      exportClass ? exportStatement : null,
+      `class ${className}`,
+      parentName ? `extends ${parentName}` : null
+    ]).join(' ')
+
+    let body      = getCode(staticProps, properties, configs, staticMethods, methods),
+        classCode = code(head + '{', ...(body.length ? [[body]] : []), '}')
+
     return { classCode, exportCode }
   }
 
   getProperties(){
-    let properties = [
-      ...this.classMembers.static.properties,
+    return [
       ...this.classMembers.properties,
-      ...this.assimilatedClasses.reduce((properties, cls) => [...properties, ...cls.classMembers.static.properties], []),
       ...this.assimilatedClasses.reduce((properties, cls) => [...properties, ...cls.classMembers.properties], [])
-    ].map(node => {
-      this.sourceFile.codebase.logProperty(Ast.getPropertyName(node))
-      this._deleteNode(node)
+    ].map(node => this._getCodeForProperty(node))
+  }
 
-      return [
-        (this.singleton || this.classMembers.static.properties.includes(node)) ? 'static ' : '',
-        Ast.toString(b.classProperty(node.key, node.value)).replace(/;$/, '')
-      ].join('')
-    })
-
-    return properties.join('\n\n')
+  getStaticProperties(){
+    return [
+      ...this.classMembers.static.properties,
+      ...this.assimilatedClasses.reduce((properties, cls) => [...properties, ...cls.classMembers.static.properties], [])
+    ].map(node => this._getCodeForProperty(node, true))
   }
 
   getConfigs(){
@@ -752,13 +755,13 @@ export default class ExtJSClass{
         configCode    = []
 
     if(!configs.length){
-      return ''
+      return []
     }
 
     if(this.isComponent() && localConfigs.length){
       configCode.push(code(
-        'static defaultProps = {',
-          [localConfigs.map(node => Ast.toString(node)).join(',\n')],
+        'props = {',
+          [[...localConfigs.map(node => Ast.toString(node)), '...props'].join(',\n')],
         '}'
       ))
 
@@ -784,7 +787,7 @@ export default class ExtJSClass{
 
     deleteNodes(configs)
 
-    return configCode.join('\n\n')
+    return configCode
   }
 
   getAccessorsFromConfig(node, evented = false){
@@ -853,82 +856,53 @@ export default class ExtJSClass{
   }
 
   getMethods(){
+    return [
+      ...this.classMembers.methods.filter(method => !method.$delete),
+      ...this.assimilatedClasses.reduce((methods, cls) => [...methods, ...cls.classMembers.methods], [])
+    ].map(node => this._getCodeForMethod(node))
+  }
+
+  getStaticMethods(){
+    return [
+      ...this.classMembers.static.methods.filter(method => !method.$delete),
+      ...this.assimilatedClasses.reduce((methods, cls) => [...methods, ...cls.classMembers.static.methods], [])
+    ].map(node => this._getCodeForMethod(node, true))
+  }
+
+  _getCodeForProperty(node, isStatic){
+    this.sourceFile.codebase.logProperty(Ast.getPropertyName(node))
+    this._deleteNode(node)
+
+    if(this.isComponent()){
+      let object = isStatic ? b.identifier(this.exportName) : b.thisExpression()
+      return Ast.toString(b.assignmentExpression('=', b.memberExpression(object, node.key), node.value))
+    }
+
+    return (isStatic ? 'static ' : '') + Ast.toString(b.classProperty(node.key, node.value))
+  }
+
+  _getCodeForMethod(node, isStatic){
+    this._deleteNode(node)
+
     let getMethodName = name => ({
       'constructor': this.isComponent() ? 'REWRITE_constructor' : 'constructor'
     }[name] || name)
 
-    let transformMethod = node => {
-      let name   = b.identifier(getMethodName(Ast.getPropertyName(node))),
-          method = b.classMethod('method', name, node.value.params, node.value.body)
+    let name = getMethodName(Ast.getPropertyName(node))
 
-      this._deleteNode(node)
-
+    if(this.isComponent()){
       return [
-        this.classMembers.static.methods.includes(node) ? 'static ' : '',
+        isStatic ? `${this.exportName}.${name} = ` : `const ${name} = `,
         node.value.async ? 'async ' : '',
-        Ast.toString(method).replace(/\) \{/, '){')
+        Ast.toString(b.arrowFunctionExpression(node.value.params, node.value.body))
       ].join('')
     }
 
-    let cmpConstructor = null,
-        methods        = []
-
-    if(this.isComponent()){
-      methods.push(this.getRenderFn())
-    }
-
-    [
-      ...[...this.classMembers.static.methods, ...this.classMembers.methods].filter(method => !method.$delete),
-      ...this.assimilatedClasses.reduce((methods, cls) => [...methods, ...cls.classMembers.static.methods], []),
-      ...this.assimilatedClasses.reduce((methods, cls) => [...methods, ...cls.classMembers.methods], [])
-    ].forEach(node => {
-      if(Ast.getPropertyName(node) === 'constructor' && this.classMembers.methods.includes(node)){
-        cmpConstructor = transformMethod(node)
-        return
-      }
-
-      methods.push(transformMethod(node))
-    })
-
-    let constructor = this.getConstructorFn()
-
-    if(constructor){
-      methods.unshift(constructor)
-    }
-
-    if(cmpConstructor){
-      methods.unshift(cmpConstructor)
-    }
-
-    return methods.join('\n\n')
-  }
-
-  getConstructorFn(){
-    let body = []
-
-    if(this.isComponent() && !this._listenersParsed){
-      throw new Error('Need to parse listeners before creating constructor')
-    }
-
-    if(this.listeners.length){
-      let listeners = _.uniq(this.listeners).sort((l1, l2) => l1.localeCompare(l2)),
-          longestFn = Math.max(0, ...listeners.map(fn => fn.length))
-
-      body.push(...listeners.map(fn => `this.${fn.padEnd(longestFn)} = this.${fn}.bind(this)`))
-    }
-
-    if(!body.length){
-      return null
-    }
-
-    return code(
-      'constructor(props){',
-        [
-          'super(props)\n',
-          ...body
-        ],
-      '}'
-    )
+    return [
+      isStatic ? 'static ' : '',
+      node.value.async ? 'async ' : '',
+      Ast.toString(b.classMethod('method', b.identifier(name), node.value.params, node.value.body)).replace(/\) \{/, '){')
+    ].join('')
   }
 
   getRenderFn(){
@@ -941,7 +915,7 @@ export default class ExtJSClass{
 
     props = [
       ...this.getPropsFromConfig(b.objectExpression(props), true),
-      b.jsxSpreadAttribute(b.memberExpression(b.thisExpression(), b.identifier('props')))
+      b.jsxSpreadAttribute(b.identifier('props'))
     ]
 
     let jsx = b.jsxElement(
@@ -967,7 +941,7 @@ export default class ExtJSClass{
 
     this._listenersParsed = true
 
-    return code('render(){', renderBody, '}')
+    return code(renderBody)
   }
 
   formatJSX(ast){
@@ -1084,7 +1058,7 @@ export default class ExtJSClass{
 
     if(Ast.isString(value)){
       this.listeners.push(value.value)
-      value = b.memberExpression(b.thisExpression(), b.identifier(value.value))
+      value = b.identifier(value.value)
     }
 
     return b.jsxAttribute(b.jsxIdentifier(name), b.jsxExpressionContainer(value))
