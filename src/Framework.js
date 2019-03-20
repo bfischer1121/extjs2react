@@ -31,28 +31,30 @@ export default class Framework extends Codebase{
   }
 
   async transpile(){
-    let widgets = [],
-        classes = []
+    let exports = this.sourceFiles[0].undiscardedClasses
+      .filter(cls => !cls.override)
+      .map(cls => {
+        let xtype = (cls.classAliases.find(alias => alias.startsWith('widget.')) || '').replace(/^widget\./, ''),
+            value = xtype ? `r('${xtype}')` : `m('${cls.className}')`
 
-    this.sourceFiles[0].undiscardedClasses.forEach(cls => {
-      // ExtJS doesn't create referenceable classes from overrides, so discard
-      if(cls.override){
-        return
-      }
+        return { name: cls.exportName, value, widget: !!xtype }
+      })
+      .sort((e1, e2) => e1.name.localeCompare(e2.name))
 
-      let xtype = (cls.classAliases.find(alias => alias.startsWith('widget.')) || '').replace(/^widget\./, '')
-
-      xtype
-        ? widgets.push(`export const ${cls.exportName} = reactify('${xtype}')`)
-        : classes.push(`export const ${cls.exportName} = window.${cls.className}`)
-    })
+    let getExportCode = exports => {
+      let namePad = Math.max(0, ...exports.map(({ name }) => name.length))
+      return exports.map(({ name, value }) => `export const ${name.padEnd(namePad)} = ${value}`)
+    }
 
     let framework = code(
       `import { reactify } from '@sencha/ext-react'`,
+      `import { modernize as m } from './modernize'`,
       '',
-      ...widgets,
+      'const r = reactify',
       '',
-      ...classes
+      ...getExportCode(exports.filter(exp => exp.widget)),
+      '',
+      ...getExportCode(exports.filter(exp => !exp.widget))
     )
 
     writeFile(this.manifestFilePath, framework)
