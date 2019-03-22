@@ -856,10 +856,26 @@ export default class ExtJSClass{
   }
 
   getMethods(){
-    return [
+    let methods = [
       ...this.classMembers.methods.filter(method => !method.$delete),
       ...this.assimilatedClasses.reduce((methods, cls) => [...methods, ...cls.classMembers.methods], [])
     ].map(node => this._getCodeForMethod(node))
+
+    let applyMethods = methods
+      .filter(m => _.isObject(m) && m.isApplyFn)
+      .sort((m1, m2) => m1.config.localeCompare(m2.config))
+      .map(m => `props.${m.config} = useMemo(${m.fn}, [props.${m.config}])`)
+
+    let updateMethods = methods
+      .filter(m => _.isObject(m) && m.isUpdateFn)
+      .sort((m1, m2) => m1.config.localeCompare(m2.config))
+      .map(m => `useEffect(${m.fn}, [props.${m.config}])`)
+
+    return [
+      ...applyMethods,
+      ...updateMethods,
+      ...methods.filter(m => !_.isObject(m))
+    ]
   }
 
   getStaticMethods(){
@@ -890,11 +906,33 @@ export default class ExtJSClass{
 
     let name = getMethodName(Ast.getPropertyName(node))
 
+    let getConfigName = () => {
+      if(isStatic || !this.classMembers.methods.includes(node)){
+        return null
+      }
+
+      let config = name.replace(/^(apply|update)/, '')
+      config = config[0].toLowerCase() + config.slice(1)
+
+      return this.classMembers.configs.find(node => Ast.getPropertyName(node) === config) ? config : null
+    }
+
     if(this.isComponent()){
+      let config = getConfigName(),
+          fn     = Ast.toString(b.arrowFunctionExpression(node.value.params, node.value.body))
+
+      if(config && name.startsWith('apply')){
+        return { isApplyFn: true, config, fn }
+      }
+
+      if(config && name.startsWith('update')){
+        return { isUpdateFn: true, config, fn }
+      }
+
       return [
         isStatic ? `${this.exportName}.${name} = ` : `const ${name} = `,
         node.value.async ? 'async ' : '',
-        Ast.toString(b.arrowFunctionExpression(node.value.params, node.value.body))
+        fn
       ].join('')
     }
 
