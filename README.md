@@ -34,6 +34,19 @@ This modularization can lead to circular dependencies. In webpack, the imported 
 
 To resolve these issues, I recommend using a tool like [circular-dependency-plugin](https://github.com/aackerman/circular-dependency-plugin) and refactoring the original code as needed.
 
+## Dynamic Classes
+Since e2r does a static code analysis, it isn't able to pick up on dynamically generated `Ext.define` calls. If you are dynamically creating ExtJS Classes and want to ensure these class definitions are properly imported and referenced throughout, add a comment to the file like so:
+```javascript
+/**
+ * Classes:
+ * MyApp.model.Foo
+ * MyApp.model.Bar
+ * MyApp.user.List
+ */
+```
+
+e2r will then add placeholder ES6 classes to the file's generated output. You can of course safely remove these as long as you export classes of the same names.
+
 ## Progress
 ##### Architectural - generally non-breaking:
 - [x] ClassManager → ES6 modules

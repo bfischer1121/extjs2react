@@ -176,6 +176,22 @@ export default class SourceFile{
         }
 
         this.traverse(path)
+      },
+
+      visitNode: function(path){
+        (path.node.comments || []).forEach(comment => {
+          let lines = _.compact(comment.value.split('\n').map(line => line.trim().replace(/^\*\s*/, ''))),
+              label = (lines.shift() || '').toLowerCase()
+
+          if(label === 'classes:'){
+            lines.slice(1).forEach(className => {
+              let classNode = Ast.from(`Ext.define('${className}', {})`).expression
+              processClassDefinition(classNode)
+            })
+          }
+        })
+
+        this.traverse(path)
       }
     })
   }
