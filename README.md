@@ -65,7 +65,7 @@ e2r will then add placeholder ES6 classes to the file's generated output. You ca
   - [x] mixins → inline js (Object.assign)
   - [ ] plugins
 - [x] Component
-  - [x] configs → props/defaultProps
+  - [x] configs → props/useMemo/useEffect
   - [x] items/cmp → JSX
 - [ ] ViewController
   - [x] merge methods/configs/properties
