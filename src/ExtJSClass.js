@@ -81,7 +81,7 @@ export default class ExtJSClass{
   constructor(sourceFile, className, ast, createdFn){
     this.sourceFile = sourceFile
     this.className  = className
-    this.ast       = ast
+    this.ast        = ast
     this._createdFn = createdFn
   }
 
@@ -748,25 +748,32 @@ export default class ExtJSClass{
   }
 
   getConfigs(){
-    let localConfigs  = this.classMembers.configs.filter(node => this.localConfigs.includes(Ast.getPropertyName(node))),
-        remoteConfigs = this.assimilatedClasses.reduce((configs, cls) => [...configs, ...cls.classMembers.configs], []),
-        deleteNodes   = configs => configs.forEach(this._deleteNode),
-        configs       = [...localConfigs, ...remoteConfigs],
-        configCode    = []
+    let configs = [
+      ...this.classMembers.configs,
+      ...this.assimilatedClasses.reduce((configs, cls) => [...configs, ...cls.classMembers.configs], [])
+    ]
+
+    let deleteNodes = configs => configs.forEach(this._deleteNode),
+        configCode  = []
 
     if(!configs.length){
       return []
     }
 
-    if(this.isComponent() && localConfigs.length){
-      configCode.push(code(
-        'props = {',
-          [[...localConfigs.map(node => Ast.toString(node)), '...props'].join(',\n')],
-        '}'
-      ))
+    if(this.isComponent()){
+      let props = this._getProps(true)
 
-      deleteNodes(localConfigs)
-      configs = remoteConfigs
+      if(props.length){
+        configCode.push(code(
+          'props = {',
+            [[...props.map(node => Ast.toString(node)), '...props'].join(',\n')],
+          '}'
+        ))
+      }
+
+      deleteNodes(props)
+      configs = _.difference(configs, props)
+      return configCode
     }
 
     if(configs.length){
@@ -781,7 +788,7 @@ export default class ExtJSClass{
 
       configCode.push([
         ...(props.length ? [props.join('\n')] : []),
-        ..._.compact(accessors.map(({ accessors }) => accessors))
+        ..._.compact(accessors.map(({ methods }) => methods))
       ].join('\n\n'))
     }
 
@@ -826,7 +833,7 @@ export default class ExtJSClass{
     if(evented){
       this.evented = true
       beforeSet.push(
-        `if(this._${name}Initialized)`,
+        `if(this._${name}Initialized){`,
           [`this.dispatchEvent(${eventName}, this, value, this._${name})`],
         '}'
       )
@@ -836,7 +843,7 @@ export default class ExtJSClass{
       beforeSet.push(`this._${name}Initialized = true`)
     }
 
-    let accessors = code(
+    let methods = code(
       `get ${name}(){`,
         [
           ...(beforeGet.length ? [beforeGet.join('\n\n') + '\n'] : []),
@@ -852,7 +859,7 @@ export default class ExtJSClass{
       '}'
     )
 
-    return { externalName: name, internalName: `_${name}`, defaultValue, accessors }
+    return { externalName: name, internalName: `_${name}`, defaultValue, methods }
   }
 
   getMethods(){
@@ -943,11 +950,15 @@ export default class ExtJSClass{
     ].join('')
   }
 
+  _getProps(processed){
+    let shouldProcess = node => this.localConfigs.includes(Ast.getPropertyName(node))
+    return this.classMembers.configs.filter(node => shouldProcess(node) === !!processed)
+  }
+
   getRenderFn(){
     let identifier = b.jsxIdentifier(this.sourceFile.getImportNameForClassName(this.parentClass.className)),
+        props      = this._getProps(false),
         items      = _.compact((Ast.toValue(this.classMembers.items) || []).map(item => this.getJSXFromConfig(item)))
-
-    let props = this.classMembers.configs.filter(node => !this.localConfigs.includes(Ast.getPropertyName(node)))
 
     props.forEach(this._deleteNode)
 
