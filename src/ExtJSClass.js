@@ -851,7 +851,7 @@ export default class ExtJSClass{
     }
 
     if(updateFn){
-      let update = `(${Ast.toString(updateFn)})(value, this._${name})`
+      let update = `(${Ast.toString(updateFn)}).call(this, value, this._${name})`
       beforeSet.push(applyFn ? code(`if(typeof value !== 'undefined' && value !== this._${name}){`, [update], `}`) : update)
       this._deleteNode(this.classMembers.methods.find(node => node.value === updateFn))
     }
@@ -942,7 +942,7 @@ export default class ExtJSClass{
     this._deleteNode(node)
 
     let getMethodName = name => ({
-      'constructor': this.isComponent() ? 'REWRITE_constructor' : 'constructor'
+      'constructor': this.isComponent() ? 'REWRITE_constructor' : 'construct'
     }[name] || name)
 
     let name = getMethodName(Ast.getPropertyName(node))
