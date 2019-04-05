@@ -39,6 +39,7 @@ export const afterTranspile = ast => {
     'Ext.JSON.decode'       : { fn: () => ['JSON.parse'] },
     'Ext.Number.constrain'  : { fn: () => ['_.clamp'], lib: '_' },
     'Ext.String.capitalize' : { fn: () => ['_.upperFirst'], lib: '_' },
+    'Ext.isDate'            : { fn: () => ['_.isDate'], lib: '_' },
     'Ext.isEmpty'           : { fn: () => ['_.isEmpty'], lib: '_' },
     'Ext.isFunction'        : { fn: () => ['_.isFunction'], lib: '_' },
     'Ext.isString'          : { fn: () => ['_.isString'], lib: '_' }
