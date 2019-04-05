@@ -149,6 +149,7 @@ e2r will then add placeholder ES6 classes to the file's generated output. You ca
     - [ ] .rejected
   - [x] .isEmpty → _.isEmpty
   - [x] .isFunction → _.isFunction
+  - [x] .isString → _.isString
   - [ ] .Promise
 #### Component (Optional) - generally break associated code, requiring manual fixing
 - [ ] Small subset of Components → open source libraries (w/ documented api loss)
