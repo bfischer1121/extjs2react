@@ -121,7 +121,7 @@ e2r will then add placeholder ES6 classes to the file's generated output. You ca
     - [ ] .createThrottled
     - [ ] .interceptBefore
   - [ ] .JSON
-    - [ ] .decode
+    - [x] .decode → JSON.parse
   - [ ] .Number
     - [x] .constrain → _.clamp
     - [ ] .from

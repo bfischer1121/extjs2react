@@ -36,6 +36,7 @@ export const afterTranspile = ast => {
     'Ext.Array.pluck'       : { fn: () => ['_.map'], lib: '_' },
     'Ext.Array.remove'      : { fn: () => ['_.pull'], lib: '_' },
     'Ext.Array.unique'      : { fn: () => ['_.uniq'], lib: '_' },
+    'Ext.JSON.decode'       : { fn: () => ['JSON.parse'] },
     'Ext.Number.constrain'  : { fn: () => ['_.clamp'], lib: '_' },
     'Ext.String.capitalize' : { fn: () => ['_.upperFirst'], lib: '_' },
     'Ext.isEmpty'           : { fn: () => ['_.isEmpty'], lib: '_' },
