@@ -41,9 +41,9 @@ export const afterTranspile = ast => {
       return `${wrapExpression(array)}.forEach(${Ast.toString(fn)})`
     },
 
-    'Ext.String.leftPad': (string, size, character) => (
-      `${wrapExpression(string)}.padStart(${_.compact([size, character]).map(Ast.toString).join(', ')})`
-    ),
+    'Ext.Array.indexOf': (array, item, from) => `${wrapExpression(array)}.indexOf(${getArgs(item, from)})`,
+
+    'Ext.String.leftPad': (string, size, character) => `${wrapExpression(string)}.padStart(${getArgs(size, character)})`,
 
     // string must be present; no default string return value; trims spaces, not list of chars in trimRegex
     'Ext.String.trim': string => `${wrapExpression(string)}.trim()`
@@ -55,6 +55,8 @@ export const afterTranspile = ast => {
 
     return wrap ? `(${code})` : code
   }
+
+  const getArgs = (...args) => _.compact(args).map(Ast.toString).join(', ')
 
   const getContext = path => {
     let methodPath = Ast.up(path, Ast.isMethod),
