@@ -70,7 +70,7 @@ export const afterTranspile = ast => {
         return null
       }
 
-      return `_.each(${Ast.toString(object)}, ${Ast.toString(swapParams(fn, 0, 1))})`
+      return `_.forEach(${Ast.toString(object)}, ${Ast.toString(swapParams(fn, 0, 1))})`
     },
 
     'Ext.String.leftPad': (string, size, character) => `${wrapExpression(string)}.padStart(${getArgs(size, character)})`,
