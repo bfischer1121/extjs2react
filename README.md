@@ -115,7 +115,7 @@ e2r will then add placeholder ES6 classes to the file's generated output. You ca
   - [ ] .DomQuery
     - [ ] .is
   - [ ] .Function
-    - [ ] .bind
+    - [x] .bind → Function.bind
     - [ ] .createBuffered
     - [ ] .createSequence
     - [ ] .createThrottled
@@ -143,7 +143,7 @@ e2r will then add placeholder ES6 classes to the file's generated output. You ca
       - [ ] .pluralize
       - [ ] .singular
   - [ ] .baseCSSPrefix
-  - [ ] .bind
+  - [x] .bind (see Ext.Function.bind)
   - [ ] .Deferred
     - [ ] self
     - [ ] .rejected

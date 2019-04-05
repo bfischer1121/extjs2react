@@ -19,6 +19,12 @@ export const afterTranspile = ast => {
     }))
   )
 
+  const aliases = {
+    'Ext.bind': 'Ext.Function.bind'
+  }
+
+  const withAlias = variable => (aliases[variable] || variable)
+
   // Possibly breaking changes are noted with each transform
 
   const variableTransforms = parseTransforms({
@@ -48,6 +54,17 @@ export const afterTranspile = ast => {
 
     'Ext.Array.indexOf': (array, item, from) => `${wrapExpression(array)}.indexOf(${getArgs(item, from)})`,
 
+    'Ext.Function.bind': (fn, scope, args, appendArgs) => {
+      if(!_.isUndefined(args) && (_.isUndefined(appendArgs) || Ast.toString(appendArgs) !== '0')){
+        return null
+      }
+
+      scope = _.isUndefined(scope) ? 'window' : Ast.toString(scope)
+      args  = _.isUndefined(args) ? '' : `, ${explodeArray(args)}`
+
+      return `${wrapExpression(fn)}.bind(${scope}${args})`
+    },
+
     'Ext.String.leftPad': (string, size, character) => `${wrapExpression(string)}.padStart(${getArgs(size, character)})`,
 
     // string must be present; no default string return value; trims spaces, not list of chars in trimRegex
@@ -59,6 +76,11 @@ export const afterTranspile = ast => {
         wrap = Ast.isTernary(member)
 
     return wrap ? `(${code})` : code
+  }
+
+  const explodeArray = array => {
+    let code = Ast.toString(array)
+    return Ast.isArray(array) ? code.replace(/(^\[|\]$)/g, '') : `...${wrapExpression(code)}`
   }
 
   const getArgs = (...args) => _.compact(args).map(Ast.toString).join(', ')
@@ -75,7 +97,7 @@ export const afterTranspile = ast => {
 
   visit(ast, {
     visitCallExpression: function(path){
-      let fnName = Ast.toString(path.node.callee)
+      let fnName = withAlias(Ast.toString(path.node.callee))
 
       if(deleteCalls.includes(fnName)){
         path.prune()
@@ -111,8 +133,8 @@ export const afterTranspile = ast => {
 
   visit(ast, {
     visitMemberExpression: function(path){
-      let expression = Ast.toString(path.node),
-          transform  = variableTransforms.find(({ check }) => expression.match(check))
+      let expression = withAlias(Ast.toString(path.node)),
+          transform  = variableTransforms.find(transform => expression.match(transform.check))
 
       if(transform){
         let [newExpression] = transform.transform(...expression.match(transform.check).slice(1))
