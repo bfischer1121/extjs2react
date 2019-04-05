@@ -123,7 +123,7 @@ e2r will then add placeholder ES6 classes to the file's generated output. You ca
   - [ ] .JSON
     - [ ] .decode
   - [ ] .Number
-    - [ ] .constrain
+    - [x] .constrain → _.clamp
     - [ ] .from
     - [ ] .toFixed
   - [ ] .Object
