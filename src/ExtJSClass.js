@@ -88,6 +88,9 @@ export default class ExtJSClass{
   get libraries(){
     return (this.isComponent() ? ['react'] : []).concat(this._libraries || [])
   }
+
+  get unparsed(){
+    return !!this.override
   }
 
   get discard(){
@@ -601,6 +604,10 @@ export default class ExtJSClass{
   transpile(type = 'ES6'){
     //this.convertXTypesToJSX()
 
+    if(this.unparsed){
+      return { classCode: `Ext.define('${this.className}', ${Ast.toString(this.ast)})`, unparsed: true }
+    }
+
     return type === 'reactify'
       ? this.getReactifyClass()
       : this.getES6Class()
@@ -730,17 +737,24 @@ export default class ExtJSClass{
       return { classCode, exportCode }
     }
 
-    let head = _.compact([
-      exportClass ? exportStatement : null,
-      `class ${className}`,
-      parentName ? `extends ${parentName}` : null
-    ]).join(' ')
     if(parentName){
       this._addLibrary('define')
     }
 
-    let body      = getCode(staticProps, properties, configs, staticMethods, methods),
-        classCode = code(head + '{', ...(body.length ? [[body]] : []), '}')
+    let head = [
+      parentName ? '@define\n' : '',
+      (exportClass ? exportStatement + ' ' : ''),
+      `class ${className}`
+    ].join('')
+
+    let body = getCode(staticProps, properties, configs, staticMethods, methods)
+
+    let classCode = code(
+      head + '{',
+        ...(parentName ? [[`extend = ${parentName}\n`]] : []),
+        ...(body.length ? [[body]] : []),
+      '}'
+    )
 
     return { classCode, exportCode }
   }

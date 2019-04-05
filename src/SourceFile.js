@@ -202,6 +202,10 @@ export default class SourceFile{
       this.removeEmptyClasses()
     }
 
+    if(this.classes.every(cls => cls.unparsed)){
+      return ''
+    }
+
     let code   = Ast.toString(this._ast).trim(),
         define = /Ext\.define\(/
 
@@ -214,14 +218,16 @@ export default class SourceFile{
     }
 
     let clsCode   = this.undiscardedClasses.map(cls => cls.transpile()),
-        exports   = _.compact(clsCode.map(({ exportCode }) => exportCode)),
-        classes   = _.compact(clsCode.map(({ classCode }) => classCode)),
         libraries = _.uniq(this.undiscardedClasses.reduce((lib, cls) => [...lib, ...cls.libraries], []))
 
-    classes = classes.map(code => {
-      code = this.replaceClassNames(code)
+    let classes = _.compact(clsCode.map(({ classCode, unparsed }) => {
+      if(!classCode || unparsed){
+        return classCode
+      }
 
-      let ast = Ast.parseWithJSX(code)
+      classCode = this.replaceClassNames(classCode)
+
+      let ast = Ast.parseWithJSX(classCode)
 
       this.renameConfigCalls(ast)
 
@@ -230,14 +236,14 @@ export default class SourceFile{
       }
 
       return Ast.toString(ast)
-    })
+    }))
 
     let imports = this.getImportsCode(_.uniq(libraries))
 
     let code = _.compact([
       imports,
       ...classes,
-      ...exports
+      ...(_.compact(clsCode.map(code => code.exportCode)))
     ]).join('\n\n').trim()
 
     if(hooks.beforeSave){
