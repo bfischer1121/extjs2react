@@ -72,6 +72,7 @@ e2r will then add placeholder ES6 classes to the file's generated output. You ca
   - [ ] transform lifecycle methods
 - [ ] ViewModel → `state`, render
 - [ ] Utility methods → ES6, lodash
+  - [x] Ext.isFunction → _.isFunction
   - [ ] Ext.Date
   - [ ] Ext.String
 ##### Component (Optional) - generally break associated code, requiring manual fixing
