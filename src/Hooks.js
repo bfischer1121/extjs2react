@@ -20,9 +20,10 @@ export const afterTranspile = ast => {
   )
 
   const variableTransforms = parseTransforms({
-    '*.app.*'        : { fn: (appName, methodName) => ([`App.${methodName}`]), lib: 'App' },
-    'Ext.isEmpty'    : { fn: () => ['_.isEmpty'], lib: '_' },
-    'Ext.isFunction' : { fn: () => ['_.isFunction'], lib: '_' }
+    '*.app.*'               : { fn: (appName, methodName) => ([`App.${methodName}`]), lib: 'App' },
+    'Ext.String.capitalize' : { fn: () => ['_.upperFirst'], lib: '_' },
+    'Ext.isEmpty'           : { fn: () => ['_.isEmpty'], lib: '_' },
+    'Ext.isFunction'        : { fn: () => ['_.isFunction'], lib: '_' }
   })
 
   const callTransforms = parseTransforms({
