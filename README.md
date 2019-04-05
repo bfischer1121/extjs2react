@@ -78,7 +78,7 @@ e2r will then add placeholder ES6 classes to the file's generated output. You ca
     - [ ] .on
     - [ ] .request
   - [ ] .Array
-    - [ ] .clean
+    - [x] .clean → _.compact
     - [ ] .clone
     - [x] .each → Array.forEach
     - [ ] .contains
@@ -145,8 +145,8 @@ e2r will then add placeholder ES6 classes to the file's generated output. You ca
   - [ ] .baseCSSPrefix
   - [ ] .bind
   - [ ] .Deferred
-    - (self)
-    - .rejected
+    - [ ] self
+    - [ ] .rejected
   - [x] .isEmpty → _.isEmpty
   - [x] .isFunction → _.isFunction
   - [ ] .Promise
