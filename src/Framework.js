@@ -35,7 +35,7 @@ export default class Framework extends Codebase{
       .filter(cls => !cls.override)
       .map(cls => {
         let xtype = (cls.classAliases.find(alias => alias.startsWith('widget.')) || '').replace(/^widget\./, ''),
-            value = xtype ? `r('${xtype}')` : `m('${cls.className}')`
+            value = xtype ? `r('${xtype}')` : `w.${cls.className}`
 
         return { name: cls.exportName, value, widget: !!xtype }
       })
@@ -48,9 +48,11 @@ export default class Framework extends Codebase{
 
     let framework = code(
       `import { reactify } from '@sencha/ext-react'`,
-      `import { modernize as m } from './modernize'`,
+      '',
+      `export * from './define'`,
       '',
       'const r = reactify',
+      'const w = window',
       '',
       ...getExportCode(exports.filter(exp => exp.widget)),
       '',
