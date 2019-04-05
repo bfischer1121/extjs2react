@@ -356,8 +356,9 @@ export default class SourceFile{
 
   replaceClassNames(code){
     this.codebase.classRe.forEach(({ re, cls }) => {
-      code = code.replace(re, (match, name, extra) => this.getImportNameForClassName(cls.className) + extra)
+      code = code.replace(re, (match, name, extra) => (this.getImportNameForClassName(cls.className) || name) + extra)
     })
+
     return code
   }
 

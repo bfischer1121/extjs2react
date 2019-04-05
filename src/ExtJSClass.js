@@ -317,7 +317,9 @@ export default class ExtJSClass{
   }
 
   get fileSearchRegExps(){
-    return [this.className, ...(this.alternateClassNames)].map(name => new RegExp(`(${name})(\\W+?)`))
+    return [this.className, ...(this.alternateClassNames)].map(name => (
+      new RegExp(`('?${name}'?)(\\W+?)`)
+    ))
   }
 
   get methodCalls(){
