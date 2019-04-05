@@ -128,9 +128,9 @@ e2r will then add placeholder ES6 classes to the file's generated output. You ca
     - [ ] .toFixed
   - [ ] .Object
     - [x] .each → _.forEach
-    - [ ] .getSize
+    - [x] .getSize → Object.keys(...).length
     - [ ] .merge
-  - [ ] .String
+  - [x] .String
     - [x] .capitalize → _.upperFirst
     - [x] .leftPad → String.padStart
     - [x] .trim → String.trim

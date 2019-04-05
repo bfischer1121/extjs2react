@@ -73,6 +73,8 @@ export const afterTranspile = ast => {
       return `_.forEach(${Ast.toString(object)}, ${Ast.toString(swapParams(fn, 0, 1))})`
     },
 
+    'Ext.Object.getSize': object => `Object.keys(${Ast.toString(object)}).length`,
+
     'Ext.String.leftPad': (string, size, character) => `${wrapExpression(string)}.padStart(${getArgs(size, character)})`,
 
     // string must be present; no default string return value; trims spaces, not list of chars in trimRegex
