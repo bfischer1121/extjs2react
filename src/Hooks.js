@@ -24,6 +24,7 @@ export const afterTranspile = ast => {
   const variableTransforms = parseTransforms({
     '*.app.*'               : { fn: (appName, methodName) => ([`App.${methodName}`]), lib: 'App' },
     'Ext.Array.clean'       : { fn: () => ['_.compact'], lib: '_' },
+    'Ext.Array.difference'  : { fn: () => ['_.difference'], lib: '_' },
     'Ext.Array.unique'      : { fn: () => ['_.uniq'], lib: '_' },
     'Ext.String.capitalize' : { fn: () => ['_.upperFirst'], lib: '_' },
     'Ext.isEmpty'           : { fn: () => ['_.isEmpty'], lib: '_' },
