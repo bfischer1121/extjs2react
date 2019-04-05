@@ -71,15 +71,15 @@ e2r will then add placeholder ES6 classes to the file's generated output. You ca
   - [x] merge methods/configs/properties
   - [ ] transform lifecycle methods
 - [ ] ViewModel → `state`, render
-- [ ] Utility methods → ES6, lodash
-  - [x] Ext.Array.each → Array.forEach
-  - [x] Ext.String.capitalize → _.upperFirst
-  - [x] Ext.String.leftPad → String.padStart
-  - [x] Ext.String.trim → String.trim
-  - [x] Ext.isEmpty → _.isEmpty
-  - [x] Ext.isFunction → _.isFunction
-  - [ ] Ext.Date
-  - [ ] Ext.String
+- [ ] Ext
+  - [ ] .Array
+    - [x] .each → Array.forEach
+  - [ ] .String
+    - [x] .capitalize → _.upperFirst
+    - [x] .leftPad → String.padStart
+    - [x] .trim → String.trim
+  - [x] .isEmpty → _.isEmpty
+  - [x] .isFunction → _.isFunction
 ##### Component (Optional) - generally break associated code, requiring manual fixing
 - [ ] Small subset of Components → open source libraries (w/ documented api loss)
   - [ ] Layouts (flexbox-compatible)
