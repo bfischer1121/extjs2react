@@ -151,6 +151,7 @@ e2r will then add placeholder ES6 classes to the file's generated output. You ca
   - [ ] .Deferred
     - [ ] self
     - [ ] .rejected
+  - [x] .isArray → _.isArray
   - [x] .isDate → _.isDate
   - [x] .isDefined → !_.isUndefined
   - [x] .isEmpty → _.isEmpty
