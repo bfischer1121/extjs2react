@@ -86,7 +86,8 @@ export default class ExtJSClass{
   }
 
   get libraries(){
-    return this.isComponent() ? ['react'] : []
+    return (this.isComponent() ? ['react'] : []).concat(this._libraries || [])
+  }
   }
 
   get discard(){
@@ -471,6 +472,10 @@ export default class ExtJSClass{
     return this._transformedClassMembers
   }
 
+  _addLibrary(library){
+    this._libraries = _.uniq([...(this._libraries || []), library])
+  }
+
   _getLocalConfigs(configType){
     let key = {
       configs        : 'config',
@@ -710,6 +715,8 @@ export default class ExtJSClass{
     let getCode = (...members) => _.compact(members.map(members => members.join('\n\n'))).join('\n\n')
 
     if(this.isComponent()){
+      this._addLibrary('React')
+
       let body = getCode(properties, configs, methods)
 
       let classCode = code(
@@ -728,6 +735,9 @@ export default class ExtJSClass{
       `class ${className}`,
       parentName ? `extends ${parentName}` : null
     ]).join(' ')
+    if(parentName){
+      this._addLibrary('define')
+    }
 
     let body      = getCode(staticProps, properties, configs, staticMethods, methods),
         classCode = code(head + '{', ...(body.length ? [[body]] : []), '}')
@@ -879,6 +889,14 @@ export default class ExtJSClass{
       .filter(m => _.isObject(m) && m.isUpdateFn)
       .sort((m1, m2) => m1.config.localeCompare(m2.config))
       .map(m => `useEffect(${m.fn}, [props.${m.config}])`)
+
+    if(applyMethods.length){
+      this._addLibrary('useMemo')
+    }
+
+    if(updateMethods.length){
+      this._addLibrary('useEffect')
+    }
 
     return [
       ...applyMethods,

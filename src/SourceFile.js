@@ -249,9 +249,10 @@ export default class SourceFile{
 
   getImportsCode(libraries){
     let libImports = [
-      { specifiers: 'App',   source: 'app' },
-      { specifiers: 'React', source: 'react' },
-      { specifiers: '_',     source: 'lodash' }
+      { source: 'framework', specifiers: ['define'] },
+      { source: 'app',       default: 'App' },
+      { source: 'react',     default: 'React', specifiers: ['useMemo', 'useEffect'] },
+      { source: 'lodash',    default: '_' }
     ]
 
     let sourceAliases = [
@@ -260,15 +261,19 @@ export default class SourceFile{
 
     let classes     = Object.keys(this._importNames).map(className => this.codebase.getClassForClassName(className)),
         sourceFiles = _.uniq(classes.filter(cls => !cls.discard).map(c => c.sourceFile)),
-        imports     = libImports.filter(lib => libraries.includes(lib.source))
+        imports     = {}
+
+    libImports.forEach(lib => {
+      let $default   = (lib.default && libraries.includes(lib.default)) ? lib.default : null,
+          specifiers = _.intersection(lib.specifiers, libraries)
+
+      if($default || specifiers.length){
+        imports[lib.source] = { default: $default, specifiers }
+      }
+    })
 
     sourceFiles.forEach(sourceFile => {
-      let importNames = _.intersection(sourceFile.undiscardedClasses, classes).map(cls => this.getImportNameForClassName(cls.className)),
-          source      = getRelativePath(this.codeFilePath, sourceFile.importFilePath).replace(/\.js$/, '').replace(/\/index$/, '')
-
-      let specifiers = sourceFile.undiscardedClasses.length > 1
-        ? '{ ' + importNames.sort((s1, s2) => s1.localeCompare(s2)).join(', ') + ' }'
-        : importNames[0]
+      let source = getRelativePath(this.codeFilePath, sourceFile.importFilePath).replace(/\.js$/, '').replace(/\/index$/, '')
 
       sourceAliases.forEach(([check, alias]) => {
         if(check.test(source)){
@@ -276,17 +281,37 @@ export default class SourceFile{
         }
       })
 
-      imports.push({ specifiers, source })
+      let specifiers = _.intersection(sourceFile.undiscardedClasses, classes)
+        .map(cls => this.getImportNameForClassName(cls.className))
+        .sort((s1, s2) => s1.localeCompare(s2))
+
+      if(sourceFile.undiscardedClasses.length <= 1){
+        imports[source] = { default: specifiers[0] }
+        return
+      }
+
+      imports[source]
+        ? imports[source].specifiers = [...imports[source].specifiers, ...specifiers]
+        : imports[source] = { specifiers }
     })
 
     let importOrder = [...libImports.map(({ source }) => source), ...sourceAliases.map(a => a[1])].reverse()
 
-    imports = imports.sort(({ source: s1 }, { source: s2 }) => {
-      let order = importOrder.indexOf(s2) - importOrder.indexOf(s1)
-      return order === 0 ? s1.localeCompare(s2) : order
-    })
+    imports = Object.keys(imports)
+      .map(source => ({ source, ...imports[source] }))
+      .sort(({ source: s1 }, { source: s2 }) => {
+        let order = importOrder.indexOf(s2) - importOrder.indexOf(s1)
+        return order === 0 ? s1.localeCompare(s2) : order
+      })
 
-    return code(...imports.map(({ specifiers, source }) => `import ${specifiers} from '${source}'`))
+    return code(...imports.map(imp => {
+      let specifiers = _.compact([
+        imp.default,
+        (imp.specifiers || []).length ? `{ ${imp.specifiers.join(', ')} }` : null
+      ]).join(', ')
+
+      return `import ${specifiers} from '${imp.source}'`
+    }))
   }
 
   renameConfigCalls(ast){
