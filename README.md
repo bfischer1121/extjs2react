@@ -130,14 +130,18 @@ e2r will then add placeholder ES6 classes to the file's generated output. You ca
     - [x] .each → _.forEach
     - [x] .getSize → Object.keys(...).length
     - [ ] .merge
-  - [x] .String
+  - [ ] .String
     - [x] .capitalize → _.upperFirst
+    - [ ] .htmlEncode
     - [x] .leftPad → String.padStart
+    - [ ] .repeat
     - [x] .trim → String.trim
+    - [ ] .escapeRegex
+    - [ ] .trimRegex
   - [ ] .util
     - [ ] .Format
       - [ ] .date
-      - [ ] .htmlEncode
+      - [ ] .htmlEncode (see Ext.String.htmlEncode)
     - [ ] .Inflector
       - [ ] .plural
       - [ ] .pluralize
