@@ -48,7 +48,7 @@ Since e2r does a static code analysis, it isn't able to pick up on dynamically g
 e2r will then add placeholder ES6 classes to the file's generated output. You can of course safely remove these as long as you export classes of the same names.
 
 ## Progress
-##### Architectural - generally non-breaking:
+#### Architecture
 - [x] ClassManager → ES6 modules
   - [x] namespaced class names → simple names & references
   - [x] import class dependencies
@@ -71,16 +71,18 @@ e2r will then add placeholder ES6 classes to the file's generated output. You ca
   - [x] merge methods/configs/properties
   - [ ] transform lifecycle methods
 - [ ] ViewModel → `state`, render
+#### Utility Library
 - [ ] Ext
   - [ ] .Array
     - [x] .each → Array.forEach
+    - [x] .unique → _.uniq
   - [ ] .String
     - [x] .capitalize → _.upperFirst
     - [x] .leftPad → String.padStart
     - [x] .trim → String.trim
   - [x] .isEmpty → _.isEmpty
   - [x] .isFunction → _.isFunction
-##### Component (Optional) - generally break associated code, requiring manual fixing
+#### Component (Optional) - generally break associated code, requiring manual fixing
 - [ ] Small subset of Components → open source libraries (w/ documented api loss)
   - [ ] Layouts (flexbox-compatible)
   - [ ] Panel, Container, Component
