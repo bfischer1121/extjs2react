@@ -65,6 +65,14 @@ export const afterTranspile = ast => {
       return `${wrapExpression(fn)}.bind(${scope}${args})`
     },
 
+    'Ext.Object.each': (object, fn, scope) => {
+      if(!_.isUndefined(scope)){
+        return null
+      }
+
+      return `_.each(${Ast.toString(object)}, ${Ast.toString(swapParams(fn, 0, 1))})`
+    },
+
     'Ext.String.leftPad': (string, size, character) => `${wrapExpression(string)}.padStart(${getArgs(size, character)})`,
 
     // string must be present; no default string return value; trims spaces, not list of chars in trimRegex
@@ -81,6 +89,17 @@ export const afterTranspile = ast => {
   const explodeArray = array => {
     let code = Ast.toString(array)
     return Ast.isArray(array) ? code.replace(/(^\[|\]$)/g, '') : `...${wrapExpression(code)}`
+  }
+
+  const swapParams = (fn, index1, index2) => {
+    let copy = Ast.copy(fn),
+        p1   = copy.params[index1],
+        p2   = copy.params[index2]
+
+    copy.params[index1] = p2
+    copy.params[index2] = p1
+
+    return copy
   }
 
   const getArgs = (...args) => _.compact(args).map(Ast.toString).join(', ')

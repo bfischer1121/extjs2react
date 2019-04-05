@@ -2,7 +2,7 @@ import fs from 'fs-extra'
 import path from 'path'
 import _ from 'lodash'
 import recast from 'recast'
-import { namedTypes as t } from 'ast-types'
+import { namedTypes as t, eachField } from 'ast-types'
 
 export const asyncForEach = async (array, callback) => {
   for(let i = 0; i < array.length; i++){
@@ -117,6 +117,12 @@ class AST{
 
   toString(ast){
     return recast.print(ast).code
+  }
+
+  copy(node){
+    let copy = {}
+    eachField(node, (name, value) => copy[name] = value)
+    return copy
   }
 
   up(path, test){
