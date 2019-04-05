@@ -28,6 +28,7 @@ export const afterTranspile = ast => {
     'Ext.Array.flatten'     : { fn: () => ['_.flattenDeep'], lib: '_' },
     'Ext.Array.intersect'   : { fn: () => ['_.intersection'], lib: '_' },
     'Ext.Array.pluck'       : { fn: () => ['_.map'], lib: '_' },
+    'Ext.Array.remove'      : { fn: () => ['_.pull'], lib: '_' },
     'Ext.Array.unique'      : { fn: () => ['_.uniq'], lib: '_' },
     'Ext.String.capitalize' : { fn: () => ['_.upperFirst'], lib: '_' },
     'Ext.isEmpty'           : { fn: () => ['_.isEmpty'], lib: '_' },

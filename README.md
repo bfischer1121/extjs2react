@@ -88,7 +88,7 @@ e2r will then add placeholder ES6 classes to the file's generated output. You ca
     - [x] .intersect → _.intersection
     - [ ] .map
     - [x] .pluck → _.map
-    - [ ] .remove
+    - [x] .remove → _.pull
     - [ ] .slice
     - [ ] .sort
     - [ ] .toArray
