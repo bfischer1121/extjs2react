@@ -13,7 +13,8 @@ export const afterTranspile = ast => {
 
   let transforms = {
     '*.app.*' : { fn: (node, appName, methodName) => ([`App.${methodName}`]), lib: 'App' },
-    'Ext.isFunction': { fn: node => ['_.isFunction'], lib: '_' }
+    'Ext.isEmpty'    : { fn: () => ['_.isEmpty'], lib: '_' },
+    'Ext.isFunction' : { fn: () => ['_.isFunction'], lib: '_' }
   }
 
   transforms = Object.keys(transforms).map(key => ({
