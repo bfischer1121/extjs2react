@@ -73,15 +73,83 @@ e2r will then add placeholder ES6 classes to the file's generated output. You ca
 - [ ] ViewModel → `state`, render
 #### Utility Library
 - [ ] Ext
+  - [ ] .Ajax
+    - [ ] .getDefaultHeaders
+    - [ ] .on
+    - [ ] .request
   - [ ] .Array
+    - [ ] .clean
+    - [ ] .clone
     - [x] .each → Array.forEach
+    - [ ] .contains
+    - [ ] .difference
+    - [ ] .flatten
+    - [ ] .indexOf
+    - [ ] .intersect
+    - [ ] .map
+    - [ ] .pluck
+    - [ ] .remove
+    - [ ] .slice
+    - [ ] .sort
+    - [ ] .toArray
     - [x] .unique → _.uniq
+  - [ ] .browser
+    - [ ] .browser
+      - [ ] .name
+      - [ ] .version.version
+    - [ ] .is
+      - [ ] .AndroidStock2
+      - [ ] .WebView
+  - [ ] .Date
+    - [ ] .add
+    - [ ] .between
+    - [ ] .clearTime
+    - [ ] .diff
+    - [ ] .format
+    - [ ] .getShortDayName
+    - [ ] .getShortMonthName
+    - [ ] .parse
+    - [ ] .DAY
+    - [ ] .MINUTE
+    - [ ] .monthNames
+  - [ ] .DomQuery
+    - [ ] .is
+  - [ ] .Function
+    - [ ] .bind
+    - [ ] .createBuffered
+    - [ ] .createSequence
+    - [ ] .createThrottled
+    - [ ] .interceptBefore
+  - [ ] .JSON
+    - [ ] .decode
+  - [ ] .Number
+    - [ ] .constrain
+    - [ ] .from
+    - [ ] .toFixed
+  - [ ] .Object
+    - [ ] .each
+    - [ ] .getSize
+    - [ ] .merge
   - [ ] .String
     - [x] .capitalize → _.upperFirst
     - [x] .leftPad → String.padStart
     - [x] .trim → String.trim
+  - [ ] .util
+    - [ ] .Format
+      - [ ] .date
+      - [ ] .htmlEncode
+    - [ ] .Inflector
+      - [ ] .plural
+      - [ ] .pluralize
+      - [ ] .singular
+  - [ ] .baseCSSPrefix
+  - [ ] .bind
+  - [ ] .Deferred
+    - (self)
+    - .rejected
   - [x] .isEmpty → _.isEmpty
   - [x] .isFunction → _.isFunction
+  - [ ] .Promise
 #### Component (Optional) - generally break associated code, requiring manual fixing
 - [ ] Small subset of Components → open source libraries (w/ documented api loss)
   - [ ] Layouts (flexbox-compatible)
