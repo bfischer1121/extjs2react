@@ -31,6 +31,8 @@ export const afterTranspile = ast => {
   })
 
   const callTransforms = parseTransforms({
+    'Ext.Array.contains': (array, item) => `${wrapExpression(array)}.includes(${Ast.toString(item)})`,
+
     'Ext.Array.each': (array, fn, scope, reverse) => {
       if(!_.isUndefined(scope) || !_.isUndefined(reverse)){
         return null
