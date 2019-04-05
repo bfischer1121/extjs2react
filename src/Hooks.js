@@ -9,21 +9,40 @@ export const beforeTranspile = codebase => {
 export const afterTranspile = ast => {
   const deleteCalls = ['this.initConfig']
 
-  let libraries = []
+  const libraries = []
 
-  let transforms = {
-    '*.app.*' : { fn: (node, appName, methodName) => ([`App.${methodName}`]), lib: 'App' },
+  const parseTransforms = transforms => (
+    Object.keys(transforms).map(key => ({
+      check     : new RegExp('^' + key.replace(/\./g, '\\.').replace(/\*/g, '([A-Z0-9_]+)') + '$', 'i'),
+      transform : transforms[key].fn || transforms[key],
+      library   : transforms[key].lib || null
+    }))
+  )
+
+  const variableTransforms = parseTransforms({
+    '*.app.*'        : { fn: (appName, methodName) => ([`App.${methodName}`]), lib: 'App' },
     'Ext.isEmpty'    : { fn: () => ['_.isEmpty'], lib: '_' },
     'Ext.isFunction' : { fn: () => ['_.isFunction'], lib: '_' }
+  })
+
+  const callTransforms = parseTransforms({
+    'Ext.Array.each' : (array, fn, scope, reverse) => {
+      if(!_.isUndefined(scope) || !_.isUndefined(reverse)){
+        return null
+      }
+
+      return `${wrapExpression(array)}.forEach(${Ast.toString(fn)})`
+    }
+  })
+
+  const wrapExpression = member => {
+    let code = Ast.toString(member),
+        wrap = Ast.isTernary(member)
+
+    return wrap ? `(${code})` : code
   }
 
-  transforms = Object.keys(transforms).map(key => ({
-    check     : new RegExp('^' + key.replace(/\./g, '\\.').replace(/\*/g, '([A-Z0-9_]+)') + '$', 'i'),
-    transform : transforms[key].fn || transforms[key],
-    library   : transforms[key].lib || null
-  }))
-
-  let getContext = path => {
+  const getContext = path => {
     let methodPath = Ast.up(path, Ast.isMethod),
         classPath  = Ast.up(path, Ast.isClass)
 
@@ -34,22 +53,6 @@ export const afterTranspile = ast => {
   }
 
   visit(ast, {
-    visitMemberExpression: function(path){
-      let expression = Ast.toString(path.node),
-          transform  = transforms.find(({ check }) => expression.match(check))
-
-      if(transform){
-        let [newExpression] = transform.transform(path.node, ...expression.match(transform.check).slice(1))
-        path.replace(Ast.from(newExpression))
-
-        if(transform.library && !libraries.includes(transform.library)){
-          libraries.push(transform.library)
-        }
-      }
-
-      this.traverse(path)
-    },
-
     visitCallExpression: function(path){
       let fnName = Ast.toString(path.node.callee)
 
@@ -64,6 +67,38 @@ export const afterTranspile = ast => {
           if(!context.extendedClass){
             path.prune()
           }
+        }
+      }
+
+      let transform = callTransforms.find(transform => fnName.match(transform.check))
+
+      if(transform){
+        let newNode = transform.transform(...path.node.arguments)
+
+        if(newNode){
+          path.replace(Ast.from(newNode))
+
+          if(transform.library && !libraries.includes(transform.library)){
+            libraries.push(transform.library)
+          }
+        }
+      }
+
+      this.traverse(path)
+    }
+  })
+
+  visit(ast, {
+    visitMemberExpression: function(path){
+      let expression = Ast.toString(path.node),
+          transform  = variableTransforms.find(({ check }) => expression.match(check))
+
+      if(transform){
+        let [newExpression] = transform.transform(...expression.match(transform.check).slice(1))
+        path.replace(Ast.from(newExpression))
+
+        if(transform.library && !libraries.includes(transform.library)){
+          libraries.push(transform.library)
         }
       }
 
