@@ -33,7 +33,8 @@ export const afterTranspile = ast => {
       }
 
       return `${wrapExpression(array)}.forEach(${Ast.toString(fn)})`
-    }
+    },
+    'Ext.String.trim': string => `${wrapExpression(string)}.trim()`
   })
 
   const wrapExpression = member => {
