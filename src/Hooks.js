@@ -19,6 +19,8 @@ export const afterTranspile = ast => {
     }))
   )
 
+  // Possibly breaking changes are noted with each transform
+
   const variableTransforms = parseTransforms({
     '*.app.*'               : { fn: (appName, methodName) => ([`App.${methodName}`]), lib: 'App' },
     'Ext.String.capitalize' : { fn: () => ['_.upperFirst'], lib: '_' },
@@ -27,13 +29,19 @@ export const afterTranspile = ast => {
   })
 
   const callTransforms = parseTransforms({
-    'Ext.Array.each' : (array, fn, scope, reverse) => {
+    'Ext.Array.each': (array, fn, scope, reverse) => {
       if(!_.isUndefined(scope) || !_.isUndefined(reverse)){
         return null
       }
 
       return `${wrapExpression(array)}.forEach(${Ast.toString(fn)})`
     },
+
+    'Ext.String.leftPad': (string, size, character) => (
+      `${wrapExpression(string)}.padStart(${_.compact([size, character]).map(Ast.toString).join(', ')})`
+    ),
+
+    // string must be present; no default string return value; trims spaces, not list of chars in trimRegex
     'Ext.String.trim': string => `${wrapExpression(string)}.trim()`
   })
 

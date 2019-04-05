@@ -74,6 +74,7 @@ e2r will then add placeholder ES6 classes to the file's generated output. You ca
 - [ ] Utility methods → ES6, lodash
   - [x] Ext.Array.each → Array.forEach
   - [x] Ext.String.capitalize → _.upperFirst
+  - [x] Ext.String.leftPad → String.padStart
   - [x] Ext.String.trim → String.trim
   - [x] Ext.isEmpty → _.isEmpty
   - [x] Ext.isFunction → _.isFunction
