@@ -156,7 +156,7 @@ e2r will then add placeholder ES6 classes to the file's generated output. You ca
   - [ ] .Deferred
     - [ ] self
     - [ ] .rejected
-  - [ ] .emptyFn
+  - [x] .emptyFn → () => {}
   - [x] .encode (see Ext.JSON.encode)
   - [x] .isArray → _.isArray
   - [x] .isDate → _.isDate

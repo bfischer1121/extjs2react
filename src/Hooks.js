@@ -42,6 +42,7 @@ export const afterTranspile = ast => {
     'Ext.Number.constrain'  : { fn: () => ['_.clamp'], lib: '_' },
     'Ext.String.capitalize' : { fn: () => ['_.upperFirst'], lib: '_' },
     'Ext.clone'             : { fn: () => ['_.cloneDeep'], lib: '_' },
+    'Ext.emptyFn'           : { fn: () => ['() => {}'], lib: '_' },
     'Ext.isArray'           : { fn: () => ['_.isArray'], lib: '_' },
     'Ext.isDate'            : { fn: () => ['_.isDate'], lib: '_' },
     'Ext.isDefined'         : { fn: () => ['!_.isUndefined'], lib: '_' },
