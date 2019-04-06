@@ -114,7 +114,9 @@ export const afterTranspile = ast => {
 
     'Ext.applyIf': (object, config) => (
       `_.assignWith(${Ast.toString(object)}, ${Ast.toString(config)}, (objValue, srcValue) => _.isUndefined(objValue) ? srcValue : objValue)`
-    )
+    ),
+
+    'Ext.isNumeric': value => `_.isFinite(+${Ast.toString(value)})`
   }
 
   const callTransforms = parseTransforms(_callTransforms)

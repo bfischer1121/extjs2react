@@ -164,7 +164,7 @@ e2r will then add placeholder ES6 classes to the file's generated output. You ca
   - [x] .isEmpty → _.isEmpty
   - [x] .isFunction → _.isFunction
   - [x] .isNumber → _.isFinite
-  - [ ] .isNumeric
+  - [x] .isNumeric → _.isFinite(+...)
   - [ ] .isObject
   - [x] .isString → _.isString
   - [ ] .Promise
