@@ -49,7 +49,7 @@ export const afterTranspile = ast => {
     'Ext.isDefined'         : { fn: () => ['!_.isUndefined'], lib: '_' },
     'Ext.isEmpty'           : { fn: () => ['_.isEmpty'], lib: '_' },
     'Ext.isFunction'        : { fn: () => ['_.isFunction'], lib: '_' },
-    'Ext.isNumber'          : { fn: () => ['_.isNumber'], lib: '_' },
+    'Ext.isNumber'          : { fn: () => ['_.isFinite'], lib: '_' },
     'Ext.isString'          : { fn: () => ['_.isString'], lib: '_' }
   })
 
