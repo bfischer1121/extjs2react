@@ -71,7 +71,7 @@ e2r will then add placeholder ES6 classes to the file's generated output. You ca
   - [x] merge methods/configs/properties
   - [ ] transform lifecycle methods
 - [ ] ViewModel → `state`, render
-#### Utility Library
+#### Standard Library
 - [ ] Ext
   - [ ] .Ajax
     - [ ] .getDefaultHeaders
@@ -152,7 +152,7 @@ e2r will then add placeholder ES6 classes to the file's generated output. You ca
   - [ ] .baseCSSPrefix
   - [x] .bind (see Ext.Function.bind)
   - [x] .clone → _.cloneDeep
-  - [ ] .defer
+  - [x] .defer → setTimeout
   - [ ] .Deferred
     - [ ] self
     - [ ] .rejected

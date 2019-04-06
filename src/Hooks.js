@@ -52,7 +52,7 @@ export const afterTranspile = ast => {
     'Ext.isString'          : { fn: () => ['_.isString'], lib: '_' }
   })
 
-  const callTransforms = parseTransforms({
+  const _callTransforms = {
     'Ext.Array.contains': (array, item) => `${wrapExpression(array)}.includes(${Ast.toString(item)})`,
 
     'Ext.Array.each': (array, fn, scope, reverse) => {
@@ -89,8 +89,22 @@ export const afterTranspile = ast => {
     'Ext.String.leftPad': (string, size, character) => `${wrapExpression(string)}.padStart(${getArgs(size, character)})`,
 
     // string must be present; no default string return value; trims spaces, not list of chars in trimRegex
-    'Ext.String.trim': string => `${wrapExpression(string)}.trim()`
-  })
+    'Ext.String.trim': string => `${wrapExpression(string)}.trim()`,
+
+    'Ext.defer': (fn, millis, scope, args, appendArgs) => {
+      fn = (!_.isUndefined(scope) || !_.isUndefined(args))
+        ? _callTransforms['Ext.Function.bind'](fn, scope, args, appendArgs)
+        : Ast.toString(fn)
+
+      if(!fn){
+        return null
+      }
+
+      return `setTimeout(${fn}, ${Ast.toString(millis)})`
+    }
+  }
+
+  const callTransforms = parseTransforms(_callTransforms)
 
   const wrapExpression = member => {
     let code = Ast.toString(member),
