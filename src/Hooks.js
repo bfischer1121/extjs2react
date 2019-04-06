@@ -79,6 +79,8 @@ export const afterTranspile = ast => {
       return `${wrapExpression(fn)}.bind(${scope}${args})`
     },
 
+    'Ext.Number.toFixed': (value, precision) => `${wrapExpression(value)}.toFixed(${Ast.toString(precision)})`,
+
     'Ext.Object.each': (object, fn, scope) => {
       if(!_.isUndefined(scope)){
         return null
