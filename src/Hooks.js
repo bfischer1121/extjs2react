@@ -41,6 +41,7 @@ export const afterTranspile = ast => {
     'Ext.JSON.encode'       : { fn: () => ['JSON.stringify'] },
     'Ext.Number.constrain'  : { fn: () => ['_.clamp'], lib: '_' },
     'Ext.String.capitalize' : { fn: () => ['_.upperFirst'], lib: '_' },
+    'Ext.baseCSSPrefix'     : { fn: () => ['\'x-\''] },
     'Ext.clone'             : { fn: () => ['_.cloneDeep'], lib: '_' },
     'Ext.emptyFn'           : { fn: () => ['() => {}'], lib: '_' },
     'Ext.isArray'           : { fn: () => ['_.isArray'], lib: '_' },
