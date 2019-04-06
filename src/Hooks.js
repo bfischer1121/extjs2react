@@ -66,6 +66,8 @@ export const afterTranspile = ast => {
 
     'Ext.Array.indexOf': (array, item, from) => `${wrapExpression(array)}.indexOf(${getArgs(item, from)})`,
 
+    'Ext.Array.map': (array, fn, scope) => `${wrapExpression(array)}.map(${getArgs(fn, scope)})`,
+
     'Ext.Function.bind': (fn, scope, args, appendArgs) => {
       if(!_.isUndefined(args) && (_.isUndefined(appendArgs) || Ast.toString(appendArgs) !== '0')){
         return null
