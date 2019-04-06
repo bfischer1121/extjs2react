@@ -110,7 +110,11 @@ export const afterTranspile = ast => {
       // return Ast.isObject(object) ? toSpread(object, defaults, config) : `Object.assign(${Ast.toString(object)}, ${toSpread(defaults, config)})`
       defaults = _.isUndefined(defaults) ? '' : `, ${Ast.toString(defaults) || {}}`
       return `Object.assign(${Ast.toString(object)}${defaults}, ${Ast.toString(config)})`
-    }
+    },
+
+    'Ext.applyIf': (object, config) => (
+      `_.assignWith(${Ast.toString(object)}, ${Ast.toString(config)}, (objValue, srcValue) => _.isUndefined(objValue) ? srcValue : objValue)`
+    )
   }
 
   const callTransforms = parseTransforms(_callTransforms)
