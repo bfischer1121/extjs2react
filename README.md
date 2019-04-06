@@ -151,7 +151,7 @@ e2r will then add placeholder ES6 classes to the file's generated output. You ca
   - [ ] .applyIf
   - [ ] .baseCSSPrefix
   - [x] .bind (see Ext.Function.bind)
-  - [ ] .clone
+  - [x] .clone → _.cloneDeep
   - [ ] .defer
   - [ ] .Deferred
     - [ ] self
