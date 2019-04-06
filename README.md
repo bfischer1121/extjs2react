@@ -122,6 +122,7 @@ e2r will then add placeholder ES6 classes to the file's generated output. You ca
     - [ ] .interceptBefore
   - [ ] .JSON
     - [x] .decode → JSON.parse
+    - [ ] .encode
   - [ ] .Number
     - [x] .constrain → _.clamp
     - [ ] .from
@@ -146,19 +147,28 @@ e2r will then add placeholder ES6 classes to the file's generated output. You ca
       - [ ] .plural
       - [ ] .pluralize
       - [ ] .singular
+  - [ ] .apply
+  - [ ] .applyIf
   - [ ] .baseCSSPrefix
   - [x] .bind (see Ext.Function.bind)
+  - [ ] .clone
+  - [ ] .defer
   - [ ] .Deferred
     - [ ] self
     - [ ] .rejected
+  - [ ] .emptyFn
+  - [ ] .encode
   - [x] .isArray → _.isArray
   - [x] .isDate → _.isDate
   - [x] .isDefined → !_.isUndefined
   - [x] .isEmpty → _.isEmpty
   - [x] .isFunction → _.isFunction
   - [x] .isNumber → _.isNumber
+  - [ ] .isNumeric
+  - [ ] .isObject
   - [x] .isString → _.isString
   - [ ] .Promise
+  - [ ] .toArray
 #### Component (Optional) - generally break associated code, requiring manual fixing
 - [ ] Small subset of Components → open source libraries (w/ documented api loss)
   - [ ] Layouts (flexbox-compatible)
