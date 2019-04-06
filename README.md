@@ -120,7 +120,7 @@ e2r will then add placeholder ES6 classes to the file's generated output. You ca
     - [ ] .createSequence
     - [ ] .createThrottled
     - [ ] .interceptBefore
-  - [ ] .JSON
+  - [x] .JSON
     - [x] .decode → JSON.parse
     - [x] .encode → JSON.stringify
   - [ ] .Number
@@ -133,11 +133,11 @@ e2r will then add placeholder ES6 classes to the file's generated output. You ca
     - [ ] .merge
   - [ ] .String
     - [x] .capitalize → _.upperFirst
+    - [ ] .escapeRegex
     - [ ] .htmlEncode
     - [x] .leftPad → String.padStart
     - [ ] .repeat
     - [x] .trim → String.trim
-    - [ ] .escapeRegex
     - [ ] .trimRegex
   - [ ] .util
     - [ ] .Format
@@ -147,7 +147,7 @@ e2r will then add placeholder ES6 classes to the file's generated output. You ca
       - [ ] .plural
       - [ ] .pluralize
       - [ ] .singular
-  - [ ] .apply
+  - [x] .apply → Object.assign
   - [ ] .applyIf
   - [x] .baseCSSPrefix → 'x-'
   - [x] .bind (see Ext.Function.bind)

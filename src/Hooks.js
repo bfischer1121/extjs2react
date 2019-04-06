@@ -102,6 +102,14 @@ export const afterTranspile = ast => {
       }
 
       return `setTimeout(${fn}, ${Ast.toString(millis)})`
+    },
+
+    'Ext.apply': (object, config, defaults) => {
+      // esprima can't parse object spread: https://github.com/jquery/esprima/issues/1588
+      // let toSpread = (...objects) => '{ ' + _.compact(objects).map(obj => `...(${wrapExpression(obj)})`).join(', ') + ' }'
+      // return Ast.isObject(object) ? toSpread(object, defaults, config) : `Object.assign(${Ast.toString(object)}, ${toSpread(defaults, config)})`
+      defaults = _.isUndefined(defaults) ? '' : `, ${Ast.toString(defaults) || {}}`
+      return `Object.assign(${Ast.toString(object)}${defaults}, ${Ast.toString(config)})`
     }
   }
 
