@@ -122,7 +122,7 @@ e2r will then add placeholder ES6 classes to the file's generated output. You ca
     - [ ] .interceptBefore
   - [ ] .JSON
     - [x] .decode → JSON.parse
-    - [ ] .encode
+    - [x] .encode → JSON.stringify
   - [ ] .Number
     - [x] .constrain → _.clamp
     - [ ] .from
@@ -157,7 +157,7 @@ e2r will then add placeholder ES6 classes to the file's generated output. You ca
     - [ ] self
     - [ ] .rejected
   - [ ] .emptyFn
-  - [ ] .encode
+  - [x] .encode (see Ext.JSON.encode)
   - [x] .isArray → _.isArray
   - [x] .isDate → _.isDate
   - [x] .isDefined → !_.isUndefined

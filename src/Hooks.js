@@ -20,7 +20,8 @@ export const afterTranspile = ast => {
   )
 
   const aliases = {
-    'Ext.bind': 'Ext.Function.bind'
+    'Ext.bind'   : 'Ext.Function.bind',
+    'Ext.encode' : 'Ext.JSON.encode'
   }
 
   const withAlias = variable => (aliases[variable] || variable)
@@ -37,6 +38,7 @@ export const afterTranspile = ast => {
     'Ext.Array.remove'      : { fn: () => ['_.pull'], lib: '_' },
     'Ext.Array.unique'      : { fn: () => ['_.uniq'], lib: '_' },
     'Ext.JSON.decode'       : { fn: () => ['JSON.parse'] },
+    'Ext.JSON.encode'       : { fn: () => ['JSON.stringify'] },
     'Ext.Number.constrain'  : { fn: () => ['_.clamp'], lib: '_' },
     'Ext.String.capitalize' : { fn: () => ['_.upperFirst'], lib: '_' },
     'Ext.clone'             : { fn: () => ['_.cloneDeep'], lib: '_' },
