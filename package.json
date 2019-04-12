@@ -32,6 +32,7 @@
     "ast-types": "^0.12.2",
     "fs-extra": "^7.0.1",
     "nodemon": "^1.18.10",
+    "parse5": "^5.1.0",
     "recast": "^0.17.3"
   },
   "devDependencies": {

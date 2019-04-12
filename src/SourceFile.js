@@ -255,7 +255,7 @@ export default class SourceFile{
 
   getImportsCode(libraries){
     let libImports = [
-      { source: 'framework', specifiers: ['define'] },
+      { source: 'framework', specifiers: ['define', 'Template'] },
       { source: 'app',       default: 'App' },
       { source: 'react',     default: 'React', specifiers: ['useMemo', 'useEffect'] },
       { source: 'lodash',    default: '_' }

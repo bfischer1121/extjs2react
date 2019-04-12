@@ -47,6 +47,11 @@ Since e2r does a static code analysis, it isn't able to pick up on dynamically g
 
 e2r will then add placeholder ES6 classes to the file's generated output. You can of course safely remove these as long as you export classes of the same names.
 
+## XTemplates to JSX
+When compiling templates, ExtJS wraps `tpl` conditional statements in native `with(values)` blocks. This adds `values` to the scope chain so we can write `<tpl if="age &gt; 1">` instead of `<tpl if="values.age &gt; 1">`.
+
+To keep the generated JSX clean, e2r will instead auto-prefix unqualified, uncapitalized variables with `values`. This may change the reference if you're referring to variables outside of `values`, and so require manual adjustment.
+
 ## Progress
 ### Architecture
 - [x] ClassManager → ES6 modules
@@ -68,7 +73,7 @@ e2r will then add placeholder ES6 classes to the file's generated output. You ca
   - [x] configs → props/useMemo/useEffect
   - [x] items/cmp → JSX
 - [ ] ViewController
-  - [x] merge methods/configs/properties
+  - [x] merge into View
   - [ ] transform lifecycle methods
 - [ ] ViewModel → `state`, render
 ### Standard Library
@@ -139,6 +144,23 @@ e2r will then add placeholder ES6 classes to the file's generated output. You ca
     - [ ] .repeat
     - [x] .trim → String.trim
     - [ ] .trimRegex
+  - [ ] .Template → JSX
+    - [x] Member functions
+    - [ ] Dynamically-determined template substrings
+    - [x] {...}
+      - [x] {(field|.):(this.fn|fn)(...)} → {(Ext.util.Format|helper).fn((field|data), ...)}
+    - [ ] {[ ... ]}
+      - [x] values
+      - [ ] out
+      - [ ] parent
+      - [ ] xindex
+      - [ ] xcount
+      - [ ] xkey
+    - [ ] {% ... %}
+    - [x] tpl if
+    - [ ] tpl elseif
+    - [ ] tpl else
+    - [ ] tpl for
   - [ ] .util
     - [ ] .Format
       - [ ] .date

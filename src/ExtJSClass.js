@@ -1,6 +1,8 @@
 import _ from 'lodash'
 import recast from 'recast'
 import prettier from 'prettier'
+import parse5 from 'parse5'
+import Serializer from 'parse5/lib/serializer'
 import { namedTypes as t, builders as b, visit } from 'ast-types'
 import { Ast, code, logError, getConfig } from './Util'
 import SourceFile from './SourceFile'
@@ -1015,7 +1017,7 @@ export default class ExtJSClass{
     ]
 
     let extractedProps = Object.keys(this.extractedProps).map(name => (
-      `const ${name} = ${Ast.toString(this.extractedProps[name])}`
+      `const ${name} = ${this._transformProp(name, this.extractedProps[name])}`
     )).join('\n\n')
 
     if(extractedProps.length){
@@ -1027,16 +1029,19 @@ export default class ExtJSClass{
     return code(renderBody)
   }
 
-  formatJSX(ast){
-    let code = `let foo = ${Ast.toString(ast)}`
+  formatJSX(astOrString){
+    let string = _.isString(astOrString) ? astOrString : Ast.toString(astOrString).replace(/(^\{|\}$)/g, ''),
+        code   = `let foo = ${string}`
 
     try{
-      let formatted = prettier.format(code, { parser: 'babel', printWidth: 200 }).replace(/;\s*$/, '')
-      return Ast.parseWithJSX(formatted).declarations[0].init
+      let options   = { parser: 'babel', printWidth: 200 },
+          formatted = Ast.parseWithJSX(prettier.format(code, options).replace(/;\s*$/, '')).declarations[0].init
+
+      return _.isString(astOrString) ? Ast.toString(formatted) : formatted
     }
     catch(e){
       console.log(`Error formatting JSX (${this.className})`, e)
-      return ast
+      return astOrString
     }
   }
 
@@ -1173,5 +1178,238 @@ export default class ExtJSClass{
 
     this.extractedProps[keyedName] = value
     return keyedName
+  }
+
+  _transformProp(name, value){
+    let propCode = Ast.toString(value)
+
+    if(['tpl', 'itemTpl'].includes(name)){
+      this._addLibrary('Template')
+      propCode = this._getTpl(value)
+    }
+
+    return propCode
+  }
+
+  _getTpl(value){
+    if(!Ast.isArray(value) && !Ast.isString(value)){
+      return Ast.toString(value)
+    }
+
+    // { tpl: ['<div>{value:this.doSomething}</div>', { ...this is the helper... }] }
+    let lastItem = Ast.isArray(value) ? value.elements[value.elements.length - 1] : null,
+        helper   = null
+
+    if(lastItem && (Ast.isIdentifier(lastItem) || Ast.isMemberExpression(lastItem) || Ast.isObject(lastItem))){
+      helper = Ast.isObject(lastItem) ? 'helper' : Ast.toString(lastItem)
+    }
+
+    let tpl = Ast.isArray(value)
+      ? value.elements.filter(el => Ast.isString(el)).map(el => el.value).join('')
+      : value.value
+
+    tpl = this._convertTplInterpolations(tpl, helper)
+
+    // close some tpl tags so it's valid xml for parsing
+    tpl = tpl.replace(/\<tpl else/g, '</tpl><tpl else')
+
+    tpl = parse5.parseFragment(tpl)
+
+    const visitHtml = (node, fn) => {
+      let traverse = (node => (
+        () => (node.childNodes || []).map(childNode => visitHtml(childNode, fn))
+      ))(node)
+
+      return node.nodeName === '#document-fragment' ? traverse().join('') : fn(node, traverse)
+    }
+
+    let wrap = (tpl.childNodes.length > 1)
+
+    let inlineCodeRe = /\{([^\}]+)\}/g,
+        onlyNodesRe  = /^\<(.+)\>$/,
+        onlyCodeRe   = /^\{([^\}]+)\}$/
+
+    let encodings = [
+      [/&gt;/g,  '>'],
+      [/&gte;/g, '>='],
+      [/&lt;/g,  '<'],
+      [/&lte;/g, '<='],
+      [/&amp;/g, '&']
+    ]
+
+    let unencode = string => (
+      encodings.reduce((string, [encoded, unencoded]) => string.replace(encoded, unencoded), string)
+    )
+
+    let getAttr = (node, name) => ((node.attrs || []).find(a => a.name === name) || {}).value
+
+    tpl = visitHtml(tpl, (node, traverse) => {
+      // text, comment, etc
+      if(!node.tagName){
+        return parse5.serialize({ childNodes: [node] })
+      }
+
+      let childNodes = traverse()
+
+      if(node.tagName === 'tpl'){
+        let code      = childNodes.join(''),
+            onlyNodes = onlyNodesRe.test(code),
+            onlyCode  = onlyCodeRe.test(code)
+
+        // e.g., <i>John</i> <b>Doe</b> -> <><i>John</i> <b>Doe</b></>
+        if(onlyNodes){
+          code = childNodes.length > 1 ? `<>${code}</>` : code
+        }
+
+        // e.g., {data.disabled ? 'disabled' : 'enabled'} -> (data.disabled ? 'disabled' : 'enabled')
+        if(onlyCode){
+          code = code.replace(onlyCodeRe, '$1')
+          code = code.includes(' ') ? `(${code})` : code
+        }
+
+        // e.g., {data.username} was here -> <>{data.username} was here</>
+        if(!onlyNodes && !onlyCode){
+          code = `<>${code}</>`
+        }
+
+        let test = this._scopeTplVariables((getAttr(node, 'if') || 'false').replace(/values/g, 'data'), 'data')
+
+        // e.g., data.is_admin && data.state === 'Active' -> (data.is_admin && data.state === 'Active')
+        if(test.includes('&&') || test.includes('||') || test.includes('?')){
+          test = `(${test})`
+        }
+
+        return `{${test} && ${code}}`
+      }
+
+      let attrs = (node.attrs || []).map(attr => {
+        let name  = { 'class' : 'className' }[attr.name] || attr.name,
+            value = Serializer.escapeString(attr.value, true)
+
+        // XTemplate interpolations -> ES6
+        // <div className="button {disabledCls}"> -> <div className={`button ${disabledCls}`}>
+        let assignment = inlineCodeRe.test(value)
+          ? '{`' + value.replace(inlineCodeRe, (match, code) => '${' + code + '}') + '`}'
+          : `"${value}"`
+
+        return `${name}=${assignment}`
+      }).join(' ')
+
+      let selfClosing = ['area', 'br', 'embed', 'frame', 'hr', 'img', 'input'].includes(node.tagName)
+
+      return [
+        `<${node.tagName}${attrs.length ? ' ' + attrs : ''}`,
+        (childNodes.length || !selfClosing) ? `>${childNodes.join('')}</${node.tagName}>` : ' />'
+      ].join('')
+    })
+
+    tpl = tpl.replace(/&quot;/g, '"').replace(/&apos;/g, '\'')
+
+    tpl = unencode(tpl)
+
+    tpl = (wrap || !onlyNodesRe.test(tpl)) ? `<>${tpl}</>` : tpl.replace(onlyCodeRe, '$1')
+
+    tpl = onlyNodesRe.test(tpl) ? this.formatJSX(tpl) : tpl
+
+    if(helper === 'helper'){
+      return code(
+        'new Template(data => {',
+          [
+            `const helper = ${Ast.toString(lastItem)}`,
+            '',
+            ...(tpl.includes('\n') ? ['return (', [tpl], ')'] : [`return ${tpl}`])
+          ],
+        '})'
+      )
+    }
+
+    return code('new Template(data => (', [tpl], '))')
+  }
+
+  _convertTplInterpolations(tpl, helper){
+    let inlineCodeRe  = /\{\[(.+?)(?=\]\})/g,
+        fieldRe       = /\{([^\}]+)\}/g,
+        offsetOffset  = 0,
+        inlineOffsets = [],
+        replaceQuotes = code => code.replace(/\"/g, '&quot;').replace(/\'/g, '&apos;')
+
+    // {[ ... ]} -> { ... }
+    tpl = tpl.replace(inlineCodeRe, (match, original, offset) => {
+      let code = '{' + replaceQuotes(original.trim()) + '}'
+
+      // TODO: support for out, values, parent, xindex, xcount, xkey
+      code = code.replace(/values/g, 'data')
+
+      code = code.replace(/this\./g, helper ? helper + '.' : '')
+
+      offset = offset + offsetOffset
+      inlineOffsets.push([offset, offset + code.length])
+
+      offsetOffset += (code.length - original.length) - 2
+
+      return code
+    })
+
+    // {field:fnName(extraArgs)} -> {(helper|Ext.util.Format).fnName(field, ...extraArgs)}
+    tpl = tpl.replace(fieldRe, (match, code, offset) => {
+      // don't modify objects within {[ ... ]}
+      if(inlineOffsets.find(([start, end]) => offset >= start && offset <= end)){
+        return match
+      }
+
+      code = replaceQuotes(code.trim())
+
+      let [field, fnCall] = code.split(':')
+
+      field = field === '.' ? 'data' : `data.${field}`
+
+      if(!fnCall){
+        return `{${field}}`
+      }
+
+      let [, fnName, , extraArgs] = fnCall.match(/([^\(]+)(\((.+)\))?/),
+          fn   = fnName.startsWith('this.') ? `${helper}.${fnName.replace(/^this\./, '')}` : `Ext.util.Format.${fnName}`,
+          args = _.compact([field, extraArgs]).join(', ')
+
+      return `{${fn}(${args})}`
+    })
+
+    // remove leftover ]}'s since they're lookahead values in inlineCodeRe
+    tpl = tpl.replace(/\}\]\}/g, '}')
+
+    return tpl
+  }
+
+  _scopeTplVariables(code, scope){
+    const ast         = Ast.from(code),
+          shouldScope = name => (!['this', scope].includes(name) && name[0] === name[0].toLowerCase())
+
+    // "foo" -> "scope.foo"
+    visit(ast, {
+      visitIdentifier: function(path){
+        if(!Ast.isMemberExpression(path.parent.node) && shouldScope(path.node.name)){
+          path.replace(Ast.from(`${scope}.${path.node.name}`).expression)
+        }
+
+        this.traverse(path)
+      }
+    })
+
+    // "foo.bar" -> "scope.foo.bar"
+    visit(ast, {
+      visitMemberExpression: function(path){
+        if(
+          !Ast.isMemberExpression(path.parent.node) &&
+          Ast.isIdentifier(path.node.object) &&
+          shouldScope(path.node.object.name)
+        ){
+          path.replace(Ast.from(`${scope}.${Ast.toString(path.node)}`).expression)
+        }
+
+        this.traverse(path)
+      }
+    })
+
+    return Ast.toString(ast)
   }
 }
