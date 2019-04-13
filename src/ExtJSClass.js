@@ -726,12 +726,14 @@ export default class ExtJSClass{
     if(this.isComponent()){
       this._addLibrary('React')
 
-      let body = getCode(properties, configs, methods)
+      let body     = getCode(properties, configs, methods),
+          renderFn = this.getRenderFn()
 
       let classCode = code(
         `function ${className}(props){`,
           ...(body.length ? [[body]] : []),
-          this.getRenderFn(),
+          ...((body.length && renderFn.length) ? [''] : []),
+          ...(renderFn.length ? [renderFn] : []),
         '}',
         ...((staticMethods.length || staticProps.length) ? ['', getCode(staticMethods, staticProps)] : [])
       )
