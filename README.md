@@ -70,10 +70,11 @@ To keep the generated JSX clean, e2r will instead auto-prefix unqualified, uncap
   - [x] mixins → inline js (Object.assign)
   - [ ] plugins
 - [x] Component
+  - [x] properties → local variables
   - [x] configs
     - [x] assignment → JSX
     - [x] definition
-      - [x] default values → merged props object
+      - [x] default values → merged `props` object
       - [x] apply* → `useMemo` prop reassignment
       - [x] update* → `useEffect`
   - [x] methods → inline functions

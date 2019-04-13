@@ -941,8 +941,15 @@ export default class ExtJSClass{
     this._deleteNode(node)
 
     if(this.isComponent()){
-      let object = isStatic ? b.identifier(this.exportName) : b.thisExpression()
-      return Ast.toString(b.assignmentExpression('=', b.memberExpression(object, node.key), node.value))
+      let property = isStatic
+        ? `${this.exportName}.${Ast.toString(node.key)} = ${Ast.toString(node.value)}`
+        : `const ${Ast.toString(node.key)} = ${Ast.toString(node.value)}`
+
+      if(!Ast.isIdentifier(node.key) && !Ast.isMemberExpression(node.key)){
+        return `/* ${property.replace('\*\/', '*//*')} */`
+      }
+
+      return property
     }
 
     return (isStatic ? 'static ' : '') + Ast.toString(b.classProperty(node.key, node.value))
