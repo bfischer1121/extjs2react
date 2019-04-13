@@ -1,9 +1,10 @@
-import { namedTypes as t, visit } from 'ast-types'
+import { namedTypes as t, builders as b, visit } from 'ast-types'
 import _ from 'lodash'
 import { Ast } from './Util'
 
 const config = {
-  varToLet: true
+  varToLet: true,
+  arrowFunctions: true
 }
 
 export const beforeTranspile = codebase => {
@@ -173,6 +174,35 @@ export const afterTranspile = ast => {
           Ast.isFunction(path.parent.parent.node)
         ){
           path.replace(Ast.from(Ast.toString(path.node).replace(/^var/, 'let')))
+        }
+
+        this.traverse(path)
+      }
+    })
+  }
+
+  if(config.arrowFunctions){
+    visit(ast, {
+      visitFunctionExpression: function(path){
+        let transform = true
+
+        visit(path.node, {
+          visitIdentifier: function(path){
+            if(path.node.name === 'arguments'){
+              transform = false
+            }
+
+            this.traverse(path)
+          },
+
+          visitThisExpression: function(path){
+            transform = false
+            this.traverse(path)
+          }
+        })
+
+        if(transform){
+          path.replace(b.arrowFunctionExpression(path.node.params, path.node.body))
         }
 
         this.traverse(path)

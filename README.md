@@ -50,7 +50,7 @@ e2r will then add placeholder ES6 classes to the file's generated output. You ca
 ## XTemplate → JSX
 When compiling templates, ExtJS wraps `tpl` conditional statements in native `with(values)` blocks. This adds `values` to the scope chain so we can write `<tpl if="age &gt; 1">` instead of `<tpl if="values.age &gt; 1">`.
 
-To keep the generated JSX clean, e2r will instead auto-prefix unqualified, uncapitalized variables with `values`. This may change the reference if you're referring to variables outside of `values`, and so require manual adjustment.
+To keep the generated JSX clean, e2r will instead auto-prefix unqualified, uncapitalized variables with `values`. This will change the reference if you're referring to unqualified, uncapitalized variables outside of `values`, requiring manual adjustment.
 
 ## Progress
 ### Architecture
@@ -203,7 +203,8 @@ To keep the generated JSX clean, e2r will instead auto-prefix unqualified, uncap
   - [ ] .Promise
   - [ ] .toArray
 ### General Modernization
-- [x] `var` → `let` when at root of function
+- [x] `var` → `let` when at root of function (config: `varToLet`)
+- [x] `function` → arrow function when not using `this` or `arguments` (config: `arrowFunctions`)
 ### Component Library
 - [ ] Small subset of Components → open source libraries (w/ documented api loss)
   - [ ] Layouts (flexbox-compatible)
