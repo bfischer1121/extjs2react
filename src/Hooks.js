@@ -182,32 +182,99 @@ export const afterTranspile = ast => {
   }
 
   if(config.arrowFunctions){
-    visit(ast, {
-      visitFunctionExpression: function(path){
-        let transform = true
+    const transformArrowFunctions = () => {
+      visit(ast, {
+        visitFunctionExpression: function(path){
+          let transform = true
 
-        visit(path.node, {
-          visitIdentifier: function(path){
-            if(path.node.name === 'arguments'){
+          visit(path.node, {
+            visitIdentifier: function(path){
+              if(path.node.name === 'arguments'){
+                transform = false
+              }
+
+              this.traverse(path)
+            },
+
+            visitThisExpression: function(path){
               transform = false
+              this.traverse(path)
             }
+          })
 
-            this.traverse(path)
-          },
-
-          visitThisExpression: function(path){
-            transform = false
-            this.traverse(path)
+          if(transform){
+            path.replace(b.arrowFunctionExpression(path.node.params, path.node.body))
           }
-        })
 
-        if(transform){
-          path.replace(b.arrowFunctionExpression(path.node.params, path.node.body))
+          this.traverse(path)
         }
+      })
+    }
 
-        this.traverse(path)
+    const needsMeReferences = node => {
+      let needsMe = false
+
+      visit(node, {
+        visitFunctionExpression: function(path){
+          visit(path.node, {
+            visitIdentifier: function(path){
+              if(path.node.name === 'me'){
+                needsMe = true
+              }
+
+              this.traverse(path)
+            }
+          })
+
+          this.traverse(path)
+        }
+      })
+
+      return needsMe
+    }
+
+    const meDeclarationRe = /me\s*\=\s*this\,?\s*/g,
+          trailingCommaRe = /\,\s*$/g
+
+    const removeMeReferences = node => {
+      visit(node, {
+        visitVariableDeclaration: function(path){
+          if(path.node.declarations.find(d => d.id.name === 'me')){
+            (path.node.declarations.length === 1)
+              ? path.prune()
+              : path.replace(Ast.from(Ast.toString(path.node).replace(meDeclarationRe, '').replace(trailingCommaRe, '')))
+          }
+
+          this.traverse(path)
+        },
+
+        visitIdentifier: function(path){
+          if(path.node.name === 'me'){
+            path.replace(b.thisExpression())
+          }
+
+          this.traverse(path)
+        }
+      })
+    }
+
+    const removeMeTraversal = function(path){
+      if(!needsMeReferences(path.node)){
+        removeMeReferences(path.node)
       }
+
+      this.traverse(path)
+    }
+
+    transformArrowFunctions()
+
+    visit(ast, {
+      visitClassMethod             : removeMeTraversal,
+      visitArrowFunctionExpression : removeMeTraversal,
+      visitFunctionExpression      : removeMeTraversal
     })
+
+    transformArrowFunctions()
   }
 
   visit(ast, {
