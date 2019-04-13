@@ -47,7 +47,7 @@ Since e2r does a static code analysis, it isn't able to pick up on dynamically g
 
 e2r will then add placeholder ES6 classes to the file's generated output. You can of course safely remove these as long as you export classes of the same names.
 
-## XTemplates to JSX
+## XTemplate → JSX
 When compiling templates, ExtJS wraps `tpl` conditional statements in native `with(values)` blocks. This adds `values` to the scope chain so we can write `<tpl if="age &gt; 1">` instead of `<tpl if="values.age &gt; 1">`.
 
 To keep the generated JSX clean, e2r will instead auto-prefix unqualified, uncapitalized variables with `values`. This may change the reference if you're referring to variables outside of `values`, and so require manual adjustment.
@@ -70,10 +70,20 @@ To keep the generated JSX clean, e2r will instead auto-prefix unqualified, uncap
   - [x] mixins → inline js (Object.assign)
   - [ ] plugins
 - [x] Component
-  - [x] configs → props/useMemo/useEffect
-  - [x] items/cmp → JSX
+  - [x] configs
+    - [x] assignment → JSX
+    - [x] definition
+      - [x] default values → merged props object
+      - [x] apply* → `useMemo` prop reassignment
+      - [x] update* → `useEffect`
+  - [x] methods → inline functions
+    - [ ] this.* references
+      - [x] local class members → local scope
+      - [ ] inherited class members → JSX ExtJS component
+    - [ ] .view|.getView() → (local scope | JSX ExtJS component)
+    - [ ] .lookup → React `reference`
 - [ ] ViewController
-  - [x] merge into View
+  - [x] merge class members into View
   - [ ] transform lifecycle methods
 - [ ] ViewModel → `state`, render
 ### Standard Library

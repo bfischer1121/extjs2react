@@ -721,7 +721,7 @@ export default class ExtJSClass{
       ...(exportClass ? [] : [this.singleton ? `${exportStatement} (new ${className}())` : `${exportStatement} ${className}`])
     )
 
-    let getCode = (...members) => _.compact(members.map(members => members.join('\n\n'))).join('\n\n')
+    const getCode = (...members) => _.compact(members.map(members => members.join('\n\n'))).join('\n\n')
 
     if(this.isComponent()){
       this._addLibrary('React')
@@ -894,9 +894,12 @@ export default class ExtJSClass{
 
   getMethods(){
     let methods = [
-      ...this.classMembers.methods.filter(method => !method.$delete),
-      ...this.assimilatedClasses.reduce((methods, cls) => [...methods, ...cls.classMembers.methods], [])
-    ].map(node => this._getCodeForMethod(node))
+      ...this.classMembers.methods.filter(method => !method.$delete).map(node => this._getCodeForMethod(node, this, false)),
+      ...this.assimilatedClasses.reduce((methods, cls) => [
+        ...methods,
+        ...cls.classMembers.methods.map(node => this._getCodeForMethod(node, cls, false))
+      ], [])
+    ]
 
     let applyMethods = methods
       .filter(m => _.isObject(m) && m.isApplyFn)
@@ -925,9 +928,12 @@ export default class ExtJSClass{
 
   getStaticMethods(){
     return [
-      ...this.classMembers.static.methods.filter(method => !method.$delete),
-      ...this.assimilatedClasses.reduce((methods, cls) => [...methods, ...cls.classMembers.static.methods], [])
-    ].map(node => this._getCodeForMethod(node, true))
+      ...this.classMembers.static.methods.filter(method => !method.$delete).map(node => this._getCodeForMethod(node, this, true)),
+      ...this.assimilatedClasses.reduce((methods, cls) => [
+        ...methods,
+        ...cls.classMembers.static.methods.map(node => this._getCodeForMethod(node, cls, true))
+      ], [])
+    ]
   }
 
   _getCodeForProperty(node, isStatic){
@@ -942,7 +948,7 @@ export default class ExtJSClass{
     return (isStatic ? 'static ' : '') + Ast.toString(b.classProperty(node.key, node.value))
   }
 
-  _getCodeForMethod(node, isStatic){
+  _getCodeForMethod(node, cls, isStatic){
     this._deleteNode(node)
 
     let getMethodName = name => ({
@@ -951,18 +957,46 @@ export default class ExtJSClass{
 
     let name = getMethodName(Ast.getPropertyName(node))
 
-    let getConfigName = () => {
-      if(isStatic || !this.classMembers.methods.includes(node)){
+    const getConfigName = () => {
+      if(isStatic || !cls.classMembers.methods.includes(node)){
         return null
       }
 
       let config = name.replace(/^(apply|update)/, '')
       config = config[0].toLowerCase() + config.slice(1)
 
-      return this.classMembers.configs.find(node => Ast.getPropertyName(node) === config) ? config : null
+      return cls.classMembers.configs.find(node => Ast.getPropertyName(node) === config) ? config : null
     }
 
     if(this.isComponent()){
+      const isLocalMember = node => !!cls.classMembers[_.isString(node) ? node : Ast.toString(node)]
+
+      visit(node, {
+        visitMemberExpression: function(path){
+          let { node } = path
+
+          if(node.object.type === 'ThisExpression' || (Ast.isIdentifier(node.object) && node.object.name === 'me')){
+            if(Ast.isTernary(node.property)){
+              let { test, consequent, alternate } = node.property
+
+              consequent = Ast.isString(consequent) ? consequent.value : Ast.toString(consequent)
+              alternate  = Ast.isString(alternate) ? alternate.value : Ast.toString(alternate)
+
+              if(isLocalMember(consequent) && isLocalMember(alternate)){
+                path.replace(Ast.from(`(${Ast.toString(test)} ? ${consequent} : ${alternate})`))
+              }
+            }
+            else{
+              if(isLocalMember(node.property)){
+                path.replace(node.property)
+              }
+            }
+          }
+
+          this.traverse(path)
+        }
+      })
+
       let config = getConfigName(),
           fn     = Ast.toString(b.arrowFunctionExpression(node.value.params, node.value.body))
 
