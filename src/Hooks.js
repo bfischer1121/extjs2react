@@ -2,6 +2,10 @@ import { namedTypes as t, visit } from 'ast-types'
 import _ from 'lodash'
 import { Ast } from './Util'
 
+const config = {
+  varToLet: true
+}
+
 export const beforeTranspile = codebase => {
   
 }
@@ -158,6 +162,22 @@ export const afterTranspile = ast => {
       method        : methodPath ? methodPath.node.key.name : null,
       extendedClass : classPath ? ((classPath.node.superClass || {}).name || null) : null
     }
+  }
+
+  if(config.varToLet){
+    visit(ast, {
+      visitVariableDeclaration: function(path){
+        if(
+          path.node.kind === 'var' &&
+          Ast.isBlock(path.parent.node) &&
+          Ast.isFunction(path.parent.parent.node)
+        ){
+          path.replace(Ast.from(Ast.toString(path.node).replace(/^var/, 'let')))
+        }
+
+        this.traverse(path)
+      }
+    })
   }
 
   visit(ast, {

@@ -172,7 +172,11 @@ class AST{
   }
 
   isFunction(node){
-    return t.FunctionExpression.check(node)
+    return (t.FunctionExpression.check(node) || t.ArrowFunctionExpression.check(node))
+  }
+
+  isBlock(node){
+    return t.BlockStatement.check(node)
   }
 
   isClass(node){

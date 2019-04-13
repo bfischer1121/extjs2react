@@ -81,7 +81,7 @@ To keep the generated JSX clean, e2r will instead auto-prefix unqualified, uncap
     - [ ] this.* references
       - [x] local class members → local scope
       - [ ] inherited class members → JSX ExtJS component
-    - [ ] .view|.getView() → (local scope | JSX ExtJS component)
+    - [ ] .view | .getView() → local scope | JSX ExtJS component
     - [ ] .lookup → React `reference`
 - [ ] ViewController
   - [x] merge class members into View
@@ -159,7 +159,7 @@ To keep the generated JSX clean, e2r will instead auto-prefix unqualified, uncap
     - [x] Member functions
     - [ ] Dynamically-determined template substrings
     - [x] {...}
-      - [x] {(field|.):(this.fn|fn)(...)} → {(Ext.util.Format|helper).fn((field|data), ...)}
+      - [x] {(field|.):(fn|this.fn)(...)} → {(Ext.util.Format|helper).fn((field|data), ...)}
     - [ ] {[ ... ]}
       - [x] values
       - [ ] out
@@ -202,6 +202,8 @@ To keep the generated JSX clean, e2r will instead auto-prefix unqualified, uncap
   - [x] .isString → _.isString
   - [ ] .Promise
   - [ ] .toArray
+### General Modernization
+- [x] `var` → `let` when at root of function
 ### Component Library
 - [ ] Small subset of Components → open source libraries (w/ documented api loss)
   - [ ] Layouts (flexbox-compatible)
