@@ -943,7 +943,7 @@ export default class ExtJSClass{
     if(this.isComponent()){
       let property = isStatic
         ? `${this.exportName}.${Ast.toString(node.key)} = ${Ast.toString(node.value)}`
-        : `const ${Ast.toString(node.key)} = ${Ast.toString(node.value)}`
+        : `let ${Ast.toString(node.key)} = ${Ast.toString(node.value)}`
 
       if(!Ast.isIdentifier(node.key) && !Ast.isMemberExpression(node.key)){
         return `/* ${property.replace('\*\/', '*//*')} */`
