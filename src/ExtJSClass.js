@@ -982,6 +982,7 @@ export default class ExtJSClass{
         visitMemberExpression: function(path){
           let { node } = path
 
+          // this.foo -> foo, this.bar() -> bar()
           if(node.object.type === 'ThisExpression' || (Ast.isIdentifier(node.object) && node.object.name === 'me')){
             if(Ast.isTernary(node.property)){
               let { test, consequent, alternate } = node.property
@@ -1013,6 +1014,10 @@ export default class ExtJSClass{
 
       if(config && name.startsWith('update')){
         return { isUpdateFn: true, config, fn }
+      }
+
+      if(name === 'initialize' && !isStatic){
+        return `useEffect(${node.value.async ? 'async ' : ''}${fn}, [])`
       }
 
       return [

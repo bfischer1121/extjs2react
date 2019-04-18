@@ -78,6 +78,7 @@ To keep the generated JSX clean, e2r will instead auto-prefix unqualified, uncap
       - [x] apply* → `useMemo` prop reassignment
       - [x] update* → `useEffect`
   - [x] methods → inline functions
+    - [x] initialize → useEffect(..., [])
     - [ ] this.* references
       - [x] local class members → local scope
       - [ ] inherited class members → JSX ExtJS component
