@@ -1006,7 +1006,8 @@ export default class ExtJSClass{
       })
 
       let config = getConfigName(),
-          fn     = Ast.toString(b.arrowFunctionExpression(node.value.params, node.value.body))
+          fnNode = b.arrowFunctionExpression(node.value.params, node.value.body),
+          fn     = Ast.toString(fnNode)
 
       if(config && name.startsWith('apply')){
         return { isApplyFn: true, config, fn }
@@ -1017,7 +1018,17 @@ export default class ExtJSClass{
       }
 
       if(name === 'initialize' && !isStatic){
-        return `useEffect(${node.value.async ? 'async ' : ''}${fn}, [])`
+        visit(fnNode, {
+          visitCallExpression: function(path){
+            if(Ast.toString(path.node.callee) === 'this.callParent'){
+              path.prune()
+            }
+
+            this.traverse(path)
+          }
+        })
+
+        return `useEffect(${node.value.async ? 'async ' : ''}${Ast.toString(fnNode)}, [])`
       }
 
       return [
