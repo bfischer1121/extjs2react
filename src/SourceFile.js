@@ -1,7 +1,8 @@
 import _ from 'lodash'
 import recast from 'recast'
 import { builders as b, visit } from 'ast-types'
-import { Ast, code, getRelativePath, logError } from './Util'
+import Ast from './Ast'
+import { code, getRelativePath, logError } from './Util'
 import ExtJSClass from './ExtJSClass'
 import * as hooks from './Hooks'
 

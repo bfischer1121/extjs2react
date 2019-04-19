@@ -1,11 +1,11 @@
 import _ from 'lodash'
 import recast from 'recast'
 import fs from 'fs-extra'
+import Ast from './Ast'
 import Codebase from './Codebase'
 import SourceFile from './SourceFile'
 
 import {
-  Ast,
   getAbsolutePath,
   readFile,
   writeFile,

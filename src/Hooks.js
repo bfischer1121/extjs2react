@@ -1,6 +1,6 @@
 import { namedTypes as t, builders as b, visit } from 'ast-types'
 import _ from 'lodash'
-import { Ast } from './Util'
+import Ast from './Ast'
 
 const config = {
   varToLet: true,
@@ -233,34 +233,9 @@ export const afterTranspile = ast => {
       return needsMe
     }
 
-    const meDeclarationRe = /me\s*\=\s*this\,?\s*/g,
-          trailingCommaRe = /\,\s*$/g
-
-    const removeMeReferences = node => {
-      visit(node, {
-        visitVariableDeclaration: function(path){
-          if(path.node.declarations.find(d => d.id.name === 'me')){
-            (path.node.declarations.length === 1)
-              ? path.prune()
-              : path.replace(Ast.from(Ast.toString(path.node).replace(meDeclarationRe, '').replace(trailingCommaRe, '')))
-          }
-
-          this.traverse(path)
-        },
-
-        visitIdentifier: function(path){
-          if(path.node.name === 'me'){
-            path.replace(b.thisExpression())
-          }
-
-          this.traverse(path)
-        }
-      })
-    }
-
     const removeMeTraversal = function(path){
       if(!needsMeReferences(path.node)){
-        removeMeReferences(path.node)
+        Ast.removeVariable(path.node, 'me', 'this')
       }
 
       this.traverse(path)

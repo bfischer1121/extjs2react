@@ -2,11 +2,11 @@ import _ from 'lodash'
 import recast from 'recast'
 import { visit } from 'ast-types'
 import fs from 'fs-extra'
+import Ast from './Ast'
 import SourceFile from './SourceFile'
 import * as hooks from './Hooks'
 
 import {
-  Ast,
   getConfig,
   readFile,
   writeFile,

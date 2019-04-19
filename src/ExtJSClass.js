@@ -4,7 +4,8 @@ import prettier from 'prettier'
 import parse5 from 'parse5'
 import Serializer from 'parse5/lib/serializer'
 import { namedTypes as t, builders as b, visit } from 'ast-types'
-import { Ast, code, logError, getConfig } from './Util'
+import Ast from './Ast'
+import { code, logError, getConfig } from './Util'
 import SourceFile from './SourceFile'
 
 export default class ExtJSClass{
