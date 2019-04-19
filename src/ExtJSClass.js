@@ -976,38 +976,10 @@ export default class ExtJSClass{
     }
 
     if(this.isComponent()){
-      const isLocalMember = node => !!cls.classMembers[_.isString(node) ? node : Ast.toString(node)]
-
-      visit(node, {
-        visitMemberExpression: function(path){
-          let { node } = path
-
-          // this.foo -> foo, this.bar() -> bar()
-          if(node.object.type === 'ThisExpression' || (Ast.isIdentifier(node.object) && node.object.name === 'me')){
-            if(Ast.isTernary(node.property)){
-              let { test, consequent, alternate } = node.property
-
-              consequent = Ast.isString(consequent) ? consequent.value : Ast.toString(consequent)
-              alternate  = Ast.isString(alternate) ? alternate.value : Ast.toString(alternate)
-
-              if(isLocalMember(consequent) && isLocalMember(alternate)){
-                path.replace(Ast.from(`(${Ast.toString(test)} ? ${consequent} : ${alternate})`))
-              }
-            }
-            else{
-              if(isLocalMember(node.property)){
-                path.replace(node.property)
-              }
-            }
-          }
-
-          this.traverse(path)
-        }
-      })
+      this._replaceMethodReferences(node, name, cls, isStatic)
 
       let config = getConfigName(),
-          fnNode = b.arrowFunctionExpression(node.value.params, node.value.body),
-          fn     = Ast.toString(fnNode)
+          fn     = Ast.toString(b.arrowFunctionExpression(node.value.params, node.value.body))
 
       if(config && name.startsWith('apply')){
         return { isApplyFn: true, config, fn }
@@ -1018,17 +990,7 @@ export default class ExtJSClass{
       }
 
       if(name === 'initialize' && !isStatic){
-        visit(fnNode, {
-          visitCallExpression: function(path){
-            if(Ast.toString(path.node.callee) === 'this.callParent'){
-              path.prune()
-            }
-
-            this.traverse(path)
-          }
-        })
-
-        return `useEffect(${node.value.async ? 'async ' : ''}${Ast.toString(fnNode)}, [])`
+        return `useEffect(${node.value.async ? 'async ' : ''}${fn}, [])`
       }
 
       return [
@@ -1043,6 +1005,82 @@ export default class ExtJSClass{
       node.value.async ? 'async ' : '',
       Ast.toString(b.classMethod('method', b.identifier(name), node.value.params, node.value.body)).replace(/\) \{/, '){')
     ].join('')
+  }
+
+  _replaceMethodReferences(node, name, cls, isStatic){
+    const isLocalMember = node => !!cls.classMembers[_.isString(node) ? node : Ast.toString(node)]
+
+    const processReference = path => {
+      const { node } = path
+
+      // only replace this.foo and me.foo references
+      if(node.object.type !== 'ThisExpression' && !(Ast.isIdentifier(node.object) && node.object.name === 'me')){
+        return
+      }
+
+      const { property } = node
+
+      // this.foo() -> foo()
+      if(isLocalMember(property)){
+        path.replace(property)
+        return
+      }
+
+      // this[disabled ? 'enable' : 'disable']() -> (disabled ? enable : disable)()
+      if(Ast.isTernary(property)){
+        let { test, consequent, alternate } = property
+
+        consequent = Ast.isString(consequent) ? consequent.value : Ast.toString(consequent)
+        alternate  = Ast.isString(alternate) ? alternate.value : Ast.toString(alternate)
+
+        if(isLocalMember(consequent) && isLocalMember(alternate)){
+          path.replace(Ast.from(`(${Ast.toString(test)} ? ${consequent} : ${alternate})`))
+        }
+
+        return
+      }
+    }
+
+    const callReplacements = {
+      'this.getView': 'this'
+    }
+
+    const memberReplacements = {
+      'this.view' : 'this'
+    }
+
+    if(name === 'initialize' && !isStatic){
+      callReplacements['this.callParent'] = false
+    }
+
+    const replace = (path, replacement) => {
+      if(replacement === false){
+        path.prune()
+      }
+
+      if(replacement){
+        path.replace(Ast.from(replacement))
+      }
+    }
+
+    visit(node, {
+      visitCallExpression: function(path){
+        replace(path, callReplacements[Ast.toString(path.node.callee)])
+        this.traverse(path)
+      },
+
+      visitMemberExpression: function(path){
+        replace(path, memberReplacements[Ast.toString(path.node)])
+        this.traverse(path)
+      }
+    })
+
+    visit(node, {
+      visitMemberExpression: function(path){
+        processReference(path)
+        this.traverse(path)
+      }
+    })
   }
 
   _getProps(processed){

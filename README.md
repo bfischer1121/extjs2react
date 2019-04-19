@@ -82,10 +82,10 @@ To keep the generated JSX clean, e2r will instead auto-prefix unqualified, uncap
     - [ ] this.* references
       - [x] local class members → local scope
       - [ ] inherited class members → JSX ExtJS component
-    - [ ] .view | .getView() → local scope | JSX ExtJS component
     - [ ] .lookup → React `reference`
-- [ ] ViewController
-  - [x] merge class members into View
+- [ ] ViewController → Component
+  - [x] merge properties, configs, methods into Component
+  - [x] .getView() | .view → this
   - [ ] transform lifecycle methods
 - [ ] ViewModel → `state`, render
 ### Standard Library
