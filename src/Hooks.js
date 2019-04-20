@@ -4,7 +4,8 @@ import Ast from './Ast'
 
 const config = {
   varToLet: true,
-  arrowFunctions: true
+  arrowFunctions: true,
+  arrowReturnShorthand: true
 }
 
 export const transformArrowFunctions = node => {
@@ -37,6 +38,29 @@ export const transformArrowFunctions = node => {
         let arrowFn = b.arrowFunctionExpression(node.params, node.body)
         arrowFn.async = node.async
         path.replace(arrowFn)
+      }
+
+      this.traverse(path)
+    }
+  })
+}
+
+export const transformArrowReturnShorthand = node => {
+  if(!config.arrowReturnShorthand){
+    return
+  }
+
+  visit(node, {
+    visitArrowFunctionExpression: function(path){
+      let block = path.node.body
+
+      if(
+        block.type === 'BlockStatement' &&
+        block.body.length === 1 &&
+        block.body[0].type === 'ReturnStatement' &&
+        block.body[0].argument
+      ){
+        path.node.body = block.body[0].argument
       }
 
       this.traverse(path)
@@ -259,6 +283,8 @@ export const afterTranspile = ast => {
 
     transformArrowFunctions(ast)
   }
+
+  transformArrowReturnShorthand(ast)
 
   visit(ast, {
     visitCallExpression: function(path){

@@ -208,6 +208,7 @@ To keep the generated JSX clean, e2r will instead auto-prefix unqualified, uncap
 - [x] `var` → `let` when at root of function (config: `varToLet`)
 - [x] `function` → arrow function when not using `this` or `arguments` (config: `arrowFunctions`)
 - [x] `me` → `this` when redundant (config: `arrowFunctions`)
+- [x] `() => { return ... }` → `() => ...` (config: `arrowReturnShorthand`)
 ### Component Library
 - [ ] Small subset of Components → open source libraries (w/ documented api loss)
   - [ ] Layouts (flexbox-compatible)
