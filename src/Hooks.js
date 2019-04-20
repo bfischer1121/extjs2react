@@ -1,6 +1,7 @@
 import { namedTypes as t, builders as b, visit } from 'ast-types'
 import _ from 'lodash'
 import Ast from './Ast'
+import { code } from './Util'
 
 const config = {
   varToLet: true,
@@ -52,7 +53,7 @@ export const transformArrowReturnShorthand = node => {
 
   visit(node, {
     visitArrowFunctionExpression: function(path){
-      let block = path.node.body
+      const block = path.node.body
 
       if(
         block.type === 'BlockStatement' &&
@@ -60,7 +61,10 @@ export const transformArrowReturnShorthand = node => {
         block.body[0].type === 'ReturnStatement' &&
         block.body[0].argument
       ){
-        path.node.body = block.body[0].argument
+        let bodyNode = block.body[0].argument,
+            bodyCode = Ast.toString(bodyNode)
+
+        path.node.body = bodyCode.includes('\n') ? Ast.from(code('(', [bodyCode], ')')) : bodyNode
       }
 
       this.traverse(path)
