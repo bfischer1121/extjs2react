@@ -12,8 +12,10 @@ For speed of development and depth of implementation, it is currently assumed th
 ## Getting Started
 * Clone the repo
 * Open `/config.json` and modify the params accordingly
-* Open the terminal and go to the extjs2react directory, run `npm install`
+* Run `npm install` in the extjs2react directory
 * Run `npm start`
+* ...
+* Profit!
 
 ## Progress
 ### General Modernization
