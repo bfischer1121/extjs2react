@@ -53,6 +53,12 @@ When compiling templates, ExtJS wraps `tpl` conditional statements in native `wi
 To keep the generated JSX clean, e2r will instead auto-prefix unqualified, uncapitalized variables with `values`. This will change the reference if you're referring to unqualified, uncapitalized variables outside of `values`, requiring manual adjustment.
 
 ## Progress
+### General Modernization
+- [x] `var` → `let` when at root of function (config: `varToLet`)
+- [x] `function` → arrow function when not using `this` or `arguments` (config: `arrowFunctions`)
+- [x] `me` → `this` when redundant (config: `arrowFunctions`)
+- [x] `() => { return ... }` → `() => ...` (config: `arrowReturnShorthand`)
+- [x] `() => { ... }` → `() => ...` (config: `arrowExpressionShorthand`)
 ### Architecture
 - [x] ClassManager → ES6 modules
   - [x] namespaced class names → simple names & references
@@ -204,12 +210,6 @@ To keep the generated JSX clean, e2r will instead auto-prefix unqualified, uncap
   - [x] .isString → _.isString
   - [ ] .Promise
   - [ ] .toArray
-### General Modernization
-- [x] `var` → `let` when at root of function (config: `varToLet`)
-- [x] `function` → arrow function when not using `this` or `arguments` (config: `arrowFunctions`)
-- [x] `me` → `this` when redundant (config: `arrowFunctions`)
-- [x] `() => { return ... }` → `() => ...` (config: `arrowReturnShorthand`)
-- [x] `() => { ... }` → `() => ...` (config: `arrowExpressionShorthand`)
 ### Component Library
 - [ ] Small subset of Components → open source libraries (w/ documented api loss)
   - [ ] Layouts (flexbox-compatible)

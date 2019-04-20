@@ -67,7 +67,7 @@ export const transformArrowShorthand = node => {
                 multiLine = bodyCode.includes('\n')
 
             if(isReturn || !multiLine){
-              if(!isReturn && Ast.isExpressionStatement(bodyNode)){
+              if(!isReturn){
                 bodyNode = bodyNode.expression
               }
 
