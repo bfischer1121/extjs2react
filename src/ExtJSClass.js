@@ -1092,6 +1092,42 @@ export default class ExtJSClass{
     // remove any variables pointing to this and instead use this directly 
     Ast.removeVariable(node, null, 'this')
 
+    const skippedConfigs = ['xtype', 'items', ...(this.transformedClassMembers)]
+
+    const isConfig = name => (
+      cls.classMembers[name] &&
+      !skippedConfigs.includes(name) &&
+      cls.classMembers.configs.find(node => node.value === cls.classMembers[name])
+    )
+
+    visit(node, {
+      visitCallExpression: function(path){
+        const callee = path.node.callee
+
+        // only replace this.foo() and me.foo() calls
+        if(
+          !Ast.isMemberExpression(callee) ||
+          (callee.object.type !== 'ThisExpression' && !(Ast.isIdentifier(node.object) && node.object.name === 'me'))
+        ){
+          this.traverse(path)
+          return
+        }
+
+        let fnName = Ast.toString(callee.property)
+
+        // this.getFoo() -> props.foo
+        if(_.startsWith(fnName, 'get')){
+          let config = _.lowerFirst(fnName.replace(/^get/, ''))
+
+          if(isConfig(config)){
+            path.replace(Ast.from(`props.${config}`).expression)
+          }
+        }
+
+        this.traverse(path)
+      }
+    })
+
     visit(node, {
       visitMemberExpression: function(path){
         processReference(path)

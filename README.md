@@ -43,11 +43,16 @@ For speed of development and depth of implementation, it is currently assumed th
 - [x] Component
   - [x] properties → local variables
   - [x] configs
-    - [x] assignment → JSX
     - [x] definition
       - [x] default values → merged `props` object
       - [x] apply* → `useMemo` prop reassignment
       - [x] update* → `useEffect`
+    - [x] assignment
+      - [x] declarative → JSX
+      - [ ] procedural (set*)
+    - [ ] reference (get*)
+      - [x] inside component → `props.*`
+      - [ ] outside component
   - [x] methods → inline functions
     - [x] initialize → useEffect(..., [])
     - [ ] this.* references
