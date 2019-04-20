@@ -6,7 +6,8 @@ import { code } from './Util'
 const config = {
   varToLet: true,
   arrowFunctions: true,
-  arrowReturnShorthand: true
+  arrowReturnShorthand: true,
+  arrowExpressionShorthand: true
 }
 
 export const transformArrowFunctions = node => {
@@ -46,8 +47,8 @@ export const transformArrowFunctions = node => {
   })
 }
 
-export const transformArrowReturnShorthand = node => {
-  if(!config.arrowReturnShorthand){
+export const transformArrowShorthand = node => {
+  if(!config.arrowReturnShorthand && !config.arrowExpressionShorthand){
     return
   }
 
@@ -55,16 +56,25 @@ export const transformArrowReturnShorthand = node => {
     visitArrowFunctionExpression: function(path){
       const block = path.node.body
 
-      if(
-        block.type === 'BlockStatement' &&
-        block.body.length === 1 &&
-        block.body[0].type === 'ReturnStatement' &&
-        block.body[0].argument
-      ){
-        let bodyNode = block.body[0].argument,
-            bodyCode = Ast.toString(bodyNode)
+      if(block.type === 'BlockStatement' && block.body.length === 1){
+        let isReturn = (block.body[0].type === 'ReturnStatement' && block.body[0].argument)
 
-        path.node.body = bodyCode.includes('\n') ? Ast.from(code('(', [bodyCode], ')')) : bodyNode
+        if(isReturn || config.arrowExpressionShorthand){
+          let bodyNode = isReturn ? block.body[0].argument : (Ast.isExpressionStatement(block.body[0]) ? block.body[0] : null)
+
+          if(bodyNode && (bodyNode.comments || []).length === 0){
+            let bodyCode  = Ast.toString(bodyNode).replace(/;$/, ''),
+                multiLine = bodyCode.includes('\n')
+
+            if(isReturn || !multiLine){
+              if(!isReturn && Ast.isExpressionStatement(bodyNode)){
+                bodyNode = bodyNode.expression
+              }
+
+              path.node.body = multiLine ? Ast.from(code('(', [bodyCode], ')')) : bodyNode
+            }
+          }
+        }
       }
 
       this.traverse(path)
@@ -288,7 +298,7 @@ export const afterTranspile = ast => {
     transformArrowFunctions(ast)
   }
 
-  transformArrowReturnShorthand(ast)
+  transformArrowShorthand(ast)
 
   visit(ast, {
     visitCallExpression: function(path){

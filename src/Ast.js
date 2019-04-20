@@ -63,6 +63,14 @@ class AST{
     return t.ArrayExpression.check(node)
   }
 
+  isExpression(node){
+    return t.Expression.check(node)
+  }
+
+  isExpressionStatement(node){
+    return t.ExpressionStatement.check(node)
+  }
+
   isMemberExpression(node){
     return t.MemberExpression.check(node)
   }
