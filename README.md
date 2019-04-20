@@ -1,9 +1,9 @@
-# ExtJS → React [Native]
+# ExtJS → React [Native] + Redux
 
 ## Summary
-The goal of ExtJS2React (e2r) is migrate ExtJS applications to React [Native] by rewriting their entire codebase. Much of the work will be automated while an ever-shrinking set of cases will be left for manual intervention. This is an unofficial library in no way associated with Sencha. Use at your own risk.
+ExtJS2React (e2r) migrates ExtJS applications to React [Native] by rewriting their entire codebase. Much of the work is automated with an ever-shrinking set of cases left for manual intervention. This is an unofficial library in no way associated with Sencha. Use at your own risk.
 
-## Preparing Your ExtJS Project
+## Preparing Your Project
 For speed of development and depth of implementation, it is currently assumed that the source project is ExtJS 6.x with MVVM architecture. If your project isn't there but you want to use this tool, migrate to the common starting point and then run this tool to cross the bridge to React-land:
 * Sencha Touch → ExtJS
 * <6.x → 6.x
@@ -14,43 +14,6 @@ For speed of development and depth of implementation, it is currently assumed th
 * Open `/config.json` and modify the params accordingly
 * Open the terminal and go to the extjs2react directory, run `npm install`
 * Run `npm start`
-* Say a little prayer
-
-## ES6 Class Names
-ExtJS classes are namespaced while, with modules, ES6 class names are generally not. To make the transition, e2r uses the xtype or alias of your ExtJS class as the ES6 class name. To convert lowercase xtypes to properly-cased class names, we need to distinguish words. To this end, e2r builds a word list from the class names and namespaces used within your codebase and the ExtJS framework. While this works fairly well, it requires some manual tuning:
-
-* Run `npm run classnames` in the extjs2react directory
-* Go through this list of all of your classes and add mis-capitalized words to the `words` array in `/config.json`
-* Rinse and repeat until the class names look good
-* Note: if a word has no effect, use a larger portion of the class name (longer words take precedence and yours may have been overriden)
-
-e.g., `FaceidSetup` → add `FaceID` to config → `FaceIDSetup` (if no effect, add `FaceIDSetup`)
-
-## ES6 Modules
-ExtJS dependency management is global, while ES6 dependencies are local. To make the transition, e2r builds a registry of all class names and aliases, determines each source file's requirements, and adds corresponding `import` and `export` statements. 
-
-This modularization can lead to circular dependencies. In webpack, the imported class will become undefined and, if extended, will produce the following error:
-`Unhandled Rejection (TypeError): Super expression must either be null or a function`
-
-To resolve these issues, I recommend using a tool like [circular-dependency-plugin](https://github.com/aackerman/circular-dependency-plugin) and refactoring the original code as needed.
-
-## Dynamic Classes
-Since e2r does a static code analysis, it isn't able to pick up on dynamically generated `Ext.define` calls. If you are dynamically creating ExtJS Classes and want to ensure these class definitions are properly imported and referenced throughout, add a comment to the file like so:
-```javascript
-/**
- * Classes:
- * MyApp.model.Foo
- * MyApp.model.Bar
- * MyApp.user.List
- */
-```
-
-e2r will then add placeholder ES6 classes to the file's generated output. You can of course safely remove these as long as you export classes of the same names.
-
-## XTemplate → JSX
-When compiling templates, ExtJS wraps `tpl` conditional statements in native `with(values)` blocks. This adds `values` to the scope chain so we can write `<tpl if="age &gt; 1">` instead of `<tpl if="values.age &gt; 1">`.
-
-To keep the generated JSX clean, e2r will instead auto-prefix unqualified, uncapitalized variables with `values`. This will change the reference if you're referring to unqualified, uncapitalized variables outside of `values`, requiring manual adjustment.
 
 ## Progress
 ### General Modernization
@@ -221,6 +184,43 @@ To keep the generated JSX clean, e2r will instead auto-prefix unqualified, uncap
   - [ ] Stores
   - [ ] Models
   - [ ] Proxies
+
+## Manual Tuning
+### ES6 Class Names
+ExtJS classes are namespaced while, with modules, ES6 class names are generally not. To make the transition, e2r uses the xtype or alias of your ExtJS class as the ES6 class name. To convert lowercase xtypes to properly-cased class names, we need to distinguish words. To this end, e2r builds a word list from the class names and namespaces used within your codebase and the ExtJS framework. While this works fairly well, it requires some manual tuning:
+
+* Run `npm run classnames` in the extjs2react directory
+* Go through this list of all of your classes and add mis-capitalized words to the `words` array in `/config.json`
+* Rinse and repeat until the class names look good
+* Note: if a word has no effect, use a larger portion of the class name (longer words take precedence and yours may have been overriden)
+
+e.g., `FaceidSetup` → add `FaceID` to config → `FaceIDSetup` (if no effect, add `FaceIDSetup`)
+
+### ES6 Modules
+ExtJS dependency management is global, while ES6 dependencies are local. To make the transition, e2r builds a registry of all class names and aliases, determines each source file's requirements, and adds corresponding `import` and `export` statements. 
+
+This modularization can lead to circular dependencies. In webpack, the imported class will become undefined and, if extended, will produce the following error:
+`Unhandled Rejection (TypeError): Super expression must either be null or a function`
+
+To resolve these issues, I recommend using a tool like [circular-dependency-plugin](https://github.com/aackerman/circular-dependency-plugin) and refactoring the original code as needed.
+
+### Dynamic Classes
+Since e2r does a static code analysis, it isn't able to pick up on dynamically generated `Ext.define` calls. If you are dynamically creating ExtJS Classes and want to ensure these class definitions are properly imported and referenced throughout, add a comment to the file like so:
+```javascript
+/**
+ * Classes:
+ * MyApp.model.Foo
+ * MyApp.model.Bar
+ * MyApp.user.List
+ */
+```
+
+e2r will then add placeholder ES6 classes to the file's generated output. You can of course safely remove these as long as you export classes of the same names.
+
+### XTemplate → JSX
+When compiling templates, ExtJS wraps `tpl` conditional statements in native `with(values)` blocks. This adds `values` to the scope chain so we can write `<tpl if="age &gt; 1">` instead of `<tpl if="values.age &gt; 1">`.
+
+To keep the generated JSX clean, e2r will instead auto-prefix unqualified, uncapitalized variables with `values`. This will change the reference if you're referring to unqualified, uncapitalized variables outside of `values`, requiring manual adjustment.
 
 ## Need Help?
 If your company is migrating an ExtJS app to React (or other framework) and would like some help, feel free to email me at my github username (looks like bfis----1121) at gmail.com
