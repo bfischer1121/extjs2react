@@ -7,6 +7,43 @@ const config = {
   arrowFunctions: true
 }
 
+export const transformArrowFunctions = node => {
+  if(!config.arrowFunctions){
+    return
+  }
+
+  visit(node, {
+    visitFunctionExpression: function(path){
+      let { node } = path,
+          transform = true
+
+      // don't transform if using "arguments" or "this"
+      visit(node, {
+        visitIdentifier: function(path){
+          if(path.node.name === 'arguments'){
+            transform = false
+          }
+
+          this.traverse(path)
+        },
+
+        visitThisExpression: function(path){
+          transform = false
+          this.traverse(path)
+        }
+      })
+
+      if(transform){
+        let arrowFn = b.arrowFunctionExpression(node.params, node.body)
+        arrowFn.async = node.async
+        path.replace(arrowFn)
+      }
+
+      this.traverse(path)
+    }
+  })
+}
+
 export const beforeTranspile = codebase => {
   
 }
@@ -182,35 +219,6 @@ export const afterTranspile = ast => {
   }
 
   if(config.arrowFunctions){
-    const transformArrowFunctions = () => {
-      visit(ast, {
-        visitFunctionExpression: function(path){
-          let transform = true
-
-          visit(path.node, {
-            visitIdentifier: function(path){
-              if(path.node.name === 'arguments'){
-                transform = false
-              }
-
-              this.traverse(path)
-            },
-
-            visitThisExpression: function(path){
-              transform = false
-              this.traverse(path)
-            }
-          })
-
-          if(transform){
-            path.replace(b.arrowFunctionExpression(path.node.params, path.node.body))
-          }
-
-          this.traverse(path)
-        }
-      })
-    }
-
     const needsMeReferences = node => {
       let needsMe = false
 
@@ -241,7 +249,7 @@ export const afterTranspile = ast => {
       this.traverse(path)
     }
 
-    transformArrowFunctions()
+    transformArrowFunctions(ast)
 
     visit(ast, {
       visitClassMethod             : removeMeTraversal,
@@ -249,7 +257,7 @@ export const afterTranspile = ast => {
       visitFunctionExpression      : removeMeTraversal
     })
 
-    transformArrowFunctions()
+    transformArrowFunctions(ast)
   }
 
   visit(ast, {

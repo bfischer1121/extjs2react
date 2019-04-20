@@ -86,6 +86,7 @@ To keep the generated JSX clean, e2r will instead auto-prefix unqualified, uncap
 - [ ] ViewController
   - [x] properties/configs/methods → Component
   - [x] .getView() | .view → this
+  - [x] variables referencing Component → this
   - [ ] transform lifecycle methods
 - [ ] ViewModel → `state`, render
 ### Standard Library

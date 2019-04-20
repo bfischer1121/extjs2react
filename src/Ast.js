@@ -39,6 +39,10 @@ class AST{
     return t.Identifier.check(node)
   }
 
+  isThis(node){
+    return t.ThisExpression.check(node)
+  }
+
   isString(node){
     return t.Literal.check(node) && _.isString(node.value)
   }
@@ -126,30 +130,46 @@ class AST{
     return node.value
   }
 
-  removeVariable(node, name, ifSetTo){
-    let declarationRe   = new RegExp(`${name}\\s*\\=\\s*${ifSetTo}\\,?\\s*`, 'g'),
-        trailingCommaRe = /\,\s*$/g,
-        replaceWith     = ifSetTo,
-        isDeclared      = false
+  removeVariable(node, whenName, whenValue){
+    const trailingCommaRe = /\,\s*;?$/g,
+          variableMap     = {}
 
+    const getName  = d => d.id.name,
+          getValue = d => Ast.isThis(d.init) ? 'this' : (Ast.isIdentifier(d.init) ? d.init.name : null)
+
+    // transform variable declaration
     visit(node, {
       visitVariableDeclaration: function(path){
-        if(path.node.declarations.find(d => d.id.name === name)){
-          (path.node.declarations.length === 1)
-            ? path.prune()
-            : path.replace(Ast.from(Ast.toString(path.node).replace(declarationRe, '').replace(trailingCommaRe, '')))
-          isDeclared = true
+        let declaration = path.node.declarations.find(d => (
+          (!whenName || getName(d) === whenName) && (!whenValue || getValue(d) === whenValue)
+        ))
+
+        if(declaration){
+          let name  = getName(declaration),
+              value = getValue(declaration)
+
+          variableMap[name] = value
+
+          if(path.node.declarations.length === 1){
+            path.prune()
+          }
+          else{
+            let declarationRe = new RegExp(`${name}\\s*\\=\\s*${value}\\,?\\s*`, 'g')
+            path.replace(Ast.from(Ast.toString(path.node).replace(declarationRe, '').replace(trailingCommaRe, '')))
+          }
         }
 
         this.traverse(path)
       }
     })
 
-    if(isDeclared){
+    // transform variable references
+    if(Object.keys(variableMap).length){
       visit(node, {
         visitIdentifier: function(path){
-          if(path.node.name === name){
-            path.replace(replaceWith === 'this' ? b.thisExpression() : b.identifier(replaceWith))
+          if(variableMap.hasOwnProperty(path.node.name)){
+            let newIdentifier = variableMap[path.node.name]
+            path.replace(newIdentifier === 'this' ? b.thisExpression() : b.identifier(newIdentifier))
           }
 
           this.traverse(path)

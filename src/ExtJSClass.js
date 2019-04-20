@@ -5,6 +5,7 @@ import parse5 from 'parse5'
 import Serializer from 'parse5/lib/serializer'
 import { namedTypes as t, builders as b, visit } from 'ast-types'
 import Ast from './Ast'
+import { transformArrowFunctions } from './Hooks'
 import { code, logError, getConfig } from './Util'
 import SourceFile from './SourceFile'
 
@@ -1042,12 +1043,16 @@ export default class ExtJSClass{
       }
     }
 
+    // since we're changing variables to "this", and transformArrowFunctions passes over functions referencing "this",
+    // we want to call transformArrowFunctions beforehand to ensure it transforms as many functions as possible
+    transformArrowFunctions(node)
+
     const callReplacements = {
       'this.getView': 'this'
     }
 
     const memberReplacements = {
-      'this.view' : 'this'
+      'this.view': 'this'
     }
 
     if(name === 'initialize' && !isStatic){
@@ -1060,7 +1065,13 @@ export default class ExtJSClass{
       }
 
       if(replacement){
-        path.replace(Ast.from(replacement))
+        let newCode = Ast.from(replacement)
+
+        if(path.parent.node.type === 'VariableDeclarator' && newCode.type === 'ExpressionStatement'){
+          newCode = newCode.expression
+        }
+
+        path.replace(newCode)
       }
     }
 
@@ -1068,13 +1079,18 @@ export default class ExtJSClass{
       visitCallExpression: function(path){
         replace(path, callReplacements[Ast.toString(path.node.callee)])
         this.traverse(path)
-      },
+      }
+    })
 
+    visit(node, {
       visitMemberExpression: function(path){
         replace(path, memberReplacements[Ast.toString(path.node)])
         this.traverse(path)
       }
     })
+
+    // remove any variables pointing to this and instead use this directly 
+    Ast.removeVariable(node, null, 'this')
 
     visit(node, {
       visitMemberExpression: function(path){
