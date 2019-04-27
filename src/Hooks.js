@@ -7,7 +7,44 @@ const config = {
   varToLet: true,
   arrowFunctions: true,
   arrowReturnShorthand: true,
-  arrowExpressionShorthand: true
+  arrowExpressionShorthand: true,
+  templateLiterals: true
+}
+
+export const transformTemplateLiterals = node => {
+  if(!config.templateLiterals){
+    return
+  }
+
+  const getTemplateSubstring = node => {
+    if(Ast.isString(node)){
+      return node.value
+    }
+
+    if(Ast.isTemplate(node)){
+      return Ast.toString(node).replace(/^`(.*)`$/, '$1')
+    }
+
+    return '${' + Ast.toString(node) + '}'
+  }
+
+  const transform = node => {
+    visit(node, {
+      visitBinaryExpression: function(path){
+        // this.traverse must come first to process any child BinaryExpressions first
+        // otherwise, foo() + ' bar' + ' baz' -> `${`${foo()} bar`} baz` instead of `${foo()} bar baz`
+        this.traverse(path)
+
+        const { node } = path
+
+        if(node.operator === '+' && [node.left, node.right].find(n => Ast.isString(n) || Ast.isTemplate(n))){
+          path.replace(Ast.from('`' + getTemplateSubstring(node.left) + getTemplateSubstring(node.right) + '`').expression)
+        }
+      }
+    })
+  }
+
+  transform(node)
 }
 
 export const transformArrowFunctions = node => {
@@ -299,6 +336,8 @@ export const afterTranspile = ast => {
   }
 
   transformArrowShorthand(ast)
+
+  transformTemplateLiterals(ast)
 
   visit(ast, {
     visitCallExpression: function(path){

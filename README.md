@@ -4,10 +4,7 @@
 ExtJS2React (e2r) migrates ExtJS applications to React [Native] by rewriting their entire codebase. Much of the work is automated while an ever-shrinking set of cases are left for manual intervention. This is an unofficial library in no way associated with Sencha. Use at your own risk.
 
 ## Preparing Your Project
-For speed of development and depth of implementation, it is currently assumed that the source project is ExtJS 6.x with MVVM architecture. If your project isn't there but you want to use this tool, migrate to the common starting point and then run this tool to cross the bridge to React-land:
-* Sencha Touch → ExtJS
-* <6.x → 6.x
-* MVC → MVVM
+For speed of development and depth of implementation, it is currently assumed that the source project is ExtJS 6.x with MVVM architecture. If your project isn't there but you want to use this tool, migrate to the common starting point and then run this tool to cross the bridge to React-land: `Sencha Touch → ExtJS` `<6.x → 6.x` `MVC → MVVM`
 
 ## Getting Started
 * Clone the repo
@@ -24,6 +21,7 @@ For speed of development and depth of implementation, it is currently assumed th
 - [x] `me` → `this` when redundant (config: `arrowFunctions`)
 - [x] `() => { return ... }` → `() => ...` (config: `arrowReturnShorthand`)
 - [x] `() => { ... }` → `() => ...` (config: `arrowExpressionShorthand`)
+- [x] `getCount() + ' widgets'` → ``${getCount()} widgets`` (config: `templateLiterals`)
 ### Architecture
 - [x] ClassManager → ES6 modules
   - [x] namespaced class names → simple names & references

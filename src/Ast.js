@@ -47,6 +47,10 @@ class AST{
     return t.Literal.check(node) && _.isString(node.value)
   }
 
+  isTemplate(node){
+    return t.TemplateLiteral.check(this.isExpressionStatement(node) ? node.expression : node)
+  }
+
   isBoolean(node){
     return t.Literal.check(node) && _.isBoolean(node.value)
   }
