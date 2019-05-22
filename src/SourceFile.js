@@ -231,6 +231,7 @@ export default class SourceFile{
       let ast = Ast.parseWithJSX(classCode)
 
       this.renameConfigCalls(ast)
+      this.renameModelCalls(ast)
 
       if(hooks.afterTranspile){
         libraries.push(...hooks.afterTranspile(ast))
@@ -353,6 +354,43 @@ export default class SourceFile{
 
           if(isSetter && node.arguments.length === 1){
             path.replace(Ast.from(`${callee} = ${Ast.toString(node.arguments[0])}`))
+          }
+        }
+
+        this.traverse(path)
+      }
+    })
+  }
+
+  renameModelCalls(ast){
+    visit(ast, {
+      visitCallExpression: function(path){
+        let { node } = path
+
+        if(Ast.isMemberExpression(node.callee)){
+          let callee = Ast.toString(node.callee).split('.'),
+              call   = callee[callee.length - 1],
+              field  = node.arguments[0]
+
+          if(callee[0] !== 'Ext'){
+            let fieldRef = [
+              callee.slice(0, -1).join('.'),
+              (Ast.isString(field) && !field.value.match(/\W/g)) ? `.${field.value}` : `[${Ast.toString(field)}]`
+            ].join('')
+
+            if(call === 'get' && node.arguments.length === 1){
+              path.replace(Ast.from(fieldRef).expression)
+            }
+
+            if(call === 'set'){
+              /*if(node.arguments.length === 1){
+                path.replace(Ast.from(`${fieldRef} = ${Ast.toString(node.arguments[1])}`))
+              }*/
+
+              /*if(node.arguments.length === 2){
+                path.replace(Ast.from(`${fieldRef} = (${Ast.toString(node.arguments[1])});`).expression)
+              }*/
+            }
           }
         }
 

@@ -185,10 +185,11 @@ For speed of development and depth of implementation, it is currently assumed th
   - [ ] Button
   - [ ] Form Fields
   - [ ] DataView
-- [ ] Data Package (w/ documented api loss)
-  - [ ] Stores
-  - [ ] Models
-  - [ ] Proxies
+### Data Package
+- [ ] Stores
+- [ ] Models
+  - [x] `.get('foo')` → `.foo`
+- [ ] Proxies
 
 ## Manual Tuning
 ### ES6 Class Names
