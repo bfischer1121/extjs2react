@@ -139,6 +139,17 @@ export default class SourceFile{
     return _.uniq(_.difference(externalCls, internalCls))
   }
 
+  get libraries(){
+    return _.uniq([
+      ...(this._libraries || []),
+      ...this.undiscardedClasses.reduce((lib, cls) => [...lib, ...cls.libraries], [])
+    ])
+  }
+
+  _addLibrary(library){
+    this._libraries = _.uniq([...(this._libraries || []), library])
+  }
+
   async processAST(){
     let processClassDefinition = node => {
       let [className, data, createdFn] = node.arguments
@@ -219,7 +230,7 @@ export default class SourceFile{
     }
 
     let clsCode   = this.undiscardedClasses.map(cls => cls.transpile()),
-        libraries = _.uniq(this.undiscardedClasses.reduce((lib, cls) => [...lib, ...cls.libraries], []))
+        libraries = []
 
     let classes = _.compact(clsCode.map(({ classCode, unparsed }) => {
       if(!classCode || unparsed){
@@ -240,7 +251,7 @@ export default class SourceFile{
       return Ast.toString(ast)
     }))
 
-    let imports = this.getImportsCode(_.uniq(libraries))
+    let imports = this.getImportsCode(_.uniq([...libraries, ...this.libraries]))
 
     let code = _.compact([
       imports,
@@ -260,7 +271,8 @@ export default class SourceFile{
       { source: 'framework', specifiers: ['define', 'Template'] },
       { source: 'app',       default: 'App' },
       { source: 'react',     default: 'React', specifiers: ['useMemo', 'useEffect'] },
-      { source: 'lodash',    default: '_' }
+      { source: 'lodash',    default: '_' },
+      { source: 'actions',   specifiers: ['modifyRecord'] }
     ]
 
     let sourceAliases = [
@@ -363,6 +375,8 @@ export default class SourceFile{
   }
 
   renameModelCalls(ast){
+    const me = this
+
     visit(ast, {
       visitCallExpression: function(path){
         let { node } = path
@@ -373,8 +387,10 @@ export default class SourceFile{
               field  = node.arguments[0]
 
           if(callee[0] !== 'Ext'){
+            let record = callee.slice(0, -1).join('.')
+
             let fieldRef = [
-              callee.slice(0, -1).join('.'),
+              record,
               (Ast.isString(field) && !field.value.match(/\W/g)) ? `.${field.value}` : `[${Ast.toString(field)}]`
             ].join('')
 
@@ -383,6 +399,8 @@ export default class SourceFile{
             }
 
             if(call === 'set'){
+              me._addLibrary('modifyRecord')
+              path.replace(Ast.from(`modifyRecord(${record}, ${node.arguments.map(arg => Ast.toString(arg)).join(', ')})`).expression)
               /*if(node.arguments.length === 1){
                 path.replace(Ast.from(`${fieldRef} = ${Ast.toString(node.arguments[1])}`))
               }*/
