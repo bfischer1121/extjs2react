@@ -268,11 +268,12 @@ export default class SourceFile{
 
   getImportsCode(libraries){
     let libImports = [
-      { source: 'framework', specifiers: ['define', 'Template'] },
-      { source: 'app',       default: 'App' },
-      { source: 'react',     default: 'React', specifiers: ['useMemo', 'useEffect'] },
-      { source: 'lodash',    default: '_' },
-      { source: 'actions',   specifiers: ['modifyRecord'] }
+      { source: 'framework',         specifiers: ['define', 'Template'] },
+      { source: 'app',               default: 'App' },
+      { source: 'react',             default: 'React', specifiers: ['useMemo', 'useEffect'] },
+      { source: '@blueprintjs/core', specifiers: ['Button'] },
+      { source: 'lodash',            default: '_' },
+      { source: 'actions',           specifiers: ['modifyRecord'] }
     ]
 
     let sourceAliases = [

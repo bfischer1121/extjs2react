@@ -1,7 +1,7 @@
-# ExtJS → React [Native] + Redux
+# ExtJS → React [Native] + Redux + Blueprint
 
 ## Summary
-ExtJS2React (e2r) migrates ExtJS applications to React [Native] + Redux by rewriting their entire codebase. Much of the work is automated while an ever-shrinking set of cases are left for manual intervention. This is an unofficial library in no way associated with Sencha. Use at your own risk.
+ExtJS2React (e2r) migrates ExtJS applications to React [Native] + Redux + Blueprint by rewriting their entire codebase. Much of the work is automated while an ever-shrinking set of cases are left for manual intervention. This is an unofficial library in no way associated with Sencha. Use at your own risk.
 
 ## Preparing Your Project
 For speed of development and depth of implementation, it is currently assumed that the source project is ExtJS 6.x with MVVM architecture. If your project isn't there but you want to use this tool, migrate to the common starting point and then run this tool to cross the bridge to React-land: `Sencha Touch → ExtJS` `<6.x → 6.x` `MVC → MVVM`
@@ -63,6 +63,37 @@ For speed of development and depth of implementation, it is currently assumed th
   - [x] variables referencing Component → this
   - [ ] transform lifecycle methods
 - [ ] ViewModel → `state`, render
+### Component Library
+- [ ] Ext
+  - [ ] .dataview
+    - [ ] .DataView
+    - [ ] .List
+  - [ ] .field
+    - [ ] .Checkbox → [Checkbox](https://blueprintjs.com/docs/#core/components/checkbox)
+    - [ ] .File → [FileInput](https://blueprintjs.com/docs/#core/components/file-input)
+    - [ ] .Hidden → Hidden input
+    - [ ] .Number
+    - [ ] .Radio → [Radio](https://blueprintjs.com/docs/#core/components/radio)
+    - [ ] .Select → [Select](https://blueprintjs.com/docs/#select/select-component)
+    - [ ] .Text → [HTML input](https://blueprintjs.com/docs/#core/components/text-inputs.html-input)
+    - [ ] .TextArea → [Text area](https://blueprintjs.com/docs/#core/components/text-inputs.text-area)
+    - [ ] .Toggle → [Switch](https://blueprintjs.com/docs/#core/components/switch)
+  - [ ] .form
+    - [ ] .FieldSet
+  - [ ] .layout
+    - [ ] .Card
+  - [ ] .Button → [Button](https://blueprintjs.com/docs/#core/components/button)
+  - [ ] .Component → div
+  - [ ] .Container → div
+  - [ ] .Panel → div
+### Data Package
+- [ ] Stores
+- [ ] Models
+  - [x] `.get('foo')` → `.foo`
+  - [x] `foo.set(fieldOrObject[, value])` → `modifyRecord(foo, fieldOrObject[, value])` action
+  - [ ] .getData
+  - [ ] .isModel
+- [ ] Proxies
 ### Standard Library
 - [ ] Ext
   - [ ] .Ajax
@@ -178,21 +209,6 @@ For speed of development and depth of implementation, it is currently assumed th
   - [x] .isString → _.isString
   - [ ] .Promise
   - [ ] .toArray
-### Component Library
-- [ ] Small subset of Components → open source libraries (w/ documented api loss)
-  - [ ] Layouts (flexbox-compatible)
-  - [ ] Panel, Container, Component
-  - [ ] Button
-  - [ ] Form Fields
-  - [ ] DataView
-### Data Package
-- [ ] Stores
-- [ ] Models
-  - [x] `.get('foo')` → `.foo`
-  - [x] `foo.set(fieldOrObject[, value])` → `modifyRecord(foo, fieldOrObject[, value])` action
-  - [ ] .getData
-  - [ ] .isModel
-- [ ] Proxies
 
 ## Manual Tuning
 ### ES6 Class Names
