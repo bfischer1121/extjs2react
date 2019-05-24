@@ -71,7 +71,7 @@ For speed of development and depth of implementation, it is currently assumed th
   - [ ] .field
     - [ ] .Checkbox → [Checkbox](https://blueprintjs.com/docs/#core/components/checkbox)
     - [x] .File → [FileInput](https://blueprintjs.com/docs/#core/components/file-input)
-    - [ ] .Hidden → Hidden input
+    - [ ] .Hidden → input (type=hidden)
     - [ ] .Number
     - [ ] .Radio → [Radio](https://blueprintjs.com/docs/#core/components/radio)
     - [ ] .Select → [Select](https://blueprintjs.com/docs/#select/select-component)
@@ -83,19 +83,22 @@ For speed of development and depth of implementation, it is currently assumed th
   - [ ] .layout
     - [ ] .Card
   - [x] .Button → [Button](https://blueprintjs.com/docs/#core/components/button)
-    - [x] `onTap` → `onClick`
-    - [x] `pressed` → `active`
+    - [x] text → text
+    - [x] handler|tap|onTap → onClick
+    - [x] pressed → active
   - [x] .Component → div
-    - [x] `html` → child
+    - [x] html → child element
   - [x] .Container → div
-    - [x] `items` → children
+    - [x] items → child elements
   - [x] .Image → img
-    - [x] `src` → `src`
-    - [ ] `html` → div + background-image + child
+    - [x] src → src
+    - [ ] html → div + background-image + child
   - [x] .Panel → div
   - [x] .SegmentedButton → [ButtonGroup](https://blueprintjs.com/docs/#core/components/button-group)
   - [x] .TitleBar → div
-    - [x] `title` → child
+    - [x] title → child element
+  - [x] .Widget → div
+    - [x] disabled → disabled
 ### Data Package
 - [ ] Stores
 - [ ] Models
