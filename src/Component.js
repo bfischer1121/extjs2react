@@ -52,7 +52,12 @@ class Component{
     },
 
     field: {
-      extends: 'component'
+      extends: 'component',
+
+      props: {
+        name: () => {},
+        value: () => {}
+      }
     },
 
     inputfield: {
@@ -66,6 +71,11 @@ class Component{
       props: {
         placeholder: () => {}
       }
+    },
+
+    hiddenfield: {
+      extends: 'inputfield',
+      type: ['input', { type: 'hidden' }]
     },
 
     textareafield: {
@@ -136,7 +146,23 @@ class Component{
     let cmp = this._getSelfAndAncestors(xtype).reverse().reduce((cmp, xtype) => {
       let { type = cmp.type, props = {} } = this.components[xtype] || {}
 
-      cmp.type = type
+      if(_.isString(type)){
+        cmp.type = type
+      }
+
+      if(_.isArray(type)){
+        cmp.type = type[0]
+
+        Object.keys(type[1]).forEach(name => {
+          let value = type[1][name]
+
+          if(_.isString(value)){
+            value = b.literal(value)
+          }
+
+          cmp.props.unshift({ name, value })
+        })
+      }
 
       cmp.props = _.compact(cmp.props.map(prop => {
         let transformed = props[prop.name] ? props[prop.name](prop.value, cmp) : undefined

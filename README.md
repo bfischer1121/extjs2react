@@ -70,8 +70,11 @@ For speed of development and depth of implementation, it is currently assumed th
     - [ ] .List
   - [ ] .field
     - [ ] .Checkbox → [Checkbox](https://blueprintjs.com/docs/#core/components/checkbox)
+    - [x] .Field
+      - [x] name → name
+      - [x] value → value
     - [x] .File → [FileInput](https://blueprintjs.com/docs/#core/components/file-input)
-    - [ ] .Hidden → input (type=hidden)
+    - [x] .Hidden → input (type=hidden)
     - [ ] .Number
     - [ ] .Radio → [Radio](https://blueprintjs.com/docs/#core/components/radio)
     - [ ] .Select → [Select](https://blueprintjs.com/docs/#select/select-component)
@@ -84,7 +87,7 @@ For speed of development and depth of implementation, it is currently assumed th
     - [ ] .Card
   - [x] .Button → [Button](https://blueprintjs.com/docs/#core/components/button)
     - [x] text → text
-    - [x] handler|tap|onTap → onClick
+    - [x] handler | tap listener → onClick
     - [x] pressed → active
   - [x] .Component → div
     - [x] html → child element
