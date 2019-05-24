@@ -8,6 +8,7 @@ import Ast from './Ast'
 import { transformArrowFunctions } from './Hooks'
 import { code, logError, getConfig } from './Util'
 import SourceFile from './SourceFile'
+import Component from './Component'
 
 export default class ExtJSClass{
   props     = {}
@@ -1148,8 +1149,10 @@ export default class ExtJSClass{
 
     props.forEach(this._deleteNode)
 
+    props = this.getPropsFromConfig(b.objectExpression(props), true)
+
     props = [
-      ...this.getPropsFromConfig(b.objectExpression(props), true),
+      ...props.map(({ name, value }) => this.getJSXAttribute(name, value)),
       b.jsxSpreadAttribute(b.identifier('props'))
     ]
 
@@ -1163,7 +1166,7 @@ export default class ExtJSClass{
     let renderBody = [
       'return (',
         [this.getCodeFromJSX(jsx)],
-      ')',
+      ')'
     ]
 
     let extractedProps = Object.keys(this.extractedProps).map(name => (
@@ -1225,15 +1228,25 @@ export default class ExtJSClass{
     xtype = Ast.toValue(xtype)
 
     let importName = xtype ? this.sourceFile.getImportNameForAlias(`widget.${xtype}`) : null,
-        identifier = importName ? b.jsxIdentifier(importName) : null,
         props      = this.getPropsFromConfig(config),
-        children   = _.compact((Ast.getConfig(config, 'items') || []).map(item => this.getJSXFromConfig(item)))
+        children   = _.compact((Ast.getConfig(config, 'items') || []).map(item => this.getJSXFromConfig(item))),
+        component  = Component.convert(xtype, props)
+
+    if(component){
+      importName = component.type
+      props      = component.props
+      children   = [...component.children, ...children]
+    }
+
+    let identifier = importName ? b.jsxIdentifier(importName) : null
 
     if(!identifier){
       return null
     }
 
     this._deleteNode(config)
+
+    props = props.map(({ name, value }) => this.getJSXAttribute(name, value))
 
     if(!children.length){
       return b.jsxElement(b.jsxOpeningElement(identifier, props, true))
@@ -1262,23 +1275,7 @@ export default class ExtJSClass{
         return node.value.properties.map(node => this.getPropFromListener(node))
       }
 
-      let name  = getPropName(configName),
-          value = node.value,
-          prop  = value => b.jsxAttribute(b.jsxIdentifier(name), value)
-
-      if(this._shouldExtractJSXValue(value)){
-        value = b.identifier(this._extractProp(name, value))
-      }
-
-      if(Ast.isBoolean(value) && !!value.value){
-        return prop(null)
-      }
-
-      if(Ast.isString(value)){
-        return prop(value)
-      }
-
-      return prop(b.jsxExpressionContainer(value))
+      return { name: getPropName(configName), value: node.value }
     })
 
     return _.compact(_.flattenDeep(props))
@@ -1299,7 +1296,25 @@ export default class ExtJSClass{
       value = b.identifier(value.value)
     }
 
-    return b.jsxAttribute(b.jsxIdentifier(name), b.jsxExpressionContainer(value))
+    return { name, value }
+  }
+
+  getJSXAttribute(name, value){
+    const prop = value => b.jsxAttribute(b.jsxIdentifier(name), value)
+
+    if(this._shouldExtractJSXValue(value)){
+      value = b.identifier(this._extractProp(name, value))
+    }
+
+    if(Ast.isBoolean(value) && !!value.value){
+      return prop(null)
+    }
+
+    if(Ast.isString(value)){
+      return prop(value)
+    }
+
+    return prop(b.jsxExpressionContainer(value))
   }
 
   _shouldExtractJSXValue(node){

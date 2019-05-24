@@ -84,7 +84,9 @@ For speed of development and depth of implementation, it is currently assumed th
     - [ ] .Card
   - [ ] .Button → [Button](https://blueprintjs.com/docs/#core/components/button)
   - [ ] .Component → div
+    - [x] `html` → child
   - [ ] .Container → div
+    - [x] `items` → children
   - [ ] .Panel → div
 ### Data Package
 - [ ] Stores
