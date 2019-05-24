@@ -88,7 +88,11 @@ For speed of development and depth of implementation, it is currently assumed th
     - [x] `html` → child
   - [x] .Container → div
     - [x] `items` → children
+  - [x] .Image → img
+    - [x] `src` → `src`
+    - [ ] `html` → div + background-image + child
   - [x] .Panel → div
+  - [x] .SegmentedButton → [ButtonGroup](https://blueprintjs.com/docs/#core/components/button-group)
   - [x] .TitleBar → div
     - [x] `title` → child
 ### Data Package

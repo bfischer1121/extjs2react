@@ -45,6 +45,11 @@ class Component{
       }
     },
 
+    segmentedbutton: {
+      extends: 'container',
+      type: 'ButtonGroup'
+    },
+
     field: {
       extends: 'component'
     },
@@ -95,6 +100,21 @@ class Component{
           }
         }
       }
+    },
+
+    image: {
+      extends: 'component',
+      type: 'img',
+      props: {
+        src: () => {},
+        html: (value, cmp) => {
+          if(Ast.isString(value)){
+            cmp.type = 'div'
+            cmp.children.push(b.jsxText(value.value))
+            return null
+          }
+        }
+      }
     }
   }
 
@@ -125,7 +145,7 @@ class Component{
       return cmp
     }, { type: 'div', props, children: [] })
 
-    cmp.html = ['div'].includes(cmp.type)
+    cmp.html = ['div', 'input', 'img'].includes(cmp.type)
 
     return cmp
   }
