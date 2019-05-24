@@ -187,7 +187,7 @@ export default class Codebase{
           .sort((p1, p2) => propCount[p2] - propCount[p1])
           .map(prop => `${prop} (${propCount[prop]})`)
 
-        console.log(`${xtype} (${instanceCount}) => ${props.join(', ')}\n`)
+        console.log(`${xtype} (${instanceCount}) =>\n${props.join(', ')}\n`)
       })
   }
 

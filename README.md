@@ -83,6 +83,7 @@ For speed of development and depth of implementation, it is currently assumed th
   - [ ] .layout
     - [ ] .Card
   - [ ] .Button → [Button](https://blueprintjs.com/docs/#core/components/button)
+    - [x] `onTap` → `onClick`
   - [ ] .Component → div
     - [x] `html` → child
   - [ ] .Container → div

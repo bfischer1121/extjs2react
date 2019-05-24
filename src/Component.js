@@ -33,7 +33,12 @@ class Component{
 
     button: {
       extends: 'component',
-      type: 'Button'
+      type: 'Button',
+
+      props: {
+        text: () => {},
+        onTap: value => ({ name: 'onClick', value })
+      }
     }
   }
 
@@ -42,7 +47,7 @@ class Component{
     this.untransformed[xtype].instanceCount = this.untransformed[xtype].instanceCount + 1
 
     props.filter(({ name }) => !['itemId', 'className'].includes(name)).forEach(prop => {
-      if(!(this.components[xtype] || {})[prop.name]){
+      if(!((this.components[xtype] || {}).props || {})[prop.name]){
         this.untransformed[xtype].propCount[prop.name] = (this.untransformed[xtype].propCount[prop.name] || 0) + 1
       }
     })
