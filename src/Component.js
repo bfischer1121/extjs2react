@@ -41,7 +41,8 @@ class Component{
 
       props: {
         text: () => {},
-        onTap: value => ({ name: 'onClick', value })
+        onTap: value => ({ name: 'onClick', value }),
+        pressed: value => ({ name: 'active', value })
       }
     },
 
