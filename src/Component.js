@@ -83,6 +83,18 @@ class Component{
     filefield: {
       extends: 'filefield',
       type: 'FileInput'
+    },
+
+    titlebar: {
+      extends: 'container',
+      props: {
+        title: (value, cmp) => {
+          if(Ast.isString(value)){
+            cmp.children.push(b.jsxText(value.value))
+            return null
+          }
+        }
+      }
     }
   }
 

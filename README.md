@@ -89,6 +89,8 @@ For speed of development and depth of implementation, it is currently assumed th
   - [x] .Container → div
     - [x] `items` → children
   - [x] .Panel → div
+  - [x] .TitleBar → div
+    - [x] `title` → child
 ### Data Package
 - [ ] Stores
 - [ ] Models
