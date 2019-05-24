@@ -70,25 +70,25 @@ For speed of development and depth of implementation, it is currently assumed th
     - [ ] .List
   - [ ] .field
     - [ ] .Checkbox → [Checkbox](https://blueprintjs.com/docs/#core/components/checkbox)
-    - [ ] .File → [FileInput](https://blueprintjs.com/docs/#core/components/file-input)
+    - [x] .File → [FileInput](https://blueprintjs.com/docs/#core/components/file-input)
     - [ ] .Hidden → Hidden input
     - [ ] .Number
     - [ ] .Radio → [Radio](https://blueprintjs.com/docs/#core/components/radio)
     - [ ] .Select → [Select](https://blueprintjs.com/docs/#select/select-component)
-    - [ ] .Text → [HTML input](https://blueprintjs.com/docs/#core/components/text-inputs.html-input)
-    - [ ] .TextArea → [Text area](https://blueprintjs.com/docs/#core/components/text-inputs.text-area)
-    - [ ] .Toggle → [Switch](https://blueprintjs.com/docs/#core/components/switch)
+    - [x] .Text → [HTML input](https://blueprintjs.com/docs/#core/components/text-inputs.html-input)
+    - [x] .TextArea → [Text area](https://blueprintjs.com/docs/#core/components/text-inputs.text-area)
+    - [x] .Toggle → [Switch](https://blueprintjs.com/docs/#core/components/switch)
   - [ ] .form
     - [ ] .FieldSet
   - [ ] .layout
     - [ ] .Card
-  - [ ] .Button → [Button](https://blueprintjs.com/docs/#core/components/button)
+  - [x] .Button → [Button](https://blueprintjs.com/docs/#core/components/button)
     - [x] `onTap` → `onClick`
-  - [ ] .Component → div
+  - [x] .Component → div
     - [x] `html` → child
-  - [ ] .Container → div
+  - [x] .Container → div
     - [x] `items` → children
-  - [ ] .Panel → div
+  - [x] .Panel → div
 ### Data Package
 - [ ] Stores
 - [ ] Models

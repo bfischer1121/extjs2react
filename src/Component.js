@@ -7,7 +7,11 @@ class Component{
 
   components = {
     widget: {
-      type: 'div'
+      type: 'div',
+
+      props: {
+        disabled: () => {},
+      }
     },
 
     component: {
@@ -39,6 +43,42 @@ class Component{
         text: () => {},
         onTap: value => ({ name: 'onClick', value })
       }
+    },
+
+    field: {
+      extends: 'component'
+    },
+
+    inputfield: {
+      extends: 'field'
+    },
+
+    textfield: {
+      extends: 'inputfield',
+      type: 'input'
+    },
+
+    textareafield: {
+      extends: 'textfield',
+      type: 'TextArea'
+    },
+
+    sliderfield: {
+      extends: 'field'
+    },
+
+    singlesliderfield: {
+      extends: 'sliderfield'
+    },
+
+    togglefield: {
+      extends: 'singlesliderfield',
+      type: 'Switch'
+    },
+
+    filefield: {
+      extends: 'filefield',
+      type: 'FileInput'
     }
   }
 
@@ -46,7 +86,7 @@ class Component{
     this.untransformed[xtype] = this.untransformed[xtype] || { instanceCount: 0, propCount: {} }
     this.untransformed[xtype].instanceCount = this.untransformed[xtype].instanceCount + 1
 
-    props.filter(({ name }) => !['itemId', 'className'].includes(name)).forEach(prop => {
+    props.filter(({ name }) => !['itemId', 'className', 'reference'].includes(name)).forEach(prop => {
       if(!((this.components[xtype] || {}).props || {})[prop.name]){
         this.untransformed[xtype].propCount[prop.name] = (this.untransformed[xtype].propCount[prop.name] || 0) + 1
       }
