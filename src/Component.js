@@ -55,7 +55,11 @@ class Component{
 
     textfield: {
       extends: 'inputfield',
-      type: 'input'
+      type: 'InputGroup',
+
+      props: {
+        placeholder: () => {}
+      }
     },
 
     textareafield: {

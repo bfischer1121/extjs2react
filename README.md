@@ -75,7 +75,7 @@ For speed of development and depth of implementation, it is currently assumed th
     - [ ] .Number
     - [ ] .Radio → [Radio](https://blueprintjs.com/docs/#core/components/radio)
     - [ ] .Select → [Select](https://blueprintjs.com/docs/#select/select-component)
-    - [x] .Text → [HTML input](https://blueprintjs.com/docs/#core/components/text-inputs.html-input)
+    - [x] .Text → [InputGroup](https://blueprintjs.com/docs/#core/components/text-inputs.input-group)
     - [x] .TextArea → [Text area](https://blueprintjs.com/docs/#core/components/text-inputs.text-area)
     - [x] .Toggle → [Switch](https://blueprintjs.com/docs/#core/components/switch)
   - [ ] .form
