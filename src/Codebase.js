@@ -4,6 +4,7 @@ import { visit } from 'ast-types'
 import fs from 'fs-extra'
 import Ast from './Ast'
 import SourceFile from './SourceFile'
+import Component from './Component'
 import * as hooks from './Hooks'
 
 import {
@@ -161,6 +162,7 @@ export default class Codebase{
     })
 
     this.logTopProperties()
+    this.logUntransformedComponents()
   }
 
   logProperty(name){
@@ -172,6 +174,21 @@ export default class Codebase{
     let props = Object.keys(this._properties).sort((p1, p2) => this._properties[p2] - this._properties[p1])
     logInfo('*** Top Properties ***')
     props.forEach(prop => logInfo(`${this._properties[prop]} => ${prop}`))
+  }
+
+  logUntransformedComponents(){
+    console.log('Untransformed Components:\n\n')
+
+    Object.keys(Component.untransformed)
+      .map(xtype => ({ xtype, ...Component.untransformed[xtype] }))
+      .sort((c1, c2) => c2.instanceCount - c1.instanceCount)
+      .map(({ xtype, instanceCount, propCount }) => {
+        let props = Object.keys(propCount)
+          .sort((p1, p2) => propCount[p2] - propCount[p1])
+          .map(prop => `${prop} (${propCount[prop]})`)
+
+        console.log(`${xtype} (${instanceCount}) => ${props.join(', ')}\n`)
+      })
   }
 
   _addSourceFiles(){

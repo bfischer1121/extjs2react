@@ -3,6 +3,8 @@ import { builders as b } from 'ast-types'
 import Ast from './Ast'
 
 class Component{
+  untransformed = {}
+
   components = {
     widget: {
       type: 'div'
@@ -36,6 +38,15 @@ class Component{
   }
 
   convert(xtype, props){
+    this.untransformed[xtype] = this.untransformed[xtype] || { instanceCount: 0, propCount: {} }
+    this.untransformed[xtype].instanceCount = this.untransformed[xtype].instanceCount + 1
+
+    props.filter(({ name }) => !['itemId', 'className'].includes(name)).forEach(prop => {
+      if(!(this.components[xtype] || {})[prop.name]){
+        this.untransformed[xtype].propCount[prop.name] = (this.untransformed[xtype].propCount[prop.name] || 0) + 1
+      }
+    })
+
     if(!this.components[xtype]){
       return null
     }
