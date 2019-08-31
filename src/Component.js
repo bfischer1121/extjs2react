@@ -80,7 +80,11 @@ class Component{
 
     textareafield: {
       extends: 'textfield',
-      type: 'TextArea'
+      type: 'TextArea',
+
+      props: {
+        maxRows: () => ({ name: 'growVertically', value: true })
+      }
     },
 
     sliderfield: {
@@ -134,13 +138,25 @@ class Component{
     this.untransformed[xtype].instanceCount = this.untransformed[xtype].instanceCount + 1
 
     props.filter(({ name }) => !['itemId', 'className', 'reference'].includes(name)).forEach(prop => {
-      if(!((this.components[xtype] || {}).props || {})[prop.name]){
+      if(!this._getSelfAndAncestors(xtype).find(cmp => ((this.components[cmp] || {}).props || {})[prop.name])){
         this.untransformed[xtype].propCount[prop.name] = (this.untransformed[xtype].propCount[prop.name] || 0) + 1
       }
     })
 
     if(!this.components[xtype]){
       return null
+    }
+
+    const transformValue = value => {
+      if(_.isString(value)){
+        value = b.literal(value)
+      }
+
+      if(_.isBoolean(value)){
+        value = b.literal(value)
+      }
+
+      return value
     }
 
     let cmp = this._getSelfAndAncestors(xtype).reverse().reduce((cmp, xtype) => {
@@ -152,20 +168,18 @@ class Component{
 
       if(_.isArray(type)){
         cmp.type = type[0]
-
         Object.keys(type[1]).forEach(name => {
-          let value = type[1][name]
-
-          if(_.isString(value)){
-            value = b.literal(value)
-          }
-
-          cmp.props.unshift({ name, value })
+          cmp.props.unshift({ name, value: transformValue(type[1][name]) })
         })
       }
 
       cmp.props = _.compact(cmp.props.map(prop => {
         let transformed = props[prop.name] ? props[prop.name](prop.value, cmp) : undefined
+
+        if(transformed && transformed.hasOwnProperty('value')){
+          transformed.value = transformValue(transformed.value)
+        }
+
         return typeof transformed === 'undefined' ? prop : transformed
       }))
 

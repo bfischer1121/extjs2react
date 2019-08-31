@@ -80,6 +80,7 @@ For speed of development and depth of implementation, it is currently assumed th
     - [ ] .Select → [Select](https://blueprintjs.com/docs/#select/select-component)
     - [x] .Text → [InputGroup](https://blueprintjs.com/docs/#core/components/text-inputs.input-group)
     - [x] .TextArea → [Text area](https://blueprintjs.com/docs/#core/components/text-inputs.text-area)
+      - [x] maxRows → growVertically
     - [x] .Toggle → [Switch](https://blueprintjs.com/docs/#core/components/switch)
   - [ ] .form
     - [ ] .FieldSet

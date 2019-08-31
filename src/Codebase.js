@@ -177,9 +177,10 @@ export default class Codebase{
   }
 
   logUntransformedComponents(){
-    console.log('Untransformed Components:\n\n')
+    console.log('Untransformed Components:\n')
 
     Object.keys(Component.untransformed)
+      .filter(xtype => this.parentCodebase.getClassNameForAlias(`widget.${xtype}`))
       .map(xtype => ({ xtype, ...Component.untransformed[xtype] }))
       .sort((c1, c2) => c2.instanceCount - c1.instanceCount)
       .map(({ xtype, instanceCount, propCount }) => {
@@ -187,7 +188,9 @@ export default class Codebase{
           .sort((p1, p2) => propCount[p2] - propCount[p1])
           .map(prop => `${prop} (${propCount[prop]})`)
 
-        console.log(`${xtype} (${instanceCount}) =>\n${props.join(', ')}\n`)
+        if(props.length){
+          console.log(`${xtype} (${instanceCount}) =>\n${props.join(', ')}\n`)
+        }
       })
   }
 
