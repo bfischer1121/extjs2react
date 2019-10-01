@@ -1,9 +1,11 @@
 import { namedTypes as t, builders as b, visit } from 'ast-types'
+import prettier from 'prettier'
 import _ from 'lodash'
 import Ast from './Ast'
 import { code } from './Util'
 
 const config = {
+  prettier: { semi: false, singleQuote: true, printWidth: 120 },
   varToLet: true,
   arrowFunctions: true,
   arrowReturnShorthand: true,
@@ -399,7 +401,18 @@ export const afterTranspile = ast => {
 const removeSemicolons = code => code.replace(/;$/gm, '')
 
 export const beforeSave = code => {
-  code = removeSemicolons(code)
+  if(config.prettier){
+    try{
+      code = prettier.format(code, { parser: 'babel', ...config.prettier })
+    }
+    catch(e){
+      code = removeSemicolons(code)
+    }
+  }
+
+  if(!config.prettier){
+    code = removeSemicolons(code)
+  }
 
   return code
 }

@@ -16,6 +16,7 @@ For speed of development and depth of implementation, it is currently assumed th
 
 ## Progress
 ### General Modernization
+- [x] Run output through prettier (config: `prettier`)
 - [x] `var` → `let` when at root of function (config: `varToLet`)
 - [x] `function` → arrow function when not using `this` or `arguments` (config: `arrowFunctions`)
 - [x] `me` → `this` when redundant (config: `arrowFunctions`)
