@@ -958,6 +958,15 @@ export default class ExtJSClass{
     return (isStatic ? 'static ' : '') + Ast.toString(b.classProperty(node.key, node.value))
   }
 
+  _getConfigNameForFn(fnName, cls, types = ['get', 'set', 'apply', 'update']){
+    if(!types.some(prefix => _.startsWith(fnName, prefix))){
+      return null
+    }
+
+    const config = _.lowerFirst(fnName.replace(/^(get|set|apply|update)/, ''))
+    return cls.classMembers.configs.some(node => Ast.getPropertyName(node) === config) ? config : null
+  }
+
   _getCodeForMethod(node, cls, isStatic){
     this._deleteNode(node)
 
@@ -967,21 +976,14 @@ export default class ExtJSClass{
 
     let name = getMethodName(Ast.getPropertyName(node))
 
-    const getConfigName = () => {
-      if(isStatic || !cls.classMembers.methods.includes(node)){
-        return null
-      }
-
-      let config = name.replace(/^(apply|update)/, '')
-      config = config[0].toLowerCase() + config.slice(1)
-
-      return cls.classMembers.configs.find(node => Ast.getPropertyName(node) === config) ? config : null
-    }
-
     if(this.isComponent()){
       this._replaceMethodReferences(node, name, cls, isStatic)
 
-      let config = getConfigName(),
+      if(cls !== this){
+        this._replaceMethodReferences(node, name, this, isStatic)
+      }
+
+      let config = (!isStatic && cls.classMembers.methods.includes(node)) ? this._getConfigNameForFn(Ast.getPropertyName(node), cls) : null,
           fn     = Ast.toString(b.arrowFunctionExpression(node.value.params, node.value.body))
 
       if(config && name.startsWith('apply')){
@@ -1011,6 +1013,7 @@ export default class ExtJSClass{
   }
 
   _replaceMethodReferences(node, name, cls, isStatic){
+    const me = this
     const isLocalMember = node => !!cls.classMembers[_.isString(node) ? node : Ast.toString(node)]
 
     const processReference = path => {
@@ -1095,11 +1098,11 @@ export default class ExtJSClass{
 
     const skippedConfigs = ['xtype', 'items', ...(this.transformedClassMembers)]
 
-    const isConfig = name => (
+    /*const isConfig = name => (
       cls.classMembers[name] &&
       !skippedConfigs.includes(name) &&
       cls.classMembers.configs.find(node => node.value === cls.classMembers[name])
-    )
+    )*/
 
     visit(node, {
       visitCallExpression: function(path){
@@ -1108,19 +1111,24 @@ export default class ExtJSClass{
         // only replace this.foo() and me.foo() calls
         if(
           !Ast.isMemberExpression(callee) ||
-          (callee.object.type !== 'ThisExpression' && !(Ast.isIdentifier(node.object) && node.object.name === 'me'))
+          (
+            callee.object.type !== 'ThisExpression' &&
+            !(callee.object.type === 'ExpressionStatement' && callee.object.expression.type === 'ThisExpression') &&
+            !(Ast.isIdentifier(node.object) && node.object.name === 'me')
+          )
         ){
           this.traverse(path)
           return
         }
 
-        let fnName = Ast.toString(callee.property)
+        const fnName = Ast.toString(callee.property)
 
         // this.getFoo() -> props.foo
-        if(_.startsWith(fnName, 'get')){
-          let config = _.lowerFirst(fnName.replace(/^get/, ''))
 
-          if(isConfig(config)){
+        const config = me._getConfigNameForFn(fnName, cls, ['get', 'set'])
+
+        if(config){
+          if(_.startsWith(fnName, 'get')){
             path.replace(Ast.from(`props.${config}`).expression)
           }
         }
